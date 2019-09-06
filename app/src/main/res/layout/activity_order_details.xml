@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    tools:context=".ui.activity.cart.ActivityCart">
+
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorAccent">
+
+        <emerge.project.onmeal.ui.fonts.RobotoMedium
+            android:id="@+id/textView_title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView_title"
+            android:layout_marginLeft="20dp"
+            android:layout_toEndOf="@+id/relativelayout_menu"
+            android:layout_toRightOf="@+id/relativelayout_menu"
+            android:text="Confirm"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="20sp" />
+
+        <emerge.project.onmeal.ui.fonts.RobotoMedium
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/relativelayout_menu"
+            android:layout_toRightOf="@+id/relativelayout_menu"
+            android:text="Your Order has been "
+            android:textColor="@color/colorTextWhite"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_menu"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_activity_back" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativelayout_title_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/relativelayout_title_bar"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true">
+
+                <RelativeLayout
+                    android:id="@+id/RelativeLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <emerge.project.onmeal.ui.fonts.RobotoItalic
+                        android:id="@+id/textview_outletcity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="60dp"
+                        android:layout_toEndOf="@+id/textview_outletname"
+                        android:layout_toRightOf="@+id/textview_outletname"
+                        android:lineSpacingExtra="4sp"
+                        android:textColor="#de797979"
+                        android:textSize="12sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoMedium
+                        android:id="@+id/textview_outletname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30dp"
+                        android:lineSpacingExtra="-3sp"
+                        android:textColor="#de262626"
+                        android:textSize="17sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="40dp"
+                        android:src="@drawable/ic_order_location"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/RelativeLayout1"
+                    android:background="#e1e1e1" />
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/RecyclerView_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/divider1"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="40dp" />
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout_subtotal"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/RecyclerView_items"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="40dp">
+
+                    <emerge.project.onmeal.ui.fonts.RobotoMedium
+                        android:id="@+id/text_deliverychaege"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toStartOf="@+id/text_deliverychaege_cents"
+                        android:layout_toLeftOf="@+id/text_deliverychaege_cents"
+                        android:lineSpacingExtra="1sp"
+                        android:text="000"
+                        android:textColor="#3e3e3e"
+                        android:textSize="13sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/robotoRegular11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="Delivery Charges"
+                        android:textColor="#de7a7a7a"
+                        android:textSize="12sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoMedium
+                        android:id="@+id/text_deliverychaege_cents"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:lineSpacingExtra="1sp"
+                        android:text=".00"
+                        android:textColor="#3e3e3e"
+                        android:textSize="9sp" />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/relativeLayout_subtotal"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="40dp">
+
+                    <emerge.project.onmeal.ui.fonts.RobotoBold
+                        android:id="@+id/text_subtotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="0dp"
+                        android:layout_toStartOf="@+id/text_subtotal_cents"
+                        android:layout_toLeftOf="@+id/text_subtotal_cents"
+                        android:lineSpacingExtra="1sp"
+                        android:text="000"
+                        android:textColor="#3e3e3e"
+                        android:textSize="28sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoMedium
+                        android:id="@+id/robotoRegular15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:lineSpacingExtra="2sp"
+                        android:text="SUB TOTAL"
+                        android:textColor="#3e3e3e"
+                        android:textSize="12sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoBold
+                        android:id="@+id/text_subtotal_cents"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="2dp"
+                        android:lineSpacingExtra="1sp"
+                        android:text=".00"
+                        android:textColor="#3e3e3e"
+                        android:textSize="11sp" />
+
+
+                </RelativeLayout>
+
+
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@+id/relativeLayout_total"
+                    android:background="#e1e1e1" />
+
+
+                <RelativeLayout
+                    android:id="@+id/RelativeLayout22"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/divider2"
+                    android:layout_marginTop="10dp">
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textview_payment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/robotoMedium21"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_toEndOf="@+id/imageView23"
+                        android:layout_toRightOf="@+id/imageView23"
+                        android:lineSpacingExtra="3sp"
+                        android:text="AMEX XXXX-XXXX-XXXX-XXXX"
+                        android:textColor="#de7a7a7a"
+                        android:textSize="11sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/robotoMedium21"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="15dp"
+                        android:src="@drawable/ic_payment" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoMedium
+                        android:id="@+id/robotoMedium21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:lineSpacingExtra="1sp"
+                        android:text="Payment Details"
+                        android:textColor="#de262626"
+                        android:textSize="13sp" />
+                </RelativeLayout>
+
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@+id/RelativeLayout22"
+                    android:background="#e1e1e1" />
+
+
+                <RelativeLayout
+                    android:id="@+id/RelativeLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@+id/divider3"
+                    android:layout_marginTop="10dp">
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoBold
+                        android:id="@+id/textview_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="40dp"
+                        android:lineSpacingExtra="9sp"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoMedium
+                        android:id="@+id/textview_time_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30dp"
+                        android:lineSpacingExtra="1sp"
+                        android:text="Delivery Time"
+                        android:textColor="#de262626"
+                        android:textSize="13sp" />
+                </RelativeLayout>
+
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@+id/RelativeLayout3"
+                    android:background="#e1e1e1" />
+
+
+                <RelativeLayout
+                    android:id="@+id/RelativeLayout4"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/divider4"
+                    android:layout_marginTop="10dp">
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textview_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textview_time_header2"
+                        android:layout_alignStart="@+id/textview_time_header2"
+                        android:layout_alignLeft="@+id/textview_time_header2"
+                        android:layout_marginTop="15dp"
+                        android:lineSpacingExtra="11sp"
+                        android:textColor="#61000000"
+                        android:textSize="13sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoMedium
+                        android:id="@+id/textview_time_header2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:lineSpacingExtra="1sp"
+                        android:text="Delivery Address"
+                        android:textColor="#de262626"
+                        android:textSize="13sp" />
+
+                </RelativeLayout>
+
+
+                <View
+                    android:id="@+id/divider5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@+id/RelativeLayout4"
+                    android:background="#e1e1e1" />
+
+                <ImageView
+                    android:id="@+id/img_btn_gohome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/divider5"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/btn_gobackhome" />
+
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/proprogressview"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible"
+        app:mk_color="@color/colorAccent"
+        app:mk_type="FishSpinner" />
+
+
+</RelativeLayout>

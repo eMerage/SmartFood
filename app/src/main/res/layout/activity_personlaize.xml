@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_titelbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent">
+
+        <emerge.project.onmeal.ui.fonts.RobotoMedium
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toEndOf="@+id/relativelayout_menu"
+            android:layout_toRightOf="@+id/relativelayout_menu"
+            android:text="Personalize"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_menu"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_activity_back" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_cart"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true">
+
+
+            <ImageView
+                android:id="@+id/imageView55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_home_cart" />
+
+            <RelativeLayout
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/circle_shape_green">
+
+                <emerge.project.onmeal.ui.fonts.RobotoMedium
+                    android:id="@+id/textview_cart_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:text="0"
+                    android:textColor="@color/colorTextAsh"
+                    android:textSize="11sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_coverimage"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/relativelayout_titelbar">
+
+
+        <ImageView
+            android:id="@+id/imageView_cover_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_image_default" />
+
+        <ProgressBar
+            android:id="@+id/progressBar_coverImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp" />
+
+        <emerge.project.onmeal.ui.fonts.RobotoMedium
+            android:id="@+id/textview_titel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:visibility="visible" />
+
+
+        <emerge.project.onmeal.ui.fonts.RobotoMedium
+            android:id="@+id/textview_titel_cat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview_titel"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relativelayoutcat"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/relativeLayout_coverimage">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorAccent">
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_food_cat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativelayoutcat"
+        android:background="#ffffff">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="450dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:minHeight="450dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+
+                        android:id="@+id/recyclerView_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#ffffff"
+                        android:layoutAnimation="@anim/layout_animation_fall_down"
+                        android:minHeight="250dp" />
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="210dp"
+                        android:layout_below="@+id/recyclerView_menu"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:paddingLeft="1dp"
+                                android:paddingRight="1dp"
+                                android:background="@drawable/bg_addtocart_red">
+
+                                <emerge.project.onmeal.ui.fonts.RobotoRegular
+                                    android:id="@+id/textview_total_price"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_toStartOf="@+id/textview_total_price_cents"
+                                    android:layout_toLeftOf="@+id/textview_total_price_cents"
+                                    android:lineSpacingExtra="-3sp"
+                                    android:text="000"
+                                    android:textColor="#ffffff"
+                                    android:textSize="17sp" />
+
+                                <emerge.project.onmeal.ui.fonts.RobotoRegular
+                                    android:id="@+id/textview_total_price_cents"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignBottom="@+id/robotoRegular2"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginEnd="20dp"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_marginBottom="2dp"
+                                    android:lineSpacingExtra="-3sp"
+                                    android:text=".00"
+                                    android:textColor="#ffffff"
+                                    android:textSize="13sp" />
+
+                                <emerge.project.onmeal.ui.fonts.RobotoRegular
+                                    android:id="@+id/robotoRegular2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="20dp"
+                                    android:lineSpacingExtra="-3sp"
+                                    android:text="Total Price"
+                                    android:textColor="#ffffff"
+                                    android:textSize="17sp" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="160dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentBottom="true"
+                                android:elevation="5dp"
+                                android:background="@drawable/bg_personalizer_price">
+
+                                <RelativeLayout
+                                    android:id="@+id/RelativeLayout126"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_alignParentLeft="true">
+
+                                    <emerge.project.onmeal.ui.fonts.RobotoMedium
+                                        android:id="@+id/robotoMedium16"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="20dp"
+                                        android:lineSpacingExtra="3sp"
+                                        android:text="Quantity"
+                                        android:textColor="#767676"
+                                        android:textSize="13sp" />
+
+                                    <ImageView
+                                        android:id="@+id/img_btn_qty_decrease"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_toStartOf="@+id/relativelayout"
+                                        android:layout_toLeftOf="@+id/relativelayout"
+                                        android:src="@drawable/ic_decrease" />
+
+                                    <RelativeLayout
+                                        android:id="@+id/relativelayout"
+                                        android:layout_width="60dp"
+                                        android:layout_height="35dp"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_toStartOf="@+id/img_btn_qty_increase"
+                                        android:layout_toLeftOf="@+id/img_btn_qty_increase"
+                                        android:background="@drawable/bg_personlazizer_qty_rectangle">
+
+                                        <emerge.project.onmeal.ui.fonts.RobotoRegular
+                                            android:id="@+id/textview_qty"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_centerInParent="true"
+                                            android:lineSpacingExtra="-1sp"
+                                            android:text="01"
+                                            android:textColor="#767676"
+                                            android:textSize="17sp" />
+                                    </RelativeLayout>
+
+                                    <ImageView
+                                        android:id="@+id/img_btn_qty_increase"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginRight="20dp"
+                                        android:src="@drawable/ic_increase" />
+                                </RelativeLayout>
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_below="@+id/RelativeLayout126"
+                                    android:layout_above="@+id/img_btn_addtocart">
+
+                                    <RelativeLayout
+                                        android:layout_width="140dp"
+                                        android:layout_height="40dp"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_marginRight="20dp"
+                                        android:layout_marginBottom="5dp">
+
+                                        <android.support.v7.widget.RecyclerView
+                                            android:id="@+id/recyclerView_size"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_alignParentLeft="true" />
+                                    </RelativeLayout>
+
+                                    <emerge.project.onmeal.ui.fonts.RobotoMedium
+                                        android:id="@+id/robotoMedium166"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_alignParentLeft="true"
+                                        android:layout_centerVertical="true"
+                                        android:layout_marginLeft="20dp"
+                                        android:lineSpacingExtra="3sp"
+                                        android:text="Size"
+                                        android:textColor="#767676"
+                                        android:textSize="13sp" />
+
+
+
+                                </RelativeLayout>
+
+
+
+                                <ImageView
+                                    android:id="@+id/img_btn_addtocart"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_marginBottom="20dp"
+                                    android:src="@drawable/btn_addtocart" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/proprogressview"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        app:mk_color="@color/colorAccent"
+        app:mk_type="FishSpinner" />
+
+
+</RelativeLayout>

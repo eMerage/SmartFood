@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout22"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true">
+
+
+        <emerge.project.onmeal.ui.fonts.RobotoRegular
+            android:id="@+id/textview_total_price_cents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:lineSpacingExtra="-3sp"
+            android:text=".00"
+            android:textColor="#3e3e3e"
+            android:textSize="9sp" />
+
+
+        <emerge.project.onmeal.ui.fonts.RobotoRegular
+            android:id="@+id/textview_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/textview_total_price_cents"
+            android:layout_toLeftOf="@+id/textview_total_price_cents"
+            android:lineSpacingExtra="-3sp"
+            android:text="000"
+            android:textColor="#3e3e3e"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
+    <emerge.project.onmeal.ui.fonts.RobotoMedium
+        android:id="@+id/textview_menuname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/img_btn_removeitem"
+        android:layout_toRightOf="@+id/img_btn_removeitem"
+        android:lineSpacingExtra="1sp"
+        android:textColor="#de262626"
+        android:textSize="13sp" />
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoRegular
+        android:id="@+id/textview_qty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="50dp"
+        android:layout_toStartOf="@+id/RelativeLayout22"
+        android:lineSpacingExtra="-1sp"
+        android:textColor="#767676"
+        android:textSize="17sp"
+        android:layout_toLeftOf="@+id/RelativeLayout22" />
+
+
+</RelativeLayout>

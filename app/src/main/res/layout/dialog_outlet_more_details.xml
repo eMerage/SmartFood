@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativelayoutdailogmain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_terms_conditions">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/bg_dialog_terms_conditions">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite">
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="OUTLET LOCATION"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textview_nolocations"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="No Location Details"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+
+
+                    <com.google.android.gms.maps.MapView
+                        android:id="@+id/mapView_outlet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text1" />
+
+
+
+                    <ImageView
+                        android:id="@+id/ImageView_googlemap"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/googlemaproundicon"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_alignParentBottom="true"/>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayout1">
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="OUTLET IMAGES"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/text3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="No Images"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp"
+                        android:visibility="gone" />
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView_outletimages"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:layout_below="@+id/text2" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relativeLayout2"
+                    android:layout_marginBottom="10dp">
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/text4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="OUTLET DETAILS"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text4"
+                        android:layout_marginLeft="15dp"
+                        android:freezesText="true"
+                        android:text="Outlet Name  "
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoLight
+                        android:id="@+id/textView_outletdetails_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text4"
+                        android:layout_marginLeft="120dp"
+                        android:freezesText="true"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_outletdetails_name"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:freezesText="true"
+                        android:text="Outlet City  "
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoLight
+                        android:id="@+id/textView_outletdetails_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_outletdetails_name"
+                        android:layout_marginLeft="120dp"
+                        android:layout_marginTop="5dp"
+                        android:freezesText="true"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_outletdetails_city"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:freezesText="true"
+                        android:text="Owner's Name  "
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoLight
+                        android:id="@+id/textView_outletdetails_ownersname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_outletdetails_city"
+                        android:layout_marginLeft="120dp"
+                        android:layout_marginTop="5dp"
+                        android:freezesText="true"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_outletdetails_ownersname"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:freezesText="true"
+                        android:text="Phone Number  "
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoLight
+                        android:id="@+id/textView_outletdetails_contactnumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_outletdetails_ownersname"
+                        android:layout_marginLeft="120dp"
+                        android:layout_marginTop="5dp"
+                        android:freezesText="true"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_outletdetails_contactnumber"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="5dp"
+                        android:freezesText="true"
+                        android:text="Email Address  "
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoLight
+                        android:id="@+id/textView_outletdetails_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_outletdetails_contactnumber"
+                        android:layout_marginLeft="120dp"
+                        android:layout_marginTop="5dp"
+                        android:freezesText="true"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>
+
+
+

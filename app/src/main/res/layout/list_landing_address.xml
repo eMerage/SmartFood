@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/relativeLayout_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoRegular
+        android:id="@+id/robotoRegular5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:textColor="#61000000"
+        android:textSize="13sp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <emerge.project.onmeal.ui.fonts.RobotoMedium
+            android:id="@+id/robotoMedium8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@+id/divider10"
+            android:layout_toRightOf="@+id/divider10"
+            android:textColor="#c2000000"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/divider10"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="#dd432b" />
+    </RelativeLayout>
+</RelativeLayout>

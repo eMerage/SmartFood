@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativelayout_titelbar"
+            android:background="@color/colorAccent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent">
+
+
+                    <RelativeLayout
+                        android:id="@+id/relativelayout_logo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp">
+
+                        <ImageView
+                            android:id="@+id/imageView21"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/smartfood_logo" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/relativelayout_logo"
+                        android:layout_margin="15dp"
+                        android:background="@drawable/bg_history_rectangle">
+
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansLight2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="@string/about_activity_des_lineone"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="16sp" />
+
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansLight33"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansLight2"
+                            android:layout_alignStart="@+id/openSansLight2"
+                            android:layout_alignLeft="@+id/openSansLight2"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/about_activity_des_linetwo"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="16sp" />
+
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansLight44"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansLight33"
+                            android:layout_alignStart="@+id/openSansLight33"
+                            android:layout_alignLeft="@+id/openSansLight33"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/about_activity_des_linethree"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="16sp" />
+
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansLight444"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansLight44"
+                            android:layout_alignStart="@+id/openSansLight44"
+                            android:layout_alignLeft="@+id/openSansLight44"
+                            android:layout_marginTop="15dp"
+                            android:text="Version 1.0.6"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="16sp" />
+
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansRegular"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansLight444"
+                            android:layout_alignStart="@+id/openSansLight444"
+                            android:layout_alignLeft="@+id/openSansLight444"
+                            android:layout_marginTop="20dp"
+                            android:text="HQ"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="16sp" />
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansLight3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansRegular"
+                            android:layout_alignStart="@+id/openSansLight2"
+                            android:layout_alignLeft="@+id/openSansLight2"
+                            android:layout_marginTop="5dp"
+                            android:text="112 Nawala Road,"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="14sp" />
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansLight4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansLight3"
+                            android:layout_alignStart="@+id/openSansLight2"
+                            android:layout_alignLeft="@+id/openSansLight2"
+                            android:text="Narahainpita"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="14sp" />
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansRegular2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansLight4"
+                            android:layout_alignStart="@+id/openSansLight2"
+                            android:layout_alignLeft="@+id/openSansLight2"
+                            android:layout_marginTop="10dp"
+                            android:text="Support"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="16sp" />
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansLight5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansRegular2"
+                            android:layout_alignStart="@+id/openSansLight2"
+                            android:layout_alignLeft="@+id/openSansLight2"
+                            android:layout_marginTop="5dp"
+                            android:text="0115960960"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="14sp" />
+
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansRegular3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansLight5"
+                            android:layout_alignStart="@+id/openSansLight2"
+                            android:layout_alignLeft="@+id/openSansLight2"
+                            android:layout_marginTop="10dp"
+                            android:text="Email"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="16sp" />
+
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/openSansLight6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansRegular3"
+                            android:layout_alignStart="@+id/openSansLight2"
+                            android:layout_alignLeft="@+id/openSansLight2"
+                            android:layout_marginTop="5dp"
+                            android:text="info@onmeal.lk"
+                            android:textColor="@color/colorTextBlack"
+                            android:textSize="14sp" />
+
+
+                        <RelativeLayout
+                            android:id="@+id/relativelayout1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/openSansLight6"
+                            android:layout_alignStart="@+id/openSansLight2"
+                            android:layout_alignLeft="@+id/openSansLight2"
+                            android:layout_marginTop="20dp">
+
+                            <ImageView
+                                android:id="@+id/imageView10"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/viber" />
+
+                            <emerge.project.onmeal.ui.fonts.RobotoLight
+                                android:id="@+id/openSansLight7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/imageView10"
+                                android:text="0702002221"
+                                android:textColor="@color/colorTextBlack"
+                                android:textSize="14sp" />
+
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/relativelayout2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/relativelayout1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toEndOf="@+id/openSansLight4"
+                            android:layout_toRightOf="@+id/openSansLight4">
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:layout_centerHorizontal="true"
+                                android:src="@drawable/whatsapp" />
+
+                            <emerge.project.onmeal.ui.fonts.RobotoLight
+                                android:id="@+id/openSansLight8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/imageView2"
+                                android:text="0702002221"
+                                android:textColor="@color/colorTextBlack"
+                                android:textSize="14sp" />
+
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_titelbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorAccent">
+
+            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                android:id="@+id/textView_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@+id/relativelayout_menu"
+                android:layout_toRightOf="@+id/relativelayout_menu"
+                android:text="Who We Are"
+                android:textColor="@color/colorTextWhite"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_menu"
+                android:layout_width="50dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_activity_back" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

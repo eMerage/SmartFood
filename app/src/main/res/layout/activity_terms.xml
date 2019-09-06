@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/relativelayout_titelbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/text_terms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="10dp"
+                        android:textSize="15sp"
+                        android:text="@string/msg_terms_titel_1"
+                        android:textColor="@color/colorTextBlack" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/text_terms"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_2"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView3"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_2_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView4"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_3"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView5"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_3_content1"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView6"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_3_content2"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView7"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_4"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView8"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_4_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView9"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_5"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView10"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_5_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView11"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_6"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView12"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_6_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView13"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_7"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView14"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_7_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView15"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_7_content2"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView16"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_8"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView17"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_8_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView18"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_9"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView19"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_9_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView20"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_9_content2"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView21"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_10"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView22"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_10_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView23"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_11"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView24"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_11_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView25"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_12"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView27"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView26"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_12_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView27"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_12_content2"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView28"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_13"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView29"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_13_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView30"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_14"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView31"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_14_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView32"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_15"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView34"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView33"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_15_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView35"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView34"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_16"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView36"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView35"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_16_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView37"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView36"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_17"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView38"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView37"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/msg_terms_titel_17_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView39"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_below="@+id/textView38"
+                        android:layout_marginTop="15dp"
+                        android:text="@string/msg_terms_titel_18"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="15sp" />
+
+                    <emerge.project.onmeal.ui.fonts.RobotoRegular
+                        android:id="@+id/textView40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView39"
+                        android:layout_alignStart="@+id/text_terms"
+                        android:layout_alignLeft="@+id/text_terms"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/msg_terms_titel_18_content"
+                        android:textColor="@color/colorTextBlack"
+                        android:textSize="14sp" />
+
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_titelbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorAccent">
+
+            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                android:id="@+id/textView_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@+id/relativelayout_menu"
+                android:layout_toRightOf="@+id/relativelayout_menu"
+                android:text="Terms &amp; Conditions"
+                android:textColor="@color/colorTextWhite"
+                android:textSize="20sp" />
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_menu"
+                android:layout_width="50dp"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_activity_back" />
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

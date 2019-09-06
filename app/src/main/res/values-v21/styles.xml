@@ -1,0 +1,71 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
+
+
+    <style name="ToastWarningYellow">
+        <item name="textBold">false</item>
+        <item name="textColor">@color/colorWhite</item>
+        <item name="font">@font/open_sans_light</item>
+        <item name="textSize">16sp</item>
+        <item name="colorBackground">@color/colorYellow</item>
+        <item name="solidBackground">true</item>
+        <item name="strokeWidth">@color/colorWhite</item>
+        <item name="gravity">top</item>
+        <item name="radius">20dp</item>
+    </style>
+
+    <style name="ToastErrorWhite">
+        <item name="textBold">false</item>
+        <item name="textColor">@color/colorAccent</item>
+        <item name="font">@font/open_sans_light</item>
+        <item name="textSize">16sp</item>
+        <item name="colorBackground">@color/colorWhite</item>
+        <item name="solidBackground">true</item>
+        <item name="strokeWidth">@color/colorWhite</item>
+        <item name="gravity">top</item>
+        <item name="radius">20dp</item>
+    </style>
+
+
+    <style name="ToastErrorRed">
+        <item name="textBold">false</item>
+        <item name="textColor">@color/colorWhite</item>
+        <item name="font">@font/open_sans_light</item>
+        <item name="textSize">16sp</item>
+        <item name="colorBackground">@color/colorAccent</item>
+        <item name="solidBackground">true</item>
+        <item name="strokeWidth">@color/colorWhite</item>
+        <item name="gravity">top</item>
+        <item name="radius">20dp</item>
+    </style>
+
+
+    <style name="CardViewStyle" parent="android:Widget.TextView">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardUseCompatPadding">false</item>
+    </style>
+
+
+</resources>

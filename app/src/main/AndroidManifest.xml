@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="emerge.project.onmeal">
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-feature android:name="android.hardware.telephony" android:required="false" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+
+    <application
+        android:name=".OnMeal"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:hardwareAccelerated="true"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:usesCleartextTraffic="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.splash.ActivitySplash"
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activity.intro.FragmentActivityIntro"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".service.firebase.FirebaseIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".service.firebase.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".service.broadcastreceiver.SmsBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BROADCAST_SMS">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".ui.activity.login.ActivityLogin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.singup.ActivitySingup"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.numbervalidate.ActivityNumberValidation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.welcome.ActivityWelcome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.landing.ActivityLanding"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.landingaddressadditianal.ActivityAddressAdditianal"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.activity.landingsetlocation.ActivitySetLocation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.home.ActivityHome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.menu.ActivityMenu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.settings.ActivitySettings"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.suggestions.ActivitySuggestions"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.profile.ActivityProfile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.favorites.ActivityFavourites"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.singin.ActivitySingIn"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.personlaize.ActivityPersonlaize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.cart.ActivityCart"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ui.activity.orderddetails.OrderDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.history.ActivityHistory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.landingaddressmenual.ActivityMenualAddress"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.termsandconditions.ActivityTerms"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.contact.ActivityContact"
+            android:screenOrientation="portrait"></activity>
+    </application>
+
+</manifest>

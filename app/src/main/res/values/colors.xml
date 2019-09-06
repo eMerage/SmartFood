@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#dd432b</color>
+    <color name="colorPrimaryDark">#dd432b</color>
+    <color name="colorAccent">#dd432b</color>
+
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorYellow">#ffc900</color>
+    <color name="colorGreen">#40b350</color>
+
+
+
+
+    <color name="colorBackground">#f152241d</color>
+    <color name="colorTextWhite">#ffffff</color>
+    <color name="colorTextAsh">#8d8d8d</color>
+    <color name="colorTextGreen">#40b350</color>
+    <color name="colorTextIcon">#b5b5b5</color>
+
+    <color name="colorTextBlack">#1f1f1f</color>
+
+
+    <color name="edittext_background">#00000000</color>
+
+    <color name="homeIndicatorTextColor">#7c2012</color>
+    <color name="menuIndicatorTextColor">#7c2012</color>
+
+
+    <color name="colorRedDark">#c23f2b</color>
+
+    <color name="navigationTextColor">#de3f3f3f</color>
+
+    <color name="timeSlotsTextColor">#a2a2a2</color>
+    <color name="historyTextColor">#de797979</color>
+
+
+
+</resources>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.settings.ActivitySettings">
+
+    <emerge.project.onmeal.ui.fonts.RobotoRegular
+        android:id="@+id/robotoRegular9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView11"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#1e1e1e"
+        android:lineSpacingExtra="5sp"
+        android:textSize="10sp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea"
+        android:layout_alignParentLeft="true" />
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_titelbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent">
+
+        <emerge.project.onmeal.ui.fonts.RobotoMedium
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toEndOf="@+id/relativelayout_menu"
+            android:layout_toRightOf="@+id/relativelayout_menu"
+            android:text="Settings"
+            android:textColor="@color/colorTextWhite"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_menu"
+            android:layout_width="50dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/menu" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:src="@drawable/btn_contact_support_settings" />
+
+    <emerge.project.onmeal.ui.fonts.RobotoLight
+        android:id="@+id/robotoLight8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativelayout_titelbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="45dp"
+        android:lineSpacingExtra="-6sp"
+        android:paddingTop="5dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="5dp"
+        android:text="Change Password"
+        android:textColor="#dd432b"
+        android:textSize="20sp" />
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoLight
+        android:id="@+id/robotoLight9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/robotoLight8"
+        android:layout_alignStart="@+id/robotoLight8"
+        android:layout_alignLeft="@+id/robotoLight8"
+        android:layout_marginTop="35dp"
+        android:paddingTop="5dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="5dp"
+        android:text="FAQ"
+        android:textColor="#dd432b"
+        android:textSize="20sp" />
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoLight
+        android:id="@+id/robotoLight10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/robotoLight9"
+        android:layout_alignStart="@+id/robotoLight9"
+        android:layout_alignLeft="@+id/robotoLight9"
+        android:layout_marginTop="35dp"
+        android:paddingTop="5dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="5dp"
+        android:text="Terms &amp; Conditions"
+        android:textColor="#dd432b"
+        android:textSize="20sp" />
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoLight
+        android:id="@+id/robotoLight11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/robotoLight10"
+        android:layout_alignStart="@+id/robotoLight10"
+        android:layout_alignLeft="@+id/robotoLight10"
+        android:layout_marginTop="35dp"
+        android:paddingTop="5dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="5dp"
+        android:text="Recommend a Restaurant"
+        android:textColor="#dd432b"
+        android:textSize="20sp" />
+
+
+</RelativeLayout>

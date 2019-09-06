@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_terms_conditions">
+
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_selectiontype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="15dp">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_subcart_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layoutAnimation="@anim/layout_animation_fall_down" />
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

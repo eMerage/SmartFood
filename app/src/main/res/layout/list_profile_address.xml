@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout_main"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:layout_marginBottom="30dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textview_addressname"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dp">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_delete"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/imageview_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_profile_addressremve" />
+
+
+        </RelativeLayout>
+
+
+        <emerge.project.onmeal.ui.fonts.RobotoRegular
+            android:id="@+id/textview_addres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/relativeLayout_delete"
+            android:layout_toLeftOf="@+id/relativeLayout_delete"
+            android:lineSpacingExtra="4sp"
+            android:textColor="#dd432b"
+            android:textSize="19sp" />
+
+
+        <emerge.project.onmeal.ui.fonts.RobotoRegular
+            android:id="@+id/textview_addres_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textview_addres"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@+id/relativeLayout_delete"
+            android:layout_toLeftOf="@+id/relativeLayout_delete"
+            android:lineSpacingExtra="4sp"
+            android:textColor="#dd432b"
+            android:textSize="19sp" />
+    </RelativeLayout>
+
+    <emerge.project.onmeal.ui.fonts.RobotoMedium
+        android:id="@+id/textview_addressname"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_alignParentTop="true"
+        android:textColor="#383838"
+        android:textSize="13sp" />
+
+
+</RelativeLayout>

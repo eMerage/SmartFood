@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        tools:context=".ui.activity.landing.ActivityLanding">
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/colorWhite">
+
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_title_bar"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/colorAccent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <emerge.project.onmeal.ui.fonts.RobotoMedium
+                        android:id="@+id/textView_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toEndOf="@+id/relativelayout_menu"
+                        android:layout_toRightOf="@+id/relativelayout_menu"
+                        android:text="Delivery Location"
+                        android:textColor="@color/colorTextWhite"
+                        android:textSize="20sp" />
+
+                    <RelativeLayout
+                        android:id="@+id/relativelayout_menu"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="8dp"
+                            android:src="@drawable/menu" />
+                    </RelativeLayout>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/relativelayout_title_bar"
+                android:background="@color/colorWhite">
+
+
+                <fragment
+
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/bg_addres_list">
+
+                <ImageView
+                    android:id="@+id/imageView_ic_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:src="@drawable/crosshair" />
+
+                <emerge.project.onmeal.ui.fonts.RobotoRegular
+                    android:id="@+id/textView_selectedaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toLeftOf="@+id/imageView_ic_location"
+                    android:layout_toStartOf="@+id/imageView_ic_location"
+                    android:textColor="#61000000"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/relativelayout_address"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_address_additinal">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorWhite">
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                                android:id="@+id/robotoMedium0"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="30dp"
+                                android:enabled="false"
+                                android:text="Name of the location"
+                                android:textColor="#d3d3d3"
+                                android:textSize="12sp"
+                                android:visibility="invisible" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoRegularEditText
+                                android:id="@+id/edittext_addres_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_below="@+id/robotoMedium0"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/edittext_background"
+                                android:ems="10"
+                                android:hint="Name of the location"
+                                android:inputType="textPersonName"
+                                android:textColor="#2b2b2b"
+                                android:textColorHint="#ababab"
+                                android:textSize="17sp" />
+
+
+                            <View
+                                android:id="@+id/divider_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/edittext_addres_name"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/colorAccent" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                                android:id="@+id/robotoMedium1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/divider_name"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="10dp"
+                                android:enabled="false"
+                                android:text="Sub Road"
+                                android:textColor="#d3d3d3"
+                                android:textSize="12sp"
+                                android:visibility="invisible" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoRegularEditText
+                                android:id="@+id/edittext_addres_subroad"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_below="@+id/robotoMedium1"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/edittext_background"
+                                android:ems="10"
+                                android:hint="Sub Road"
+                                android:inputType="textPersonName"
+                                android:textColor="#2b2b2b"
+                                android:textColorHint="#ababab"
+                                android:textSize="17sp" />
+
+
+                            <View
+                                android:id="@+id/divider_subrode"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/edittext_addres_subroad"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/colorAccent" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                                android:id="@+id/robotoMedium2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/divider_subrode"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="10dp"
+                                android:enabled="false"
+                                android:text="House or Building Number"
+                                android:textColor="#d3d3d3"
+                                android:textSize="12sp"
+                                android:visibility="invisible" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoRegularEditText
+                                android:id="@+id/edittext_addres_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_below="@+id/robotoMedium2"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/edittext_background"
+                                android:ems="10"
+                                android:hint="House or Building Number"
+                                android:inputType="textPersonName"
+                                android:textColor="#2b2b2b"
+                                android:textColorHint="#ababab"
+                                android:textSize="17sp" />
+
+                            <View
+                                android:id="@+id/divider_number"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/edittext_addres_number"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/colorAccent" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                                android:id="@+id/robotoMedium3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/divider_number"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="10dp"
+                                android:enabled="false"
+                                android:text="Building Name"
+                                android:textColor="#d3d3d3"
+                                android:textSize="12sp"
+                                android:visibility="invisible" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoRegularEditText
+                                android:id="@+id/edittext_addres_apartment_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_below="@+id/robotoMedium3"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/edittext_background"
+                                android:ems="10"
+                                android:hint="Building Name"
+                                android:inputType="textPersonName"
+                                android:textColor="#2b2b2b"
+                                android:textColorHint="#ababab"
+                                android:textSize="17sp" />
+
+                            <View
+                                android:id="@+id/divider_apartment"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/edittext_addres_apartment_name"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/colorAccent" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                                android:id="@+id/robotoMedium4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/divider_apartment"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="10dp"
+                                android:enabled="false"
+                                android:text="Floor Number"
+                                android:textColor="#d3d3d3"
+                                android:textSize="12sp"
+                                android:visibility="invisible" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoRegularEditText
+                                android:id="@+id/edittext_addres_floor"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_below="@+id/robotoMedium4"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/edittext_background"
+                                android:ems="10"
+                                android:hint="Floor Number"
+                                android:inputType="textPersonName"
+                                android:textColor="#2b2b2b"
+                                android:textColorHint="#ababab"
+                                android:textSize="17sp" />
+
+                            <View
+                                android:id="@+id/divider_floor"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/edittext_addres_floor"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/colorAccent" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                                android:id="@+id/robotoMedium5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/divider_floor"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="10dp"
+                                android:enabled="false"
+                                android:text="Department"
+                                android:textColor="#d3d3d3"
+                                android:textSize="12sp"
+                                android:visibility="invisible" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoRegularEditText
+                                android:id="@+id/edittext_addres_department"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_below="@+id/robotoMedium5"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/edittext_background"
+                                android:ems="10"
+                                android:hint="Department"
+                                android:inputType="textPersonName"
+                                android:textColor="#2b2b2b"
+                                android:textColorHint="#ababab"
+                                android:textSize="17sp" />
+
+                            <View
+                                android:id="@+id/divider_department"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/edittext_addres_department"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/colorAccent" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                                android:id="@+id/robotoMedium6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/divider_department"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="10dp"
+                                android:enabled="false"
+                                android:text="Location Landmark"
+                                android:textColor="#d3d3d3"
+                                android:textSize="12sp"
+                                android:visibility="invisible" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoRegularEditText
+                                android:id="@+id/edittext_addres_landmark"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_below="@+id/robotoMedium6"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/edittext_background"
+                                android:ems="10"
+                                android:hint="Location Landmark"
+                                android:inputType="textPersonName"
+                                android:textColor="#2b2b2b"
+                                android:textColorHint="#ababab"
+                                android:textSize="17sp" />
+
+                            <View
+                                android:id="@+id/divider_landmark"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/edittext_addres_landmark"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/colorAccent" />
+
+                            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                                android:id="@+id/robotoMedium7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/divider_landmark"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="10dp"
+                                android:enabled="false"
+                                android:text="Delivery Instructions"
+                                android:textColor="#d3d3d3"
+                                android:textSize="12sp"
+                                android:visibility="invisible" />
+
+
+                            <emerge.project.onmeal.ui.fonts.RobotoRegularEditText
+                                android:id="@+id/edittext_addres_instructions"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:layout_below="@+id/robotoMedium7"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/edittext_background"
+                                android:ems="10"
+                                android:hint="Delivery Instructions"
+                                android:inputType="textPersonName"
+                                android:textColor="#2b2b2b"
+                                android:textColorHint="#ababab"
+                                android:textSize="17sp" />
+
+                            <View
+                                android:id="@+id/divider_instructions"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/edittext_addres_instructions"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginRight="40dp"
+                                android:background="@color/colorAccent" />
+
+                            <ImageView
+                                android:id="@+id/imageView_add"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/divider_instructions"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="20dp"
+                                android:src="@drawable/btn_confrmanddelivery" />
+
+
+                        </RelativeLayout>
+
+
+                    </LinearLayout>
+                </ScrollView>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:id="@+id/proprogressview"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"
+            app:mk_color="@color/colorAccent"
+            app:mk_type="FishSpinner" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawer"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_gravity="start"
+        android:background="@color/colorWhite">
+
+        <include layout="@layout/include_navigation_menu"/>
+
+
+    </RelativeLayout>
+
+
+</android.support.v4.widget.DrawerLayout>

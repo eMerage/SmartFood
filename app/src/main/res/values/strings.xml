@@ -1,0 +1,146 @@
+<resources>
+    <string name="app_name">SmartFood</string>
+    <string name="title_activity_maps">SmartFood</string>
+
+
+    <string name="facebook_app_id">1894896700627719</string>
+    <string name="fb_login_protocol_scheme">fb1894896700627719</string>
+
+
+    //
+    <string name="no_internet">No Internet Access !,Please try again</string>
+
+
+    <string name="dialog_one_button_ok">OK</string>
+    <string name="dialog_two_button_yes">YES</string>
+    <string name="dialog_two_button_no">NO</string>
+
+
+    //
+
+    <string name="fragment_intro_stepone_easystep">IT’S EASY AS</string>
+    <string name="fragment_intro_stepone_content_sub">Enjoy the best Food Delivery Service from the best Choices around Sri Lanka.</string>
+    <string name="fragment_intro_stepone_content">SIGN UP WITH ON MEAL.</string>
+
+    <string name="fragment_intro_steptwo_content_sub">Enjoy the best Food Delivery Service from the best Choices around Sri Lanka.</string>
+    <string name="fragment_intro_steptwo_content">GIVE US YOUR LOCATION &amp; SELECT YOUR MEAL.</string>
+
+    <string name="fragment_intro_stepthree_content_sub">Enjoy the best Food Delivery Service from the best Choices around Sri Lanka.</string>
+    <string name="fragment_intro_stepthree_content">GET IT DELIVERED TO YOUR DOOR.</string>
+
+    <string name="fragment_intro_stepfour_title_terms">TERMS &amp; CONDITIONS</string>
+    <string name="fragment_intro_stepfour_action_terms_agree">I AGREE WITH THE TERMS &amp; CONDITIONS</string>
+
+
+    <string name="msg_terms_titel_1">INTERNET SITE TERMS AND CONDITIONS</string>
+
+    <string name="msg_terms_titel_2">Please read the following terms and condition carefully.</string>
+
+    <string name="msg_terms_titel_2_content">By using the pages in this site, you agree to these terms and conditions. If you do not agree, you should not use this site.</string>
+
+    <string name="msg_terms_titel_3">RESTRICTIONS ON USE</string>
+
+    <string name="msg_terms_titel_3_content1">Material from http://www.onmeal.lk/ and any other World Wide Web site owned, operated, licensed, or controlled by SmartFood or any of its related, affiliated, or subsidiary companies may not be copied or distributed, or republished, uploaded, posted, or transmitted in any way, without the prior written consent of SmartFood .</string>
+
+    <string name="msg_terms_titel_3_content2">SmartFood grants you a limited license to access and make personal use of this web site but does not permit you to download or modify it, or any portion of it, except with prior written consent of SmartFood .</string>
+
+    <string name="msg_terms_titel_4">RESTRICTION OF LIABILITY</string>
+
+    <string name="msg_terms_titel_4_content">SmartFood will not be liable for any damages or injury caused by, including but not limited to, any failure of performance, error, omission, interruption, defect, delay in operation of transmission, computer virus, or line failure. SmartFood will not be liable for any damages or injury, including but not limited to, special or consequential damages that result from the use of, or the inability to use, the materials in this site or app, even if there is negligence of SmartFood or an authorized SmartFood representative. The above limitation or exclusion may not apply to you to the extent that applicable law may not allow the limitation or exclusion of liability for incidental or consequential damages. SmartFood total liability to you for all losses, damages, and causes of action (in contract, tort (including without limitation, negligence), or otherwise) will not be greater than the amount you paid to access this site.</string>
+
+    <string name="msg_terms_titel_5">SUBMISSIONS</string>
+
+    <string name="msg_terms_titel_5_content">All remarks, suggestions, ideas, graphics, or other information communicated to SmartFood through this site (together, the "Submission") will forever be the property of SmartFood. SmartFood will not be required to treat any Submission as confidential and will not be liable for any ideas for its business (including without limitation, product, or advertising ideas) and will not incur any liability as a result of any similarities that may appear in future SmartFood operations. Without limitation, SmartFood will have exclusive ownership of all present and future existing rights to the Submission of every kind and nature everywhere. Except as noted below in this paragraph, SmartFood will be entitled to use the Submission for any commercial or other purpose whatsoever without compensation to you or any other person sending the Submission. Personally identifiable information that may be received at this site is provided voluntarily by a visitor to this site. This information is for internal purposes only and is not sold or otherwise transferred to third parties of SmartFood or to other entities who are not involved in the operation of this site. The above right to use Submissions exclude non-retained information. You acknowledge that you are responsible for whatever material you submit, and you, not SmartFood have full responsibility for the message, including its legality, reliability, appropriateness, originality, and copyright.</string>
+
+    <string name="msg_terms_titel_6">ELECTRONIC COMMUNICATION</string>
+
+    <string name="msg_terms_titel_6_content">When you visit this SmartFood web site, use uses our services / apps or send e-mails to SmartFood web site, you are communicating with it electronically. You consent to receive communications electronically. SmartFood will communicate with you by e-mail or by posting notices on this site. You agree that all agreements, notices, disclosures and other communications that SmartFood provide to you electronically satisfy any legal requirement that such communications be in writing.</string>
+
+    <string name="msg_terms_titel_7">YOUR ACCOUNT AND PASSWORD</string>
+
+    <string name="msg_terms_titel_7_content">If you are under 18, you may use this website only with approval of a parent or guardian. SmartFood and its affiliates reserve the right to refuse service, terminate accounts, remove or edit content or cancel orders it their sole discretion.</string>
+
+    <string name="msg_terms_titel_7_content2">You are responsible for all actions taken with your User ID and password, including fees. If you grant to share your User ID and password or your information with third parties to provide you additional services, you are responsible for all actions taken with your User ID and password and therefore you should review that third party\'s privacy policy. If you lose control of your password, you may lose substantial control over your personally identifiable information and may be subject to legally binding actions taken on your behalf. Therefore, we do not recommend that you disclose your password to any third parties. If your password has been compromised for any reason, you should immediately change your password.</string>
+
+    <string name="msg_terms_titel_8">COPYRIGHT</string>
+
+    <string name="msg_terms_titel_8_content">All content included on this SmartFood website, such as text, graphics, logos, button icons, images, audio clips, digital downloads, data compilations, software and all business process are the property of SmartFood or its content suppliers and protected by Sri Lanka and international copyright laws. All software (services, API apps and etc.) and especially unique delivery / panning process used is the property of SmartFood or its software suppliers and protected by Sri Lanka and international copyright laws. The compilation of all content on this web site is the exclusive property of SmartFood and protected by Sri Lanka and international copyright laws.</string>
+
+    <string name="msg_terms_titel_9">DISCLAIMER</string>
+
+    <string name="msg_terms_titel_9_content">The material in this site could include technical inaccuracies or typographical errors. SmartFood may make changes or improvements at any time. THE MATERIALS IN THIS SITE ARE PROVIDED "AS IS" AND WITHOUT WARRANTIES OF ANY KIND EITHER EXPRESSED OR IMPLIED, TO THE FULLEST EXTENT PERMISSIBLE PURSUANT TO APPLICABLE LAW. SmartFood DISCLAIMS ALL WARRANTIES OR MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. SmartFood DOES NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE MATERIAL WILL BE UNINTERRUPTED OR ERROR-FREE, THAT DEFECTS WILL BE CORRECTED, OR THAT THIS SITE OR THE SERVER THAT MAKES IT AVAILABLE ARE FREE OF VIRUSES OR OTHER HARMFUL COMPONENTS. SmartFood DOES NOT WARRANT OR MAKE ANY REPRESENTATIONS REGARDING THE USE OF OR THE RESULT OF THE USE OF THE MATERIAL IN THIS SITE IN TERMS OF THEIR CORRECTNESS, ACCURACY, RELIABILITY, OR OTHERWISE.</string>
+
+    <string name="msg_terms_titel_9_content2">This website contains downloadable materials as well as links to external sites. SmartFood is not responsible for and has no control over, the content of such downloadable materials or external sites. You understand that SmartFood cannot and does not guarantee or warrant that files or software of any kind, or from any source, available for downloading through this website, will be free of infection or viruses, worms, Trojan Horses or other code or defects that manifest contaminating or destructive properties.</string>
+
+    <string name="msg_terms_titel_10">TRADEMARK INFORMATION</string>
+
+    <string name="msg_terms_titel_10_content">The following trademarks used herein are owned by SmartFood and its affiliates: SmartFood</string>
+
+    <string name="msg_terms_titel_11">MISCELLANEOUS</string>
+
+    <string name="msg_terms_titel_11_content">These Terms and Conditions will be governed and be interpreted pursuant to the laws of Sri Lanka, notwithstanding any principles of conflicts of law. If any part of these Terms and Conditions is unlawful, void, or unenforceable, that part will be deemed severable and will not affect the validity and enforceability of any remaining provisions. Possible evidence of the use of this site for illegal purposes will be provided to law enforcement authorities. This is the entire agreement between the parties relating to the use of this site. SmartFood can revise these Terms and Conditions at any time by updating this posting. SmartFood products and services are available in some areas of the country. However, the SmartFood site may describe areas, products, and services that are available. This site may be linked to other sites which are not maintained by SmartFood . SmartFood is not responsible for the content of those sites. The inclusion of any link to such sites does not imply endorsement by SmartFood of the sites.</string>
+
+    <string name="msg_terms_titel_12">DELIVERY</string>
+
+    <string name="msg_terms_titel_12_content">SmartFood may decide the areas which can be delivered. Please review these locations in Sri Lanka carefully if you wish to have your order delivered. If you are not in an area that we deliver to, you may pick up your order from any of our restaurants. When you are ordering it is your responsibility to select the restaurant closest to you.</string>
+
+    <string name="msg_terms_titel_12_content2">SmartFood offers time slots for you to select at time of making the delivery order. SmartFood does not make any guarantee on the ability to deliver at the time you select when ordering.</string>
+
+    <string name="msg_terms_titel_13">AVAILABILITY</string>
+
+    <string name="msg_terms_titel_13_content">SmartFood does not guarantee the availability of all products at all times. If you have paid for products which are not available, we would be happy to provide other items as substitutes for the same price.</string>
+
+    <string name="msg_terms_titel_14">RETURN</string>
+
+    <string name="msg_terms_titel_14_content">SmartFood attempts to be as accurate as possible. However, SmartFood does not warrant that product description or other content of this website/ apps is accurate, complete, reliable, current, or error-free. If a product offered by SmartFood is not as described. A product may be returned if a customer has received a product that was not ordered or has received a product which does not meet the published specifications or is not in proper condition at the time of delivery. You are required to check your order carefully before the delivery person leaves your premises. In all other instances once a product is ordered it is considered sold and not returnable. SmartFood does not offer money back guarantee or trial products. It is solely your responsibility to ensure that the product you are purchasing will satisfy your requirements.</string>
+
+    <string name="msg_terms_titel_15">CERTIFICATION FOR HALAL</string>
+
+    <string name="msg_terms_titel_15_content">SmartFood extends the guarantee of our suppliers. SmartFood is not liable for any kind of contamination from non-Halal items into any other food items on its menu.</string>
+
+    <string name="msg_terms_titel_16">TERMINATION</string>
+
+    <string name="msg_terms_titel_16_content">SmartFood may terminate this agreement at any time. SmartFood may terminate this agreement immediately without notice if, in its sole judgment, you breach any term or condition of this agreement. Upon termination, you must destroy all materials.</string>
+
+    <string name="msg_terms_titel_17">DISPUTES</string>
+
+
+    <string name="msg_terms_titel_17_content">Any dispute relating in any way to your visit to SmartFood or to products you purchase through SmartFood shall be submitted to arbitration in Colombo, Sri Lanka, except that, to the extent you have in any manner violated or threatened to violate SmartFood\'s intellectual property rights, SmartFood may seek injunctive or other appropriate relief in any court in Sri Lanka, and you consent to exclusive jurisdiction and venue in such courts. Arbitration under this agreement shall be conducted under the rules prevailing in Sri Lanka. The arbitrator\'s award shall be binding and may be entered as a judgment in any court of competent jurisdiction. To the fullest extent permitted by applicable law, no arbitration under this Agreement shall be joined to an arbitration involving any other party subject to this Agreement, whether through class arbitration proceedings or otherwise.</string>
+
+
+
+    <string name="msg_terms_titel_18">JURISDICTION</string>
+
+    <string name="msg_terms_titel_18_content">Except as described otherwise, all materials in the SmartFood site are made available only to provide information about SmartFood. SmartFood controls and operates this site from its head office in Colombo, Sri Lanka and makes no representation that these materials are appropriate or available for use in other locations. If you use this site from other locations you are responsible for compliance with applicable local laws.</string>
+
+    <string name="login_activity_title">LOGIN &amp; SIGN UP</string>
+
+
+    <string name="singup_activity_title">SIGN UP</string>
+    <string name="singup_edittext_user_name_hint">Full Name</string>
+    <string name="singup_edittext_user_email_hint">Email</string>
+    <string name="singup_edittext_user_phonenumber_hint">Phone Number</string>
+    <string name="singup_edittext_user_password_hint">Password</string>
+    <string name="singup_edittext_user_password_confrim_hint">Confrim Password</string>
+
+
+    <string name="number_validation_title">Phone Number Verification</string>
+    <string name="number_validation_text">Enter the activation code sent to your mobile number</string>
+    <string name="number_validation_code_resend"><u>Resend the code</u></string>
+
+
+    <string name="welcome_title">Thank You for Signing up with Meal Go!</string>
+    <string name="welcome_text">Enjoy the best Food Delivery Service from the best Choices around Sri Lanka.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="about_activity_title">ABOUT US</string>
+    <string name="about_activity_des_lineone">Food is a nourishment of the soul and body.  it is true love. We enhance its experience using cutting-edge technology.Convenience, Quality, Smart</string>
+    <string name="about_activity_des_linetwo">This app connects you to all types of quality food outlets in your area for your convenience while bringing the self-serving experience. No lines, no waiting! Simply use the On Meal.</string>
+    <string name="about_activity_des_linethree">P.S. We consider your feedback and ideas play a vital role in enhancing this service. Please be a happy contributor by contributing your ideas, feedbacks and even a bug in the service simply for the betterment of the service</string>
+
+
+
+</resources>

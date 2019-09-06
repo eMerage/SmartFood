@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativelayoutdailogmain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_terms_conditions">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/recyclerview_timeslots"
+            android:layout_marginBottom="10dp">
+
+
+                <emerge.project.onmeal.ui.fonts.RobotoLightButton
+                    android:id="@+id/button3"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/RelativeLayout"
+                    android:background="@drawable/selector_button_green"
+                    android:text="New"
+                    android:textColor="@color/colorWhite"
+                    android:layout_toRightOf="@+id/RelativeLayout" />
+
+
+                <RelativeLayout
+                    android:id="@+id/RelativeLayout"
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true">
+
+                </RelativeLayout>
+
+                <emerge.project.onmeal.ui.fonts.RobotoLightButton
+                    android:id="@+id/button2"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@+id/RelativeLayout"
+                    android:background="@drawable/selector_button_red"
+                    android:text="Process"
+                    android:textColor="@color/colorWhite"
+                    android:layout_toLeftOf="@+id/RelativeLayout" />
+        </RelativeLayout>
+
+        <emerge.project.onmeal.ui.fonts.RobotoRegular
+            android:id="@+id/openSansRegular4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="This items cannot be add,Do you want to process or add new order ? " />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview_timeslots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/openSansRegular4"
+            android:layout_margin="5dp"
+            android:background="@android:color/white" />
+
+
+</RelativeLayout>
+
+
+

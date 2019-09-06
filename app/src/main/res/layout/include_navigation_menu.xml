@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="250dp"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoLight
+        android:id="@+id/text_navigation_getfood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView7"
+        android:layout_alignStart="@+id/imageView7"
+        android:layout_alignLeft="@+id/imageView7"
+        android:layout_marginTop="45dp"
+        android:lineSpacingExtra="4sp"
+        android:paddingTop="5dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="5dp"
+        android:text="Get Food"
+        android:textColor="#dd432b"
+        android:textSize="20sp" />
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoLight
+        android:id="@+id/text_navigation_yourorders"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_navigation_getfood"
+        android:layout_alignStart="@+id/imageView7"
+        android:layout_alignLeft="@+id/imageView7"
+        android:layout_marginTop="25dp"
+        android:lineSpacingExtra="4sp"
+        android:paddingTop="5dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="5dp"
+        android:text="Your Orders"
+        android:textColor="#de3f3f3f"
+        android:textSize="20sp" />
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoLight
+        android:id="@+id/text_navigation_favourites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_navigation_yourorders"
+        android:layout_alignStart="@+id/imageView7"
+        android:layout_alignLeft="@+id/imageView7"
+        android:layout_marginTop="25dp"
+        android:lineSpacingExtra="4sp"
+        android:paddingTop="5dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="5dp"
+        android:text="Favourites"
+        android:textColor="#de3f3f3f"
+        android:textSize="20sp" />
+
+    <emerge.project.onmeal.ui.fonts.RobotoLight
+        android:id="@+id/text_navigation_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_navigation_favourites"
+        android:layout_alignStart="@+id/imageView7"
+        android:layout_alignLeft="@+id/imageView7"
+        android:layout_marginTop="25dp"
+        android:lineSpacingExtra="4sp"
+        android:paddingTop="5dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="5dp"
+        android:text="Profile"
+        android:textColor="#de3f3f3f"
+        android:textSize="20sp" />
+
+    <emerge.project.onmeal.ui.fonts.RobotoLight
+        android:id="@+id/text_navigation_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_navigation_profile"
+        android:layout_above="@+id/relativelayout_logout"
+        android:layout_alignStart="@+id/imageView7"
+        android:layout_alignLeft="@+id/imageView7"
+        android:layout_marginTop="25dp"
+        android:lineSpacingExtra="4sp"
+        android:paddingTop="5dp"
+        android:paddingRight="50dp"
+        android:paddingBottom="5dp"
+        android:text="Settings"
+        android:textColor="#de3f3f3f"
+        android:textSize="20sp" />
+
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="40dp">
+
+        <emerge.project.onmeal.ui.fonts.RobotoRegular
+            android:id="@+id/robotoRegular6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toEndOf="@+id/imageView8"
+            android:layout_toRightOf="@+id/imageView8"
+            android:lineSpacingExtra="2sp"
+            android:text="Logout"
+            android:textColor="#dd432b"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/log_out" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/smartfood_logo" />
+
+</RelativeLayout>

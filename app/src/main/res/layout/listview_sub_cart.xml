@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    android:background="@color/colorWhite"
+    card_view:cardCornerRadius="10dp">
+
+
+    <RelativeLayout
+        android:id="@+id/view_foreground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <emerge.project.onmeal.ui.fonts.RobotoLight
+                android:id="@+id/textView_menuname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/imageview_item_cover"
+                android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@+id/imageview_item_cover"
+                android:layout_toRightOf="@+id/imageview_item_cover"
+                android:fontFamily="sans-serif-medium"
+                android:freezesText="true"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textColor="@color/colorTextBlack" />
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/imageview_item_cover"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+
+                app:civ_border_color="@color/colorAccent"
+                app:civ_border_width="1dp"
+                app:civ_shadow="true"
+                app:civ_shadow_color="#e87f6f"
+                app:civ_shadow_radius="5" />
+
+
+            <emerge.project.onmeal.ui.fonts.RobotoLight
+                android:id="@+id/textView_itemqty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView_menuname"
+                android:layout_alignStart="@+id/textView_menuname"
+                android:freezesText="true"
+                android:textAppearance="@android:style/TextAppearance.Small"
+                android:textColor="@color/colorTextBlack" />
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+</android.support.v7.widget.CardView>
+
+
+
+
+
+
+

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.login.ActivityLogin">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_background"
+        android:layout_alignParentLeft="true" />
+
+
+
+
+
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/proprogressview"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible"
+        app:mk_color="@color/colorWhite"
+        app:mk_type="FishSpinner" />
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoMedium
+        android:id="@+id/robotoMedium2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="25dp"
+        android:text="Please Enter Your Login Details"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="20sp" />
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoLightEditText
+        android:id="@+id/edittext_user_email"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_above="@+id/divider2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="40dp"
+        android:background="@color/edittext_background"
+        android:ems="10"
+        android:hint="@string/singup_edittext_user_email_hint"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/colorTextWhite"
+        android:textColorHint="@color/colorTextAsh"
+        android:textSize="18sp" />
+
+
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/colorWhite" />
+
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoLightEditText
+        android:id="@+id/edittext_user_password"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/divider2"
+        android:layout_centerHorizontal="true"
+        android:background="@color/edittext_background"
+        android:ems="10"
+        android:hint="@string/singup_edittext_user_password_hint"
+        android:inputType="textPassword"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:textColor="@color/colorTextWhite"
+        android:textColorHint="@color/colorTextAsh"
+        android:textSize="18sp" />
+
+
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_below="@+id/edittext_user_password"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorWhite" />
+
+
+
+    <RelativeLayout
+        android:id="@+id/button_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp">
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/btn_next" />
+    </RelativeLayout>
+
+    <emerge.project.onmeal.ui.fonts.RobotoMedium
+        android:id="@+id/robotoMedium15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="60dp"
+        android:layout_toStartOf="@+id/button_login"
+        android:layout_toLeftOf="@+id/button_login"
+        android:text="Sign In"
+        android:textColor="#ffffff"
+        android:textSize="25sp" />
+
+
+</RelativeLayout>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/constraintlayout_main_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_background"
+        android:visibility="visible" />
+
+
+    <com.tuyenmonkey.mkloader.MKLoader
+        android:id="@+id/proprogressview"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible"
+        app:mk_color="@color/colorWhite"
+        app:mk_type="FishSpinner" />
+
+
+    <emerge.project.onmeal.ui.fonts.RobotoMedium
+        android:id="@+id/robotoMedium2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/number_validation_title"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="20sp" />
+
+    <emerge.project.onmeal.ui.fonts.RobotoRegular
+        android:id="@+id/robotoRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/robotoMedium2"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="50dp"
+        android:lineSpacingExtra="5sp"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="15sp"
+        android:text="@string/number_validation_text"
+        android:layout_alignParentLeft="true" />
+
+    <emerge.project.onmeal.ui.fonts.RobotoRegular
+        android:id="@+id/textview_phonenumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/robotoRegular"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="15sp" />
+
+    <emerge.project.onmeal.ui.fonts.RobotoRegular
+        android:id="@+id/btn_resend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview_phonenumber"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="40dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:text="@string/number_validation_code_resend"
+        android:textColor="@color/colorTextWhite"
+        android:textSize="15sp"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btn_resend"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentLeft="true">
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_first_number"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_numbervalidation_rectangle">
+
+            <emerge.project.onmeal.ui.fonts.RobotoLightEditText
+                android:id="@+id/edittext_otp_first_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/edittext_background"
+                android:cursorVisible="false"
+                android:freezesText="true"
+                android:hint="0"
+                android:gravity="center"
+                android:inputType="number"
+                android:textColor="@color/colorTextAsh"
+                android:textSize="34sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_secend_number"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_numbervalidation_rectangle"
+            android:layout_toEndOf="@+id/relativelayout_first_number"
+            android:layout_toRightOf="@+id/relativelayout_first_number">
+
+            <emerge.project.onmeal.ui.fonts.RobotoLightEditText
+                android:id="@+id/edittext_otp_secend_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/edittext_background"
+                android:cursorVisible="false"
+                android:freezesText="true"
+                android:gravity="center"
+                android:inputType="number"
+                android:hint="0"
+                android:textColor="@color/colorTextAsh"
+                android:textSize="34sp" />
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_third_number"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_numbervalidation_rectangle"
+            android:layout_toEndOf="@+id/relativelayout_secend_number"
+            android:layout_toRightOf="@+id/relativelayout_secend_number">
+
+            <emerge.project.onmeal.ui.fonts.RobotoLightEditText
+                android:id="@+id/edittext_otp_third_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/edittext_background"
+                android:fontFamily="@font/open_sans_light"
+                android:freezesText="true"
+                android:gravity="center"
+                android:inputType="number"
+                android:hint="0"
+                android:textColor="@color/colorTextAsh"
+                android:textSize="34sp" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_fourth_number"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_numbervalidation_rectangle"
+            android:layout_toEndOf="@+id/relativelayout_third_number"
+            android:layout_toRightOf="@+id/relativelayout_third_number">
+
+            <emerge.project.onmeal.ui.fonts.RobotoLightEditText
+                android:id="@+id/edittext_otp_fourth_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/edittext_background"
+                android:cursorVisible="false"
+                android:fontFamily="@font/open_sans_light"
+                android:freezesText="true"
+                android:gravity="center"
+                android:hint="0"
+                android:inputType="number"
+                android:textColor="@color/colorTextAsh"
+                android:textSize="34sp" />
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/button_validated"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="30dp">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/btn_next" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

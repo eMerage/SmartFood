@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_centerVertical="true"
+    android:layout_marginBottom="15dp"
+    android:background="#f7f7f7">
+
+    <View
+        android:id="@+id/divider17"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/RelativeLayout2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:background="#cdcdcd"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/card_view"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone">
+
+        <emerge.project.onmeal.ui.fonts.RobotoMedium
+            android:id="@+id/robotoMedium16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:lineSpacingExtra="3sp"
+            android:text="Quantity"
+            android:textColor="#767676"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:id="@+id/img_qty_decrease"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toStartOf="@+id/relativelayout"
+            android:layout_toLeftOf="@+id/relativelayout"
+            android:src="@drawable/ic_decrease" />
+
+        <RelativeLayout
+            android:id="@+id/relativelayout"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toStartOf="@+id/imageView20"
+            android:layout_toLeftOf="@+id/imageView20"
+            android:background="@drawable/bg_personlazizer_qty_rectangle">
+
+            <emerge.project.onmeal.ui.fonts.RobotoRegular
+                android:id="@+id/robotoRegular3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:lineSpacingExtra="-1sp"
+                android:text="00"
+                android:textColor="#767676"
+                android:textSize="17sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_increase" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/card_view"
+        style="@style/CardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_header_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:elevation="5dp">
+
+
+            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                android:id="@+id/robotoMedium19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/robotoMedium18"
+                android:layout_toLeftOf="@+id/robotoMedium18"
+                android:text="+00"
+                android:textColor="#aeaeae"
+                android:textSize="11sp" />
+
+            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                android:id="@+id/robotoMedium18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/robotoMedium17"
+                android:layout_marginEnd="9dp"
+                android:layout_marginRight="9dp"
+                android:layout_marginBottom="2dp"
+                android:layout_toStartOf="@+id/checkBox"
+                android:layout_toLeftOf="@+id/checkBox"
+                android:text=".00"
+                android:textColor="#aeaeae"
+                android:textSize="9sp" />
+
+            <emerge.project.onmeal.ui.fonts.RobotoMedium
+                android:id="@+id/robotoMedium17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toStartOf="@+id/robotoMedium19"
+
+                android:layout_toLeftOf="@+id/robotoMedium19"
+                android:layout_toEndOf="@+id/imageView_header_cover"
+                android:layout_toRightOf="@+id/imageView_header_cover" />
+
+            <ImageView
+                android:id="@+id/imageView_header_cover"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_image_default" />
+
+            <ProgressBar
+                android:id="@+id/progressbar_header"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:theme="@style/checkBox"
+                android:layout_marginRight="20dp" />
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</RelativeLayout>
+
+

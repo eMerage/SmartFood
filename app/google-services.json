@@ -1,0 +1,66 @@
+{
+  "project_info": {
+    "project_number": "484062782146",
+    "firebase_url": "https://onmeal-3bd0d.firebaseio.com",
+    "project_id": "onmeal-3bd0d",
+    "storage_bucket": "onmeal-3bd0d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:484062782146:android:7ee23d819e02eabe",
+        "android_client_info": {
+          "package_name": "emerge.project.onmeal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "484062782146-3re118jj4n262an0a33ivtt9k9ftir6m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "emerge.project.onmeal",
+            "certificate_hash": "76e9ce16908e0b0084622bdc1bc308acb8446c6d"
+          }
+        },
+        {
+          "client_id": "484062782146-8ah8i1kt6ldtr1c0tbgpn5q26jld3c0a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "emerge.project.onmeal",
+            "certificate_hash": "23302d2fc58108ec3e2a1b335a16b256284fad42"
+          }
+        },
+        {
+          "client_id": "484062782146-clk8ntjihuf87fvdbe2qt2pk1othdp3u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVmfkdfqlMG7K6j5kEikZW12MPxRc9MOY"
+        },
+        {
+          "current_key": "AIzaSyCK-Yz6s6VmIPJFB35-MzYTPfmma5IOmos"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484062782146-clk8ntjihuf87fvdbe2qt2pk1othdp3u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
