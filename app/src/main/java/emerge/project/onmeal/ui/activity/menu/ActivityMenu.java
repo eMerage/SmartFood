@@ -87,7 +87,7 @@ public class ActivityMenu extends Activity implements MenuView, OnMapReadyCallba
     TextView textviewCartCount;
 
     @BindView(R.id.button_cover_image_more)
-    Button btnCoverImageMore;
+    ImageView btnCoverImageMore;
 
 
 
