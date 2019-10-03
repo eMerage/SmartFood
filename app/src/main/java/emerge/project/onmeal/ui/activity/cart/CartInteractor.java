@@ -73,6 +73,8 @@ public interface CartInteractor {
         void orderProsessSuccess(OrderConfirmDetails orderConfirmDetails);
 
         void menuItemsErrorList(ArrayList<MenuItemsError> menuItemsError);
+        void dineinTimeEmpty();
+
 
 
     }

@@ -84,6 +84,7 @@ public interface ApiInterface {
     Observable<List<MenuItems>> getMainFoodByFood(@Query("menuTitleID") String foodId, @Query("userid") int userId, @Query("Addressid") String addressId, @Query("Dispatchtype") String dispatchType);
 
 
+
     @GET("Menu/GetFoodCategoriesForOutletMenuTitle")
     Observable<List<FoodCategoryItems>> GetFoodCategoriesForOutletMenuTitle(@Query("outletID") int outletId, @Query("menuCategoryID") int menuCategoryID,
                                                                       @Query("menuTitleID") int menuTitleID, @Query("outletMenuTitleID") int outletMenuTitleID,

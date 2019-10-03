@@ -178,6 +178,11 @@ CartInteractor.OnRemoveFaildMenusFinishedListener,
         cartView.menuItemsErrorList(menuItemsError);
     }
 
+    @Override
+    public void dineinTimeEmpty() {
+        cartView.dineinTimeEmpty();
+    }
+
 
     @Override
     public void genarateOrderCode() {

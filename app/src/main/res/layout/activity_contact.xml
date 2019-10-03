@@ -158,7 +158,7 @@
                             android:layout_alignStart="@+id/openSansLight2"
                             android:layout_alignLeft="@+id/openSansLight2"
                             android:layout_marginTop="5dp"
-                            android:text="0115960960"
+                            android:text="0774442474"
                             android:textColor="@color/colorTextBlack"
                             android:textSize="14sp" />
 
@@ -184,7 +184,7 @@
                             android:layout_alignStart="@+id/openSansLight2"
                             android:layout_alignLeft="@+id/openSansLight2"
                             android:layout_marginTop="5dp"
-                            android:text="info@onmeal.lk"
+                            android:text="info@smartfood.lk"
                             android:textColor="@color/colorTextBlack"
                             android:textSize="14sp" />
 
@@ -210,7 +210,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/imageView10"
-                                android:text="0702002221"
+                                android:text="0774442474"
                                 android:textColor="@color/colorTextBlack"
                                 android:textSize="14sp" />
 
@@ -239,7 +239,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/imageView2"
-                                android:text="0702002221"
+                                android:text="0774442474"
                                 android:textColor="@color/colorTextBlack"
                                 android:textSize="14sp" />
 

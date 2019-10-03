@@ -46,8 +46,8 @@ PersonlaizeInteractor.OnCheckCartAvailabilityListener,
 
 
     @Override
-    public void getFoodCategory(Context mContext, int outletID, int menuTitleID, int outletMenuTitleID) {
-        personlaizeInteractor.getFoodCategory(mContext, outletID, menuTitleID, outletMenuTitleID, this);
+    public void getFoodCategory(Context mContext, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID) {
+        personlaizeInteractor.getFoodCategory(mContext, outletID, menuTitleID, outletMenuTitleID,menuCatID ,this);
     }
 
 
@@ -57,8 +57,8 @@ PersonlaizeInteractor.OnCheckCartAvailabilityListener,
     }
 
     @Override
-    public void foodCategoryFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID) {
-        personlaizeView.foodCategoryFail(msg, outletID, menuTitleID, outletMenuTitleID);
+    public void foodCategoryFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID) {
+        personlaizeView.foodCategoryFail(msg, outletID, menuTitleID, outletMenuTitleID,menuCatID);
     }
 
 
@@ -76,8 +76,8 @@ PersonlaizeInteractor.OnCheckCartAvailabilityListener,
 
 
     @Override
-    public void getSubFoods(Context mContext, int menuId, int foodId, int outletId, int foodItemCategoryID,ArrayList<FoodCategoryItems> foodCategoryItemsArrayList) {
-        personlaizeInteractor.getSubFoods(mContext, menuId, foodId, outletId, foodItemCategoryID, foodCategoryItemsArrayList,this);
+    public void getSubFoods(Context mContext, int menuId, int foodId, int outletId, int foodItemCategoryID,int menuCatID,ArrayList<FoodCategoryItems> foodCategoryItemsArrayList) {
+        personlaizeInteractor.getSubFoods(mContext, menuId, foodId, outletId, foodItemCategoryID,menuCatID ,foodCategoryItemsArrayList,this);
     }
 
 
@@ -92,14 +92,14 @@ PersonlaizeInteractor.OnCheckCartAvailabilityListener,
     }
 
     @Override
-    public void subFoodsFail(int menuId, int foodId, int outletId, int foodItemCategoryID, String msg) {
-        personlaizeView.subFoodsFail(menuId, foodId, outletId, foodItemCategoryID, msg);
+    public void subFoodsFail(int menuId, int foodId, int outletId, int foodItemCategoryID, String msg,int menuCatID) {
+        personlaizeView.subFoodsFail(menuId, foodId, outletId, foodItemCategoryID, msg,menuCatID);
     }
 
 
     @Override
-    public void getMenuSize(Context mContext, int outletID, int menuTitleID, int outletMenuTitleID) {
-        personlaizeInteractor.getMenuSize(mContext, outletID, menuTitleID, outletMenuTitleID, this);
+    public void getMenuSize(Context mContext, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID) {
+        personlaizeInteractor.getMenuSize(mContext, outletID, menuTitleID, outletMenuTitleID,  menuCatID,this);
     }
 
 
@@ -109,8 +109,8 @@ PersonlaizeInteractor.OnCheckCartAvailabilityListener,
     }
 
     @Override
-    public void menuSizeFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID) {
-        personlaizeView.menuSizeFail(msg, outletID, menuTitleID, outletMenuTitleID);
+    public void menuSizeFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID) {
+        personlaizeView.menuSizeFail(msg, outletID, menuTitleID, outletMenuTitleID, menuCatID);
     }
 
 

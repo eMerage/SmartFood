@@ -57,7 +57,7 @@ public interface CartView {
     void orderProsessSuccess(OrderConfirmDetails orderConfirmDetails);
 
     void menuItemsErrorList(ArrayList<MenuItemsError> menuItemsError);
-
+    void dineinTimeEmpty();
 
     void getOrderCode(String orderCode);
 

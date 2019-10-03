@@ -220,7 +220,9 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             bloackUserInteraction();
             proprogressview.setVisibility(View.VISIBLE);
+
             cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString());
+
             cartPresenter.getDeliveryAddress(this);
             cartPresenter.genarateOrderCode();
 
@@ -267,7 +269,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     @OnClick(R.id.img_btn_time)
     public void onClickTime(View view) {
 
-        if (dispatchType.equals("Pickup")) {
+        if ((dispatchType.equals("Pickup")) || (dispatchType.equals("Dinein")) ) {
             com.android.datetimepicker.time.TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getFragmentManager(), "timePicker");
 
         } else {
@@ -440,7 +442,14 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         textDiscountchaege.setText(priseArrayDiscount[0]);
         textDiscountchaegeCents.setText("." + priseArrayDiscount[1]);
 
-        Toast.makeText(this, "Promo code successfully redeemed", Toast.LENGTH_LONG).show();
+
+        if(code.equals("No Promo")){
+
+        }else {
+            Toast.makeText(this, "Promo code successfully redeemed", Toast.LENGTH_LONG).show();
+        }
+
+
 
         if (image.equals("null") || image.isEmpty() || image == null || image.equals("")) {
 
@@ -834,6 +843,13 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
+    public void dineinTimeEmpty() {
+        unBloackUserInteraction();
+        proprogressview.setVisibility(View.GONE);
+        Toast.makeText(this, "Please select the Dine-In Time", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void getOrderCode(String orderCode) {
         orderCODE = orderCode;
 
@@ -850,7 +866,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Warning");
-            alertDialogBuilder.setMessage("No Internet Access, Please try again ");
+            alertDialogBuilder.setMessage("No Internet Access, Please try again");
             alertDialogBuilder.setPositiveButton("OK",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

@@ -22,9 +22,9 @@ public interface PersonlaizeInteractor {
 
     interface OnGetFoodCategoryFinishedListener {
         void foodCategory(ArrayList<FoodCategoryItems> foodCategoryItems);
-        void foodCategoryFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID);
+        void foodCategoryFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatogory);
     }
-    void getFoodCategory(Context mContext, int outletID, int menuTitleID, int outletMenuTitleID, OnGetFoodCategoryFinishedListener onGetFoodCategoryFinishedListener);
+    void getFoodCategory(Context mContext, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatogory ,OnGetFoodCategoryFinishedListener onGetFoodCategoryFinishedListener);
 
 
     interface OnSelectedFoodCategoryListener {
@@ -36,17 +36,17 @@ public interface PersonlaizeInteractor {
     interface OnSubFoodsListener {
         void subFoodsEmpty();
         void subFoods(ArrayList<MenuSubItems> menuSubItemsArrayList);
-        void subFoodsFail(int menuId, int foodId, int outletId, int foodItemCategoryID, String msg);
+        void subFoodsFail(int menuId, int foodId, int outletId, int foodItemCategoryID, String msg,int menuCatID);
     }
 
-    void getSubFoods(Context mContext, int menuId, int foodId, int outletId, int foodItemCategoryID,ArrayList<FoodCategoryItems> foodCategoryItemsArrayList, OnSubFoodsListener onSubFoodsListener);
+    void getSubFoods(Context mContext, int menuId, int foodId, int outletId, int foodItemCategoryID,int menuCatID,ArrayList<FoodCategoryItems> foodCategoryItemsArrayList, OnSubFoodsListener onSubFoodsListener);
 
 
     interface OnGetMenuSizeFinishedListener {
         void menuSize(ArrayList<MenuSize> menuItemSizes);
-        void menuSizeFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID);
+        void menuSizeFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID);
     }
-    void getMenuSize(Context mContext, int outletID, int menuTitleID, int outletMenuTitleID, OnGetMenuSizeFinishedListener onGetMenuSizeFinishedListener);
+    void getMenuSize(Context mContext, int outletID, int menuTitleID, int outletMenuTitleID, int menuCatID,OnGetMenuSizeFinishedListener onGetMenuSizeFinishedListener);
 
 
 

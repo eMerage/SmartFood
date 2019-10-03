@@ -87,9 +87,12 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
 
 
 
-        String dispatchType;
+        String dispatchType = "";
         if (historyItems.getDispatchType().equals("P")) {
             dispatchType = "Pick Up";
+            holder.textviewTransits.setText("Ready");
+        } else if(historyItems.getDispatchType().equals("T")){
+            dispatchType = "Dine-In";
             holder.textviewTransits.setText("Ready");
         } else {
             dispatchType = "Delivery";
@@ -120,10 +123,10 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
             holder.imgMake.setImageResource(R.drawable.ic_inmake_gry);
             holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_gry);
 
-            if (historyItems.getDispatchType().equals("P")) {
-                holder.imgTransits.setImageResource(R.drawable.ic_ready_gry);
-            } else {
+            if (historyItems.getDispatchType().equals("D")) {
                 holder.imgTransits.setImageResource(R.drawable.ic_transit_gry);
+            } else {
+                holder.imgTransits.setImageResource(R.drawable.ic_ready_gry);
             }
 
 
@@ -138,11 +141,13 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
 
             holder.imgConfrimd.setImageResource(R.drawable.ic_confirmed_green);
             holder.imgMake.setImageResource(R.drawable.ic_inmake_green);
-            if (historyItems.getDispatchType().equals("P")) {
-                holder.imgTransits.setImageResource(R.drawable.ic_ready_gry);
-            } else {
+
+            if (historyItems.getDispatchType().equals("D")) {
                 holder.imgTransits.setImageResource(R.drawable.ic_transit_gry);
+            } else {
+                holder.imgTransits.setImageResource(R.drawable.ic_ready_gry);
             }
+
             holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_gry);
 
 
@@ -156,10 +161,10 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
 
             holder.imgConfrimd.setImageResource(R.drawable.ic_confirmed_green);
             holder.imgMake.setImageResource(R.drawable.ic_inmake_green);
-            if (historyItems.getDispatchType().equals("P")) {
-                holder.imgTransits.setImageResource(R.drawable.ic_ready_green);
+            if (historyItems.getDispatchType().equals("D")) {
+                holder.imgTransits.setImageResource(R.drawable.ic_transit_gry);
             } else {
-                holder.imgTransits.setImageResource(R.drawable.ic_transit_green);
+                holder.imgTransits.setImageResource(R.drawable.ic_ready_gry);
             }
             holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_gry);
 
@@ -174,10 +179,12 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
 
             holder.imgConfrimd.setImageResource(R.drawable.ic_confirmed_green);
             holder.imgMake.setImageResource(R.drawable.ic_inmake_green);
-            if (historyItems.getDispatchType().equals("P")) {
-                holder.imgTransits.setImageResource(R.drawable.ic_ready_green);
+
+
+            if (historyItems.getDispatchType().equals("D")) {
+                holder.imgTransits.setImageResource(R.drawable.ic_transit_gry);
             } else {
-                holder.imgTransits.setImageResource(R.drawable.ic_transit_green);
+                holder.imgTransits.setImageResource(R.drawable.ic_ready_gry);
             }
             holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_green);
 

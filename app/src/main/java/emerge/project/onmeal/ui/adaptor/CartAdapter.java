@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.CartDetail;
 import emerge.project.onmeal.data.table.CartHeader;
+import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.network.NetworkAvailability;
 import emerge.project.onmeal.ui.activity.cart.ActivityCart;
 import emerge.project.onmeal.ui.activity.cart.CartPresenter;
@@ -88,7 +89,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 @Override
                 public void onClick(View view) {
                     if (NetworkAvailability.isNetworkAvailable(mContext)) {
-                        removeCartItem(cartHeader,position,holder);
+
+                        if(checkCartCount()==1){
+                            Toast.makeText(mContext, "You need at least one item in a card", Toast.LENGTH_SHORT).show();
+                        }else {
+                            removeCartItem(cartHeader,position,holder);
+                        }
+
+
                     } else {
                         Toast.makeText(mContext, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
                     }
@@ -121,7 +129,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                     }
 
                     if( qty==0){
-                        removeCartItem(cartHeader,position,holder);
+
+                        if(checkCartCount()==1){
+                            Toast.makeText(mContext, "You need at least one item in a card", Toast.LENGTH_SHORT).show();
+                            holder.textviewQty.removeTextChangedListener(this);
+                            holder.textviewQty.setText("1");
+                            chengeQty(cartHeader,1);
+                            holder.textviewQty.addTextChangedListener(this);
+
+                        }else {
+                            removeCartItem(cartHeader,position,holder);
+                        }
+
                     }else if(qty==-1){
 
                     }else {
@@ -178,6 +197,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
 
     }
+
+
+
+
     public void removeCartItem(final CartHeader cartHeader , int position, final MyViewHolder holder){
         realm.executeTransaction(new Realm.Transaction() {
             @Override
@@ -189,6 +212,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
                 if (resultsCartHeader.size() == 0) {
 
+
                 } else {
                     for (int i = 0; i < resultsCartHeader.size(); i++) {
                         resultsCartHeader.get(i).setActive(false);
@@ -198,9 +222,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
             }
         });
+
+
         ((ActivityCart) mContext).getPriceAfterRemoveItem();
 
     }
+
+    public int checkCartCount(){
+        final Long userList = realm.where(CartHeader.class).equalTo("isActive",true).count();
+        return userList.intValue();
+
+    }
+
 
 
     private void chengeQty(CartHeader cartHeader, final int qty){

@@ -15,13 +15,13 @@ import emerge.project.onmeal.utils.entittes.SelectedMenuDetails;
 public interface PersonlaizePresenter {
 
 
-    void getFoodCategory(Context mContext,int outletID, int menuTitleID, int outletMenuTitleID );
+    void getFoodCategory(Context mContext,int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID );
 
     void geSelectedFoodCategory(int foodItemCategoryID,int position);
 
-    void getSubFoods(Context mContext,int menuId, int foodId, int outletId,int foodItemCategoryID,ArrayList<FoodCategoryItems> foodCategoryItemsArrayList);
+    void getSubFoods(Context mContext,int menuId, int foodId, int outletId,int foodItemCategoryID,int menuCatID ,ArrayList<FoodCategoryItems> foodCategoryItemsArrayList);
 
-    void getMenuSize(Context mContext, int outletID, int menuTitleID, int outletMenuTitleID);
+    void getMenuSize(Context mContext, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID);
 
 
     void getTotalPrice(int qty,String size );

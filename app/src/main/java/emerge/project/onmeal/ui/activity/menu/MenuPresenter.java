@@ -18,7 +18,7 @@ public interface MenuPresenter {
 
     void getMainFoodByFood(String foodId);
 
-    void geSelectedMenuDetails( int menuId,  int foodId,  int outletId, final String menuName,String menuImg,String outlet);
+    void geSelectedMenuDetails( int menuId,  int foodId,  int outletId, final String menuName,String menuImg,String outlet,int menucat);
 
     void checkCartAvailability();
 

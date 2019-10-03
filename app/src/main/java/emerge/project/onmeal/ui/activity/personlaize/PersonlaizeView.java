@@ -19,7 +19,7 @@ public interface PersonlaizeView {
 
     void foodCategory(ArrayList<FoodCategoryItems> foodCategoryItems);
 
-    void foodCategoryFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID);
+    void foodCategoryFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID);
 
     void selectedFoodCategor(int foodItemCategoryID,int position);
 
@@ -27,12 +27,12 @@ public interface PersonlaizeView {
 
     void subFoods(ArrayList<MenuSubItems> menuSubItemsArrayList);
 
-    void subFoodsFail(int menuId, int foodId, int outletId, int foodItemCategoryID, String msg);
+    void subFoodsFail(int menuId, int foodId, int outletId, int foodItemCategoryID, String msg,int menuCatID);
 
 
     void menuSize(ArrayList<MenuSize> menuItemSizes);
 
-    void menuSizeFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID);
+    void menuSizeFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID);
 
 
     void totalPrice(Double price);

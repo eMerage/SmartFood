@@ -106,6 +106,7 @@ public class MenuInteractorImpil implements MenuInteractor {
 
         final ArrayList<MenuItems> menuItemsArrayList = new ArrayList<MenuItems>();
         try {
+
             apiService.getMainFoodByOutlet(Integer.parseInt(outletId), Integer.parseInt(menuCategoryID))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -155,9 +156,6 @@ public class MenuInteractorImpil implements MenuInteractor {
     @Override
     public void getMainFoodByFood(String foodId, final OnMainFoodByFoodListener onMainFoodByFoodListener) {
 
-
-
-
         String dispatchType = "";
         String addressId;
         final ArrayList<OutletItems> outletItemsArrayList = new ArrayList<OutletItems>();
@@ -174,6 +172,7 @@ public class MenuInteractorImpil implements MenuInteractor {
         }
 
         try {
+
             final ArrayList<MenuItems> menuItemsArrayList = new ArrayList<MenuItems>();
             apiService.getMainFoodByFood(foodId, Integer.parseInt(user.getUserId()), addressId, dispatchType)
                     .subscribeOn(Schedulers.io())
@@ -227,8 +226,8 @@ public class MenuInteractorImpil implements MenuInteractor {
     }
 
     @Override
-    public void geSelectedMenuDetails(int menuId, int foodId, int outletId, String menuName, String menuImg, String outlet, OnSelectedMenuDetailsListener onSelectedMenuDetailsListener) {
-        onSelectedMenuDetailsListener.selectedMenuDetails(menuId, foodId, outletId, menuName, menuImg, outlet);
+    public void geSelectedMenuDetails(int menuId, int foodId, int outletId, String menuName, String menuImg, String outlet, int menucat,OnSelectedMenuDetailsListener onSelectedMenuDetailsListener) {
+        onSelectedMenuDetailsListener.selectedMenuDetails(menuId, foodId, outletId, menuName, menuImg, outlet,menucat);
     }
 
     @Override

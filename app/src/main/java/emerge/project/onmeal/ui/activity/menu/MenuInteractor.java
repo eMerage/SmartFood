@@ -51,9 +51,9 @@ public interface MenuInteractor {
 
 
     interface OnSelectedMenuDetailsListener {
-        void selectedMenuDetails(int menuId,  int foodId,  int outletId, final String menuName,String menuImg,String outlet);
+        void selectedMenuDetails(int menuId,  int foodId,  int outletId, final String menuName,String menuImg,String outlet,int menucat);
     }
-    void geSelectedMenuDetails( int menuId,  int foodId,  int outletId, final String menuName,String menuImg,String outlet,OnSelectedMenuDetailsListener onSelectedMenuDetailsListener );
+    void geSelectedMenuDetails( int menuId,  int foodId,  int outletId, final String menuName,String menuImg,String outlet,int menucat,OnSelectedMenuDetailsListener onSelectedMenuDetailsListener );
 
 
     interface OnCheckCartAvailabilityListener {

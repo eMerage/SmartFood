@@ -115,16 +115,33 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     RelativeLayout relativelayoutPickup;
 
 
+    @BindView(R.id.relativelayout_dinein)
+    RelativeLayout relativelayoutDinein;
+
+
+
+
+
+
+
     @BindView(R.id.imageView_ic_delivery)
     ImageView imageViewIcDelivery;
     @BindView(R.id.imageView_ic_pickup)
     ImageView imageViewIcPickup;
+    @BindView(R.id.imageView_icdinein)
+    ImageView imageViewIcDinein;
 
 
     @BindView(R.id.textView_ic_delivery)
     TextView textViewIcDelivery;
     @BindView(R.id.textView_ic_pickup)
     TextView textViewIcPickup;
+
+    @BindView(R.id.textView_ic_dinein)
+    TextView textViewDineIn;
+
+
+
 
 
     @BindView(R.id.imageView_btn)
@@ -402,16 +419,30 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
             relativelayoutDelivery.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dispatchtype_left_red));
             relativelayoutPickup.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dispatchtype_right_white));
 
+            relativelayoutDinein.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dinein_white));
+
         } else {
             relativelayoutDelivery.setBackground(getResources().getDrawable(R.drawable.bg_dispatchtype_left_red));
             relativelayoutPickup.setBackground(getResources().getDrawable(R.drawable.bg_dispatchtype_right_white));
+
+            relativelayoutDinein.setBackground(getResources().getDrawable(R.drawable.bg_dinein_white));
         }
+
+
+
         imageViewIcDelivery.setImageResource(R.drawable.ic_delivery_bick);
         textViewIcDelivery.setTextColor(getResources().getColor(R.color.colorTextWhite));
 
 
         imageViewIcPickup.setImageResource(R.drawable.ic_pick_up_dark);
         textViewIcPickup.setTextColor(getResources().getColor(R.color.colorTextIcon));
+
+
+        imageViewIcDinein.setImageResource(R.drawable.ic_dinein_dark);
+        textViewDineIn.setTextColor(getResources().getColor(R.color.colorTextIcon));
+
+
+
 
         imageViewBtn.setImageResource(R.drawable.btn_continuewithdilivery);
         imageViewBtnAddaditional.setVisibility(View.VISIBLE);
@@ -464,9 +495,12 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
             relativelayoutPickup.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dispatchtype_right_red));
             relativelayoutDelivery.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dispatchtype_left_white));
 
+            relativelayoutDinein.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dinein_white));
         } else {
             relativelayoutPickup.setBackground(getResources().getDrawable(R.drawable.bg_dispatchtype_right_red));
             relativelayoutDelivery.setBackground(getResources().getDrawable(R.drawable.bg_dispatchtype_left_white));
+
+            relativelayoutDinein.setBackground(getResources().getDrawable(R.drawable.bg_dinein_white));
         }
 
         imageViewIcPickup.setImageResource(R.drawable.ic_pickup);
@@ -475,6 +509,10 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         imageViewIcDelivery.setImageResource(R.drawable.ic_delivery_bick_dark);
         textViewIcDelivery.setTextColor(getResources().getColor(R.color.colorTextIcon));
+
+
+        imageViewIcDinein.setImageResource(R.drawable.ic_dinein_dark);
+        textViewDineIn.setTextColor(getResources().getColor(R.color.colorTextIcon));
 
         imageViewBtn.setImageResource(R.drawable.btn_continuewithpickup);
         imageViewBtnAddaditional.setVisibility(View.GONE);
@@ -499,6 +537,88 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
 
     }
+
+
+
+    @OnClick(R.id.relativelayout_dinein)
+    public void onClickDineIn(View view) {
+
+
+        new AlertDialog.Builder(this)
+                .setTitle("A General Notice!")
+                .setMessage("When you reach the restaurant the tables might have occupied fully.\n\n Happy Dining")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dineIN();
+                    }
+                })
+                .create()
+                .show();
+
+
+
+    }
+
+
+    public void dineIN(){
+
+
+        proprogressview.setVisibility(View.GONE);
+
+        if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            relativelayoutPickup.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dispatchtype_right_white));
+            relativelayoutDelivery.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dispatchtype_left_white));
+
+            relativelayoutDinein.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dinein_red));
+        } else {
+            relativelayoutPickup.setBackground(getResources().getDrawable(R.drawable.bg_dispatchtype_right_white));
+            relativelayoutDelivery.setBackground(getResources().getDrawable(R.drawable.bg_dispatchtype_left_white));
+
+            relativelayoutDinein.setBackground(getResources().getDrawable(R.drawable.bg_dinein_red));
+        }
+
+        imageViewIcPickup.setImageResource(R.drawable.ic_pick_up_dark);
+        textViewIcPickup.setTextColor(getResources().getColor(R.color.colorTextIcon));
+
+
+        imageViewIcDelivery.setImageResource(R.drawable.ic_delivery_bick_dark);
+        textViewIcDelivery.setTextColor(getResources().getColor(R.color.colorTextIcon));
+
+
+        imageViewIcDinein.setImageResource(R.drawable.ic_dinein);
+        textViewDineIn.setTextColor(getResources().getColor(R.color.colorTextWhite));
+
+        imageViewBtn.setImageResource(R.drawable.btn_continuewithpickup);
+        imageViewBtnAddaditional.setVisibility(View.GONE);
+
+        textViewTitle.setText("Dine In");
+        textViewSelectedAddress.setText("");
+        dispatchType = 2;
+
+        encryptedPreferences.edit().putString(DISPATCH_TYPE, "Dinein").apply();
+
+        if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+
+            if (mapMarker != null) {
+                mapMarker.remove();
+            } else {
+
+            }
+
+        } else {
+            Toast.makeText(this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+    }
+
+
+
+
 
 
     @OnClick(R.id.imageView_btn_addaditional)

@@ -135,7 +135,7 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
             bloackUserInteraction();
             proprogressview.setVisibility(View.VISIBLE);
             setCoverImage(selectedMenuDetails.getMenuImg(), selectedMenuDetails.getMenuName(), selectedMenuDetails.getOutletName());
-            personlaizePresenter.getFoodCategory(this, selectedMenuDetails.getOutletId(), selectedMenuDetails.getMenuId(), selectedMenuDetails.getFoodId());
+            personlaizePresenter.getFoodCategory(this, selectedMenuDetails.getOutletId(), selectedMenuDetails.getMenuId(), selectedMenuDetails.getFoodId(),selectedMenuDetails.getMenuCat());
 
         } else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -318,14 +318,14 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
     @Override
     public void foodCategory(ArrayList<FoodCategoryItems> foodCategoryItems) {
         foodCategoryItemsArrayList = foodCategoryItems;
-        personlaizePresenter.getMenuSize(this, selectedMenuDetails.getOutletId(), selectedMenuDetails.getMenuId(), selectedMenuDetails.getFoodId());
+        personlaizePresenter.getMenuSize(this, selectedMenuDetails.getOutletId(), selectedMenuDetails.getMenuId(), selectedMenuDetails.getFoodId(),selectedMenuDetails.getMenuCat());
         foodCategoryAdapter = new FoodCategoryAdapter(this, foodCategoryItems, this);
         recyclerViewFoodCat.setAdapter(foodCategoryAdapter);
 
     }
 
     @Override
-    public void foodCategoryFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID) {
+    public void foodCategoryFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID) {
         unBloackUserInteraction();
         proprogressview.setVisibility(View.GONE);
 
@@ -340,7 +340,8 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
                             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
                                 proprogressview.setVisibility(View.VISIBLE);
                                 bloackUserInteraction();
-                                personlaizePresenter.getFoodCategory(ActivityPersonlaize.this, selectedMenuDetails.getOutletId(), selectedMenuDetails.getMenuId(), selectedMenuDetails.getFoodId());
+                                personlaizePresenter.getFoodCategory(ActivityPersonlaize.this, selectedMenuDetails.getOutletId(), selectedMenuDetails.getMenuId(),
+                                        selectedMenuDetails.getFoodId(),selectedMenuDetails.getMenuCat());
                             } else {
                                 Toast.makeText(ActivityPersonlaize.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
 
@@ -370,7 +371,9 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
         layoutManagerFoodCat.scrollToPosition(position + 1);
         proprogressview.setVisibility(View.VISIBLE);
         bloackUserInteraction();
-        personlaizePresenter.getSubFoods(this, selectedMenuDetails.getMenuId(), selectedMenuDetails.getFoodId(), selectedMenuDetails.getOutletId(), foodItemCategoryID, foodCategoryItemsArrayList);
+        personlaizePresenter.getSubFoods(this, selectedMenuDetails.getMenuId(), selectedMenuDetails.getFoodId(),
+                selectedMenuDetails.getOutletId(), foodItemCategoryID,selectedMenuDetails.getMenuCat(),
+                foodCategoryItemsArrayList);
 
     }
 
@@ -417,7 +420,7 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
 
 
     @Override
-    public void subFoodsFail(final int menuId, final int foodId, final int outletId, final int foodItemCategoryID, String msg) {
+    public void subFoodsFail(final int menuId, final int foodId, final int outletId, final int foodItemCategoryID, String msg, final int menuCatID) {
 
         unBloackUserInteraction();
         proprogressview.setVisibility(View.GONE);
@@ -433,7 +436,7 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
                             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
                                 proprogressview.setVisibility(View.VISIBLE);
                                 bloackUserInteraction();
-                                personlaizePresenter.getSubFoods(ActivityPersonlaize.this, menuId, foodId, outletId, foodItemCategoryID, foodCategoryItemsArrayList);
+                                personlaizePresenter.getSubFoods(ActivityPersonlaize.this, menuId, foodId, outletId, foodItemCategoryID,menuCatID ,foodCategoryItemsArrayList);
 
                             } else {
                                 Toast.makeText(ActivityPersonlaize.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
@@ -471,7 +474,7 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
     }
 
     @Override
-    public void menuSizeFail(String msg, final int outletID, final int menuTitleID, final int outletMenuTitleID) {
+    public void menuSizeFail(String msg, final int outletID, final int menuTitleID, final int outletMenuTitleID, final int menuCatID) {
         unBloackUserInteraction();
         proprogressview.setVisibility(View.GONE);
 
@@ -486,7 +489,7 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
                             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
                                 proprogressview.setVisibility(View.VISIBLE);
                                 bloackUserInteraction();
-                                personlaizePresenter.getMenuSize(ActivityPersonlaize.this, outletID, menuTitleID, outletMenuTitleID);
+                                personlaizePresenter.getMenuSize(ActivityPersonlaize.this, outletID, menuTitleID, outletMenuTitleID, menuCatID);
                             } else {
                                 Toast.makeText(ActivityPersonlaize.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
 

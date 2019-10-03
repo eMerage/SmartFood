@@ -135,9 +135,13 @@ public class HomeInteractorImpil implements HomeInteractor {
 
             User user = realm.where(User.class).findFirst();
             Address address = realm.where(Address.class).findFirst();
+
             if (dispatch.equals("Pickup")) {
                 addressId = "";
                 dispatchType = "P";
+            } else if(dispatch.equals("Dinein")){
+                addressId = "";
+                dispatchType = "T";
             } else {
                 addressId = address.getAddressId();
                 dispatchType = "D";
@@ -208,6 +212,7 @@ public class HomeInteractorImpil implements HomeInteractor {
                 addressId = address.getAddressId();
                 dispatchType = "D";
             }
+
 
 
 

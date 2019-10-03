@@ -84,10 +84,11 @@ public class CartInteractorImpil implements CartInteractor {
 
 
         encryptedPreferences = new EncryptedPreferences.Builder(context).withEncryptionPassword("122547895511").build();
+
         String dispatch = encryptedPreferences.getString(DISPATCH_TYPE, "");
 
 
-        String addressId;
+        String addressId="0";
         Double totalPrice = 0.0;
         int outlet = 0;
 
@@ -95,10 +96,11 @@ public class CartInteractorImpil implements CartInteractor {
         Address address = realm.where(Address.class).findFirst();
 
 
-        if (dispatch.equals("Pickup")) {
-            addressId = "0";
-        } else {
+        if (dispatch.equals("Delivery")) {
             addressId = address.getAddressId();
+        } else {
+            addressId = "0";
+
         }
 
         for (CartHeader ns : realm.where(CartHeader.class).equalTo("isActive", true).findAll()) {
@@ -118,6 +120,8 @@ public class CartInteractorImpil implements CartInteractor {
         jsonObject.addProperty("SubTotal", totalPrice);
 
         final Double finalTotalPrice = totalPrice;
+
+
 
         try {
             apiService.validatePromoCode(jsonObject)
@@ -314,6 +318,7 @@ public class CartInteractorImpil implements CartInteractor {
 
 
         encryptedPreferences = new EncryptedPreferences.Builder(context).withEncryptionPassword("122547895511").build();
+
         String dispatch = encryptedPreferences.getString(DISPATCH_TYPE, "");
         String deliveryAddres;
 
@@ -367,7 +372,11 @@ public class CartInteractorImpil implements CartInteractor {
             onOrderProsessFinishedListener.pickupTimeEmpty();
         } else if ((dispatchType.equals("Delivery")) && (timeslotId == 0)) {
             onOrderProsessFinishedListener.deliveryTimeSlotEmpty();
-        } else {
+        } else if ((dispatchType.equals("Dinein")) && (pickupTime.equals("") || pickupTime == null)) {
+            onOrderProsessFinishedListener.dineinTimeEmpty();
+        }
+
+        else {
 
             User user = realm.where(User.class).findFirst();
             final String dispatchTypeForSever;
@@ -377,10 +386,15 @@ public class CartInteractorImpil implements CartInteractor {
                 Address address = realm.where(Address.class).findFirst();
                 addressId = address.getAddressId();
                 dispatchTypeForSever = "D";
+            } else if (dispatchType.equals("Dinein")) {
+                addressId = "0";
+                dispatchTypeForSever = "T";
             } else {
                 addressId = "0";
                 dispatchTypeForSever = "P";
             }
+
+
 
 
             Calendar calendar = Calendar.getInstance();
@@ -468,7 +482,7 @@ public class CartInteractorImpil implements CartInteractor {
 
                             @Override
                             public void onError(Throwable e) {
-                                onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+                                onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again a");
                             }
 
                             @Override
@@ -495,19 +509,19 @@ public class CartInteractorImpil implements CartInteractor {
                                         }
                                     } catch (JSONException e) {
                                         Logger.e(e.toString());
-                                        onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+                                        onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again b");
                                     } catch (NullPointerException exNull) {
-                                        onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+                                        onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again c");
                                     }
 
                                 } else {
-                                    onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+                                    onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again d");
                                 }
                             }
                         });
 
             } catch (Exception ex) {
-                onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+                onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again e");
             }
         }
 

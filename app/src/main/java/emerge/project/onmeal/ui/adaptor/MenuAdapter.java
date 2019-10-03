@@ -115,7 +115,8 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 headerHolder.relativeLayoutHeaderMain.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        menuPresenter.geSelectedMenuDetails(menuItem.getMenuId(),menuItem.getFoodId(),menuItem.getOutletId(),menuItem.getFoodName(),menuItem.getFoodCoverImage(),menuItem.getOutletName());
+                        menuPresenter.geSelectedMenuDetails(menuItem.getMenuId(),menuItem.getFoodId(),menuItem.getOutletId(),
+                                menuItem.getFoodName(),menuItem.getFoodCoverImage(),menuItem.getOutletName(),menuItem.getMenuCategoryID());
 
                     }
                 });
@@ -124,8 +125,6 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
             }
-
-
 
 
 
@@ -162,7 +161,8 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 footerHolder.relativeLayoutFooterMain.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        menuPresenter.geSelectedMenuDetails(menuItem.getMenuId(),menuItem.getFoodId(),menuItem.getOutletId(),menuItem.getFoodName(),menuItem.getFoodCoverImage(),menuItem.getOutletName());
+                        menuPresenter.geSelectedMenuDetails(menuItem.getMenuId(),menuItem.getFoodId(),menuItem.getOutletId(),menuItem.getFoodName(),
+                                menuItem.getFoodCoverImage(),menuItem.getOutletName(),menuItem.getMenuCategoryID());
 
 
                     }

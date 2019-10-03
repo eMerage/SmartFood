@@ -76,10 +76,13 @@ public class HistoryPastAdapter extends RecyclerView.Adapter<HistoryPastAdapter.
 
 
      //   getMenue(historyItems.getOrderID(),holder);
-        String dispatchType;
+        String dispatchType = "";
         if(historyItems.getDispatchType().equals("P")){
             dispatchType="Pick Up";
-        }else {
+        }else if(historyItems.getDispatchType().equals("T")){
+            dispatchType="Dine-In";
+        }
+        else {
             dispatchType="Delivery";
         }
 

@@ -58,7 +58,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
     List<MenuSize> menuSize;
 
     @Override
-    public void getFoodCategory(Context mContext, final int outletID, final int menuTitleID, final int outletMenuTitleID, final OnGetFoodCategoryFinishedListener onGetFoodCategoryFinishedListener) {
+    public void getFoodCategory(Context mContext, final int outletID, final int menuTitleID, final int outletMenuTitleID, final int menuCatID , final OnGetFoodCategoryFinishedListener onGetFoodCategoryFinishedListener) {
 
         encryptedPreferences = new EncryptedPreferences.Builder(mContext).withEncryptionPassword("122547895511").build();
 
@@ -75,12 +75,18 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
         if (dispatch.equals("Pickup")) {
             addressId = "0";
             dispatchType = "P";
+        } else if(dispatch.equals("Dinein")){
+            addressId = "0";
+            dispatchType = "T";
         } else {
             addressId = address.getAddressId();
             dispatchType = "D";
         }
+
+
+
         try {
-            apiService.GetFoodCategoriesForOutletMenuTitle(outletID, 2, menuTitleID, outletMenuTitleID, Integer.parseInt(user.getUserId()), Integer.parseInt(addressId), dispatchType, "M")
+            apiService.GetFoodCategoriesForOutletMenuTitle(outletID, menuCatID, menuTitleID, outletMenuTitleID, Integer.parseInt(user.getUserId()), Integer.parseInt(addressId), dispatchType, "M")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<List<FoodCategoryItems>>() {
@@ -92,11 +98,13 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                         @Override
                         public void onNext(List<FoodCategoryItems> respond) {
                             foodCategory = respond;
+
                         }
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID);
+                            onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
+
                         }
 
                         @Override
@@ -104,7 +112,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                             if (foodCategory != null) {
                                 try {
                                     if (foodCategory.isEmpty()) {
-                                        onGetFoodCategoryFinishedListener.foodCategoryFail("No Items, Please try again", outletID, menuTitleID, outletMenuTitleID);
+                                        onGetFoodCategoryFinishedListener.foodCategoryFail("No Items, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                                     } else {
                                         for (int i = 0; i < foodCategory.size(); i++) {
                                             if (i == 0) {
@@ -116,16 +124,17 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                                         onGetFoodCategoryFinishedListener.foodCategory(foodCategoryItemsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID);
+                                    onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again ", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                                 }
 
                             } else {
-                                onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID);
+                                onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                             }
                         }
                     });
         } catch (Exception ex) {
-            onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID);
+            onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
+
         }
 
     }
@@ -137,7 +146,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
 
 
     @Override
-    public void getSubFoods(final Context mContext, final int menuId, final int foodId, final int outletId, final int foodItemCategoryID, ArrayList<FoodCategoryItems> foodCategoryItemsArrayList, final OnSubFoodsListener onSubFoodsListener) {
+    public void getSubFoods(final Context mContext, final int menuId, final int foodId, final int outletId, final int foodItemCategoryID,final int menuCatID ,ArrayList<FoodCategoryItems> foodCategoryItemsArrayList, final OnSubFoodsListener onSubFoodsListener) {
 
         RealmResults<MenuSubItems> menuSubItemsdetail = realm.where(MenuSubItems.class)
                 .equalTo("outletID", outletId)
@@ -148,6 +157,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                 .and()
                 .equalTo("foodItemCategoryID", foodItemCategoryID)
                 .findAll();
+
 
 
         if (menuSubItemsdetail.isEmpty()) {
@@ -162,14 +172,20 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
             if (dispatch.equals("Pickup")) {
                 addressId = "0";
                 dispatchType = "P";
+            } else if(dispatch.equals("Dinein")){
+                addressId = "0";
+                dispatchType = "T";
             } else {
                 addressId = address.getAddressId();
                 dispatchType = "D";
             }
 
+
+
+
             for (int i = 0; i < foodCategoryItemsArrayList.size(); i++) {
                 try {
-                    apiService.GetMenuFoodItemForOutlets(outletId, 2, menuId, foodId, Integer.parseInt(user.getUserId()), Integer.parseInt(addressId), dispatchType, "M", foodCategoryItemsArrayList.get(i).getFoodItemCategoryID())
+                    apiService.GetMenuFoodItemForOutlets(outletId, menuCatID, menuId, foodId, Integer.parseInt(user.getUserId()), Integer.parseInt(addressId), dispatchType, "M", foodCategoryItemsArrayList.get(i).getFoodItemCategoryID())
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Observer<List<MenuSubItems>>() {
@@ -212,29 +228,6 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
 
             }
 
-
-
-
-           /* ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-            Call<List<MenuSubItems>> call = apiService.GetMenuFoodItemForOutlets(outletId, 2, menuId, foodId, Integer.parseInt(user.getUserId()), Integer.parseInt(addressId), dispatchType, "M", foodItemCategoryID);
-            call.enqueue(new Callback<List<MenuSubItems>>() {
-                @Override
-                public void onResponse(Call<List<MenuSubItems>> call, Response<List<MenuSubItems>> response) {
-                    List<MenuSubItems> menuSubItemsList = response.body();
-                    if (menuSubItemsList.isEmpty()) {
-                        Toast.makeText(mContext, "No Product available", Toast.LENGTH_SHORT).show();
-                    } else {
-                        addSubItems(menuId, foodId, outletId, foodItemCategoryID, menuSubItemsList, onSubFoodsListener);
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<MenuSubItems>> call, Throwable t) {
-                    Logger.e(t.toString());
-
-                }
-            });
-*/
         } else {
             getSubItems(menuId, foodId, outletId, foodItemCategoryID, onSubFoodsListener);
 
@@ -244,7 +237,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
     }
 
     @Override
-    public void getMenuSize(Context mContext, final int outletID, final int menuTitleID, final int outletMenuTitleID, final OnGetMenuSizeFinishedListener onGetMenuSizeFinishedListener) {
+    public void getMenuSize(Context mContext, final int outletID, final int menuTitleID, final int outletMenuTitleID, final int menuCatID, final OnGetMenuSizeFinishedListener onGetMenuSizeFinishedListener) {
 
         encryptedPreferences = new EncryptedPreferences.Builder(mContext).withEncryptionPassword("122547895511").build();
 
@@ -258,16 +251,21 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
         Address address = realm.where(Address.class).findFirst();
 
 
+
         if (dispatch.equals("Pickup")) {
             addressId = "0";
             dispatchType = "P";
+        } else if(dispatch.equals("Dinein")){
+            addressId = "0";
+            dispatchType = "T";
         } else {
             addressId = address.getAddressId();
             dispatchType = "D";
         }
 
+
         try {
-            apiService.GetFoodItemSizesForOutletMenuTitle(outletID, 2, menuTitleID, outletMenuTitleID, Integer.parseInt(user.getUserId()), Integer.parseInt(addressId), dispatchType, "M")
+            apiService.GetFoodItemSizesForOutletMenuTitle(outletID, menuCatID, menuTitleID, outletMenuTitleID, Integer.parseInt(user.getUserId()), Integer.parseInt(addressId), dispatchType, "M")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<List<MenuSize>>() {
@@ -283,7 +281,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID);
+                            onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                         }
 
                         @Override
@@ -303,15 +301,15 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID);
+                                    onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                                 }
                             } else {
-                                onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID);
+                                onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                             }
                         }
                     });
         } catch (Exception ex) {
-            onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID);
+            onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID, menuCatID);
         }
 
     }
@@ -398,60 +396,6 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
             }
 
 
-
-           /* ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-            Call<JsonObject> call = apiService.GetOutletMenuSetup(selectedMenuDetails.getFoodId());
-            call.enqueue(new Callback<JsonObject>() {
-                @Override
-                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                    if(response.isSuccessful()){
-                        try {
-                            int maxOrderQty = 0;
-                            JSONObject subFoodResponse = null;
-                            try {
-                                subFoodResponse = new JSONObject(response.body().toString());
-                                maxOrderQty = subFoodResponse.getInt("maxOrderQty");
-                            } catch (JSONException e) {
-                                onAddToCartListener.itemAddToCartOrderQtyExeed();
-                            }
-
-                            if (maxOrderQty < qty) {
-                                onAddToCartListener.itemAddToCartOrderQtyExeed();
-
-                            } else {
-                                int resultCheckMainFood = checkMainFoodAdded();
-                                if (resultCheckMainFood == 1) {
-                                    onAddToCartListener.itemAddToCartFaild("Please add Base Food");
-                                } else if (resultCheckMainFood == 2) {
-                                    onAddToCartListener.itemAddToCartFaild("Please add at least one Meat");
-                                } else if (resultCheckMainFood == 3) {
-                                    onAddToCartListener.itemAddToCartFaild("Please add at least one Vegetable");
-                                } else if (resultCheckMainFood == 4) {
-                                    onAddToCartListener.itemAddToCartFaild("Please add at least one Extra Item");
-                                } else if (resultCheckMainFood == 5) {
-                                    onAddToCartListener.itemAddToCartFaild("Please add at least one Other Item");
-                                } else {
-                                    addCartHeader(selectedMenuDetails, qty, size, price, onAddToCartListener);
-                                }
-
-                            }
-
-                        }catch (NullPointerException exNull){
-                            onAddToCartListener.itemAddToCartSocketFail(selectedMenuDetails, "Something went wrong, Please try again");
-                        }
-                    }else {
-                        onAddToCartListener.itemAddToCartSocketFail(selectedMenuDetails, "Something went wrong, Please try again");
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<JsonObject> call, Throwable t) {
-                    onAddToCartListener.itemAddToCartSocketFail(selectedMenuDetails, "Something went wrong, Please try again");
-                    Logger.e(t.toString());
-
-                }
-            });
-*/
 
         }
 

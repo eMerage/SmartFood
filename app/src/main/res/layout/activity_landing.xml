@@ -117,88 +117,180 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="25dp">
 
-            <RelativeLayout
-                android:id="@+id/relativelayout_delivery"
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/divider6"
-                android:layout_toStartOf="@+id/divider6"
-                android:background="@drawable/bg_dispatchtype_left_white">
+                android:orientation="horizontal"
+                tools:context=".MainActivity" >
 
-                <ImageView
-                    android:id="@+id/imageView_ic_delivery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/divider7"
-                    android:layout_toStartOf="@+id/divider7"
-                    android:src="@drawable/ic_delivery_bick_dark" />
-
-                <View
-                    android:id="@+id/divider7"
-                    android:layout_width="10dp"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
-                <emerge.project.onmeal.ui.fonts.RobotoLight
-                    android:id="@+id/textView_ic_delivery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/divider7"
-                    android:layout_toRightOf="@+id/divider7"
-                    android:lineSpacingExtra="1sp"
-                    android:text="Delivery"
-                    android:textColor="#b5b5b5"
-                    android:textSize="13sp" />
-            </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/relativelayout_delivery"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@+id/divider6"
+                        android:layout_toStartOf="@+id/divider6"
+                        android:background="@drawable/bg_dispatchtype_left_white">
 
-            <View
-                android:id="@+id/divider6"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true" />
+                        <ImageView
+                            android:id="@+id/imageView_ic_delivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/divider7"
+                            android:layout_toStartOf="@+id/divider7"
+                            android:src="@drawable/ic_delivery_bick_dark" />
 
-            <RelativeLayout
-                android:id="@+id/relativelayout_pickup"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/divider6"
-                android:layout_toRightOf="@+id/divider6"
-                android:background="@drawable/bg_dispatchtype_right_red">
+                        <View
+                            android:id="@+id/divider7"
+                            android:layout_width="10dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true" />
 
-                <ImageView
-                    android:id="@+id/imageView_ic_pickup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/divider8"
-                    android:layout_toStartOf="@+id/divider8"
-                    android:src="@drawable/ic_pickup" />
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/textView_ic_delivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/divider7"
+                            android:layout_toRightOf="@+id/divider7"
+                            android:lineSpacingExtra="1sp"
+                            android:text="Delivery"
+                            android:textColor="#b5b5b5"
+                            android:textSize="13sp" />
+                    </RelativeLayout>
 
-                <View
-                    android:id="@+id/divider8"
-                    android:layout_width="10dp"
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
 
-                <emerge.project.onmeal.ui.fonts.RobotoLight
-                    android:id="@+id/textView_ic_pickup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/divider8"
-                    android:layout_toRightOf="@+id/divider8"
-                    android:lineSpacingExtra="1sp"
-                    android:text="Pick Up"
-                    android:textColor="@color/colorTextWhite"
-                    android:textSize="13sp" />
-            </RelativeLayout>
+                    <View
+                        android:id="@+id/divider6"
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorTextAsh"/>
+
+
+                    <RelativeLayout
+                        android:id="@+id/relativelayout_dinein"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/divider6"
+                        android:layout_toRightOf="@+id/divider6"
+                        android:background="@drawable/bg_dinein_white">
+
+                        <ImageView
+                            android:id="@+id/imageView_icdinein"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/divider88"
+                            android:layout_toStartOf="@+id/divider88"
+                            android:src="@drawable/ic_dinein_dark" />
+
+                        <View
+                            android:id="@+id/divider88"
+                            android:layout_width="10dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true" />
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/textView_ic_dinein"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/divider88"
+                            android:layout_toRightOf="@+id/divider88"
+                            android:lineSpacingExtra="1sp"
+                            android:text="Dine In"
+                            android:textColor="#b5b5b5"
+                            android:textSize="13sp" />
+                    </RelativeLayout>
+
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                  >
+                    <View
+                        android:id="@+id/divider66"
+                        android:layout_width=".5dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorTextAsh"/>
+
+                    <RelativeLayout
+                        android:id="@+id/relativelayout_pickup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/divider6"
+                        android:layout_toRightOf="@+id/divider6"
+                        android:background="@drawable/bg_dispatchtype_right_red">
+
+                        <ImageView
+                            android:id="@+id/imageView_ic_pickup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/divider8"
+                            android:layout_toStartOf="@+id/divider8"
+                            android:src="@drawable/ic_pickup" />
+
+                        <View
+                            android:id="@+id/divider8"
+                            android:layout_width="10dp"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true" />
+
+                        <emerge.project.onmeal.ui.fonts.RobotoLight
+                            android:id="@+id/textView_ic_pickup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/divider8"
+                            android:layout_toRightOf="@+id/divider8"
+                            android:lineSpacingExtra="1sp"
+                            android:text="Pick Up"
+                            android:textColor="@color/colorTextWhite"
+                            android:textSize="13sp" />
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+
         </RelativeLayout>
 
         <ImageView

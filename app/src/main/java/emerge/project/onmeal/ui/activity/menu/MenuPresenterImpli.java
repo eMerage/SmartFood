@@ -116,14 +116,14 @@ public class MenuPresenterImpli implements MenuPresenter,
 
 
     @Override
-    public void geSelectedMenuDetails(int menuId, int foodId, int outletId, String menuName, String menuImg, String outlet) {
-        menuInteractor.geSelectedMenuDetails(menuId, foodId, outletId, menuName, menuImg, outlet, this);
+    public void geSelectedMenuDetails(int menuId, int foodId, int outletId, String menuName, String menuImg, String outlet,int menucat) {
+        menuInteractor.geSelectedMenuDetails(menuId, foodId, outletId, menuName, menuImg, outlet, menucat,this);
     }
 
 
     @Override
-    public void selectedMenuDetails(int menuId, int foodId, int outletId, String menuName, String menuImg, String outlet) {
-        menuView.selectedMenuDetails(menuId, foodId, outletId, menuName, menuImg, outlet);
+    public void selectedMenuDetails(int menuId, int foodId, int outletId, String menuName, String menuImg, String outlet,int menucat) {
+        menuView.selectedMenuDetails(menuId, foodId, outletId, menuName, menuImg, outlet,menucat);
     }
 
 

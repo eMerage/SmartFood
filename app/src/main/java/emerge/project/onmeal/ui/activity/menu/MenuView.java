@@ -35,7 +35,7 @@ public interface MenuView {
 
     void selectedMenuCategor(String menuCategoryID);
 
-    void selectedMenuDetails(int menuId, int foodId, int outletId, final String menuName, String menuImg, String outlet);
+    void selectedMenuDetails(int menuId, int foodId, int outletId, final String menuName, String menuImg, String outlet,int menucat);
 
 
     void cartAvailable();

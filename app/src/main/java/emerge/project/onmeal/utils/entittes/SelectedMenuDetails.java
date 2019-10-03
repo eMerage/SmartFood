@@ -12,17 +12,20 @@ public class SelectedMenuDetails implements Serializable {
     String menuName;
     String menuImg;
     String outletName;
+    int menuCat;
+
 
     public SelectedMenuDetails() {
     }
 
-    public SelectedMenuDetails(int menuId, int foodId, int outletId, String menuName,String menuImg,String outletName) {
+    public SelectedMenuDetails(int menuId, int foodId, int outletId, String menuName,String menuImg,String outletName,int menucat) {
         this.menuId = menuId;
         this.foodId = foodId;
         this.outletId = outletId;
         this.menuName = menuName;
         this.menuImg = menuImg;
         this.outletName = outletName;
+        this.menuCat = menucat;
     }
 
 
@@ -74,5 +77,13 @@ public class SelectedMenuDetails implements Serializable {
 
     public void setOutletName(String outletName) {
         this.outletName = outletName;
+    }
+
+    public int getMenuCat() {
+        return menuCat;
+    }
+
+    public void setMenuCat(int menuCat) {
+        this.menuCat = menuCat;
     }
 }

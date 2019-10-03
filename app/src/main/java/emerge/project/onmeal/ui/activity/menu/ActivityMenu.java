@@ -487,7 +487,7 @@ public class ActivityMenu extends Activity implements MenuView, OnMapReadyCallba
 
 
     @Override
-    public void selectedMenuDetails(int menuId, int foodId, int outletId, String menuName, String menuImg, String outlet) {
+    public void selectedMenuDetails(int menuId, int foodId, int outletId, String menuName, String menuImg, String outlet,int menucat) {
 
 
         SelectedMenuDetails selectedMenuDetails = new SelectedMenuDetails();
@@ -497,11 +497,14 @@ public class ActivityMenu extends Activity implements MenuView, OnMapReadyCallba
         selectedMenuDetails.setMenuImg(menuImg);
         selectedMenuDetails.setOutletName(outlet);
         selectedMenuDetails.setMenuName(menuName);
+        selectedMenuDetails.setMenuCat(menucat);
 
         Intent intentSingup = new Intent(this, ActivityPersonlaize.class);
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
         intentSingup.putExtra("SELECTEDMENU", selectedMenuDetails);
         startActivity(intentSingup, bndlanimation);
+
+
 
 
 
