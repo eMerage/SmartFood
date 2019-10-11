@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.Address;
 import emerge.project.onmeal.data.table.CartDetail;
 import emerge.project.onmeal.data.table.CartHeader;
@@ -103,7 +104,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                            onGetFoodCategoryFinishedListener.foodCategoryFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
 
                         }
 
@@ -112,7 +113,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                             if (foodCategory != null) {
                                 try {
                                     if (foodCategory.isEmpty()) {
-                                        onGetFoodCategoryFinishedListener.foodCategoryFail("No Items, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                                        onGetFoodCategoryFinishedListener.foodCategoryFail("Unknown Items, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                                     } else {
                                         for (int i = 0; i < foodCategory.size(); i++) {
                                             if (i == 0) {
@@ -124,16 +125,16 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                                         onGetFoodCategoryFinishedListener.foodCategory(foodCategoryItemsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again ", outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                                    onGetFoodCategoryFinishedListener.foodCategoryFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
                                 }
 
                             } else {
-                                onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                                onGetFoodCategoryFinishedListener.foodCategoryFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
                             }
                         }
                     });
         } catch (Exception ex) {
-            onGetFoodCategoryFinishedListener.foodCategoryFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
+            onGetFoodCategoryFinishedListener.foodCategoryFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
 
         }
 
@@ -281,7 +282,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                            onGetMenuSizeFinishedListener.menuSizeFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
                         }
 
                         @Override
@@ -301,15 +302,15 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                                    onGetMenuSizeFinishedListener.menuSizeFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
                                 }
                             } else {
-                                onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                                onGetMenuSizeFinishedListener.menuSizeFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
                             }
                         }
                     });
         } catch (Exception ex) {
-            onGetMenuSizeFinishedListener.menuSizeFail("Something went wrong, Please try again", outletID, menuTitleID, outletMenuTitleID, menuCatID);
+            onGetMenuSizeFinishedListener.menuSizeFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID, menuCatID);
         }
 
     }

@@ -13,6 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.api.ApiClient;
 import emerge.project.onmeal.service.api.ApiInterface;
@@ -139,7 +140,7 @@ public class SingUpInteractorImpil implements SingUpInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onSingUpListener.singUpFail("Something went wrong, Please try again");
+                            onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -150,20 +151,20 @@ public class SingUpInteractorImpil implements SingUpInteractor {
                                     registration = new JSONObject(registrationResponse.toString());
                                     onSingUpListener.singUpSuccess(registration.getString("id"), user.getUserPhoneNumber(), registration.getString("verificationCode"));
                                 } catch (NullPointerException exNull) {
-                                    onSingUpListener.singUpFail("Something went wrong, Please try again");
+                                    onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
                                 } catch (JSONException e) {
-                                    onSingUpListener.singUpFail("Something went wrong, Please try again");
+                                    onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
                                     Logger.e(e.toString());
                                 }
                             } else {
-                                onSingUpListener.singUpFail("Something went wrong, Please try again");
+                                onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
                             }
 
                         }
                     });
 
         } catch (Exception ex) {
-            onSingUpListener.singUpFail("Something went wrong, Please try again");
+            onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
         }
 
 
@@ -181,24 +182,24 @@ public class SingUpInteractorImpil implements SingUpInteractor {
                             onSingUpListener.singUpSuccess(registrationResponse.getString("id"), user.getUserPhoneNumber(), registrationResponse.getString("verificationCode"));
 
                         } catch (NullPointerException exNull) {
-                            onSingUpListener.singUpFail("Something went wrong, Please try again");
+                            onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
                         } catch (JSONException e) {
-                            onSingUpListener.singUpFail("Something went wrong, Please try again");
+                            onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
                             Logger.e(e.toString());
                         }
                     } else {
-                        onSingUpListener.singUpFail("Something went wrong, Please try again");
+                        onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
                     }
                 }
 
                 @Override
                 public void onFailure(Call<JsonObject> call, Throwable t) {
-                    onSingUpListener.singUpFail("Something went wrong, Please try again");
+                    onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
                     Logger.e(t.toString());
                 }
             });
         } catch (Exception ex) {
-            onSingUpListener.singUpFail("Something went wrong, Please try again");
+            onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
         }*/
 
     }

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.api.ApiClient;
 import emerge.project.onmeal.service.api.ApiInterface;
@@ -60,7 +61,7 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
 
                             @Override
                             public void onError(Throwable e) {
-                                onOTPCodeValidationFinishedListener.oTPCodeServerError("Something went wrong, Please try again");
+                                onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
                             }
 
                             @Override
@@ -76,20 +77,20 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
                                             Logger.e("Code Expired");
                                         }
                                     } catch (JSONException e) {
-                                        onOTPCodeValidationFinishedListener.oTPCodeServerError("Something went wrong, Please try again");
+                                        onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
                                         Logger.e(e.toString());
                                     } catch (NullPointerException exNull) {
-                                        onOTPCodeValidationFinishedListener.oTPCodeServerError("Something went wrong, Please try again");
+                                        onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
                                     }
 
                                 } else {
-                                    onOTPCodeValidationFinishedListener.oTPCodeServerError("Something went wrong, Please try again");
+                                    onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
                                 }
                             }
                         });
 
             } catch (Exception ex) {
-                onOTPCodeValidationFinishedListener.oTPCodeServerError("Something went wrong, Please try again");
+                onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
             }
 
         } else {
@@ -120,7 +121,7 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onNewOTPCodeFinishedListener.newOTPCodeServerError("Something went wrong, Please try again");
+                            onNewOTPCodeFinishedListener.newOTPCodeServerError(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -131,13 +132,13 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
                                     userVerifiedResponse = new JSONObject(newOTPCode.toString());
                                     onNewOTPCodeFinishedListener.newOTPCode(userVerifiedResponse.getString("verificationCode"));
                                 } catch (JSONException e) {
-                                    onNewOTPCodeFinishedListener.newOTPCodeServerError("Something went wrong, Please try again");
+                                    onNewOTPCodeFinishedListener.newOTPCodeServerError(String.valueOf(R.string.server_error_msg));
                                     Logger.e(e.toString());
                                 } catch (NullPointerException exNull) {
-                                    onNewOTPCodeFinishedListener.newOTPCodeServerError("Something went wrong, Please try again");
+                                    onNewOTPCodeFinishedListener.newOTPCodeServerError(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onNewOTPCodeFinishedListener.newOTPCodeServerError("Something went wrong, Please try again");
+                                onNewOTPCodeFinishedListener.newOTPCodeServerError(String.valueOf(R.string.server_error_msg));
                             }
 
                         }
@@ -145,7 +146,7 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
 
 
         } catch (Exception ex) {
-            onNewOTPCodeFinishedListener.newOTPCodeServerError("Something went wrong, Please try again");
+            onNewOTPCodeFinishedListener.newOTPCodeServerError(String.valueOf(R.string.server_error_msg));
         }
 
     }
@@ -174,7 +175,7 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onOTPCodeValidationFinishedListener.oTPCodeServerError("Something went wrong, Please try again");
+                            onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -183,16 +184,16 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
                                 try {
                                     saveUser(getUserById, onOTPCodeValidationFinishedListener);
                                 } catch (NullPointerException exNull) {
-                                    onOTPCodeValidationFinishedListener.oTPCodeServerError("Something went wrong, Please try again");
+                                    onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onOTPCodeValidationFinishedListener.oTPCodeServerError("Something went wrong, Please try again");
+                                onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
                             }
 
                         }
                     });
         } catch (Exception ex) {
-            onOTPCodeValidationFinishedListener.oTPCodeServerError("Something went wrong, Please try again");
+            onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
         }
 
 

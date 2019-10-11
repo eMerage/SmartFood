@@ -4,6 +4,7 @@ package emerge.project.onmeal.ui.activity.landingaddressmenual;
 import com.google.gson.JsonObject;
 import com.luseen.logger.Logger;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.Address;
 import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.api.ApiClient;
@@ -76,7 +77,7 @@ public class AddressMeunalInteractorImpil implements AddressMeunalInteractor {
 
                     @Override
                     public void onError(Throwable e) {
-                        onAddNewAddressFinishedListener.addNewAddressFail("Something went wrong, Please try again");
+                        onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
                     }
 
                     @Override
@@ -89,10 +90,10 @@ public class AddressMeunalInteractorImpil implements AddressMeunalInteractor {
                                     addAddress(newAddressRespons,fullAddress,onAddNewAddressFinishedListener);
                                 }
                             }catch (NullPointerException exNull){
-                                onAddNewAddressFinishedListener.addNewAddressFail("Something went wrong, Please try again");
+                                onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
                             }
                         } else {
-                            onAddNewAddressFinishedListener.addNewAddressFail("Something went wrong, Please try again");
+                            onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
                         }
 
                     }

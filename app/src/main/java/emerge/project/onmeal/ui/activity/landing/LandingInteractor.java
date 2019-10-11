@@ -2,6 +2,8 @@ package emerge.project.onmeal.ui.activity.landing;
 
 
 
+import android.content.Context;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -42,6 +44,12 @@ public interface LandingInteractor {
         void saveAddressFail(String msg);
     }
     void saveAddress(String addresID,String address, OnsaveAddressFinishedListener onsaveAddressFinishedListener);
+
+    interface OnsignOutinishedListener {
+        void signOutSuccess();
+    }
+    void signOut(Context context, OnsignOutinishedListener onsignOutinishedListener);
+
 
 
 

@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.history;
 
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import emerge.project.onmeal.utils.entittes.OrderHistoryItems;
@@ -15,6 +17,6 @@ public interface ActivtyHistoryPresenter {
 
 
     void getOrderHistoryDetails(String orderID,int level);
-
+    void signOut(Context context);
 
 }

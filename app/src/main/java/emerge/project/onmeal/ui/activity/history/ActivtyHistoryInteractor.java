@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.history;
 
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import emerge.project.onmeal.data.table.CartDetail;
@@ -32,6 +34,12 @@ public interface ActivtyHistoryInteractor {
         void getOrderHistoryDetailsFail(String msg,String orderID,int level);
     }
     void getOrderHistoryDetails(String orderID,int level,OnOrderHistoryDetailsFinishedListener  onOrderHistoryDetailsFinishedListener);
+
+
+    interface OnsignOutinishedListener {
+        void signOutSuccess();
+    }
+    void signOut(Context context, OnsignOutinishedListener onsignOutinishedListener);
 
 
 }

@@ -15,6 +15,10 @@ import emerge.project.onmeal.utils.entittes.OutletItems;
 
 public interface ProfileInteractor {
 
+    interface OnsignOutinishedListener {
+        void signOutSuccess();
+    }
+    void signOut(Context context,OnsignOutinishedListener onsignOutinishedListener);
 
 
 }

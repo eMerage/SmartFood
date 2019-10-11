@@ -16,5 +16,5 @@ public interface FavView {
         void getFavouriteItemsSuccessful(ArrayList<HomeFavouriteItems> favouriteItemsArrayList);
         void getFavouriteItemsFail(String msg);
 
-
+        void signOutSuccess();
 }

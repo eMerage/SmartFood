@@ -7,6 +7,7 @@ import com.luseen.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.api.ApiClient;
 import emerge.project.onmeal.service.api.ApiInterface;
@@ -56,7 +57,7 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onAddressLoadFinishedListener.getAddressFail("Something went wrong, Please try again");
+                            onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
                         }
                         @Override
                         public void onComplete() {
@@ -77,10 +78,10 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onAddressLoadFinishedListener.getAddressFail("Something went wrong, Please try again");
+                                    onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onAddressLoadFinishedListener.getAddressFail("Something went wrong, Please try again");
+                                onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
                             }
 
                         }
@@ -88,7 +89,7 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
 
 
         } catch (Exception ex) {
-            onAddressLoadFinishedListener.getAddressFail("Something went wrong, Please try again");
+            onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
         }
     }
 
@@ -119,7 +120,7 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onDeleteAddressFinishedListener.deleteAddressFail(addressID, "Something went wrong, Please try again");
+                            onDeleteAddressFinishedListener.deleteAddressFail(addressID, String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -132,17 +133,17 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
                                         onDeleteAddressFinishedListener.deleteAddressFail(addressID, "Address Deleting Fail, Please try again");
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onDeleteAddressFinishedListener.deleteAddressFail(addressID, "Something went wrong, Please try again");
+                                    onDeleteAddressFinishedListener.deleteAddressFail(addressID, String.valueOf(R.string.server_error_msg));
                                 }
 
                             } else {
-                                onDeleteAddressFinishedListener.deleteAddressFail(addressID, "Something went wrong, Please try again");
+                                onDeleteAddressFinishedListener.deleteAddressFail(addressID, String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onDeleteAddressFinishedListener.deleteAddressFail(addressID, "Something went wrong, Please try again");
+            onDeleteAddressFinishedListener.deleteAddressFail(addressID, String.valueOf(R.string.server_error_msg));
         }
     }
 }

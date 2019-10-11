@@ -31,4 +31,10 @@ public interface LoginView {
     void showGoogleSingInValidationErorr(String error);
     void userNotValidateGoogle(User user);
 
+
+
+
+
+
+
 }

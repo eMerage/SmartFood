@@ -1,13 +1,17 @@
 package emerge.project.onmeal.ui.activity.landingaddressadditianal;
 
 
+import android.content.Context;
+
 import emerge.project.onmeal.utils.entittes.AddressItems;
 
 /**
  * Created by Himanshu on 4/4/2017.
  */
 
-public class AddressAddingPresenterImpli implements AddressAddingPresenter,AddressAddingInteractor.OnAddNewAddressFinishedListener{
+public class AddressAddingPresenterImpli implements AddressAddingPresenter,
+        AddressAddingInteractor.OnAddNewAddressFinishedListener,
+        AddressAddingInteractor.OnsignOutinishedListener{
 
 
     private AddressAddingView addressAddingView;
@@ -21,6 +25,17 @@ public class AddressAddingPresenterImpli implements AddressAddingPresenter,Addre
     }
 
 
+
+    @Override
+    public void signOut(Context context) {
+        addressAddingInteractor.signOut(context,this);
+    }
+
+
+    @Override
+    public void signOutSuccess() {
+        addressAddingView.signOutSuccess();
+    }
 
     @Override
     public void addNewAddress(AddressItems addressItems) {

@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.landingsetlocation;
 
 
+import android.content.Context;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.luseen.logger.Logger;
 
@@ -13,6 +15,7 @@ import emerge.project.onmeal.service.api.ApiInterface;
 import emerge.project.onmeal.ui.activity.landing.LandingInteractor;
 import emerge.project.onmeal.utils.entittes.AddressItems;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,7 +26,7 @@ import retrofit2.Response;
 
 public class SetLocationInteractorImpil implements SetLocationInteractor {
 
-
+    Realm realm = Realm.getDefaultInstance();
     @Override
     public void getSellectedAddressDetails(String name, String address, LatLng latLng, OnGetSellectedAddressDetailsFinishedListener onGetSellectedAddressDetailsFinishedListener) {
 
@@ -93,4 +96,20 @@ public class SetLocationInteractorImpil implements SetLocationInteractor {
         
         
     }
+    @Override
+    public void signOut(Context context, final OnsignOutinishedListener onsignOutinishedListener) {
+        realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<User> resultsAddress = realm.where(User.class).findAll();
+                resultsAddress.deleteAllFromRealm();
+
+
+                onsignOutinishedListener.signOutSuccess();
+            }
+        });
+
+    }
+
 }

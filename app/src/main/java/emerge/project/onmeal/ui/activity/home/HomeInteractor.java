@@ -40,6 +40,12 @@ public interface HomeInteractor {
     }
     void getOutlet(Context mContext,String serachtext,OnOutletLoadFinishedListener  onOutletLoadFinishedListener);
 
+    interface OnsignOutinishedListener {
+        void signOutSuccess();
+    }
+    void signOut(Context context,OnsignOutinishedListener onsignOutinishedListener);
+
+
 
 
 

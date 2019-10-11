@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.api.ApiClient;
 import emerge.project.onmeal.service.api.ApiInterface;
@@ -77,7 +78,7 @@ public class SingInInteractorImpil implements SingInInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onLoginValidationFinishedListener.loginValidationFail("Something went wrong, Please try again");
+                            onLoginValidationFinishedListener.loginValidationFail(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -91,18 +92,18 @@ public class SingInInteractorImpil implements SingInInteractor {
                                         saveUser(userValidation, onLoginValidationFinishedListener);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onLoginValidationFinishedListener.loginValidationFail("Something went wrong, Please try again");
+                                    onLoginValidationFinishedListener.loginValidationFail(String.valueOf(R.string.server_error_msg));
                                 }
 
                             } else {
-                                onLoginValidationFinishedListener.loginValidationFail("Something went wrong, Please try again");
+                                onLoginValidationFinishedListener.loginValidationFail(String.valueOf(R.string.server_error_msg));
                             }
 
                         }
                     });
             
         } catch (Exception ex) {
-            onLoginValidationFinishedListener.loginValidationFail("Something went wrong, Please try again");
+            onLoginValidationFinishedListener.loginValidationFail(String.valueOf(R.string.server_error_msg));
         }
 
     }

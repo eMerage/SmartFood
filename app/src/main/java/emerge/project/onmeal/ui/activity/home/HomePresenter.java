@@ -11,5 +11,5 @@ public interface HomePresenter {
     void getFavouriteItems();
     void getMainFood(Context mContext,String serachtext);
     void getOutlet(Context mContext,String serachtext);
-
+    void signOut(Context context);
 }

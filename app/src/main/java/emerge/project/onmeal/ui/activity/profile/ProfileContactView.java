@@ -10,6 +10,6 @@ import emerge.project.onmeal.utils.entittes.HomeFavouriteItems;
  */
 
 public interface ProfileContactView {
-
+    void signOutSuccess();
 
 }

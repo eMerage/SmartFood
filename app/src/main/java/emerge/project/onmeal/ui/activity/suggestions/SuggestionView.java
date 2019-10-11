@@ -12,5 +12,5 @@ public interface SuggestionView {
 
     void sendSuggestionFail();
 
-
+    void signOutSuccess();
 }

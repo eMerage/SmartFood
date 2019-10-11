@@ -9,6 +9,6 @@ public interface AddressAddingView {
 
     void addNewAddressSuccessful();
     void addNewAddressFail(String msg);
-
+    void signOutSuccess();
 
 }

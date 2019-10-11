@@ -29,12 +29,13 @@ import emerge.project.onmeal.R;
 import emerge.project.onmeal.service.network.NetworkAvailability;
 import emerge.project.onmeal.ui.activity.history.ActivityHistory;
 import emerge.project.onmeal.ui.activity.landing.ActivityLanding;
+import emerge.project.onmeal.ui.activity.login.ActivityLogin;
 import emerge.project.onmeal.ui.activity.profile.ActivityProfile;
 import emerge.project.onmeal.ui.activity.settings.ActivitySettings;
 import emerge.project.onmeal.ui.adaptor.FavouriteAdapter;
 import emerge.project.onmeal.utils.entittes.HomeFavouriteItems;
 
-public class ActivityFavourites extends Activity implements FavView{
+public class ActivityFavourites extends Activity implements FavView {
 
 
     @BindView(R.id.drawer_layout)
@@ -88,12 +89,10 @@ public class ActivityFavourites extends Activity implements FavView{
         setNavigationMenuItems();
 
 
-
-
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             proprogressview.setVisibility(View.VISIBLE);
             favPresenter.getFavouriteItems();
-        }else {
+        } else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Warning");
             alertDialogBuilder.setMessage("No Internet Access, Please try again ");
@@ -115,7 +114,6 @@ public class ActivityFavourites extends Activity implements FavView{
     }
 
 
-
     @Override
     public void getFavouriteItemsEmpty() {
         proprogressview.setVisibility(View.GONE);
@@ -125,7 +123,7 @@ public class ActivityFavourites extends Activity implements FavView{
     @Override
     public void getFavouriteItemsSuccessful(ArrayList<HomeFavouriteItems> favouriteItemsArrayList) {
         proprogressview.setVisibility(View.GONE);
-        favouriteAdapter = new FavouriteAdapter(this,favouriteItemsArrayList);
+        favouriteAdapter = new FavouriteAdapter(this, favouriteItemsArrayList);
         recyclerViewFavorite.setAdapter(favouriteAdapter);
 
     }
@@ -136,42 +134,42 @@ public class ActivityFavourites extends Activity implements FavView{
         proprogressview.setVisibility(View.GONE);
 
         try {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Warning");
-        alertDialogBuilder.setMessage(msg);
-        alertDialogBuilder.setPositiveButton("YES",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-                            proprogressview.setVisibility(View.VISIBLE);
-                            favPresenter.getFavouriteItems();
-                        }else {
-                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ActivityFavourites.this);
-                            alertDialogBuilder.setTitle("Warning");
-                            alertDialogBuilder.setMessage("No Internet Access, Please try again ");
-                            alertDialogBuilder.setPositiveButton("OK",
-                                    new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            return;
-                                        }
-                                    });
-                            alertDialogBuilder.show();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage(msg);
+            alertDialogBuilder.setPositiveButton("YES",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+                                proprogressview.setVisibility(View.VISIBLE);
+                                favPresenter.getFavouriteItems();
+                            } else {
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ActivityFavourites.this);
+                                alertDialogBuilder.setTitle("Warning");
+                                alertDialogBuilder.setMessage("No Internet Access, Please try again ");
+                                alertDialogBuilder.setPositiveButton("OK",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                return;
+                                            }
+                                        });
+                                alertDialogBuilder.show();
+                            }
+
                         }
+                    });
+            alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    return;
+                }
+            });
+            alertDialogBuilder.show();
 
-                    }
-                });
-        alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                return;
-            }
-        });
-        alertDialogBuilder.show();
-
-    } catch (WindowManager.BadTokenException e) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        e.printStackTrace();
-    }
+        } catch (WindowManager.BadTokenException e) {
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
 
 
     }
@@ -201,7 +199,6 @@ public class ActivityFavourites extends Activity implements FavView{
     }
 
 
-
     @OnClick(R.id.text_navigation_profile)
     public void onClickNavigationProfile(View view) {
         Intent intentSingup = new Intent(this, ActivityProfile.class);
@@ -222,9 +219,7 @@ public class ActivityFavourites extends Activity implements FavView{
     }
 
 
-
-
-    private void setNavigationMenuItems(){
+    private void setNavigationMenuItems() {
         textViewNavigationGetFood.setTextColor(getResources().getColor(R.color.navigationTextColor));
         textViewNavigationFavourites.setTextColor(getResources().getColor(R.color.colorAccent));
         textViewNavigationYourOrders.setTextColor(getResources().getColor(R.color.navigationTextColor));
@@ -244,9 +239,22 @@ public class ActivityFavourites extends Activity implements FavView{
     }
 
 
+    @OnClick(R.id.relativelayout_logout)
+    public void onSingOut(View view) {
+        favPresenter.signOut(this);
+
+    }
 
 
+    @Override
+    public void signOutSuccess() {
 
+        Intent intent = new Intent(this, ActivityLogin.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+        finish();
+        startActivity(intent, bndlanimation);
+
+    }
 
 
     @Override

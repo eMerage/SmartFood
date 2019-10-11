@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.suggestions;
 
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 import com.luseen.logger.Logger;
 
@@ -19,6 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -90,4 +93,23 @@ public class SuggestionInteractorImpil implements SuggestionInteractor {
         }
 
     }
+
+
+
+    @Override
+    public void signOut(Context context, final OnsignOutinishedListener onsignOutinishedListener) {
+        realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<User> resultsAddress = realm.where(User.class).findAll();
+                resultsAddress.deleteAllFromRealm();
+
+
+                onsignOutinishedListener.signOutSuccess();
+            }
+        });
+
+    }
+
 }

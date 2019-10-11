@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.api.ApiClient;
 import emerge.project.onmeal.service.api.ApiInterface;
@@ -56,7 +57,7 @@ public class ProfileContactInteractorImpil implements ProfileContactInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetUserDetailsFinishedListener.getUserDetailsFail("Something went wrong, Please try again");
+                            onGetUserDetailsFinishedListener.getUserDetailsFail(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -65,15 +66,15 @@ public class ProfileContactInteractorImpil implements ProfileContactInteractor {
                                 try {
                                     onGetUserDetailsFinishedListener.getUserDetailsSuccessful(getUserDetails);
                                 } catch (NullPointerException exNull) {
-                                    onGetUserDetailsFinishedListener.getUserDetailsFail("Something went wrong, Please try again");
+                                    onGetUserDetailsFinishedListener.getUserDetailsFail(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onGetUserDetailsFinishedListener.getUserDetailsFail("Something went wrong, Please try again");
+                                onGetUserDetailsFinishedListener.getUserDetailsFail(String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
         } catch (Exception ex) {
-            onGetUserDetailsFinishedListener.getUserDetailsFail("Something went wrong, Please try again");
+            onGetUserDetailsFinishedListener.getUserDetailsFail(String.valueOf(R.string.server_error_msg));
         }
     }
 
@@ -106,7 +107,7 @@ public class ProfileContactInteractorImpil implements ProfileContactInteractor {
 
                             @Override
                             public void onError(Throwable e) {
-                                onUpdateUserDetailsFinishedListener.getUpdateFail("Something went wrong, Please try again");
+                                onUpdateUserDetailsFinishedListener.getUpdateFail(String.valueOf(R.string.server_error_msg));
                             }
 
                             @Override
@@ -119,16 +120,16 @@ public class ProfileContactInteractorImpil implements ProfileContactInteractor {
                                             onUpdateUserDetailsFinishedListener.getUpdateFail("User Detail Update Fail, Please try again");
                                         }
                                     } catch (NullPointerException exNull) {
-                                        onUpdateUserDetailsFinishedListener.getUpdateFail("Something went wrong, Please try again");
+                                        onUpdateUserDetailsFinishedListener.getUpdateFail(String.valueOf(R.string.server_error_msg));
                                     }
 
                                 } else {
-                                    onUpdateUserDetailsFinishedListener.getUpdateFail("Something went wrong, Please try again");
+                                    onUpdateUserDetailsFinishedListener.getUpdateFail(String.valueOf(R.string.server_error_msg));
                                 }
                             }
                         });
             } catch (Exception ex) {
-                onUpdateUserDetailsFinishedListener.getUpdateFail("Something went wrong, Please try again");
+                onUpdateUserDetailsFinishedListener.getUpdateFail(String.valueOf(R.string.server_error_msg));
             }
         }
 

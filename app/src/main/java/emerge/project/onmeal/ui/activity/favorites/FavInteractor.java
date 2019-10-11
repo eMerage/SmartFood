@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.favorites;
 
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import emerge.project.onmeal.ui.activity.home.HomeInteractor;
@@ -19,6 +21,14 @@ public interface FavInteractor {
         void getFavouriteItemsFail(String msg);
     }
     void getFavouriteItems(OnFavouriteItemsLoadFinishedListener onFavouriteItemsLoadFinishedListener);
+
+
+    interface OnsignOutinishedListener {
+        void signOutSuccess();
+    }
+    void signOut(Context context, OnsignOutinishedListener onsignOutinishedListener);
+
+
 
 
 

@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.landing;
 
 
+import android.content.Context;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import emerge.project.onmeal.utils.entittes.AddressItems;
@@ -18,5 +20,5 @@ public interface LandingPresenter {
     void saveAddress(String addresID,String address);
 
     void deleteAddress();
-
+    void signOut(Context context);
 }

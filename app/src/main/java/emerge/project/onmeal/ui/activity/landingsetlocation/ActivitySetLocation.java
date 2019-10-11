@@ -59,6 +59,7 @@ import emerge.project.onmeal.ui.activity.favorites.ActivityFavourites;
 import emerge.project.onmeal.ui.activity.history.ActivityHistory;
 import emerge.project.onmeal.ui.activity.landing.ActivityLanding;
 import emerge.project.onmeal.ui.activity.landingaddressmenual.ActivityMenualAddress;
+import emerge.project.onmeal.ui.activity.login.ActivityLogin;
 import emerge.project.onmeal.ui.activity.profile.ActivityProfile;
 import emerge.project.onmeal.ui.activity.settings.ActivitySettings;
 import emerge.project.onmeal.utils.entittes.AddressItems;
@@ -476,6 +477,24 @@ public class ActivitySetLocation extends FragmentActivity implements OnMapReadyC
         intentSingup.putExtra("addressItem", addressItem);
         startActivity(intentSingup, bndlanimation);
         finish();
+
+    }
+
+
+    @Override
+    public void signOutSuccess() {
+
+        Intent intent = new Intent(this, ActivityLogin.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+        finish();
+        startActivity(intent, bndlanimation);
+
+    }
+
+
+    @OnClick(R.id.relativelayout_logout)
+    public void onSingOut(View view) {
+        setLocationPresenter.signOut(this);
 
     }
 

@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.landing;
 
 
+import android.content.Context;
+
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonObject;
 import com.luseen.logger.Logger;
@@ -8,6 +10,7 @@ import com.luseen.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.Address;
 import emerge.project.onmeal.data.table.CartDetail;
 import emerge.project.onmeal.data.table.CartHeader;
@@ -157,7 +160,7 @@ public class LandingInteractorImpil implements LandingInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onAddressLoadFinishedListener.getAddressFail("Something went wrong, Please try again");
+                            onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
                         }
                         @Override
                         public void onComplete() {
@@ -178,19 +181,19 @@ public class LandingInteractorImpil implements LandingInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onAddressLoadFinishedListener.getAddressFail("Something went wrong, Please try again");
+                                    onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
                                 }
 
 
                             } else {
-                                onAddressLoadFinishedListener.getAddressFail("Something went wrong, Please try again");
+                                onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
                             }
 
                         }
                     });
 
         } catch (Exception ex) {
-            onAddressLoadFinishedListener.getAddressFail("Something went wrong, Please try again");
+            onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
         }
     }
 
@@ -240,7 +243,7 @@ public class LandingInteractorImpil implements LandingInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onAddNewAddressFinishedListener.addNewAddressFail("Something went wrong, Please try again");
+                            onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
                         }
                         @Override
                         public void onComplete() {
@@ -252,16 +255,16 @@ public class LandingInteractorImpil implements LandingInteractor {
                                         addAddress(newAddressRespons, fullAddress, onAddNewAddressFinishedListener);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onAddNewAddressFinishedListener.addNewAddressFail("Something went wrong, Please try again");
+                                    onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onAddNewAddressFinishedListener.addNewAddressFail("Something went wrong, Please try again");
+                                onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onAddNewAddressFinishedListener.addNewAddressFail("Something went wrong, Please try again");
+            onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
         }
     }
 
@@ -337,6 +340,21 @@ public class LandingInteractorImpil implements LandingInteractor {
             }
         });
 
+
+    }
+    @Override
+    public void signOut(Context context, final OnsignOutinishedListener onsignOutinishedListener) {
+        realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<User> resultsAddress = realm.where(User.class).findAll();
+                resultsAddress.deleteAllFromRealm();
+
+
+                onsignOutinishedListener.signOutSuccess();
+            }
+        });
 
     }
 

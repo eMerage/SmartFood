@@ -10,5 +10,6 @@ import android.content.Context;
 public interface ProfilePresenter {
 
 
+    void signOut(Context context);
 
 }

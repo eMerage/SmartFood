@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.history;
 
 
+import android.content.Context;
+
 import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
@@ -10,6 +12,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.CartDetail;
 import emerge.project.onmeal.data.table.CartHeader;
 import emerge.project.onmeal.data.table.User;
@@ -27,6 +30,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -69,7 +73,7 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Something went wrong, Please try again");
+                            onOrderHistoryLoadFinishedListener.getOrderHistoryFail(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -93,15 +97,15 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Something went wrong, Please try again");
+                                    onOrderHistoryLoadFinishedListener.getOrderHistoryFail(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Something went wrong, Please try again");
+                                onOrderHistoryLoadFinishedListener.getOrderHistoryFail(String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
         } catch (Exception ex) {
-            onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Something went wrong, Please try again");
+            onOrderHistoryLoadFinishedListener.getOrderHistoryFail(String.valueOf(R.string.server_error_msg));
         }
     }
 
@@ -132,7 +136,7 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Something went wrong, Please try again", orderID,level);
+                            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail(String.valueOf(R.string.server_error_msg), orderID,level);
                         }
 
                         @Override
@@ -191,20 +195,37 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
 
                                 } catch (JSONException e) {
-                                    onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Something went wrong, Please try again", orderID,level);
+                                    onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail(String.valueOf(R.string.server_error_msg), orderID,level);
                                 }
 
 
 
                             } else {
-                                onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Something went wrong, Please try again", orderID,level);
+                                onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail(String.valueOf(R.string.server_error_msg), orderID,level);
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Something went wrong, Please try again", orderID,level);
+            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail(String.valueOf(R.string.server_error_msg), orderID,level);
         }
 
     }
+
+    @Override
+    public void signOut(Context context, final OnsignOutinishedListener onsignOutinishedListener) {
+        realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<User> resultsAddress = realm.where(User.class).findAll();
+                resultsAddress.deleteAllFromRealm();
+
+
+                onsignOutinishedListener.signOutSuccess();
+            }
+        });
+
+    }
+
 }

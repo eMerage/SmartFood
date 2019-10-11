@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.favorites;
 
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import emerge.project.onmeal.ui.activity.splash.SplashInteractor;
@@ -13,7 +15,7 @@ import emerge.project.onmeal.utils.entittes.HomeFavouriteItems;
  * Created by Himanshu on 4/4/2017.
  */
 
-public class FavPresenterImpli implements FavPresenter,FavInteractor.OnFavouriteItemsLoadFinishedListener {
+public class FavPresenterImpli implements FavPresenter,FavInteractor.OnFavouriteItemsLoadFinishedListener,FavInteractor.OnsignOutinishedListener {
 
 
     private FavView favView;
@@ -53,4 +55,14 @@ public class FavPresenterImpli implements FavPresenter,FavInteractor.OnFavourite
     }
 
 
+    @Override
+    public void signOut(Context context) {
+        favInteractor.signOut(context,this);
+    }
+
+
+    @Override
+    public void signOutSuccess() {
+        favView.signOutSuccess();
+    }
 }

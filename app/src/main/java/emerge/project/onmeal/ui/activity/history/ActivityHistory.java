@@ -44,6 +44,7 @@ import emerge.project.onmeal.data.table.CartHeader;
 import emerge.project.onmeal.service.network.NetworkAvailability;
 import emerge.project.onmeal.ui.activity.favorites.ActivityFavourites;
 import emerge.project.onmeal.ui.activity.home.ActivityHome;
+import emerge.project.onmeal.ui.activity.login.ActivityLogin;
 import emerge.project.onmeal.ui.activity.profile.ActivityProfile;
 import emerge.project.onmeal.ui.activity.settings.ActivitySettings;
 import emerge.project.onmeal.ui.adaptor.CartSubItemsAdapter;
@@ -576,4 +577,23 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
 
         }
     }
+
+
+    @OnClick(R.id.relativelayout_logout)
+    public void onSingOut(View view) {
+        activtyHistoryPresenter.signOut(this);
+
+    }
+
+
+    @Override
+    public void signOutSuccess() {
+
+        Intent intent = new Intent(this, ActivityLogin.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+        finish();
+        startActivity(intent, bndlanimation);
+
+    }
+
 }

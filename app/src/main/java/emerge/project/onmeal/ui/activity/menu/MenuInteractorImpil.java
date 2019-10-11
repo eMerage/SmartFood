@@ -8,6 +8,7 @@ import com.luseen.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.Address;
 import emerge.project.onmeal.data.table.CartHeader;
 import emerge.project.onmeal.data.table.User;
@@ -66,7 +67,7 @@ public class MenuInteractorImpil implements MenuInteractor {
 
                             @Override
                             public void onError(Throwable e) {
-                                onGetMenuCategoryFinishedListener.menuCategoryFail("Something went wrong, Please try again");
+                                onGetMenuCategoryFinishedListener.menuCategoryFail(String.valueOf(R.string.server_error_msg));
                             }
 
                             @Override
@@ -74,7 +75,7 @@ public class MenuInteractorImpil implements MenuInteractor {
                                 if (menuCategory != null) {
                                     try {
                                         if (menuCategory.isEmpty()) {
-                                            onGetMenuCategoryFinishedListener.menuCategoryFail("Something went wrong, Please try again");
+                                            onGetMenuCategoryFinishedListener.menuCategoryFail(String.valueOf(R.string.server_error_msg));
                                         } else {
                                             for (int i = 0; i < menuCategory.size(); i++) {
                                                 if (i == 0) {
@@ -86,15 +87,15 @@ public class MenuInteractorImpil implements MenuInteractor {
                                             onGetMenuCategoryFinishedListener.menuCategory(menuCategoryItemsArrayList);
                                         }
                                     } catch (NullPointerException exNull) {
-                                        onGetMenuCategoryFinishedListener.menuCategoryFail("Something went wrong, Please try again");
+                                        onGetMenuCategoryFinishedListener.menuCategoryFail(String.valueOf(R.string.server_error_msg));
                                     }
                                 } else {
-                                    onGetMenuCategoryFinishedListener.menuCategoryFail("Something went wrong, Please try again");
+                                    onGetMenuCategoryFinishedListener.menuCategoryFail(String.valueOf(R.string.server_error_msg));
                                 }
                             }
                         });
             } catch (Exception ex) {
-                onGetMenuCategoryFinishedListener.menuCategoryFail("Something went wrong, Please try again");
+                onGetMenuCategoryFinishedListener.menuCategoryFail(String.valueOf(R.string.server_error_msg));
             }
         }
 
@@ -140,15 +141,15 @@ public class MenuInteractorImpil implements MenuInteractor {
                                         otMainFoodByOutletListener.getMainFoodByOutletSuccess(menuItemsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    otMainFoodByOutletListener.getMainFoodByOutletLoadFail("Something went wrong, Please try again", outletId, menuCategoryID);
+                                    otMainFoodByOutletListener.getMainFoodByOutletLoadFail(String.valueOf(R.string.server_error_msg), outletId, menuCategoryID);
                                 }
                             } else {
-                                otMainFoodByOutletListener.getMainFoodByOutletLoadFail("Something went wrong, Please try again", outletId, menuCategoryID);
+                                otMainFoodByOutletListener.getMainFoodByOutletLoadFail(String.valueOf(R.string.server_error_msg), outletId, menuCategoryID);
                             }
                         }
                     });
         } catch (Exception ex) {
-            otMainFoodByOutletListener.getMainFoodByOutletLoadFail("Something went wrong, Please try again", outletId, menuCategoryID);
+            otMainFoodByOutletListener.getMainFoodByOutletLoadFail(String.valueOf(R.string.server_error_msg), outletId, menuCategoryID);
         }
 
     }
@@ -190,7 +191,7 @@ public class MenuInteractorImpil implements MenuInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onMainFoodByFoodListener.getMainFoodByFoodLoadFail("Something went wrong, Please try again");
+                            onMainFoodByFoodListener.getMainFoodByFoodLoadFail(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -207,16 +208,16 @@ public class MenuInteractorImpil implements MenuInteractor {
                                         onMainFoodByFoodListener.getMainFoodByFoodSuccess(menuItemsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onMainFoodByFoodListener.getMainFoodByFoodLoadFail("Something went wrong, Please try again");
+                                    onMainFoodByFoodListener.getMainFoodByFoodLoadFail(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onMainFoodByFoodListener.getMainFoodByFoodLoadFail("Something went wrong, Please try again");
+                                onMainFoodByFoodListener.getMainFoodByFoodLoadFail(String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onMainFoodByFoodListener.getMainFoodByFoodLoadFail("Something went wrong, Please try again");
+            onMainFoodByFoodListener.getMainFoodByFoodLoadFail(String.valueOf(R.string.server_error_msg));
         }
     }
 

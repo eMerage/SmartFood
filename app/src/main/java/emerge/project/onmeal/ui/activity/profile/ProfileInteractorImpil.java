@@ -19,6 +19,7 @@ import emerge.project.onmeal.utils.entittes.Foodtems;
 import emerge.project.onmeal.utils.entittes.HomeFavouriteItems;
 import emerge.project.onmeal.utils.entittes.OutletItems;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -31,5 +32,22 @@ import retrofit2.Response;
 public class ProfileInteractorImpil implements ProfileInteractor {
 
 
+    Realm realm = Realm.getDefaultInstance();
+
+    @Override
+    public void signOut(Context context, final OnsignOutinishedListener onsignOutinishedListener) {
+        realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<User> resultsAddress = realm.where(User.class).findAll();
+                resultsAddress.deleteAllFromRealm();
+
+
+                onsignOutinishedListener.signOutSuccess();
+            }
+        });
+
+    }
 
 }

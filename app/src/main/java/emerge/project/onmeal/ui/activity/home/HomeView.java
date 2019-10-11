@@ -17,4 +17,5 @@ public interface HomeView {
     void getFavouriteItemsFail(String msg);
 
 
+    void signOutSuccess();
 }

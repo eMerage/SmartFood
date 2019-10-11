@@ -108,6 +108,8 @@ public class LoginPresenterImpli implements LoginPresenter,
         loginInteractor.checkGoogleSingInValidation(context,account,this);
     }
 
+
+
     @Override
     public void alreadySingUpWithGoogle() {
         loginView.showAlreadySingUpWithGoogle();
@@ -127,4 +129,8 @@ public class LoginPresenterImpli implements LoginPresenter,
     public void userNotValidateGoogle(User user) {
         loginView.userNotValidateGoogle(user);
     }
+
+
+
+
 }

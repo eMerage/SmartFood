@@ -27,6 +27,7 @@ import emerge.project.onmeal.service.network.NetworkAvailability;
 import emerge.project.onmeal.ui.activity.favorites.ActivityFavourites;
 import emerge.project.onmeal.ui.activity.history.ActivityHistory;
 import emerge.project.onmeal.ui.activity.landing.ActivityLanding;
+import emerge.project.onmeal.ui.activity.login.ActivityLogin;
 import emerge.project.onmeal.ui.activity.profile.ActivityProfile;
 import emerge.project.onmeal.ui.activity.settings.ActivitySettings;
 
@@ -311,5 +312,22 @@ public class ActivitySuggestions extends Activity implements SuggestionView{
 
     private void unBloackUserInteraction() {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    @Override
+    public void signOutSuccess() {
+
+        Intent intent = new Intent(this, ActivityLogin.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+        finish();
+        startActivity(intent, bndlanimation);
+
+    }
+
+
+    @OnClick(R.id.relativelayout_logout)
+    public void onSingOut(View view) {
+        suggestionPresenter.signOut(this);
+
     }
 }

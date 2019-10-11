@@ -91,6 +91,7 @@ import emerge.project.onmeal.ui.activity.history.ActivityHistory;
 import emerge.project.onmeal.ui.activity.home.ActivityHome;
 import emerge.project.onmeal.ui.activity.landingaddressadditianal.ActivityAddressAdditianal;
 import emerge.project.onmeal.ui.activity.landingsetlocation.ActivitySetLocation;
+import emerge.project.onmeal.ui.activity.login.ActivityLogin;
 import emerge.project.onmeal.ui.activity.profile.ActivityProfile;
 import emerge.project.onmeal.ui.activity.settings.ActivitySettings;
 import emerge.project.onmeal.ui.adaptor.AddressListAdapter;
@@ -546,7 +547,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         new AlertDialog.Builder(this)
                 .setTitle("A General Notice!")
-                .setMessage("When you reach the restaurant the tables might have occupied fully.\n\n Happy Dining")
+                .setMessage("At the time of reach the restaurant, tables might be occupied fully.\n\n Happy Dining")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -1223,6 +1224,27 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     private void unBloackUserInteraction() {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
+
+
+    @Override
+    public void signOutSuccess() {
+
+        Intent intent = new Intent(this, ActivityLogin.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+        finish();
+        startActivity(intent, bndlanimation);
+
+    }
+
+
+    @OnClick(R.id.relativelayout_logout)
+    public void onSingOut(View view) {
+        landingPresenter.signOut(this);
+
+    }
+
+
+
 
 
 }

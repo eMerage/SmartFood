@@ -15,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.api.ApiClient;
 import emerge.project.onmeal.service.api.ApiInterface;
@@ -23,6 +24,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -109,7 +111,7 @@ public class LoginInteractorImpil implements LoginInteractor {
             }
 
         } catch (Exception ex) {
-            onLocalSingInValidationFinishedListener.localSingInValidationErorr("Something went wrong, Please try again");
+            onLocalSingInValidationFinishedListener.localSingInValidationErorr(String.valueOf(R.string.server_error_msg));
         }
     }
 
@@ -140,7 +142,7 @@ public class LoginInteractorImpil implements LoginInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr("Something went wrong, Please try again");
+                            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr(String.valueOf(R.string.server_error_msg));
                         }
                         @Override
                         public void onComplete() {
@@ -162,20 +164,20 @@ public class LoginInteractorImpil implements LoginInteractor {
                                         onFacebookSingInValidationFinishedListener.userNotValidateFacebook(user);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr("Something went wrong, Please try again");
+                                    onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr("Something went wrong, Please try again");
+                                onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr(String.valueOf(R.string.server_error_msg));
                             }
 
                         }
                     });
 
         } catch (JSONException e) {
-            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr("Something went wrong, Please try again");
+            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr(String.valueOf(R.string.server_error_msg));
             Logger.e(e.toString());
         } catch (Exception ex) {
-            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr("Something went wrong, Please try again");
+            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr(String.valueOf(R.string.server_error_msg));
         }
 
     }
@@ -205,7 +207,7 @@ public class LoginInteractorImpil implements LoginInteractor {
                         }
                         @Override
                         public void onError(Throwable e) {
-                            onGoogleSingInValidationFinishedListener.googleSingInValidationErorr("Something went wrong, Please try again");
+                            onGoogleSingInValidationFinishedListener.googleSingInValidationErorr(String.valueOf(R.string.server_error_msg));
                         }
                         @Override
                         public void onComplete() {
@@ -227,21 +229,22 @@ public class LoginInteractorImpil implements LoginInteractor {
                                         onGoogleSingInValidationFinishedListener.userNotValidateGoogle(user);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onGoogleSingInValidationFinishedListener.googleSingInValidationErorr("Something went wrong, Please try again");
+                                    onGoogleSingInValidationFinishedListener.googleSingInValidationErorr(String.valueOf(R.string.server_error_msg));
                                 }
 
                             } else {
-                                onGoogleSingInValidationFinishedListener.googleSingInValidationErorr("Something went wrong, Please try again");
+                                onGoogleSingInValidationFinishedListener.googleSingInValidationErorr(String.valueOf(R.string.server_error_msg));
                             }
 
                         }
                     });
 
         } catch (Exception ex) {
-            onGoogleSingInValidationFinishedListener.googleSingInValidationErorr("Something went wrong, Please try again");
+            onGoogleSingInValidationFinishedListener.googleSingInValidationErorr(String.valueOf(R.string.server_error_msg));
         }
 
     }
+
 
     private void saveUser(final User userArrayList, final OnLocalSingInValidationFinishedListener onLocalSingInValidationFinishedListener) {
 

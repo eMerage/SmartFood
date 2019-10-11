@@ -26,5 +26,5 @@ public interface ActivtyHistorytView {
     void getOrderHistoryDetailsFail(String msg,String orderID,int level);
 
 
-
+    void signOutSuccess();
 }

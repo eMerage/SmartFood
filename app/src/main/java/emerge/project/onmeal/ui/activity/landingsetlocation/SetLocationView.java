@@ -12,4 +12,7 @@ import emerge.project.onmeal.utils.entittes.AddressItems;
 public interface SetLocationView {
     void selectedAddressDetails(AddressItems addressItems);
     void selectedAddressDetailsFail();
+
+    void signOutSuccess();
 }
+

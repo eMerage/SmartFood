@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.landing;
 
 
+import android.content.Context;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -14,7 +16,9 @@ import emerge.project.onmeal.utils.entittes.AddressItems;
 public class LandingPresenterImpli implements LandingPresenter,
         LandingInteractor.OnGetSellectedAddressDetailsFinishedListener,
         LandingInteractor.OnAddressLoadFinishedListener,
-        LandingInteractor.OnAddNewAddressFinishedListener,LandingInteractor.OnsaveAddressFinishedListener{
+        LandingInteractor.OnAddNewAddressFinishedListener,
+        LandingInteractor.OnsaveAddressFinishedListener,
+        LandingInteractor.OnsignOutinishedListener{
 
 
     private LandingView landingView;
@@ -34,6 +38,16 @@ public class LandingPresenterImpli implements LandingPresenter,
     }
 
 
+    @Override
+    public void signOut(Context context) {
+        landingInteractor.signOut(context,this);
+    }
+
+
+    @Override
+    public void signOutSuccess() {
+        landingView.signOutSuccess();
+    }
 
 
     @Override

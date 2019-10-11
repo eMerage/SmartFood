@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.history;
 
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import emerge.project.onmeal.data.table.CartDetail;
@@ -18,7 +20,9 @@ import emerge.project.onmeal.utils.entittes.OutletItems;
  */
 
 public class ActivtyHistoryPresenterImpli implements ActivtyHistoryPresenter,
-        ActivtyHistoryInteractor.OnOrderHistoryLoadFinishedListener,ActivtyHistoryInteractor.OnOrderHistoryDetailsFinishedListener{
+        ActivtyHistoryInteractor.OnOrderHistoryLoadFinishedListener,
+        ActivtyHistoryInteractor.OnOrderHistoryDetailsFinishedListener,
+        ActivtyHistoryInteractor.OnsignOutinishedListener{
 
 
     private ActivtyHistorytView activtyHistorytView;
@@ -34,6 +38,16 @@ public class ActivtyHistoryPresenterImpli implements ActivtyHistoryPresenter,
 
 
 
+    @Override
+    public void signOut(Context context) {
+        activtyHistoryInteractor.signOut(context,this);
+    }
+
+
+    @Override
+    public void signOutSuccess() {
+        activtyHistorytView.signOutSuccess();
+    }
 
     @Override
     public void getOrderHistory() {

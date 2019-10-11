@@ -20,12 +20,13 @@ import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.ui.activity.favorites.ActivityFavourites;
 import emerge.project.onmeal.ui.activity.history.ActivityHistory;
 import emerge.project.onmeal.ui.activity.landing.ActivityLanding;
+import emerge.project.onmeal.ui.activity.login.ActivityLogin;
 import emerge.project.onmeal.ui.activity.settings.ActivitySettings;
 import emerge.project.onmeal.ui.adaptor.ProfileViewPagerAdapter;
 import emerge.project.onmeal.ui.fragment.profile.address.FragmentProfileAddress;
 import io.realm.Realm;
 
-public class ActivityProfile extends FragmentActivity {
+public class ActivityProfile extends FragmentActivity implements  ProfileContactView{
 
 
 
@@ -79,6 +80,8 @@ public class ActivityProfile extends FragmentActivity {
 
     Realm realm;
 
+    ProfilePresenter profilePresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +93,7 @@ public class ActivityProfile extends FragmentActivity {
         realm = Realm.getDefaultInstance();
 
 
-
+        profilePresenter = new ProfilePresenterImpli(this);
 
         assert viewPager != null;
         viewPager.setAdapter(new ProfileViewPagerAdapter(getSupportFragmentManager()));
@@ -215,6 +218,24 @@ public class ActivityProfile extends FragmentActivity {
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
         startActivity(intentSingup, bndlanimation);
         finish();
+    }
+
+
+    @Override
+    public void signOutSuccess() {
+
+        Intent intent = new Intent(this, ActivityLogin.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+        finish();
+        startActivity(intent, bndlanimation);
+
+    }
+
+
+    @OnClick(R.id.relativelayout_logout)
+    public void onSingOut(View view) {
+        profilePresenter.signOut(this);
+
     }
 
 

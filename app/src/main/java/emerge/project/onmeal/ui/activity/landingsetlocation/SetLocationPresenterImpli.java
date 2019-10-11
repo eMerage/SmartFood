@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.landingsetlocation;
 
 
+import android.content.Context;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -15,7 +17,10 @@ import emerge.project.onmeal.utils.entittes.AddressItems;
  * Created by Himanshu on 4/4/2017.
  */
 
-public class SetLocationPresenterImpli implements SetLocationPresenter,SetLocationInteractor.OnGetSellectedAddressDetailsFinishedListener {
+public class SetLocationPresenterImpli implements
+        SetLocationPresenter,
+        SetLocationInteractor.OnGetSellectedAddressDetailsFinishedListener,
+        SetLocationInteractor.OnsignOutinishedListener{
 
 
     private SetLocationView setLocationView;
@@ -26,6 +31,18 @@ public class SetLocationPresenterImpli implements SetLocationPresenter,SetLocati
         this.setLocationView = setlocationView;
         this.setLocationInteractor = new SetLocationInteractorImpil();
 
+    }
+
+
+    @Override
+    public void signOut(Context context) {
+        setLocationInteractor.signOut(context,this);
+    }
+
+
+    @Override
+    public void signOutSuccess() {
+        setLocationView.signOutSuccess();
     }
 
 

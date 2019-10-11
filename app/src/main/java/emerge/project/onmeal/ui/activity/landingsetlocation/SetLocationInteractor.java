@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.landingsetlocation;
 
 
+import android.content.Context;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -20,6 +22,14 @@ public interface SetLocationInteractor {
         void selectedAddressDetailsFail();
     }
     void getSellectedAddressDetails(String name, String address,LatLng latLng, OnGetSellectedAddressDetailsFinishedListener onGetSellectedAddressDetailsFinishedListener);
+
+
+    interface OnsignOutinishedListener {
+        void signOutSuccess();
+    }
+    void signOut(Context context, OnsignOutinishedListener onsignOutinishedListener);
+
+
 
 
 }

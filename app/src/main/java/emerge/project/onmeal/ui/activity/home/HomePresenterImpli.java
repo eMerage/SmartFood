@@ -14,7 +14,8 @@ import emerge.project.onmeal.utils.entittes.OutletItems;
  */
 
 public class HomePresenterImpli implements HomePresenter,HomeInteractor.OnFavouriteItemsLoadFinishedListener,
-        HomeInteractor.OnMainFoodLoadFinishedListener,HomeInteractor.OnOutletLoadFinishedListener{
+        HomeInteractor.OnMainFoodLoadFinishedListener,HomeInteractor.OnOutletLoadFinishedListener,
+        HomeInteractor.OnsignOutinishedListener{
 
 
     private HomeView homeView;
@@ -43,6 +44,16 @@ public class HomePresenterImpli implements HomePresenter,HomeInteractor.OnFavour
     }
 
 
+    @Override
+    public void signOut(Context context) {
+        homeInteractor.signOut(context,this);
+    }
+
+
+    @Override
+    public void signOutSuccess() {
+        homeView.signOutSuccess();
+    }
 
 
     @Override

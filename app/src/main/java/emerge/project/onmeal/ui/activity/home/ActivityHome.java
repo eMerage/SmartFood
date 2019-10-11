@@ -33,17 +33,21 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 import emerge.project.onmeal.R;
+import emerge.project.onmeal.data.table.Address;
 import emerge.project.onmeal.service.network.NetworkAvailability;
 import emerge.project.onmeal.ui.activity.favorites.ActivityFavourites;
 import emerge.project.onmeal.ui.activity.history.ActivityHistory;
 import emerge.project.onmeal.ui.activity.landing.ActivityLanding;
 import emerge.project.onmeal.ui.activity.landingsetlocation.ActivitySetLocation;
+import emerge.project.onmeal.ui.activity.login.ActivityLogin;
 import emerge.project.onmeal.ui.activity.profile.ActivityProfile;
 import emerge.project.onmeal.ui.activity.settings.ActivitySettings;
 import emerge.project.onmeal.ui.adaptor.HomeFavouriteAdapter;
 import emerge.project.onmeal.ui.adaptor.HomeViewPagerAdapter;
 import emerge.project.onmeal.ui.fragment.home.FragmentHomeFood;
 import emerge.project.onmeal.utils.entittes.HomeFavouriteItems;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class ActivityHome extends FragmentActivity implements HomeView{
 
@@ -91,6 +95,8 @@ public class ActivityHome extends FragmentActivity implements HomeView{
     TextView textViewNavigationProfile;
 
 
+
+
     @BindView(R.id.text_navigation_settings)
     TextView textViewNavigationSettings;
 
@@ -108,6 +114,7 @@ public class ActivityHome extends FragmentActivity implements HomeView{
 
     HomeViewByFood homeViewByFood;
     HomeViewByOutlet homeViewByOutlet;
+
 
 
 
@@ -354,6 +361,24 @@ public class ActivityHome extends FragmentActivity implements HomeView{
 
 
     }
+
+    @Override
+    public void signOutSuccess() {
+
+        Intent intent = new Intent(this, ActivityLogin.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+        finish();
+        startActivity(intent, bndlanimation);
+
+    }
+
+
+    @OnClick(R.id.relativelayout_logout)
+    public void onSingOut(View view) {
+        homePresenter.signOut(this);
+
+    }
+
 
 
     @Override

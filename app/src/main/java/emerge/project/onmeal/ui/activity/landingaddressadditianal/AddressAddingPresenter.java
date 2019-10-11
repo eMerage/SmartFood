@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.activity.landingaddressadditianal;
 
 
+import android.content.Context;
+
 import emerge.project.onmeal.utils.entittes.AddressItems;
 
 /**
@@ -9,4 +11,6 @@ import emerge.project.onmeal.utils.entittes.AddressItems;
 
 public interface AddressAddingPresenter {
     void addNewAddress(AddressItems addressItems);
+
+    void signOut(Context context);
 }

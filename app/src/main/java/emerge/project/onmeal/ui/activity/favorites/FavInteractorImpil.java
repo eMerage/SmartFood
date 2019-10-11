@@ -1,12 +1,15 @@
 package emerge.project.onmeal.ui.activity.favorites;
 
 
+import android.content.Context;
+
 import com.luseen.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.api.ApiClient;
 import emerge.project.onmeal.service.api.ApiInterface;
@@ -18,6 +21,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import io.realm.Realm;
 
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,7 +57,7 @@ public class FavInteractorImpil implements FavInteractor {
                         }
                         @Override
                         public void onError(Throwable e) {
-                            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Something went wrong, Please try again");
+                            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
                         }
                         @Override
                         public void onComplete() {
@@ -71,16 +75,33 @@ public class FavInteractorImpil implements FavInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Something went wrong, Please try again");
+                                    onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Something went wrong, Please try again");
+                                onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
         } catch (Exception ex) {
-            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Something went wrong, Please try again");
+            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
         }
+    }
+
+
+    @Override
+    public void signOut(Context context, final OnsignOutinishedListener onsignOutinishedListener) {
+        realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<User> resultsAddress = realm.where(User.class).findAll();
+                resultsAddress.deleteAllFromRealm();
+
+
+                onsignOutinishedListener.signOutSuccess();
+            }
+        });
+
     }
 }
 

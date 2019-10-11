@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.Address;
 import emerge.project.onmeal.data.table.CartDetail;
 import emerge.project.onmeal.data.table.CartHeader;
@@ -140,7 +141,7 @@ public class CartInteractorImpil implements CartInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Something went wrong, Please try again");
+                            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -189,19 +190,19 @@ public class CartInteractorImpil implements CartInteractor {
 
                                 } catch (JSONException e) {
                                     Logger.e(e.toString());
-                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Something went wrong, Please try again");
+                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, String.valueOf(R.string.server_error_msg));
                                 } catch (NullPointerException exNull) {
-                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Something went wrong, Please try again");
+                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, String.valueOf(R.string.server_error_msg));
                                 }
 
                             } else {
-                                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Something went wrong, Please try again");
+                                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Something went wrong, Please try again");
+            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, String.valueOf(R.string.server_error_msg));
         }
     }
 
@@ -226,7 +227,7 @@ public class CartInteractorImpil implements CartInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail("Something went wrong, Please try again");
+                            ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -243,15 +244,15 @@ public class CartInteractorImpil implements CartInteractor {
                                         ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotSuccessful(timeSlotsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail("Something went wrong, Please try again");
+                                    ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail("Something went wrong, Please try again");
+                                ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail(String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
         } catch (Exception ex) {
-            ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail("Something went wrong, Please try again");
+            ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail(String.valueOf(R.string.server_error_msg));
         }
     }
 
@@ -482,7 +483,7 @@ public class CartInteractorImpil implements CartInteractor {
 
                             @Override
                             public void onError(Throwable e) {
-                                onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again a");
+                                onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
                             }
 
                             @Override
@@ -509,19 +510,19 @@ public class CartInteractorImpil implements CartInteractor {
                                         }
                                     } catch (JSONException e) {
                                         Logger.e(e.toString());
-                                        onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again b");
+                                        onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
                                     } catch (NullPointerException exNull) {
-                                        onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again c");
+                                        onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
                                     }
 
                                 } else {
-                                    onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again d");
+                                    onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
                                 }
                             }
                         });
 
             } catch (Exception ex) {
-                onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again e");
+                onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
             }
         }
 
@@ -548,7 +549,7 @@ public class CartInteractorImpil implements CartInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+                            onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -556,7 +557,7 @@ public class CartInteractorImpil implements CartInteractor {
                             if (orderSaveFail != null) {
                                 try {
                                     if (orderSaveFail.isEmpty()) {
-                                        onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+                                        onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
 
                                     } else {
                                         for (int i = 0; i < orderSaveFail.size(); i++) {
@@ -566,7 +567,7 @@ public class CartInteractorImpil implements CartInteractor {
                                             } else if (orderSaveFail.get(i).getErrorCode().equals("ERDLT")) {
                                                 onOrderProsessFinishedListener.orderProsessFail("Delivery time slot error, Please try again");
                                             } else {
-                                                onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+                                                onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
                                             }
 
                                         }
@@ -574,16 +575,16 @@ public class CartInteractorImpil implements CartInteractor {
 
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+                                    onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
                                 }
 
                             } else {
-                                onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+                                onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
         } catch (Exception ex) {
-            onOrderProsessFinishedListener.orderProsessFail("Something went wrong, Please try again");
+            onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
         }
     }
 

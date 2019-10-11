@@ -9,6 +9,7 @@ import com.pddstudio.preferences.encrypted.EncryptedPreferences;
 import java.util.ArrayList;
 import java.util.List;
 
+import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.Address;
 import emerge.project.onmeal.data.table.CartDetail;
 import emerge.project.onmeal.data.table.CartHeader;
@@ -90,7 +91,7 @@ public class HomeInteractorImpil implements HomeInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Something went wrong, Please try again");
+                            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -109,15 +110,15 @@ public class HomeInteractorImpil implements HomeInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Something went wrong, Please try again");
+                                    onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Something went wrong, Please try again");
+                                onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
         } catch (Exception ex) {
-            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Something went wrong, Please try again");
+            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
         }
 
     }
@@ -164,7 +165,7 @@ public class HomeInteractorImpil implements HomeInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onMainFoodLoadFinishedListener.getMainFoodFail("Something went wrong, Please try again");
+                            onMainFoodLoadFinishedListener.getMainFoodFail(String.valueOf(R.string.server_error_msg));
                         }
 
                         @Override
@@ -180,16 +181,16 @@ public class HomeInteractorImpil implements HomeInteractor {
                                         onMainFoodLoadFinishedListener.getMainFoodSuccessful(foodtemsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onMainFoodLoadFinishedListener.getMainFoodFail("Something went wrong, Please try again");
+                                    onMainFoodLoadFinishedListener.getMainFoodFail(String.valueOf(R.string.server_error_msg));
                                 }
                             } else {
-                                onMainFoodLoadFinishedListener.getMainFoodFail("Something went wrong, Please try again");
+                                onMainFoodLoadFinishedListener.getMainFoodFail(String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onMainFoodLoadFinishedListener.getMainFoodFail("Something went wrong, Please try again");
+            onMainFoodLoadFinishedListener.getMainFoodFail(String.valueOf(R.string.server_error_msg));
         }
     }
 
@@ -230,7 +231,7 @@ public class HomeInteractorImpil implements HomeInteractor {
                         }
                         @Override
                         public void onError(Throwable e) {
-                            onOutletLoadFinishedListener.getOutletFail("Something went wrong, Please try again");
+                            onOutletLoadFinishedListener.getOutletFail(String.valueOf(R.string.server_error_msg));
                         }
                         @Override
                         public void onComplete() {
@@ -243,17 +244,33 @@ public class HomeInteractorImpil implements HomeInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onOutletLoadFinishedListener.getOutletFail("Something went wrong, Please try again");
+                                    onOutletLoadFinishedListener.getOutletFail(String.valueOf(R.string.server_error_msg));
                                 }
 
                             } else {
-                                onOutletLoadFinishedListener.getOutletFail("Something went wrong, Please try again");
+                                onOutletLoadFinishedListener.getOutletFail(String.valueOf(R.string.server_error_msg));
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onOutletLoadFinishedListener.getOutletFail("Something went wrong, Please try again");
+            onOutletLoadFinishedListener.getOutletFail(String.valueOf(R.string.server_error_msg));
         }
+    }
+
+    @Override
+    public void signOut(Context context, final OnsignOutinishedListener onsignOutinishedListener) {
+        realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                RealmResults<User> resultsAddress = realm.where(User.class).findAll();
+                resultsAddress.deleteAllFromRealm();
+
+
+                onsignOutinishedListener.signOutSuccess();
+            }
+        });
+
     }
 }

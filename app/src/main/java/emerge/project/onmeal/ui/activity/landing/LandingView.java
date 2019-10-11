@@ -29,6 +29,6 @@ public interface LandingView {
     void saveAddressSuccessful(String add);
 
     void saveAddressFail(String msg);
-
+    void signOutSuccess();
 
 }
