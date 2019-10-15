@@ -108,6 +108,9 @@ public class MenuInteractorImpil implements MenuInteractor {
         final ArrayList<MenuItems> menuItemsArrayList = new ArrayList<MenuItems>();
         try {
 
+            System.out.println("vvvvvvvvvvvvvvv outletId: "+outletId);
+            System.out.println("vvvvvvvvvvvvvvv menuCategoryID: "+menuCategoryID);
+
             apiService.getMainFoodByOutlet(Integer.parseInt(outletId), Integer.parseInt(menuCategoryID))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -172,7 +175,14 @@ public class MenuInteractorImpil implements MenuInteractor {
             dispatchType = "D";
         }
 
+
+
         try {
+
+            System.out.println("vvvvvvvvvvvvvvv foodId: "+foodId);
+            System.out.println("vvvvvvvvvvvvvvv user.getUserId(): "+user.getUserId());
+            System.out.println("vvvvvvvvvvvvvvv addressId: "+addressId);
+            System.out.println("vvvvvvvvvvvvvvv dispatchType: "+dispatchType);
 
             final ArrayList<MenuItems> menuItemsArrayList = new ArrayList<MenuItems>();
             apiService.getMainFoodByFood(foodId, Integer.parseInt(user.getUserId()), addressId, dispatchType)

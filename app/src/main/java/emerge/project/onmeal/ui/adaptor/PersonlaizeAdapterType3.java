@@ -129,9 +129,6 @@ public class PersonlaizeAdapterType3 extends RecyclerView.Adapter<PersonlaizeAda
 
 
 
-
-
-
         holder.imageViewQtyincrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {

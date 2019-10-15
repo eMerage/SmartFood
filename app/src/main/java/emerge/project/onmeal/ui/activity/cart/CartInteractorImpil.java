@@ -96,13 +96,28 @@ public class CartInteractorImpil implements CartInteractor {
         User user = realm.where(User.class).findFirst();
         Address address = realm.where(Address.class).findFirst();
 
+        String dispatchPatchType="P";
 
-        if (dispatch.equals("Delivery")) {
+
+      /*  if (dispatch.equals("Delivery")) {
             addressId = address.getAddressId();
         } else {
             addressId = "0";
+        }*/
 
+        if (dispatch.equals("Delivery")) {
+            dispatchPatchType = "D";
+            addressId = address.getAddressId();
+
+        } else if(dispatch.equals("Pickup")){
+            dispatchPatchType = "P";
+            addressId = "0";
+        }else {
+            dispatchPatchType = "T";
+            addressId = "0";
         }
+
+
 
         for (CartHeader ns : realm.where(CartHeader.class).equalTo("isActive", true).findAll()) {
             totalPrice = totalPrice + ns.getPriceTotal();
@@ -119,9 +134,12 @@ public class CartInteractorImpil implements CartInteractor {
         jsonObject.addProperty("OutletID", outlet);
         jsonObject.addProperty("PromoCode", promoCode);
         jsonObject.addProperty("SubTotal", totalPrice);
+        jsonObject.addProperty("DispatchType", dispatchPatchType);
 
         final Double finalTotalPrice = totalPrice;
 
+
+        System.out.println("bbbbbbbbbbbbbbbbb : "+jsonObject);
 
 
         try {
