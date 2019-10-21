@@ -140,7 +140,7 @@ public class SingUpInteractorImpil implements SingUpInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
+                            onSingUpListener.singUpFail("Communication error, Please try again");
                         }
 
                         @Override
@@ -151,20 +151,20 @@ public class SingUpInteractorImpil implements SingUpInteractor {
                                     registration = new JSONObject(registrationResponse.toString());
                                     onSingUpListener.singUpSuccess(registration.getString("id"), user.getUserPhoneNumber(), registration.getString("verificationCode"));
                                 } catch (NullPointerException exNull) {
-                                    onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
+                                    onSingUpListener.singUpFail("Communication error, Please try again");
                                 } catch (JSONException e) {
-                                    onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
+                                    onSingUpListener.singUpFail("Communication error, Please try again");
                                     Logger.e(e.toString());
                                 }
                             } else {
-                                onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
+                                onSingUpListener.singUpFail("Communication error, Please try again");
                             }
 
                         }
                     });
 
         } catch (Exception ex) {
-            onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
+            onSingUpListener.singUpFail("Communication error, Please try again");
         }
 
 
@@ -182,24 +182,24 @@ public class SingUpInteractorImpil implements SingUpInteractor {
                             onSingUpListener.singUpSuccess(registrationResponse.getString("id"), user.getUserPhoneNumber(), registrationResponse.getString("verificationCode"));
 
                         } catch (NullPointerException exNull) {
-                            onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
+                            onSingUpListener.singUpFail("Communication error, Please try again");
                         } catch (JSONException e) {
-                            onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
+                            onSingUpListener.singUpFail("Communication error, Please try again");
                             Logger.e(e.toString());
                         }
                     } else {
-                        onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
+                        onSingUpListener.singUpFail("Communication error, Please try again");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<JsonObject> call, Throwable t) {
-                    onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
+                    onSingUpListener.singUpFail("Communication error, Please try again");
                     Logger.e(t.toString());
                 }
             });
         } catch (Exception ex) {
-            onSingUpListener.singUpFail(String.valueOf(R.string.server_error_msg));
+            onSingUpListener.singUpFail("Communication error, Please try again");
         }*/
 
     }

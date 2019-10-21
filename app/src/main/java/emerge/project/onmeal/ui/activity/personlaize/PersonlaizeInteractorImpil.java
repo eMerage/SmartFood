@@ -104,7 +104,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetFoodCategoryFinishedListener.foodCategoryFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                            onGetFoodCategoryFinishedListener.foodCategoryFail("Communication error, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
 
                         }
 
@@ -125,16 +125,16 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                                         onGetFoodCategoryFinishedListener.foodCategory(foodCategoryItemsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onGetFoodCategoryFinishedListener.foodCategoryFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                                    onGetFoodCategoryFinishedListener.foodCategoryFail("Communication error, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                                 }
 
                             } else {
-                                onGetFoodCategoryFinishedListener.foodCategoryFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                                onGetFoodCategoryFinishedListener.foodCategoryFail("Communication error, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                             }
                         }
                     });
         } catch (Exception ex) {
-            onGetFoodCategoryFinishedListener.foodCategoryFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
+            onGetFoodCategoryFinishedListener.foodCategoryFail("Communication error, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
 
         }
 
@@ -282,7 +282,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetMenuSizeFinishedListener.menuSizeFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                            onGetMenuSizeFinishedListener.menuSizeFail("Communication error, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                         }
 
                         @Override
@@ -302,15 +302,15 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onGetMenuSizeFinishedListener.menuSizeFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                                    onGetMenuSizeFinishedListener.menuSizeFail("Communication error, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                                 }
                             } else {
-                                onGetMenuSizeFinishedListener.menuSizeFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID,menuCatID);
+                                onGetMenuSizeFinishedListener.menuSizeFail("Communication error, Please try again", outletID, menuTitleID, outletMenuTitleID,menuCatID);
                             }
                         }
                     });
         } catch (Exception ex) {
-            onGetMenuSizeFinishedListener.menuSizeFail(String.valueOf(R.string.server_error_msg), outletID, menuTitleID, outletMenuTitleID, menuCatID);
+            onGetMenuSizeFinishedListener.menuSizeFail("Communication error, Please try again", outletID, menuTitleID, outletMenuTitleID, menuCatID);
         }
 
     }
@@ -374,6 +374,18 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
             onAddToCartListener.itemAddToCartNoItems();
         } else {
             int resultCheckMainFood = checkMainFoodAdded(results.get(0).getMenuTitleID());
+
+            int outletCardId = selectedMenuDetails.getOutletId();
+
+             int cardCount = (int) realm.where(CartHeader.class).count();
+
+             if(cardCount!=0){
+                  outletCardId = realm.where(CartHeader.class).findFirst().getOutletID();
+             }else {
+
+             }
+
+
             if (resultCheckMainFood == 1) {
                 MenuSubItems resultsforBase = realm.where(MenuSubItems.class)
                         .equalTo("isBaseFood", true)
@@ -383,7 +395,6 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
 
                 onAddToCartListener.itemAddToCartFaild("Please add " + resultsforBase.getFoodItemCategory());
 
-                //   onAddToCartListener.itemAddToCartFaild("Please add Base");
             } else if (resultCheckMainFood == 2) {
                 onAddToCartListener.itemAddToCartFaild("Please add at least one Meat");
             } else if (resultCheckMainFood == 3) {
@@ -392,7 +403,11 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                 onAddToCartListener.itemAddToCartFaild("Please add at least one Extra Item");
             } else if (resultCheckMainFood == 5) {
                 onAddToCartListener.itemAddToCartFaild("Please add at least one Other Item");
-            } else {
+            }else if( (cardCount!=0) &&  (outletCardId !=selectedMenuDetails.getOutletId() )  ){
+                onAddToCartListener.itemAddToCartFaild("Please add items in same Outlet");
+
+            }
+            else {
                 addCartHeader(selectedMenuDetails, qty, size, price, onAddToCartListener);
             }
 

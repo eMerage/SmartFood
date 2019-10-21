@@ -38,7 +38,7 @@ public class FavInteractorImpil implements FavInteractor {
     List<HomeFavouriteItems> favouriteItems;
 
     @Override
-    public void getFavouriteItems(final OnFavouriteItemsLoadFinishedListener onFavouriteItemsLoadFinishedListener) {
+    public void getFavouriteItems(final Context appContext, final OnFavouriteItemsLoadFinishedListener onFavouriteItemsLoadFinishedListener) {
 
         final ArrayList<HomeFavouriteItems> favouriteItemsArrayList = new ArrayList<HomeFavouriteItems>();
         User user = realm.where(User.class).findFirst();
@@ -57,7 +57,7 @@ public class FavInteractorImpil implements FavInteractor {
                         }
                         @Override
                         public void onError(Throwable e) {
-                            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
+                            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Communication error, Please try again");
                         }
                         @Override
                         public void onComplete() {
@@ -75,15 +75,15 @@ public class FavInteractorImpil implements FavInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
+                                    onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Communication error, Please try again");
                                 }
                             } else {
-                                onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
+                                onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Communication error, Please try again");
                             }
                         }
                     });
         } catch (Exception ex) {
-            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
+            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Communication error, Please try again");
         }
     }
 

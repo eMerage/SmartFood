@@ -77,7 +77,7 @@ public class AddressMeunalInteractorImpil implements AddressMeunalInteractor {
 
                     @Override
                     public void onError(Throwable e) {
-                        onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+                        onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
                     }
 
                     @Override
@@ -90,10 +90,10 @@ public class AddressMeunalInteractorImpil implements AddressMeunalInteractor {
                                     addAddress(newAddressRespons,fullAddress,onAddNewAddressFinishedListener);
                                 }
                             }catch (NullPointerException exNull){
-                                onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+                                onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
                             }
                         } else {
-                            onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+                            onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
                         }
 
                     }

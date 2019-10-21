@@ -78,7 +78,7 @@ public class SingInInteractorImpil implements SingInInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onLoginValidationFinishedListener.loginValidationFail(String.valueOf(R.string.server_error_msg));
+                            onLoginValidationFinishedListener.loginValidationFail("Communication error, Please try again");
                         }
 
                         @Override
@@ -92,18 +92,18 @@ public class SingInInteractorImpil implements SingInInteractor {
                                         saveUser(userValidation, onLoginValidationFinishedListener);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onLoginValidationFinishedListener.loginValidationFail(String.valueOf(R.string.server_error_msg));
+                                    onLoginValidationFinishedListener.loginValidationFail("Communication error, Please try again");
                                 }
 
                             } else {
-                                onLoginValidationFinishedListener.loginValidationFail(String.valueOf(R.string.server_error_msg));
+                                onLoginValidationFinishedListener.loginValidationFail("Communication error, Please try again");
                             }
 
                         }
                     });
             
         } catch (Exception ex) {
-            onLoginValidationFinishedListener.loginValidationFail(String.valueOf(R.string.server_error_msg));
+            onLoginValidationFinishedListener.loginValidationFail("Communication error, Please try again");
         }
 
     }

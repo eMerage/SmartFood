@@ -67,6 +67,8 @@ public class CartInteractorImpil implements CartInteractor {
     List<OrderErrorReturn> orderSaveFail;
     int orderPaymentUpdate;
 
+    Context appContext;
+
     @Override
     public void getCartItems(OnCartItemsFinishedListener onCartItemsFinishedListener) {
 
@@ -83,6 +85,7 @@ public class CartInteractorImpil implements CartInteractor {
     @Override
     public void getPromoCodeValidation(final Context context, final String promoCode, final OnPromoCodeValidationFinishedListener onPromoCodeValidationFinishedListener) {
 
+        appContext = context;
 
         encryptedPreferences = new EncryptedPreferences.Builder(context).withEncryptionPassword("122547895511").build();
 
@@ -139,7 +142,7 @@ public class CartInteractorImpil implements CartInteractor {
         final Double finalTotalPrice = totalPrice;
 
 
-        System.out.println("bbbbbbbbbbbbbbbbb : "+jsonObject);
+
 
 
         try {
@@ -159,7 +162,8 @@ public class CartInteractorImpil implements CartInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, String.valueOf(R.string.server_error_msg));
+                           // onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again"));
+                            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode,"Communication error, Please try again");
                         }
 
                         @Override
@@ -208,19 +212,19 @@ public class CartInteractorImpil implements CartInteractor {
 
                                 } catch (JSONException e) {
                                     Logger.e(e.toString());
-                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, String.valueOf(R.string.server_error_msg));
+                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
                                 } catch (NullPointerException exNull) {
-                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, String.valueOf(R.string.server_error_msg));
+                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
                                 }
 
                             } else {
-                                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, String.valueOf(R.string.server_error_msg));
+                                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, String.valueOf(R.string.server_error_msg));
+            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
         }
     }
 
@@ -245,7 +249,7 @@ public class CartInteractorImpil implements CartInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail(String.valueOf(R.string.server_error_msg));
+                            ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail("Communication error, Please try again");
                         }
 
                         @Override
@@ -262,15 +266,15 @@ public class CartInteractorImpil implements CartInteractor {
                                         ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotSuccessful(timeSlotsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail(String.valueOf(R.string.server_error_msg));
+                                    ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail("Communication error, Please try again");
                                 }
                             } else {
-                                ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail(String.valueOf(R.string.server_error_msg));
+                                ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail("Communication error, Please try again");
                             }
                         }
                     });
         } catch (Exception ex) {
-            ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail(String.valueOf(R.string.server_error_msg));
+            ongetDeliveryTimeSlotFinishedListener.getDeliveryTimeSlotFail("Communication error, Please try again");
         }
     }
 
@@ -501,7 +505,7 @@ public class CartInteractorImpil implements CartInteractor {
 
                             @Override
                             public void onError(Throwable e) {
-                                onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+                                onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
                             }
 
                             @Override
@@ -528,19 +532,19 @@ public class CartInteractorImpil implements CartInteractor {
                                         }
                                     } catch (JSONException e) {
                                         Logger.e(e.toString());
-                                        onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+                                        onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
                                     } catch (NullPointerException exNull) {
-                                        onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+                                        onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
                                     }
 
                                 } else {
-                                    onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+                                    onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
                                 }
                             }
                         });
 
             } catch (Exception ex) {
-                onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+                onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
             }
         }
 
@@ -567,7 +571,7 @@ public class CartInteractorImpil implements CartInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+                            onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
                         }
 
                         @Override
@@ -575,7 +579,7 @@ public class CartInteractorImpil implements CartInteractor {
                             if (orderSaveFail != null) {
                                 try {
                                     if (orderSaveFail.isEmpty()) {
-                                        onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+                                        onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
 
                                     } else {
                                         for (int i = 0; i < orderSaveFail.size(); i++) {
@@ -585,7 +589,7 @@ public class CartInteractorImpil implements CartInteractor {
                                             } else if (orderSaveFail.get(i).getErrorCode().equals("ERDLT")) {
                                                 onOrderProsessFinishedListener.orderProsessFail("Delivery time slot error, Please try again");
                                             } else {
-                                                onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+                                                onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
                                             }
 
                                         }
@@ -593,16 +597,16 @@ public class CartInteractorImpil implements CartInteractor {
 
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+                                    onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
                                 }
 
                             } else {
-                                onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+                                onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
                             }
                         }
                     });
         } catch (Exception ex) {
-            onOrderProsessFinishedListener.orderProsessFail(String.valueOf(R.string.server_error_msg));
+            onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
         }
     }
 

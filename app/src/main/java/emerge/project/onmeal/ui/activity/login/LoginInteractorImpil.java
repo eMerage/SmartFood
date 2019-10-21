@@ -111,7 +111,7 @@ public class LoginInteractorImpil implements LoginInteractor {
             }
 
         } catch (Exception ex) {
-            onLocalSingInValidationFinishedListener.localSingInValidationErorr(String.valueOf(R.string.server_error_msg));
+            onLocalSingInValidationFinishedListener.localSingInValidationErorr("Communication error, Please try again");
         }
     }
 
@@ -142,7 +142,7 @@ public class LoginInteractorImpil implements LoginInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr(String.valueOf(R.string.server_error_msg));
+                            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr("Communication error, Please try again");
                         }
                         @Override
                         public void onComplete() {
@@ -164,20 +164,20 @@ public class LoginInteractorImpil implements LoginInteractor {
                                         onFacebookSingInValidationFinishedListener.userNotValidateFacebook(user);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr(String.valueOf(R.string.server_error_msg));
+                                    onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr("Communication error, Please try again");
                                 }
                             } else {
-                                onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr(String.valueOf(R.string.server_error_msg));
+                                onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr("Communication error, Please try again");
                             }
 
                         }
                     });
 
         } catch (JSONException e) {
-            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr(String.valueOf(R.string.server_error_msg));
+            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr("Communication error, Please try again");
             Logger.e(e.toString());
         } catch (Exception ex) {
-            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr(String.valueOf(R.string.server_error_msg));
+            onFacebookSingInValidationFinishedListener.facebookSingInValidationErorr("Communication error, Please try again");
         }
 
     }
@@ -207,7 +207,7 @@ public class LoginInteractorImpil implements LoginInteractor {
                         }
                         @Override
                         public void onError(Throwable e) {
-                            onGoogleSingInValidationFinishedListener.googleSingInValidationErorr(String.valueOf(R.string.server_error_msg));
+                            onGoogleSingInValidationFinishedListener.googleSingInValidationErorr("Communication error, Please try again");
                         }
                         @Override
                         public void onComplete() {
@@ -229,18 +229,18 @@ public class LoginInteractorImpil implements LoginInteractor {
                                         onGoogleSingInValidationFinishedListener.userNotValidateGoogle(user);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onGoogleSingInValidationFinishedListener.googleSingInValidationErorr(String.valueOf(R.string.server_error_msg));
+                                    onGoogleSingInValidationFinishedListener.googleSingInValidationErorr("Communication error, Please try again");
                                 }
 
                             } else {
-                                onGoogleSingInValidationFinishedListener.googleSingInValidationErorr(String.valueOf(R.string.server_error_msg));
+                                onGoogleSingInValidationFinishedListener.googleSingInValidationErorr("Communication error, Please try again");
                             }
 
                         }
                     });
 
         } catch (Exception ex) {
-            onGoogleSingInValidationFinishedListener.googleSingInValidationErorr(String.valueOf(R.string.server_error_msg));
+            onGoogleSingInValidationFinishedListener.googleSingInValidationErorr("Communication error, Please try again");
         }
 
     }

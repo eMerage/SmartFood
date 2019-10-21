@@ -78,7 +78,7 @@ public class AddressAddingInteractorImpil implements AddressAddingInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+                            onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
                         }
 
                         @Override
@@ -91,16 +91,16 @@ public class AddressAddingInteractorImpil implements AddressAddingInteractor {
                                         addAddress(newAddressRespons, fullAddress, onAddNewAddressFinishedListener);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+                                    onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
                                 }
                             } else {
-                                onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+                                onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
                             }
 
                         }
                     });
         } catch (Exception ex) {
-            onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+            onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
         }
 
     }

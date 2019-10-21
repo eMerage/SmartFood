@@ -91,7 +91,7 @@ public class ActivityFavourites extends Activity implements FavView {
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             proprogressview.setVisibility(View.VISIBLE);
-            favPresenter.getFavouriteItems();
+            favPresenter.getFavouriteItems(this);
         } else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Warning");
@@ -142,7 +142,7 @@ public class ActivityFavourites extends Activity implements FavView {
                         public void onClick(DialogInterface dialog, int which) {
                             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
                                 proprogressview.setVisibility(View.VISIBLE);
-                                favPresenter.getFavouriteItems();
+                                favPresenter.getFavouriteItems(ActivityFavourites.this);
                             } else {
                                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ActivityFavourites.this);
                                 alertDialogBuilder.setTitle("Warning");

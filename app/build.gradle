@@ -8,8 +8,8 @@ android {
         applicationId "emerge.project.onmeal"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 17
-        versionName "1.0.1.DE17"
+        versionCode 18
+        versionName "1.0.1.DE18"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

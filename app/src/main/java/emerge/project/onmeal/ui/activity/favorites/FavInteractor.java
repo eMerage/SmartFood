@@ -20,7 +20,7 @@ public interface FavInteractor {
         void getFavouriteItemsSuccessful(ArrayList<HomeFavouriteItems> favouriteItemsArrayList);
         void getFavouriteItemsFail(String msg);
     }
-    void getFavouriteItems(OnFavouriteItemsLoadFinishedListener onFavouriteItemsLoadFinishedListener);
+    void getFavouriteItems(Context appContext,OnFavouriteItemsLoadFinishedListener onFavouriteItemsLoadFinishedListener);
 
 
     interface OnsignOutinishedListener {

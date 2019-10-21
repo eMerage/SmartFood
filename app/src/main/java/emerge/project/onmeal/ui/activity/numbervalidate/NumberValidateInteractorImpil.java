@@ -61,7 +61,7 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
 
                             @Override
                             public void onError(Throwable e) {
-                                onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                                onOTPCodeValidationFinishedListener.oTPCodeServerError("Communication error, Please try again");
                             }
 
                             @Override
@@ -77,20 +77,20 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
                                             Logger.e("Code Expired");
                                         }
                                     } catch (JSONException e) {
-                                        onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                                        onOTPCodeValidationFinishedListener.oTPCodeServerError("Communication error, Please try again");
                                         Logger.e(e.toString());
                                     } catch (NullPointerException exNull) {
-                                        onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                                        onOTPCodeValidationFinishedListener.oTPCodeServerError("Communication error, Please try again");
                                     }
 
                                 } else {
-                                    onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                                    onOTPCodeValidationFinishedListener.oTPCodeServerError("Communication error, Please try again");
                                 }
                             }
                         });
 
             } catch (Exception ex) {
-                onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                onOTPCodeValidationFinishedListener.oTPCodeServerError("Communication error, Please try again");
             }
 
         } else {
@@ -121,7 +121,7 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onNewOTPCodeFinishedListener.newOTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                            onNewOTPCodeFinishedListener.newOTPCodeServerError("Communication error, Please try again");
                         }
 
                         @Override
@@ -132,13 +132,13 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
                                     userVerifiedResponse = new JSONObject(newOTPCode.toString());
                                     onNewOTPCodeFinishedListener.newOTPCode(userVerifiedResponse.getString("verificationCode"));
                                 } catch (JSONException e) {
-                                    onNewOTPCodeFinishedListener.newOTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                                    onNewOTPCodeFinishedListener.newOTPCodeServerError("Communication error, Please try again");
                                     Logger.e(e.toString());
                                 } catch (NullPointerException exNull) {
-                                    onNewOTPCodeFinishedListener.newOTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                                    onNewOTPCodeFinishedListener.newOTPCodeServerError("Communication error, Please try again");
                                 }
                             } else {
-                                onNewOTPCodeFinishedListener.newOTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                                onNewOTPCodeFinishedListener.newOTPCodeServerError("Communication error, Please try again");
                             }
 
                         }
@@ -146,7 +146,7 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
 
 
         } catch (Exception ex) {
-            onNewOTPCodeFinishedListener.newOTPCodeServerError(String.valueOf(R.string.server_error_msg));
+            onNewOTPCodeFinishedListener.newOTPCodeServerError("Communication error, Please try again");
         }
 
     }
@@ -175,7 +175,7 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                            onOTPCodeValidationFinishedListener.oTPCodeServerError("Communication error, Please try again");
                         }
 
                         @Override
@@ -184,16 +184,16 @@ public class NumberValidateInteractorImpil implements NumberValidateInteractor {
                                 try {
                                     saveUser(getUserById, onOTPCodeValidationFinishedListener);
                                 } catch (NullPointerException exNull) {
-                                    onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                                    onOTPCodeValidationFinishedListener.oTPCodeServerError("Communication error, Please try again");
                                 }
                             } else {
-                                onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
+                                onOTPCodeValidationFinishedListener.oTPCodeServerError("Communication error, Please try again");
                             }
 
                         }
                     });
         } catch (Exception ex) {
-            onOTPCodeValidationFinishedListener.oTPCodeServerError(String.valueOf(R.string.server_error_msg));
+            onOTPCodeValidationFinishedListener.oTPCodeServerError("Communication error, Please try again");
         }
 
 

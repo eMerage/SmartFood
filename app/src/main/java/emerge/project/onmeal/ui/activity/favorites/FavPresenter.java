@@ -10,7 +10,7 @@ import android.content.Context;
 public interface FavPresenter {
 
 
-    void getFavouriteItems();
+    void getFavouriteItems(Context appContext);
 
     void signOut(Context context);
 }

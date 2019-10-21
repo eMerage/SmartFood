@@ -143,7 +143,10 @@
 
 
 
-    <string name="server_error_msg">Communication error, Please try again</string>
+   <!-- <string name="server_error_msg">Communication error, Please try again</string>
+
+
+    <string name="server_error">Communication error, Please try again</string>-->
 
 
 

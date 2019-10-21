@@ -57,7 +57,7 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
+                            onAddressLoadFinishedListener.getAddressFail("Communication error, Please try again");
                         }
                         @Override
                         public void onComplete() {
@@ -78,10 +78,10 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
+                                    onAddressLoadFinishedListener.getAddressFail("Communication error, Please try again");
                                 }
                             } else {
-                                onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
+                                onAddressLoadFinishedListener.getAddressFail("Communication error, Please try again");
                             }
 
                         }
@@ -89,7 +89,7 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
 
 
         } catch (Exception ex) {
-            onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
+            onAddressLoadFinishedListener.getAddressFail("Communication error, Please try again");
         }
     }
 
@@ -120,7 +120,7 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onDeleteAddressFinishedListener.deleteAddressFail(addressID, String.valueOf(R.string.server_error_msg));
+                            onDeleteAddressFinishedListener.deleteAddressFail(addressID, "Communication error, Please try again");
                         }
 
                         @Override
@@ -133,17 +133,17 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
                                         onDeleteAddressFinishedListener.deleteAddressFail(addressID, "Address Deleting Fail, Please try again");
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onDeleteAddressFinishedListener.deleteAddressFail(addressID, String.valueOf(R.string.server_error_msg));
+                                    onDeleteAddressFinishedListener.deleteAddressFail(addressID, "Communication error, Please try again");
                                 }
 
                             } else {
-                                onDeleteAddressFinishedListener.deleteAddressFail(addressID, String.valueOf(R.string.server_error_msg));
+                                onDeleteAddressFinishedListener.deleteAddressFail(addressID, "Communication error, Please try again");
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onDeleteAddressFinishedListener.deleteAddressFail(addressID, String.valueOf(R.string.server_error_msg));
+            onDeleteAddressFinishedListener.deleteAddressFail(addressID, "Communication error, Please try again");
         }
     }
 }

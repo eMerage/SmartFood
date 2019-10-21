@@ -160,7 +160,7 @@ public class LandingInteractorImpil implements LandingInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
+                            onAddressLoadFinishedListener.getAddressFail("Communication error, Please try again");
                         }
                         @Override
                         public void onComplete() {
@@ -181,19 +181,19 @@ public class LandingInteractorImpil implements LandingInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
+                                    onAddressLoadFinishedListener.getAddressFail("Communication error, Please try again");
                                 }
 
 
                             } else {
-                                onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
+                                onAddressLoadFinishedListener.getAddressFail("Communication error, Please try again");
                             }
 
                         }
                     });
 
         } catch (Exception ex) {
-            onAddressLoadFinishedListener.getAddressFail(String.valueOf(R.string.server_error_msg));
+            onAddressLoadFinishedListener.getAddressFail("Communication error, Please try again");
         }
     }
 
@@ -243,7 +243,7 @@ public class LandingInteractorImpil implements LandingInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+                            onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
                         }
                         @Override
                         public void onComplete() {
@@ -255,16 +255,16 @@ public class LandingInteractorImpil implements LandingInteractor {
                                         addAddress(newAddressRespons, fullAddress, onAddNewAddressFinishedListener);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+                                    onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
                                 }
                             } else {
-                                onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+                                onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onAddNewAddressFinishedListener.addNewAddressFail(String.valueOf(R.string.server_error_msg));
+            onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
         }
     }
 

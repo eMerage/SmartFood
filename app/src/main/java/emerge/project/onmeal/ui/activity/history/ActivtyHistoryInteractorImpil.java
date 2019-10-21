@@ -73,7 +73,7 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onOrderHistoryLoadFinishedListener.getOrderHistoryFail(String.valueOf(R.string.server_error_msg));
+                            onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Communication error, Please try again");
                         }
 
                         @Override
@@ -97,15 +97,15 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onOrderHistoryLoadFinishedListener.getOrderHistoryFail(String.valueOf(R.string.server_error_msg));
+                                    onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Communication error, Please try again");
                                 }
                             } else {
-                                onOrderHistoryLoadFinishedListener.getOrderHistoryFail(String.valueOf(R.string.server_error_msg));
+                                onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Communication error, Please try again");
                             }
                         }
                     });
         } catch (Exception ex) {
-            onOrderHistoryLoadFinishedListener.getOrderHistoryFail(String.valueOf(R.string.server_error_msg));
+            onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Communication error, Please try again");
         }
     }
 
@@ -136,7 +136,7 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail(String.valueOf(R.string.server_error_msg), orderID,level);
+                            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID,level);
                         }
 
                         @Override
@@ -195,19 +195,19 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
 
                                 } catch (JSONException e) {
-                                    onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail(String.valueOf(R.string.server_error_msg), orderID,level);
+                                    onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID,level);
                                 }
 
 
 
                             } else {
-                                onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail(String.valueOf(R.string.server_error_msg), orderID,level);
+                                onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID,level);
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail(String.valueOf(R.string.server_error_msg), orderID,level);
+            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID,level);
         }
 
     }

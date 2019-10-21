@@ -67,7 +67,7 @@ public class MenuInteractorImpil implements MenuInteractor {
 
                             @Override
                             public void onError(Throwable e) {
-                                onGetMenuCategoryFinishedListener.menuCategoryFail(String.valueOf(R.string.server_error_msg));
+                                onGetMenuCategoryFinishedListener.menuCategoryFail("Communication error, Please try again");
                             }
 
                             @Override
@@ -75,7 +75,7 @@ public class MenuInteractorImpil implements MenuInteractor {
                                 if (menuCategory != null) {
                                     try {
                                         if (menuCategory.isEmpty()) {
-                                            onGetMenuCategoryFinishedListener.menuCategoryFail(String.valueOf(R.string.server_error_msg));
+                                            onGetMenuCategoryFinishedListener.menuCategoryFail("Communication error, Please try again");
                                         } else {
                                             for (int i = 0; i < menuCategory.size(); i++) {
                                                 if (i == 0) {
@@ -87,15 +87,15 @@ public class MenuInteractorImpil implements MenuInteractor {
                                             onGetMenuCategoryFinishedListener.menuCategory(menuCategoryItemsArrayList);
                                         }
                                     } catch (NullPointerException exNull) {
-                                        onGetMenuCategoryFinishedListener.menuCategoryFail(String.valueOf(R.string.server_error_msg));
+                                        onGetMenuCategoryFinishedListener.menuCategoryFail("Communication error, Please try again");
                                     }
                                 } else {
-                                    onGetMenuCategoryFinishedListener.menuCategoryFail(String.valueOf(R.string.server_error_msg));
+                                    onGetMenuCategoryFinishedListener.menuCategoryFail("Communication error, Please try again");
                                 }
                             }
                         });
             } catch (Exception ex) {
-                onGetMenuCategoryFinishedListener.menuCategoryFail(String.valueOf(R.string.server_error_msg));
+                onGetMenuCategoryFinishedListener.menuCategoryFail("Communication error, Please try again");
             }
         }
 
@@ -144,15 +144,15 @@ public class MenuInteractorImpil implements MenuInteractor {
                                         otMainFoodByOutletListener.getMainFoodByOutletSuccess(menuItemsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    otMainFoodByOutletListener.getMainFoodByOutletLoadFail(String.valueOf(R.string.server_error_msg), outletId, menuCategoryID);
+                                    otMainFoodByOutletListener.getMainFoodByOutletLoadFail("Communication error, Please try again", outletId, menuCategoryID);
                                 }
                             } else {
-                                otMainFoodByOutletListener.getMainFoodByOutletLoadFail(String.valueOf(R.string.server_error_msg), outletId, menuCategoryID);
+                                otMainFoodByOutletListener.getMainFoodByOutletLoadFail("Communication error, Please try again", outletId, menuCategoryID);
                             }
                         }
                     });
         } catch (Exception ex) {
-            otMainFoodByOutletListener.getMainFoodByOutletLoadFail(String.valueOf(R.string.server_error_msg), outletId, menuCategoryID);
+            otMainFoodByOutletListener.getMainFoodByOutletLoadFail("Communication error, Please try again", outletId, menuCategoryID);
         }
 
     }
@@ -201,7 +201,7 @@ public class MenuInteractorImpil implements MenuInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onMainFoodByFoodListener.getMainFoodByFoodLoadFail(String.valueOf(R.string.server_error_msg));
+                            onMainFoodByFoodListener.getMainFoodByFoodLoadFail("Communication error, Please try again");
                         }
 
                         @Override
@@ -218,16 +218,16 @@ public class MenuInteractorImpil implements MenuInteractor {
                                         onMainFoodByFoodListener.getMainFoodByFoodSuccess(menuItemsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onMainFoodByFoodListener.getMainFoodByFoodLoadFail(String.valueOf(R.string.server_error_msg));
+                                    onMainFoodByFoodListener.getMainFoodByFoodLoadFail("Communication error, Please try again");
                                 }
                             } else {
-                                onMainFoodByFoodListener.getMainFoodByFoodLoadFail(String.valueOf(R.string.server_error_msg));
+                                onMainFoodByFoodListener.getMainFoodByFoodLoadFail("Communication error, Please try again");
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onMainFoodByFoodListener.getMainFoodByFoodLoadFail(String.valueOf(R.string.server_error_msg));
+            onMainFoodByFoodListener.getMainFoodByFoodLoadFail("Communication error, Please try again");
         }
     }
 

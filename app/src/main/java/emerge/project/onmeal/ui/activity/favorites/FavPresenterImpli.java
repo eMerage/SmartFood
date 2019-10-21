@@ -35,8 +35,8 @@ public class FavPresenterImpli implements FavPresenter,FavInteractor.OnFavourite
 
 
     @Override
-    public void getFavouriteItems() {
-        favInteractor.getFavouriteItems(this);
+    public void getFavouriteItems(Context appContext) {
+        favInteractor.getFavouriteItems( appContext,this);
     }
 
     @Override

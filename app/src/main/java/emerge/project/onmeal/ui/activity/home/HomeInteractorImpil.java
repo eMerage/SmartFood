@@ -91,7 +91,7 @@ public class HomeInteractorImpil implements HomeInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
+                            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Communication error, Please try again");
                         }
 
                         @Override
@@ -110,21 +110,21 @@ public class HomeInteractorImpil implements HomeInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
+                                    onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Communication error, Please try again");
                                 }
                             } else {
-                                onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
+                                onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Communication error, Please try again");
                             }
                         }
                     });
         } catch (Exception ex) {
-            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail(String.valueOf(R.string.server_error_msg));
+            onFavouriteItemsLoadFinishedListener.getFavouriteItemsFail("Communication error, Please try again");
         }
 
     }
 
     @Override
-    public void getMainFood(Context mContext,String serachtext, final OnMainFoodLoadFinishedListener onMainFoodLoadFinishedListener) {
+    public void getMainFood(final Context mContext, String serachtext, final OnMainFoodLoadFinishedListener onMainFoodLoadFinishedListener) {
         try {
             encryptedPreferences = new EncryptedPreferences.Builder(mContext).withEncryptionPassword("122547895511").build();
 
@@ -165,7 +165,8 @@ public class HomeInteractorImpil implements HomeInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onMainFoodLoadFinishedListener.getMainFoodFail(String.valueOf(R.string.server_error_msg));
+
+                            onMainFoodLoadFinishedListener.getMainFoodFail("Communication error, Please try again");
                         }
 
                         @Override
@@ -181,16 +182,16 @@ public class HomeInteractorImpil implements HomeInteractor {
                                         onMainFoodLoadFinishedListener.getMainFoodSuccessful(foodtemsArrayList);
                                     }
                                 } catch (NullPointerException exNull) {
-                                    onMainFoodLoadFinishedListener.getMainFoodFail(String.valueOf(R.string.server_error_msg));
+                                    onMainFoodLoadFinishedListener.getMainFoodFail("Communication error, Please try again");
                                 }
                             } else {
-                                onMainFoodLoadFinishedListener.getMainFoodFail(String.valueOf(R.string.server_error_msg));
+                                onMainFoodLoadFinishedListener.getMainFoodFail("Communication error, Please try again");
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onMainFoodLoadFinishedListener.getMainFoodFail(String.valueOf(R.string.server_error_msg));
+            onMainFoodLoadFinishedListener.getMainFoodFail("Communication error, Please try again");
         }
     }
 
@@ -231,7 +232,7 @@ public class HomeInteractorImpil implements HomeInteractor {
                         }
                         @Override
                         public void onError(Throwable e) {
-                            onOutletLoadFinishedListener.getOutletFail(String.valueOf(R.string.server_error_msg));
+                            onOutletLoadFinishedListener.getOutletFail("Communication error, Please try again");
                         }
                         @Override
                         public void onComplete() {
@@ -244,17 +245,17 @@ public class HomeInteractorImpil implements HomeInteractor {
                                     }
 
                                 } catch (NullPointerException exNull) {
-                                    onOutletLoadFinishedListener.getOutletFail(String.valueOf(R.string.server_error_msg));
+                                    onOutletLoadFinishedListener.getOutletFail("Communication error, Please try again");
                                 }
 
                             } else {
-                                onOutletLoadFinishedListener.getOutletFail(String.valueOf(R.string.server_error_msg));
+                                onOutletLoadFinishedListener.getOutletFail("Communication error, Please try again");
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onOutletLoadFinishedListener.getOutletFail(String.valueOf(R.string.server_error_msg));
+            onOutletLoadFinishedListener.getOutletFail("Communication error, Please try again");
         }
     }
 

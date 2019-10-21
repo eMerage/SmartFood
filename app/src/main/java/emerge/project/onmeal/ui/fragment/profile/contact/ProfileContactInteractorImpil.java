@@ -57,7 +57,7 @@ public class ProfileContactInteractorImpil implements ProfileContactInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetUserDetailsFinishedListener.getUserDetailsFail(String.valueOf(R.string.server_error_msg));
+                            onGetUserDetailsFinishedListener.getUserDetailsFail("Communication error, Please try again");
                         }
 
                         @Override
@@ -66,15 +66,15 @@ public class ProfileContactInteractorImpil implements ProfileContactInteractor {
                                 try {
                                     onGetUserDetailsFinishedListener.getUserDetailsSuccessful(getUserDetails);
                                 } catch (NullPointerException exNull) {
-                                    onGetUserDetailsFinishedListener.getUserDetailsFail(String.valueOf(R.string.server_error_msg));
+                                    onGetUserDetailsFinishedListener.getUserDetailsFail("Communication error, Please try again");
                                 }
                             } else {
-                                onGetUserDetailsFinishedListener.getUserDetailsFail(String.valueOf(R.string.server_error_msg));
+                                onGetUserDetailsFinishedListener.getUserDetailsFail("Communication error, Please try again");
                             }
                         }
                     });
         } catch (Exception ex) {
-            onGetUserDetailsFinishedListener.getUserDetailsFail(String.valueOf(R.string.server_error_msg));
+            onGetUserDetailsFinishedListener.getUserDetailsFail("Communication error, Please try again");
         }
     }
 
@@ -107,7 +107,7 @@ public class ProfileContactInteractorImpil implements ProfileContactInteractor {
 
                             @Override
                             public void onError(Throwable e) {
-                                onUpdateUserDetailsFinishedListener.getUpdateFail(String.valueOf(R.string.server_error_msg));
+                                onUpdateUserDetailsFinishedListener.getUpdateFail("Communication error, Please try again");
                             }
 
                             @Override
@@ -120,16 +120,16 @@ public class ProfileContactInteractorImpil implements ProfileContactInteractor {
                                             onUpdateUserDetailsFinishedListener.getUpdateFail("User Detail Update Fail, Please try again");
                                         }
                                     } catch (NullPointerException exNull) {
-                                        onUpdateUserDetailsFinishedListener.getUpdateFail(String.valueOf(R.string.server_error_msg));
+                                        onUpdateUserDetailsFinishedListener.getUpdateFail("Communication error, Please try again");
                                     }
 
                                 } else {
-                                    onUpdateUserDetailsFinishedListener.getUpdateFail(String.valueOf(R.string.server_error_msg));
+                                    onUpdateUserDetailsFinishedListener.getUpdateFail("Communication error, Please try again");
                                 }
                             }
                         });
             } catch (Exception ex) {
-                onUpdateUserDetailsFinishedListener.getUpdateFail(String.valueOf(R.string.server_error_msg));
+                onUpdateUserDetailsFinishedListener.getUpdateFail("Communication error, Please try again");
             }
         }
 
