@@ -115,7 +115,7 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
 
     LinearLayoutManager layoutManagerFoodCat;
 
-
+    Boolean isNavigationFromOutlet = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +124,9 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
 
 
         selectedMenuDetails = (SelectedMenuDetails) getIntent().getSerializableExtra("SELECTEDMENU");
+
+
+
         personlaizePresenter = new PersonlaizePresenterImpli(this);
 
 

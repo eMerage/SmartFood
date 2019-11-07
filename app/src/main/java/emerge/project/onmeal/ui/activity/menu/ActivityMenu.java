@@ -112,6 +112,8 @@ public class ActivityMenu extends Activity implements MenuView, OnMapReadyCallba
     TextView textNoLocation;
     ImageView ImageView_googlemap;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,13 +132,14 @@ public class ActivityMenu extends Activity implements MenuView, OnMapReadyCallba
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             proprogressview.setVisibility(View.VISIBLE);
             bloackUserInteraction();
+
             if (outlet == null) {
                 setCoverImage(food.getFoodCoverImage(), food.getFoodName(), food.getMenuCategory());
                 btnCoverImageMore.setVisibility(View.GONE);
                 menuPresenter.getMenuCategory(null, food.getFoodId(), food.getMenuCategory());
                 menuPresenter.getMainFoodByFood(food.getFoodId());
-            } else {
 
+            } else {
                 btnCoverImageMore.setVisibility(View.VISIBLE);
                 setCoverImage(outlet.getOutletImageUrl(), outlet.getOutletName(), outlet.getOutletCity());
                 menuPresenter.getMenuCategory(outlet.getOutletId(), null, null);
@@ -503,7 +506,6 @@ public class ActivityMenu extends Activity implements MenuView, OnMapReadyCallba
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
         intentSingup.putExtra("SELECTEDMENU", selectedMenuDetails);
         startActivity(intentSingup, bndlanimation);
-
 
 
 

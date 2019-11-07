@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -25,11 +26,13 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import emerge.project.onmeal.R;
+import emerge.project.onmeal.data.table.CartHeader;
 import emerge.project.onmeal.ui.activity.menu.MenuPresenter;
 import emerge.project.onmeal.ui.activity.menu.MenuPresenterImpli;
 import emerge.project.onmeal.ui.activity.menu.MenuView;
 import emerge.project.onmeal.utils.entittes.MenuCategoryItems;
 import emerge.project.onmeal.utils.entittes.MenuItems;
+import io.realm.Realm;
 
 
 /**
@@ -45,6 +48,7 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     boolean isFromOutlet =true;
 
+    Realm realm;
 
     MenuPresenter menuPresenter;
 
@@ -53,6 +57,7 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         this.menuItems = item;
         this.isFromOutlet = isfromoutlet;
         menuPresenter = new MenuPresenterImpli(menuView);
+         realm = Realm.getDefaultInstance();
     }
 
 
@@ -115,8 +120,19 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 headerHolder.relativeLayoutHeaderMain.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        menuPresenter.geSelectedMenuDetails(menuItem.getMenuId(),menuItem.getFoodId(),menuItem.getOutletId(),
-                                menuItem.getFoodName(),menuItem.getFoodCoverImage(),menuItem.getOutletName(),menuItem.getMenuCategoryID());
+
+                        if(isFromOutlet){
+                            menuPresenter.geSelectedMenuDetails(menuItem.getMenuId(),menuItem.getFoodId(),menuItem.getOutletId(),
+                                    menuItem.getFoodName(),menuItem.getFoodCoverImage(),menuItem.getOutletName(),menuItem.getMenuCategoryID());
+                        }else {
+                            if(checkCartHasItemFromThisOutlet(menuItem.getOutletId())){
+                                menuPresenter.geSelectedMenuDetails(menuItem.getMenuId(),menuItem.getFoodId(),menuItem.getOutletId(),
+                                        menuItem.getFoodName(),menuItem.getFoodCoverImage(),menuItem.getOutletName(),menuItem.getMenuCategoryID());
+                            }else {
+                                Toast.makeText(mContext, "Please add items in same Outlet", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
 
                     }
                 });
@@ -161,8 +177,22 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 footerHolder.relativeLayoutFooterMain.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        menuPresenter.geSelectedMenuDetails(menuItem.getMenuId(),menuItem.getFoodId(),menuItem.getOutletId(),menuItem.getFoodName(),
-                                menuItem.getFoodCoverImage(),menuItem.getOutletName(),menuItem.getMenuCategoryID());
+
+                        if(isFromOutlet){
+                            menuPresenter.geSelectedMenuDetails(menuItem.getMenuId(),menuItem.getFoodId(),menuItem.getOutletId(),menuItem.getFoodName(),
+                                    menuItem.getFoodCoverImage(),menuItem.getOutletName(),menuItem.getMenuCategoryID());
+                        }else {
+
+                            if(checkCartHasItemFromThisOutlet(menuItem.getOutletId())){
+                                menuPresenter.geSelectedMenuDetails(menuItem.getMenuId(),menuItem.getFoodId(),menuItem.getOutletId(),menuItem.getFoodName(),
+                                        menuItem.getFoodCoverImage(),menuItem.getOutletName(),menuItem.getMenuCategoryID());
+                            }else {
+                                Toast.makeText(mContext, "Please add items in same Outlet", Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+
 
 
                     }
@@ -174,6 +204,8 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         }
     }
+
+
 
 
 
@@ -261,4 +293,27 @@ public class MenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    private boolean checkCartHasItemFromThisOutlet(int outletID){
+
+        boolean retrunResult = false;
+
+        int outletIDFromCart;
+        int cardCount = (int) realm.where(CartHeader.class).count();
+
+        if(cardCount!=0){
+            outletIDFromCart = realm.where(CartHeader.class).findFirst().getOutletID();
+            if( (cardCount!=0) &&  (outletIDFromCart !=outletID)  ){
+                retrunResult = false;
+            }else {
+                retrunResult = true;
+            }
+
+
+        }else {
+            retrunResult = true;
+
+        }
+
+    return retrunResult;
+    }
 }
