@@ -621,8 +621,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/relativelayout_peymenttypeone"
-                            android:visibility="invisible">
+                            android:layout_below="@+id/relativelayout_peymenttypeone">
 
                             <CheckBox
                                 android:id="@+id/checkBox_card"

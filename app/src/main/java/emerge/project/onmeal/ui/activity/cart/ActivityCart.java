@@ -887,7 +887,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
         Intent intent = new Intent(this, PHMainActivity.class);
         intent.putExtra(PHConstants.INTENT_EXTRA_DATA, req);
-        PHConfigs.setBaseUrl(PHConfigs.SANDBOX_URL);
+        PHConfigs.setBaseUrl(PHConfigs.LIVE_URL);
         startActivityForResult(intent, PAYHERE_REQUEST);
 
 

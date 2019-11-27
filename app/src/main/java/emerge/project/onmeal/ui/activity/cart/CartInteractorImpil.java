@@ -685,8 +685,8 @@ public class CartInteractorImpil implements CartInteractor {
 
 
         InitRequest req = new InitRequest();
-        req.setMerchantId("1211423"); // Your Merchant ID
-        req.setMerchantSecret("emerge"); // Your Merchant secret
+        req.setMerchantId("213803"); // Your Merchant ID
+        req.setMerchantSecret("8m0Wm1pO6KX4uVyxW40rli4ua5fYqpw0f4p6nffEZpwb"); // Your Merchant secret
         req.setAmount(ammount); // Amount which the customer should pay
         req.setCurrency("LKR"); // Currency
         req.setOrderId(orderID); // Unique ID for your payment transaction
