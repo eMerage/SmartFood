@@ -683,6 +683,13 @@ public class CartInteractorImpil implements CartInteractor {
         User user = realm.where(User.class).findFirst();
         Address address = realm.where(Address.class).findFirst();
 
+        int totalQty = 1;
+
+        for (CartHeader ns : realm.where(CartHeader.class).equalTo("isActive", true).findAll()) {
+            totalQty = totalQty + ns.getQuantity();
+        }
+
+
 
         InitRequest req = new InitRequest();
         req.setMerchantId("213803"); // Your Merchant ID
@@ -718,7 +725,8 @@ public class CartInteractorImpil implements CartInteractor {
 
 
         }
-        req.getItems().add(new Item(null, "Door bell wireless", 1));
+        req.getItems().add(new Item(null, "Smart Food", totalQty,ammount));
+       // req.getItems().add(new Item(null, "Door bell wireless", 1));
 
         onSetDataToPaymentGatewayFinishedListener.dataSetToPaymentGateway(req, orderID);
     }

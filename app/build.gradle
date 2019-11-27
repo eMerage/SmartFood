@@ -8,8 +8,8 @@ android {
         applicationId "emerge.project.onmeal"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 19
-        versionName "1.0.1.DE19"
+        versionCode 22
+        versionName "1.0.1.DE22"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -35,22 +35,14 @@ android {
 
     buildTypes {
         release {
-            shrinkResources true
-            minifyEnabled true
-            signingConfig signingConfigs.key
 
+            signingConfig signingConfigs.key
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_Production/api/\"'
         }
         debug {
-            /*proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-           // buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_DEV/api/\"'
-             buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_DEV/api/\"'*/
 
 
-            shrinkResources true
-            minifyEnabled true
-            signingConfig signingConfigs.key
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_Production/api/\"'
@@ -88,6 +80,15 @@ dependencies {
 
 
 
+    //multidex
+    implementation 'com.android.support:multidex:1.0.3'
+
+
+    implementation 'lk.payhere.sdk:android-payment-sdk:1.0.0'
+
+
+
+    implementation 'com.android.support:cardview-v7:28.0.0'
 
     //multidex
     implementation 'com.android.support:multidex:1.0.3'
@@ -146,8 +147,6 @@ dependencies {
 
 
 }
-
-
 apply plugin: 'com.google.gms.google-services'
 repositories {
     mavenCentral()
