@@ -120,6 +120,9 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     @BindView(R.id.textView_selectedaddress)
     TextView textViewSelectedaddress;
 
+    @BindView(R.id.relativeLayout_delivery)
+    RelativeLayout layoutDeliverychaege;
+
 
     @BindView(R.id.text_deliverychaege_cents)
     TextView textDeliverychaegeCents;
@@ -408,6 +411,13 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
         unBloackUserInteraction();
         proprogressview.setVisibility(View.GONE);
+
+        if ((dispatchType.equals("Pickup")) || (dispatchType.equals("Dinein")) ) {
+            layoutDeliverychaege.setVisibility(View.GONE);
+        }else {
+            layoutDeliverychaege.setVisibility(View.VISIBLE);
+        }
+
 
 
         String sPrice = String.valueOf(subtotal);

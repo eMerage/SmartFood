@@ -543,22 +543,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
     @OnClick(R.id.relativelayout_dinein)
     public void onClickDineIn(View view) {
-
-
-        new AlertDialog.Builder(this)
-                .setTitle("A General Notice!")
-                .setMessage("At the time of reach the restaurant, tables might be occupied fully.\n\n Happy Dining")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dineIN();
-                    }
-                })
-                .create()
-                .show();
-
-
+        dineIN();
 
     }
 
@@ -591,7 +576,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         imageViewIcDinein.setImageResource(R.drawable.ic_dinein);
         textViewDineIn.setTextColor(getResources().getColor(R.color.colorTextWhite));
 
-        imageViewBtn.setImageResource(R.drawable.btn_continuewithpickup);
+        imageViewBtn.setImageResource(R.drawable.btn_continuewithdinin);
         imageViewBtnAddaditional.setVisibility(View.GONE);
 
         textViewTitle.setText("Dine In");
@@ -612,14 +597,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
             Toast.makeText(this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
         }
 
-
-
-
     }
-
-
-
-
 
 
     @OnClick(R.id.imageView_btn_addaditional)

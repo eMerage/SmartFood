@@ -42,10 +42,9 @@ android {
         }
         debug {
 
-
-
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_Production/api/\"'
+          /// buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_DEV/api/\"'
 
         }
     }

@@ -53,7 +53,7 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
 
     int sdk;
 
-    public HistoryCurrentAdapter(Context mContext, ArrayList<OrderHistoryItems> item,ActivtyHistorytView activtyHistorytView) {
+    public HistoryCurrentAdapter(Context mContext, ArrayList<OrderHistoryItems> item, ActivtyHistorytView activtyHistorytView) {
         this.mContext = mContext;
         this.orderHistoryItems = item;
         sdk = android.os.Build.VERSION.SDK_INT;
@@ -80,23 +80,26 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
         holder.textviewOrdernumber.setText(String.valueOf(historyItems.getOrderID()));
 
 
-      //  getMenue(historyItems.getOrderID(),holder);
+        //  getMenue(historyItems.getOrderID(),holder);
 
 
         holder.textviewOutlet.setText(historyItems.getOutletName());
-
 
 
         String dispatchType = "";
         if (historyItems.getDispatchType().equals("P")) {
             dispatchType = "Pick Up";
             holder.textviewTransits.setText("Ready");
-        } else if(historyItems.getDispatchType().equals("T")){
+            holder.textviewDeliverd.setText("Picked");
+
+        } else if (historyItems.getDispatchType().equals("T")) {
             dispatchType = "Dine-In";
             holder.textviewTransits.setText("Ready");
+            holder.textviewDeliverd.setText("Served");
         } else {
             dispatchType = "Delivery";
             holder.textviewTransits.setText("In Transit");
+            holder.textviewDeliverd.setText("Delivered");
         }
 
 
@@ -111,7 +114,6 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
         String statusCode = historyItems.getStatusCode();
 
         if (statusCode.equals("ODPN")) {
-
 
             holder.textviewConfirm.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
             holder.textviewMake.setTextColor(mContext.getResources().getColor(R.color.historyTextColor));
@@ -130,9 +132,7 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
             }
 
 
-
-
-        } else if (statusCode.equals("ODPR") || statusCode.equals("ODPK")) {
+        } else if (statusCode.equals("ODPR")) {
             holder.textviewConfirm.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
             holder.textviewMake.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
             holder.textviewTransits.setTextColor(mContext.getResources().getColor(R.color.historyTextColor));
@@ -149,31 +149,50 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
                 holder.imgTransits.setImageResource(R.drawable.ic_ready_gry);
             }
 
+        } else if (statusCode.equals("ODPK")) {
+            if (historyItems.getDispatchType().equals("D")) {
+                holder.textviewConfirm.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
+                holder.textviewMake.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
+                holder.textviewTransits.setTextColor(mContext.getResources().getColor(R.color.historyTextColor));
+                holder.textviewDeliverd.setTextColor(mContext.getResources().getColor(R.color.historyTextColor));
 
 
-        } else if (statusCode.equals("ODDS") || statusCode.equals("ODCO")) {
+                holder.imgConfrimd.setImageResource(R.drawable.ic_confirmed_green);
+                holder.imgMake.setImageResource(R.drawable.ic_inmake_green);
+                holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_gry);
 
+                holder.imgTransits.setImageResource(R.drawable.ic_transit_gry);
+
+
+            } else {
+                holder.textviewConfirm.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
+                holder.textviewMake.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
+                holder.textviewTransits.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
+                holder.textviewDeliverd.setTextColor(mContext.getResources().getColor(R.color.historyTextColor));
+
+
+                holder.imgConfrimd.setImageResource(R.drawable.ic_confirmed_green);
+                holder.imgMake.setImageResource(R.drawable.ic_inmake_green);
+                holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_gry);
+
+                holder.imgTransits.setImageResource(R.drawable.ic_ready_green);
+
+
+            }
+
+        } else if (statusCode.equals("ODCO")) {
             holder.textviewConfirm.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
             holder.textviewMake.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
             holder.textviewTransits.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
-            holder.textviewDeliverd.setTextColor(mContext.getResources().getColor(R.color.historyTextColor));
-
-
+            holder.textviewDeliverd.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
             holder.imgConfrimd.setImageResource(R.drawable.ic_confirmed_green);
             holder.imgMake.setImageResource(R.drawable.ic_inmake_green);
-            holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_gry);
+            holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_green);
+
+            holder.imgTransits.setImageResource(R.drawable.ic_transit_green);
 
 
-            if (historyItems.getDispatchType().equals("D")) {
-                holder.imgTransits.setImageResource(R.drawable.ic_transit_green);
-            } else {
-                holder.imgTransits.setImageResource(R.drawable.ic_ready_green);
-            }
-
-
-
-        }
-        else if (statusCode.equals("ODDV") || statusCode.equals("ODCP")) {
+        }else if (statusCode.equals("ODDV") || statusCode.equals("ODCP")) {
 
             holder.textviewConfirm.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
             holder.textviewMake.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
@@ -192,25 +211,23 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
                 holder.imgTransits.setImageResource(R.drawable.ic_ready_green);
             }
 
-
         }
+
 
 
         holder.relativeLayoutMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()),0);
+                activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()), 0);
             }
         });
 
         holder.textview_orderoutletdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()),1);
+                activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()), 1);
             }
         });
-
-
 
 
     }
@@ -258,8 +275,6 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
         TextView textviewOutlet;
 
 
-
-
         @BindView(R.id.img_confrimd)
         ImageView imgConfrimd;
 
@@ -277,7 +292,6 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
 
         @BindView(R.id.relativeLayout_main)
         RelativeLayout relativeLayoutMain;
-
 
 
         @BindView(R.id.textview_orderoutletdetails)
