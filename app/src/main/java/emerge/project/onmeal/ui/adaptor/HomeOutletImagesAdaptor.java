@@ -71,6 +71,8 @@ public class HomeOutletImagesAdaptor extends RecyclerView.Adapter<HomeOutletImag
         requestOptions.error(R.drawable.ic_image_default);
 
 
+
+
         RequestListener<Bitmap> requestListener = new RequestListener<Bitmap>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {

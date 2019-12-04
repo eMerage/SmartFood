@@ -156,7 +156,6 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     TextView textServicechaegeValue;
 
 
-
     @BindView(R.id.recyclerview_added_item)
     RecyclerView recyclerviewAddedItem;
 
@@ -171,6 +170,13 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
     @BindView(R.id.checkBox_card)
     CheckBox checkBoxPaymentByCard;
+
+
+    @BindView(R.id.relativelayout_peymenttypeone)
+    RelativeLayout relativelayoutPeymentOndelivery;
+
+    @BindView(R.id.relativelayout_peymenttypetwo)
+    RelativeLayout relativelayoutPeymentCard;
 
 
     CartPresenter cartPresenter;
@@ -245,6 +251,19 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
         calendar = Calendar.getInstance();
 
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if ((dispatchType.equals("Dinein"))) {
+            relativelayoutPeymentOndelivery.setVisibility(View.GONE);
+            relativelayoutPeymentCard.setVisibility(View.VISIBLE);
+        } else {
+            relativelayoutPeymentOndelivery.setVisibility(View.VISIBLE);
+            relativelayoutPeymentCard.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -272,7 +291,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     @OnClick(R.id.img_btn_time)
     public void onClickTime(View view) {
 
-        if ((dispatchType.equals("Pickup")) || (dispatchType.equals("Dinein")) ) {
+        if ((dispatchType.equals("Pickup")) || (dispatchType.equals("Dinein"))) {
             com.android.datetimepicker.time.TimePickerDialog.newInstance(this, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true).show(getFragmentManager(), "timePicker");
 
         } else {
@@ -293,7 +312,6 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
     @OnClick(R.id.img_btn_confirm)
     public void onClickConfrim(View view) {
-
 
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
@@ -400,24 +418,23 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void cartItems(ArrayList<CartHeader> cartHeaderArrayList) {
 
-        cartAdapter = new CartAdapter(this, cartHeaderArrayList,this);
+        cartAdapter = new CartAdapter(this, cartHeaderArrayList, this);
         recyclerviewAddedItem.setAdapter(cartAdapter);
 
     }
 
 
     @Override
-    public void getPromoCodeValidationSuccessful(String code, Double discount, Double subtotal, String image, Double deliveryCharges,String service,String serviceChage,Double total) {
+    public void getPromoCodeValidationSuccessful(String code, Double discount, Double subtotal, String image, Double deliveryCharges, String service, String serviceChage, Double total) {
 
         unBloackUserInteraction();
         proprogressview.setVisibility(View.GONE);
 
-        if ((dispatchType.equals("Pickup")) || (dispatchType.equals("Dinein")) ) {
+        if ((dispatchType.equals("Pickup")) || (dispatchType.equals("Dinein"))) {
             layoutDeliverychaege.setVisibility(View.GONE);
-        }else {
+        } else {
             layoutDeliverychaege.setVisibility(View.VISIBLE);
         }
-
 
 
         String sPrice = String.valueOf(subtotal);
@@ -428,37 +445,36 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
         String sPriceDelivery = String.valueOf(deliveryCharges);
         String[] priseArrayDelivery = sPriceDelivery.split("\\.");
+
         textDeliverychaege.setText(priseArrayDelivery[0]);
         textDeliverychaegeCents.setText("." + priseArrayDelivery[1]);
 
 
         String sPriceFulltotal = String.valueOf(total);
-        String[] priseArrayFulltotal= sPriceFulltotal.split("\\.");
+        String[] priseArrayFulltotal = sPriceFulltotal.split("\\.");
         textFulltotal.setText(priseArrayFulltotal[0]);
         textFulltotalCents.setText("." + priseArrayFulltotal[1]);
 
 
-
-        String[] priseArrayService= serviceChage.split("\\.");
+        String[] priseArrayService = serviceChage.split("\\.");
         textServicechaege.setText(priseArrayService[0]);
         textServicechaegecents.setText("." + priseArrayService[1]);
 
 
-        textServicechaegeValue.setText("Service Charges ("+service+" % )");
+        textServicechaegeValue.setText("Service Charges (" + service + " % )");
 
 
         String sPriceDiscount = String.valueOf(discount);
-        String[] priseArrayDiscount= sPriceDiscount.split("\\.");
+        String[] priseArrayDiscount = sPriceDiscount.split("\\.");
         textDiscountchaege.setText(priseArrayDiscount[0]);
         textDiscountchaegeCents.setText("." + priseArrayDiscount[1]);
 
 
-        if(code.equals("No Promo")){
+        if (code.equals("No Promo")) {
 
-        }else {
+        } else {
             Toast.makeText(this, "Promo code successfully redeemed", Toast.LENGTH_LONG).show();
         }
-
 
 
         if (image.equals("null") || image.isEmpty() || image == null || image.equals("")) {
@@ -474,34 +490,78 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     public void getPromoCodeValidationFail(String promoCode, String msg) {
         unBloackUserInteraction();
         proprogressview.setVisibility(View.GONE);
-
         try {
+            if (msg.equals("No Order in your cart")) {
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Warning");
+                alertDialogBuilder.setMessage(msg + ",do you want add items");
+                alertDialogBuilder.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        textSubtotal.setText("00");
+                        textSubtotalCents.setText(".00");
 
 
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Warning");
-            alertDialogBuilder.setMessage(msg);
-            alertDialogBuilder.setPositiveButton("Re-Try",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-                                proprogressview.setVisibility(View.VISIBLE);
-                                bloackUserInteraction();
-                                cartPresenter.getPromoCodeValidation(ActivityCart.this, editTextPromocode.getText().toString());
-                            } else {
-                                Toast.makeText(ActivityCart.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
+                        textDeliverychaege.setText("00");
+                        textDeliverychaegeCents.setText(".00");
+
+
+                        textFulltotal.setText("00");
+                        textFulltotalCents.setText(".00");
+
+                        textServicechaege.setText("00");
+                        textServicechaegecents.setText(".00");
+
+
+                        textServicechaegeValue.setText("Service Charges (" + 00.0 + " % )");
+
+
+                        textDiscountchaege.setText("00");
+                        textDiscountchaegeCents.setText(".00");
+
+
+                        return;
+                    }
+                });
+                alertDialogBuilder.show();
+
+
+            } else {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Warning");
+                alertDialogBuilder.setMessage(msg);
+                alertDialogBuilder.setPositiveButton("Re-Try",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+                                    proprogressview.setVisibility(View.VISIBLE);
+                                    bloackUserInteraction();
+                                    cartPresenter.getPromoCodeValidation(ActivityCart.this, editTextPromocode.getText().toString());
+                                } else {
+                                    Toast.makeText(ActivityCart.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
+
+                                }
 
                             }
+                        });
+                alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                alertDialogBuilder.show();
+            }
 
-                        }
-                    });
-            alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    return;
-                }
-            });
-            alertDialogBuilder.show();
+
         } catch (WindowManager.BadTokenException e) {
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -757,31 +817,31 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
                 try {
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("Warning");
-                alertDialogBuilder.setMessage("Payment Fail Please try again");
-                alertDialogBuilder.setPositiveButton("Re-Try",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                    alertDialogBuilder.setTitle("Warning");
+                    alertDialogBuilder.setMessage("Payment Fail Please try again");
+                    alertDialogBuilder.setPositiveButton("Re-Try",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
 
-                                if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-                                    String totalAmount = textSubtotal.getText().toString() + textSubtotalCents.getText().toString();
-                                    cartPresenter.setDataToPaymentGateway(Double.parseDouble(totalAmount), webOrderId, orderCODE, edittextNote.getText().toString());
+                                    if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+                                        String totalAmount = textSubtotal.getText().toString() + textSubtotalCents.getText().toString();
+                                        cartPresenter.setDataToPaymentGateway(Double.parseDouble(totalAmount), webOrderId, orderCODE, edittextNote.getText().toString());
 
-                                } else {
-                                    Toast.makeText(ActivityCart.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(ActivityCart.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
+
+                                    }
 
                                 }
-
-                            }
-                        });
-                alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        return;
-                    }
-                });
-                alertDialogBuilder.show();
+                            });
+                    alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            return;
+                        }
+                    });
+                    alertDialogBuilder.show();
 
 
                 } catch (WindowManager.BadTokenException e) {
@@ -872,6 +932,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
             bloackUserInteraction();
             proprogressview.setVisibility(View.VISIBLE);
             cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString());
+            cartPresenter.getCartItems();
         } else {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -921,8 +982,6 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-
-
     @Override
     public void getSubCartItemsEmpty() {
 
@@ -939,9 +998,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         dialogBox.setCancelable(true);
 
 
-
-
-        RecyclerView  recyclerViewOrderSubitems = (RecyclerView) dialogBox.findViewById(R.id.recyclerview_subcart_items);
+        RecyclerView recyclerViewOrderSubitems = (RecyclerView) dialogBox.findViewById(R.id.recyclerview_subcart_items);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerViewOrderSubitems.setLayoutManager(layoutManager);
@@ -1026,8 +1083,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         String deliver = textDeliverychaege.getText().toString() + textDeliverychaegeCents.getText().toString();
         String totalAmount = textSubtotal.getText().toString() + textSubtotalCents.getText().toString();
 
-        cartPresenter.orderProsess(edittextNote.getText().toString(), paymentType, orderCODE, Double.parseDouble(deliver), Double.parseDouble(totalAmount),
-                editTextPromocode.getText().toString(), selectedPickupTime, selectedTimeSlots, this);
+        cartPresenter.orderProsess(edittextNote.getText().toString(), paymentType, orderCODE, Double.parseDouble(deliver), Double.parseDouble(totalAmount), editTextPromocode.getText().toString(), selectedPickupTime, selectedTimeSlots, this);
 
 
     }

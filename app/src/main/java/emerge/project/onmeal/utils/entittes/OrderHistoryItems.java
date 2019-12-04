@@ -25,12 +25,16 @@ public class OrderHistoryItems implements Serializable {
     @SerializedName("outletName")
     String outletName;
 
+    @SerializedName("outletID")
+    int outletID;
+
+
 
 
     String menuItems;
 
 
-    public OrderHistoryItems(int orderID, String orderDate, Double orderTotal, String dispatchType, String statusCode, String menuItems, String outletname) {
+    public OrderHistoryItems(int orderID, String orderDate, Double orderTotal, String dispatchType, String statusCode, String menuItems, String outletname,int outletid) {
         this.orderID = orderID;
         this.orderDate = orderDate;
         this.orderTotal = orderTotal;
@@ -38,8 +42,16 @@ public class OrderHistoryItems implements Serializable {
         this.statusCode = statusCode;
         this.menuItems = menuItems;
         this.outletName = outletname;
+        this.outletID = outletid;
     }
 
+    public int getOutletID() {
+        return outletID;
+    }
+
+    public void setOutletID(int outletID) {
+        this.outletID = outletID;
+    }
 
     public int getOrderID() {
         return orderID;

@@ -99,14 +99,14 @@ public class HistoryPastAdapter extends RecyclerView.Adapter<HistoryPastAdapter.
         holder.relativeLayoutMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()),0);
+                activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()));
             }
         });
 
         holder.textview_orderoutletdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()),1);
+                activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()));
             }
         });
 

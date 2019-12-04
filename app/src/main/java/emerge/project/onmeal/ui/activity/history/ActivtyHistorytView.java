@@ -22,9 +22,16 @@ public interface ActivtyHistorytView {
 
 
     void getOrderHistoryDetailsStart();
-    void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> orderHistoryMenu, int level, OutletItems outlet);
-    void getOrderHistoryDetailsFail(String msg,String orderID,int level);
+    void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> orderHistoryMenu, OutletItems outlet);
+    void getOrderHistoryDetailsFail(String msg,String orderID);
 
 
     void signOutSuccess();
+
+
+        void getOutletDetails(OutletItems outletItems);
+        void getOutletDetailsFail(String msg,int outletID);
+
+
+
 }

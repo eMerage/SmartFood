@@ -20,6 +20,9 @@ public class MenuItemsError implements Serializable {
     String imageUrl;
 
 
+    public MenuItemsError() {
+    }
+
     public MenuItemsError(int menuId, int outletMenuTitleID, String menuTitle, String imageUrl) {
         this.menuId = menuId;
         this.outletMenuTitleID = outletMenuTitleID;

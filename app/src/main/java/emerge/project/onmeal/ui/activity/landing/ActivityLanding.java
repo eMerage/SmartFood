@@ -67,6 +67,7 @@ import com.google.android.libraries.places.api.net.FetchPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.gson.Gson;
 import com.pddstudio.preferences.encrypted.EncryptedPreferences;
@@ -120,11 +121,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     RelativeLayout relativelayoutDinein;
 
 
-
-
-
-
-
     @BindView(R.id.imageView_ic_delivery)
     ImageView imageViewIcDelivery;
     @BindView(R.id.imageView_ic_pickup)
@@ -140,9 +136,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
     @BindView(R.id.textView_ic_dinein)
     TextView textViewDineIn;
-
-
-
 
 
     @BindView(R.id.imageView_btn)
@@ -197,7 +190,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     static final int REQUEST_CHECK_SETTINGS = 2;
     int PLACE_PICKER_REQUEST = 1;
 
-  //  private GeoDataClient mGeoDataClient;
+    //  private GeoDataClient mGeoDataClient;
     Double latitude, longitude;
     private final LatLng mDefaultLocation = new LatLng(6.890872, 79.878859);
 
@@ -206,7 +199,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
-   // private PlaceDetectionClient mPlaceDetectionClient;
+    // private PlaceDetectionClient mPlaceDetectionClient;
 
     private String[] mLikelyPlaceNames;
     private String[] mLikelyPlaceAddresses;
@@ -236,6 +229,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     PlacesClient placesClient;
     List<Place.Field> placeFields;
     FetchPlaceRequest request;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -255,15 +249,15 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
 
 
-        Places.initialize(getApplicationContext(),getResources().getString(R.string.google_maps_key));
-         placesClient = Places.createClient(this);
+        Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
+        placesClient = Places.createClient(this);
 
-         placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
+        placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
 
-         request = FetchPlaceRequest.builder(placeId, placeFields).build();
+        request = FetchPlaceRequest.builder(placeId, placeFields).build();
 
-       // mGeoDataClient = Places.getGeoDataClient(this, null);
-      //  mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
+        // mGeoDataClient = Places.getGeoDataClient(this, null);
+        //  mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         setNavigationMenuItems();
@@ -313,11 +307,9 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                     } else {
                         textViewSelectedAddress.setText(addressItem.getAddress());
                     }
-                }catch (ArrayIndexOutOfBoundsException aiobex){
+                } catch (ArrayIndexOutOfBoundsException aiobex) {
                     textViewSelectedAddress.setText(addressItem.getAddress());
                 }
-
-
 
 
             }
@@ -419,8 +411,8 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
             relativelayoutDelivery.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dispatchtype_left_red));
             relativelayoutPickup.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dispatchtype_right_white));
-
             relativelayoutDinein.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dinein_white));
+
 
         } else {
             relativelayoutDelivery.setBackground(getResources().getDrawable(R.drawable.bg_dispatchtype_left_red));
@@ -428,7 +420,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
             relativelayoutDinein.setBackground(getResources().getDrawable(R.drawable.bg_dinein_white));
         }
-
 
 
         imageViewIcDelivery.setImageResource(R.drawable.ic_delivery_bick);
@@ -441,8 +432,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         imageViewIcDinein.setImageResource(R.drawable.ic_dinein_dark);
         textViewDineIn.setTextColor(getResources().getColor(R.color.colorTextIcon));
-
-
 
 
         imageViewBtn.setImageResource(R.drawable.btn_continuewithdilivery);
@@ -540,7 +529,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     }
 
 
-
     @OnClick(R.id.relativelayout_dinein)
     public void onClickDineIn(View view) {
         dineIN();
@@ -548,7 +536,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     }
 
 
-    public void dineIN(){
+    public void dineIN() {
 
 
         proprogressview.setVisibility(View.GONE);
@@ -690,14 +678,48 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        if (requestCode == PLACE_PICKER_REQUEST) {
+
+            if (resultCode == -1) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+
+                try {
 
 
-      /*  if (requestCode == PLACE_PICKER_REQUEST) {
-            if (resultCode == RESULT_OK) {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude), 15));
+                    mapMarker = mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude))
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+
+                    try {
+                        if (place.getAddress().toString().length() > 30) {
+                            textViewSelectedAddress.setText(place.getAddress().toString().substring(0, 30));
+                        } else {
+                            textViewSelectedAddress.setText(place.getAddress().toString());
+                        }
+                    } catch (ArrayIndexOutOfBoundsException aiobex) {
+                        textViewSelectedAddress.setText(place.getAddress().toString());
+                    }
 
 
-                Place place = PlaceAutocomplete.getPlace(this, data);
+                    landingPresenter.getSellectedAddressDetails(place.getName().toString(), place.getAddress().toString(), place.getLatLng());
 
+                    relativelayoutAddedlist.setVisibility(View.INVISIBLE);
+
+                }catch (Exception ex){
+
+                    Toast.makeText(this, "Place request fail,try again", Toast.LENGTH_SHORT).show();
+                }
+
+            }else {
+                Toast.makeText(this, "Place request fail,try again", Toast.LENGTH_SHORT).show();
+            }
+
+
+           /* if (resultCode == RESULT_OK) {
+
+
+                Place place = Autocomplete.getPlaceFromIntent(data);
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude), 15));
                 mapMarker = mMap.addMarker(new MarkerOptions()
@@ -711,7 +733,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                     } else {
                         textViewSelectedAddress.setText(place.getAddress().toString());
                     }
-                }catch (ArrayIndexOutOfBoundsException aiobex){
+                } catch (ArrayIndexOutOfBoundsException aiobex) {
                     textViewSelectedAddress.setText(place.getAddress().toString());
                 }
 
@@ -720,16 +742,16 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
                 relativelayoutAddedlist.setVisibility(View.INVISIBLE);
 
-            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
-                Status status = PlaceAutocomplete.getStatus(this, data);
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                Status status = Autocomplete.getStatusFromIntent(data);
 
 
             } else if (resultCode == RESULT_CANCELED) {
                 // The user canceled the operation.
-            }
+            }*/
         } else if (requestCode == REQUEST_CHECK_SETTINGS) {
             mapFragment.getMapAsync(this);
-        }*/
+        }
 
 
     }
@@ -855,7 +877,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                     textViewSelectedAddress.setText(place.getAddress());
                 }*/
 
-                landingPresenter.getSellectedAddressDetails(place.getName(),place.getAddress(),place.getLatLng());
+                landingPresenter.getSellectedAddressDetails(place.getName(), place.getAddress(), place.getLatLng());
 
                 proprogressview.setVisibility(View.GONE);
                 unBloackUserInteraction();
@@ -869,9 +891,9 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                 if (exception instanceof ApiException) {
                     ApiException apiException = (ApiException) exception;
                     int statusCode = apiException.getStatusCode();
-                    System.out.println("sssss  fail :"+exception);
-                    System.out.println("sssss  fail statusCode :"+statusCode);
-                    System.out.println("sssss  fail ApiException :"+apiException);
+                    System.out.println("sssss  fail :" + exception);
+                    System.out.println("sssss  fail statusCode :" + statusCode);
+                    System.out.println("sssss  fail ApiException :" + apiException);
                     proprogressview.setVisibility(View.GONE);
                     unBloackUserInteraction();
                 }
@@ -1094,7 +1116,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
             } else {
                 textViewSelectedAddress.setText(add);
             }
-        }catch (ArrayIndexOutOfBoundsException aiobex){
+        } catch (ArrayIndexOutOfBoundsException aiobex) {
             textViewSelectedAddress.setText(add);
         }
 
@@ -1220,9 +1242,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         landingPresenter.signOut(this);
 
     }
-
-
-
 
 
 }

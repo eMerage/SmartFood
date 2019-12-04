@@ -150,5 +150,10 @@ public interface ApiInterface {
     @GET("Order/GetOrderHistoryByOrder")
     Observable<JsonObject> orderHistorDetails(@Query("OrderID") int orderID);
 
+    @GET("Outlet/GetOutlet")
+    Observable<OutletItems> getOutlet(@Query("outletID") int outletID);
+
+
+
 
 }

@@ -16,7 +16,8 @@ public class OrderErrorReturn implements Serializable {
     String orderCode;
 
     @SerializedName("outletMenu")
-    MenuItemsError menuItemsError;
+    MenuItemsError menuItemsError = new MenuItemsError();
+
 
 
     public OrderErrorReturn(String errorCode, int outletID, String orderCode, MenuItemsError menuItemsError) {

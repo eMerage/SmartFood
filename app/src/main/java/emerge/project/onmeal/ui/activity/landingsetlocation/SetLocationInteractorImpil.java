@@ -59,17 +59,22 @@ public class SetLocationInteractorImpil implements SetLocationInteractor {
             }
         }
 
-        if (separated.length <= 3) {
-            mapCity = separated[1].trim();
-        } else {
-            if (separated.length <= 4) {
-                mapMainroad = separated[1].trim();
-                mapCity = separated[2].trim();
+        try {
+            if (separated.length <= 3) {
+                mapCity = separated[1].trim();
             } else {
-                mapSubroad = separated[1].trim();
-                mapMainroad = separated[2].trim();
-                mapCity = separated[3].trim();
+                if (separated.length <= 4) {
+                    mapMainroad = separated[1].trim();
+                    mapCity = separated[2].trim();
+                } else {
+                    mapSubroad = separated[1].trim();
+                    mapMainroad = separated[2].trim();
+                    mapCity = separated[3].trim();
+                }
             }
+
+        }catch (Exception ex){
+
         }
 
 

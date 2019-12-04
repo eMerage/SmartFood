@@ -30,16 +30,26 @@ public interface ActivtyHistoryInteractor {
     interface OnOrderHistoryDetailsFinishedListener {
 
         void getOrderHistoryDetailsStart();
-        void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> OrderHistoryMenu, int level, OutletItems outlet);
-        void getOrderHistoryDetailsFail(String msg,String orderID,int level);
+        void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> OrderHistoryMenu, OutletItems outlet);
+        void getOrderHistoryDetailsFail(String msg,String orderID);
     }
-    void getOrderHistoryDetails(String orderID,int level,OnOrderHistoryDetailsFinishedListener  onOrderHistoryDetailsFinishedListener);
+    void getOrderHistoryDetails(String orderID,OnOrderHistoryDetailsFinishedListener  onOrderHistoryDetailsFinishedListener);
 
 
     interface OnsignOutinishedListener {
         void signOutSuccess();
     }
     void signOut(Context context, OnsignOutinishedListener onsignOutinishedListener);
+
+
+    interface OnGetOutletFinishedListener {
+        void getOutletDetails(OutletItems outletItems);
+        void getOutletDetailsFail(String msg,int outletID);
+    }
+    void getOutlet(int outletID,OnGetOutletFinishedListener  onGetOutletFinishedListener);
+
+
+
 
 
 }

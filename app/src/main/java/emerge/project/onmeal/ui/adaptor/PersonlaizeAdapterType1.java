@@ -102,6 +102,9 @@ public class PersonlaizeAdapterType1 extends RecyclerView.Adapter<PersonlaizeAda
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                System.out.println("llllklklkllklk :"+menuItems.getFoodItemSize());
+
                 if(holder.checkBox.isChecked()){
 
                     for(MenuSubItems items :menuSubItems){

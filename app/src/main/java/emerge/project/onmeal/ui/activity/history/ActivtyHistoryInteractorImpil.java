@@ -50,6 +50,8 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
     JsonObject orderHistoryDetails;
 
+    OutletItems outletItems;
+
     @Override
     public void getOrderHistory(final OnOrderHistoryLoadFinishedListener onOrderHistoryLoadFinishedListener) {
 
@@ -86,10 +88,10 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
                                         for (int i = 0; i < orderHistory.size(); i++) {
                                             if (orderHistory.get(i).getStatusCode().equals("ODCP")) {
                                                 orderHistoryItemsPast.add(new OrderHistoryItems(orderHistory.get(i).getOrderID(), orderHistory.get(i).getOrderDate(), orderHistory.get(i).getOrderTotal(),
-                                                        orderHistory.get(i).getDispatchType(), orderHistory.get(i).getStatusCode(), "",orderHistory.get(i).getOutletName()));
+                                                        orderHistory.get(i).getDispatchType(), orderHistory.get(i).getStatusCode(), "",orderHistory.get(i).getOutletName(),orderHistory.get(i).getOutletID()));
                                             } else {
                                                 orderHistoryItemsCurrent.add(new OrderHistoryItems(orderHistory.get(i).getOrderID(), orderHistory.get(i).getOrderDate(), orderHistory.get(i).getOrderTotal(),
-                                                        orderHistory.get(i).getDispatchType(), orderHistory.get(i).getStatusCode(), "",orderHistory.get(i).getOutletName()));
+                                                        orderHistory.get(i).getDispatchType(), orderHistory.get(i).getStatusCode(), "",orderHistory.get(i).getOutletName(),orderHistory.get(i).getOutletID()));
                                             }
                                         }
                                         onOrderHistoryLoadFinishedListener.getOrderHistoryCurrent(orderHistoryItemsCurrent);
@@ -110,14 +112,11 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
     }
 
     @Override
-    public void getOrderHistoryDetails(final String orderID, final int level, final OnOrderHistoryDetailsFinishedListener onOrderHistoryDetailsFinishedListener) {
+    public void getOrderHistoryDetails(final String orderID, final OnOrderHistoryDetailsFinishedListener onOrderHistoryDetailsFinishedListener) {
 
 
         onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsStart();
         final ArrayList<OrderHistoryMenu> menusArrayList = new ArrayList<OrderHistoryMenu>();//main
-
-
-
 
         try {
             apiService.orderHistorDetails(Integer.parseInt(orderID))
@@ -136,7 +135,7 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID,level);
+                            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID);
                         }
 
                         @Override
@@ -191,23 +190,23 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
                                                 jsonData.getString("menuSizeCode"),jsonData.getDouble("menuPrice"), jsonData.getInt("menuQty"), foodsArrayList));
 
                                     }
-                                    onOrderHistoryDetailsFinishedListener.getOrderHistoryDetails(menusArrayList,level,outlet);
+                                    onOrderHistoryDetailsFinishedListener.getOrderHistoryDetails(menusArrayList,outlet);
 
 
                                 } catch (JSONException e) {
-                                    onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID,level);
+                                    onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID);
                                 }
 
 
 
                             } else {
-                                onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID,level);
+                                onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID);
                             }
                         }
                     });
 
         } catch (Exception ex) {
-            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID,level);
+            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID);
         }
 
     }
@@ -225,6 +224,45 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
                 onsignOutinishedListener.signOutSuccess();
             }
         });
+
+    }
+
+    @Override
+    public void getOutlet(final int outletID, final OnGetOutletFinishedListener onGetOutletFinishedListener) {
+
+
+
+        try {
+            apiService.getOutlet(outletID)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<OutletItems>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(OutletItems respond) {
+                            outletItems = respond;
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            onGetOutletFinishedListener.getOutletDetailsFail("Communication error, Please try again",outletID);
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            onGetOutletFinishedListener.getOutletDetails(outletItems);
+                        }
+                    });
+
+        } catch (Exception ex) {
+            onGetOutletFinishedListener.getOutletDetailsFail("Communication error, Please try again",outletID);
+        }
+
 
     }
 

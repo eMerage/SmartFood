@@ -22,7 +22,8 @@ import emerge.project.onmeal.utils.entittes.OutletItems;
 public class ActivtyHistoryPresenterImpli implements ActivtyHistoryPresenter,
         ActivtyHistoryInteractor.OnOrderHistoryLoadFinishedListener,
         ActivtyHistoryInteractor.OnOrderHistoryDetailsFinishedListener,
-        ActivtyHistoryInteractor.OnsignOutinishedListener{
+        ActivtyHistoryInteractor.OnsignOutinishedListener,
+        ActivtyHistoryInteractor.OnGetOutletFinishedListener{
 
 
     private ActivtyHistorytView activtyHistorytView;
@@ -42,6 +43,7 @@ public class ActivtyHistoryPresenterImpli implements ActivtyHistoryPresenter,
     public void signOut(Context context) {
         activtyHistoryInteractor.signOut(context,this);
     }
+
 
 
     @Override
@@ -80,8 +82,8 @@ public class ActivtyHistoryPresenterImpli implements ActivtyHistoryPresenter,
 
 
     @Override
-    public void getOrderHistoryDetails(String orderID,int level) {
-        activtyHistoryInteractor.getOrderHistoryDetails(orderID,level,this);
+    public void getOrderHistoryDetails(String orderID) {
+        activtyHistoryInteractor.getOrderHistoryDetails(orderID,this);
     }
 
     @Override
@@ -90,12 +92,28 @@ public class ActivtyHistoryPresenterImpli implements ActivtyHistoryPresenter,
     }
 
     @Override
-    public void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> cartHeader, int level, OutletItems outlet) {
-        activtyHistorytView.getOrderHistoryDetails(cartHeader,level,outlet);
+    public void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> cartHeader, OutletItems outlet) {
+        activtyHistorytView.getOrderHistoryDetails(cartHeader,outlet);
     }
 
     @Override
-    public void getOrderHistoryDetailsFail(String msg,String orderID,int level) {
-        activtyHistorytView.getOrderHistoryDetailsFail(msg,orderID,level);
+    public void getOrderHistoryDetailsFail(String msg,String orderID) {
+        activtyHistorytView.getOrderHistoryDetailsFail(msg,orderID);
+    }
+
+
+    @Override
+    public void getOutlet(int outletID) {
+        activtyHistoryInteractor.getOutlet(outletID,this);
+    }
+
+    @Override
+    public void getOutletDetails(OutletItems outletItems) {
+        activtyHistorytView.getOutletDetails(outletItems);
+    }
+
+    @Override
+    public void getOutletDetailsFail(String msg, int outletID) {
+        activtyHistorytView.getOutletDetailsFail(msg,outletID);
     }
 }

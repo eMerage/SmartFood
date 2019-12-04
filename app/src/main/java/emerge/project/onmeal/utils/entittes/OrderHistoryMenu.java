@@ -17,7 +17,7 @@ public class OrderHistoryMenu implements Parcelable {
     String size;
     Double price;
     int qty;
-    ArrayList<OrderHistorySubMenu> foods;
+    ArrayList<OrderHistorySubMenu> foods =  new ArrayList<OrderHistorySubMenu>();
 
 
     public OrderHistoryMenu(int orderId, String cartID, String outletMenuName, String size,Double price, int qty, ArrayList<OrderHistorySubMenu> foods) {

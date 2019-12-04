@@ -133,7 +133,7 @@ public class PersonlaizeAdapterType3 extends RecyclerView.Adapter<PersonlaizeAda
             @Override
             public void onClick(final View v) {
                 int qty = Integer.parseInt(holder.textQty.getText().toString());
-                if (qty > 3) {//Maximum extra qty per item
+                if (qty > 20) {//Maximum extra qty per item
                     Toast.makeText(mContext, "Maximum Extra count exceed", Toast.LENGTH_LONG).show();
                 } else {
                     qty = qty + 1;
@@ -191,9 +191,9 @@ public class PersonlaizeAdapterType3 extends RecyclerView.Adapter<PersonlaizeAda
                 .equalTo("isSelect", true)
                 .findAll();
 
-
-        if (cartdetail.size() >= menusubItems.getMaxExtrasQty()) {
-            Toast.makeText(mContext, "Max extras count exceed", Toast.LENGTH_LONG).show();
+        if (cartdetail.size() >=20) {
+       // if (cartdetail.size() >= menusubItems.getMaxExtrasQty()) {
+            Toast.makeText(mContext, "Max extras count exceed ", Toast.LENGTH_LONG).show();
             holder.checkBox.setChecked(false);
         } else if (menusubItems.getMaxOrderQty() == 0) {
             Toast.makeText(mContext, "Max Order count exceed", Toast.LENGTH_LONG).show();

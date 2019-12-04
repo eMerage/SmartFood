@@ -155,7 +155,7 @@ public class FragmentProfileContact extends Fragment implements ProfileContactVi
         proprogressview.setVisibility(View.GONE);
 
         textviewPhonenumber.setText(user.getUserPhoneNumber());
-        textviewDob.setText(user.getDateOfBirth());
+        textviewDob.setText(user.getDateOfBirth().substring(0,10));
         textviewEmail.setText(user.getUserEmail());
         textviewGender.setText(user.getUserGender());
     }

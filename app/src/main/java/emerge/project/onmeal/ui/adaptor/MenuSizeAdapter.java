@@ -83,6 +83,7 @@ public class MenuSizeAdapter extends RecyclerView.Adapter<MenuSizeAdapter.MyView
 
 
         holder.textviewSize.setText(menuSizeItems.getFoodItemSizeCode());
+
         holder.relativeLayoutMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,6 +96,7 @@ public class MenuSizeAdapter extends RecyclerView.Adapter<MenuSizeAdapter.MyView
                     menuSizeArrayList.get(position).setSelect(true);
                     notifyDataSetChanged();
                 }
+
                 status ++;
                 personlaizePresenter.setMenuSize(menuSizeArrayList.get(position).getFoodItemSizeCode());
 

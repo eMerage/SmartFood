@@ -1,6 +1,8 @@
 package emerge.project.onmeal.ui.adaptor;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -113,6 +115,9 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
 
         String statusCode = historyItems.getStatusCode();
 
+
+        System.out.println("cccccccccccccccccccccccccc : "+statusCode);
+
         if (statusCode.equals("ODPN")) {
 
             holder.textviewConfirm.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
@@ -180,6 +185,19 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
 
             }
 
+        }else if (statusCode.equals("ODDS")) {
+            holder.textviewConfirm.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
+            holder.textviewMake.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
+            holder.textviewTransits.setTextColor(mContext.getResources().getColor(R.color.historyTextColor));
+            holder.textviewDeliverd.setTextColor(mContext.getResources().getColor(R.color.historyTextColor));
+
+
+            holder.imgConfrimd.setImageResource(R.drawable.ic_confirmed_green);
+            holder.imgMake.setImageResource(R.drawable.ic_inmake_green);
+            holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_gry);
+
+            holder.imgTransits.setImageResource(R.drawable.ic_transit_gry);
+
         } else if (statusCode.equals("ODCO")) {
             holder.textviewConfirm.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
             holder.textviewMake.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
@@ -190,6 +208,7 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
             holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_green);
 
             holder.imgTransits.setImageResource(R.drawable.ic_transit_green);
+            holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_gry);
 
 
         }else if (statusCode.equals("ODDV") || statusCode.equals("ODCP")) {
@@ -218,14 +237,50 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
         holder.relativeLayoutMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()), 0);
+
+
+
+                if (NetworkAvailability.isNetworkAvailable(mContext)) {
+                    activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()));
+                } else {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+                    alertDialogBuilder.setTitle("Warning");
+                    alertDialogBuilder.setMessage("No Internet Access, Please try again ");
+                    alertDialogBuilder.setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    return;
+                                }
+                            });
+                    alertDialogBuilder.show();
+                }
+
+
+
+
+
             }
         });
 
         holder.textview_orderoutletdetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()), 1);
+                if (NetworkAvailability.isNetworkAvailable(mContext)) {
+                    activtyHistoryPresenter.getOutlet(historyItems.getOutletID());
+                } else {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
+                    alertDialogBuilder.setTitle("Warning");
+                    alertDialogBuilder.setMessage("No Internet Access, Please try again ");
+                    alertDialogBuilder.setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    return;
+                                }
+                            });
+                    alertDialogBuilder.show();
+                }
+
+
             }
         });
 

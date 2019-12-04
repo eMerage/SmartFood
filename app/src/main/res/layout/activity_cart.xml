@@ -614,11 +614,12 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="50dp"
-                                android:text="On Delivery" />
+                                android:text="Cash" />
                         </RelativeLayout>
 
 
                         <RelativeLayout
+                            android:id="@+id/relativelayout_peymenttypetwo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/relativelayout_peymenttypeone">

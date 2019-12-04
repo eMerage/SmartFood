@@ -182,6 +182,8 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
             }
 
 
+            System.out.println();
+
 
 
             for (int i = 0; i < foodCategoryItemsArrayList.size(); i++) {
@@ -495,6 +497,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
     public void addCartHeader(final SelectedMenuDetails selectedMenuDetails, final int qty, final String size, final Double price, final OnAddToCartListener onAddToCartListener) {
         final Long cartHeaderId;
         cartHeaderId = cratePrimerykeyID();
+
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm bgRealm) {
@@ -541,6 +544,9 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
             } else {
                 lastInsertedId = allTransactions.last().getCartDetailId();
             }
+
+
+
 
             if (cartdetail != null) {
 
@@ -870,9 +876,6 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                     MenuSubItems menuItems = bgRealm.createObject(MenuSubItems.class, (cratePrimerykeyID() + lastInsertedId));
 
 
-                    System.out.println("bbbbbbbbbb : "+menuSubItems.get(i).getFoodname());
-
-
                     menuItems.setMenuCategory(menuSubItems.get(i).getMenuCategory());
                     menuItems.setMenuCategoryID(menuSubItems.get(i).getMenuCategoryID());
                     menuItems.setFoodItemID(menuSubItems.get(i).getFoodItemID());
@@ -934,7 +937,6 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                 .findAll()) {
 
 
-            System.out.println("ffffffff : "+no.getFoodname());
 
 
             if (no.isSelect()) {
@@ -963,9 +965,17 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
 
 
     private Long cratePrimerykeyID() {
-        User user = realm.where(User.class).findFirst();
         Calendar c = Calendar.getInstance();
-        String numberFromTime = String.valueOf(c.get(Calendar.YEAR)).substring(1) + String.valueOf(c.get(Calendar.MONTH)) + String.valueOf(c.get(Calendar.DATE)) + String.valueOf(c.get(Calendar.HOUR)) + String.valueOf(c.get(Calendar.MINUTE)) + String.valueOf(c.get(Calendar.SECOND)) + String.valueOf(c.get(Calendar.MILLISECOND));
+        String numberFromTime;
+
+        try {
+             numberFromTime = String.valueOf(c.get(Calendar.YEAR)).substring(1) + String.valueOf(c.get(Calendar.MONTH)) + String.valueOf(c.get(Calendar.DATE)) + String.valueOf(c.get(Calendar.HOUR)) + String.valueOf(c.get(Calendar.MINUTE)) + String.valueOf(c.get(Calendar.SECOND)) + String.valueOf(c.get(Calendar.MILLISECOND));
+
+        }catch (Exception ex){
+
+            numberFromTime =   getAlphaNumericString(16);
+
+        }
         if (numberFromTime.length() == 16) {
         } else {
             if (numberFromTime.length() > 16) {
@@ -977,8 +987,27 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
                 }
             }
         }
-        return Long.parseLong((numberFromTime + user.getUserId()));
+        return Long.parseLong(numberFromTime);
+
     }
 
+    static String getAlphaNumericString(int n) {
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                + "0123456789"
+                + "abcdefghijklmnopqrstuvxyz";
+
+
+        StringBuilder sb = new StringBuilder(n);
+
+        for (int i = 0; i < n; i++) {
+            int index
+                    = (int)(AlphaNumericString.length()
+                    * Math.random());
+
+            sb.append(AlphaNumericString
+                    .charAt(index));
+        }
+        return sb.toString();
+    }
 
 }

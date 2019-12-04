@@ -229,7 +229,8 @@ public class ActivityLogin extends Activity implements LoginView {
     public void onClickFacebookSingUp(View view) {
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             bloackUserInteraction();
-            FacebookSingUp();
+            Toast.makeText(getApplicationContext(), "This feature will be available soon", Toast.LENGTH_SHORT).show();
+         //   FacebookSingUp();
         } else {
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }

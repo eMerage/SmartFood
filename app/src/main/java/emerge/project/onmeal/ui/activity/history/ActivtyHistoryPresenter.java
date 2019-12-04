@@ -16,7 +16,12 @@ public interface ActivtyHistoryPresenter {
     void getOrderHistory();
 
 
-    void getOrderHistoryDetails(String orderID,int level);
+    void getOrderHistoryDetails(String orderID);
     void signOut(Context context);
+
+
+    void getOutlet(int outletID);
+
+
 
 }

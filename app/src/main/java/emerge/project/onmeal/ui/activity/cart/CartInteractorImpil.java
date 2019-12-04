@@ -121,8 +121,10 @@ public class CartInteractorImpil implements CartInteractor {
         }
 
 
+        int cartCount = 0;
 
         for (CartHeader ns : realm.where(CartHeader.class).equalTo("isActive", true).findAll()) {
+            cartCount++;
             totalPrice = totalPrice + ns.getPriceTotal();
             outlet = ns.getOutletID();
         }
@@ -141,91 +143,96 @@ public class CartInteractorImpil implements CartInteractor {
 
         final Double finalTotalPrice = totalPrice;
 
+        if(cartCount==0){
+            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "No Order in your cart");
+        }else {
 
+            try {
+                apiService.validatePromoCode(jsonObject)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<JsonObject>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
 
+                            }
 
+                            @Override
+                            public void onNext(JsonObject respond) {
+                                promoCodeValidationJsonObject = respond;
+                            }
 
-        try {
-            apiService.validatePromoCode(jsonObject)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<JsonObject>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
+                            @Override
+                            public void onError(Throwable e) {
+                                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode,"Communication error, Please try again");
+                            }
 
-                        }
+                            @Override
+                            public void onComplete() {
+                                if (promoCodeValidationJsonObject != null) {
+                                    JSONObject userVerifiedResponse = null;
+                                    try {
+                                        userVerifiedResponse = new JSONObject(promoCodeValidationJsonObject.toString());
+                                        Double deliveryCharges = userVerifiedResponse.getDouble("deliveryCost");
+                                        double subAmount;
+                                        double fullAmount;
+                                        String serviceCharge;
+                                        double serviceChargeValue = 0.0;
 
-                        @Override
-                        public void onNext(JsonObject respond) {
-                            promoCodeValidationJsonObject = respond;
-                        }
+                                        if (userVerifiedResponse.getDouble("subTotal") == 0) {
+                                            fullAmount = finalTotalPrice;
+                                            Toast.makeText(context, "Promo Code not valid", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            fullAmount = userVerifiedResponse.getDouble("subTotal");
+                                        }
 
-                        @Override
-                        public void onError(Throwable e) {
-                           // onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again"));
-                            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode,"Communication error, Please try again");
-                        }
+                                        if (userVerifiedResponse.getString("serviceChargePercentage").equals("0") || userVerifiedResponse.getString("serviceChargePercentage").equals("null")) {
+                                            serviceCharge = "0.00";
+                                        } else {
+                                            serviceCharge = userVerifiedResponse.getString("serviceChargePercentage");
+                                            serviceChargeValue = userVerifiedResponse.getDouble("serviceCharge");
+                                        }
 
-                        @Override
-                        public void onComplete() {
-                            if (promoCodeValidationJsonObject != null) {
-                                JSONObject userVerifiedResponse = null;
-                                try {
-                                    userVerifiedResponse = new JSONObject(promoCodeValidationJsonObject.toString());
-                                    Double deliveryCharges = userVerifiedResponse.getDouble("deliveryCost");
-                                    double subAmount;
-                                    double fullAmount;
-                                    String serviceCharge;
-                                    double serviceChargeValue = 0.0;
+                                        if (userVerifiedResponse.getDouble("promoTotal") == 0) {
+                                            subAmount = fullAmount;
+                                        } else {
+                                            subAmount = userVerifiedResponse.getDouble("promoTotal");
+                                        }
 
-                                    if (userVerifiedResponse.getDouble("subTotal") == 0) {
-                                        fullAmount = finalTotalPrice;
-                                        Toast.makeText(context, "Promo Code not valid", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        fullAmount = userVerifiedResponse.getDouble("subTotal");
+                                        double discount = 0.0;
+
+                                        discount = userVerifiedResponse.getDouble("discountedAmount");
+
+                                        String promo;
+                                        if (userVerifiedResponse.getString("promoTitle").equals("") || userVerifiedResponse.getString("promoTitle") == null || userVerifiedResponse.getString("promoTitle").equals("null")) {
+                                            promo = "No Promo";
+                                        } else {
+                                            promo = userVerifiedResponse.getString("promoTitle");
+                                        }
+                                        onPromoCodeValidationFinishedListener.getPromoCodeValidationSuccessful(promo, discount, subAmount, userVerifiedResponse.getString("imageUrl"), deliveryCharges, serviceCharge, String.valueOf(serviceChargeValue), fullAmount);
+
+                                    } catch (JSONException e) {
+                                        Logger.e(e.toString());
+                                        onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
+                                    } catch (NullPointerException exNull) {
+                                        onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
                                     }
 
-                                    if (userVerifiedResponse.getString("serviceChargePercentage").equals("0") || userVerifiedResponse.getString("serviceChargePercentage").equals("null")) {
-                                        serviceCharge = "0.00";
-                                    } else {
-                                        serviceCharge = userVerifiedResponse.getString("serviceChargePercentage");
-                                        serviceChargeValue = userVerifiedResponse.getDouble("serviceCharge");
-                                    }
-
-                                    if (userVerifiedResponse.getDouble("promoTotal") == 0) {
-                                        subAmount = fullAmount;
-                                    } else {
-                                        subAmount = userVerifiedResponse.getDouble("promoTotal");
-                                    }
-
-                                    double discount = 0.0;
-
-                                    discount = userVerifiedResponse.getDouble("discountedAmount");
-
-                                    String promo;
-                                    if (userVerifiedResponse.getString("promoTitle").equals("") || userVerifiedResponse.getString("promoTitle") == null || userVerifiedResponse.getString("promoTitle").equals("null")) {
-                                        promo = "No Promo";
-                                    } else {
-                                        promo = userVerifiedResponse.getString("promoTitle");
-                                    }
-                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationSuccessful(promo, discount, subAmount, userVerifiedResponse.getString("imageUrl"), deliveryCharges, serviceCharge, String.valueOf(serviceChargeValue), fullAmount);
-
-                                } catch (JSONException e) {
-                                    Logger.e(e.toString());
-                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
-                                } catch (NullPointerException exNull) {
+                                } else {
                                     onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
                                 }
-
-                            } else {
-                                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
                             }
-                        }
-                    });
+                        });
 
-        } catch (Exception ex) {
-            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
+            } catch (Exception ex) {
+                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
+            }
+
+
+
         }
+
+
     }
 
     @Override
@@ -379,6 +386,8 @@ public class CartInteractorImpil implements CartInteractor {
         }
 
 
+
+
         if (cartCount == 0) {
             onOrderProsessFinishedListener.cartIsEmpty();
         } else if (paymentType == null || paymentType.equals("") || paymentType.isEmpty()) {
@@ -524,6 +533,7 @@ public class CartInteractorImpil implements CartInteractor {
                                             String outletCity = userVerifiedResponse.getJSONObject("orderOutlet").getString("city");
                                             String outletPromoTitle = userVerifiedResponse.getString("promoTitle");
                                             String subTotal = userVerifiedResponse.getString("subTotal");
+
                                             OrderConfirmDetails orderConfirmDetails = new OrderConfirmDetails(userVerifiedResponse.getString("orderID"),
                                                     orderCode, strDate, Integer.parseInt(addressId), Promocode, outletPromoTitle, finalOutletId, outletName, outletCity, deliveryChargers,
                                                     totalAmount, paymentType, dispatchTypeForSever, pickupTime, timeSlot);
@@ -664,15 +674,15 @@ public class CartInteractorImpil implements CartInteractor {
                     RealmResults<CartDetail> resultsCartDetail = realm.where(CartDetail.class).equalTo("outletMenuTitleID", menuitemserror1.getOutletMenuTitleID()).findAll();
                     resultsCartDetail.deleteAllFromRealm();
                     RealmResults<CartHeader> resultsCartHeader = realm.where(CartHeader.class).equalTo("outletMenuTitleID", menuitemserror1.getOutletMenuTitleID()).findAll();
-                    resultsCartHeader.deleteAllFromRealm();
 
+                    resultsCartHeader.deleteAllFromRealm();
 
                 }
             });
-            onRemoveFaildMenusFinishedListener.removeFaildMenusSuccess();
-
-
         }
+
+
+        onRemoveFaildMenusFinishedListener.removeFaildMenusSuccess();
     }
 
     @Override
@@ -683,7 +693,7 @@ public class CartInteractorImpil implements CartInteractor {
         User user = realm.where(User.class).findFirst();
         Address address = realm.where(Address.class).findFirst();
 
-        int totalQty = 1;
+        int totalQty = 0;
 
         for (CartHeader ns : realm.where(CartHeader.class).equalTo("isActive", true).findAll()) {
             totalQty = totalQty + ns.getQuantity();
@@ -726,7 +736,6 @@ public class CartInteractorImpil implements CartInteractor {
 
         }
         req.getItems().add(new Item(null, "Smart Food", totalQty,ammount));
-       // req.getItems().add(new Item(null, "Door bell wireless", 1));
 
         onSetDataToPaymentGatewayFinishedListener.dataSetToPaymentGateway(req, orderID);
     }

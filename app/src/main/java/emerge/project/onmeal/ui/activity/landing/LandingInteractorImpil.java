@@ -204,7 +204,51 @@ public class LandingInteractorImpil implements LandingInteractor {
         User user = realm.where(User.class).findFirst();
         JsonObject jsonObject = new JsonObject();
 
-        final String fullAddress = addressItems.getAddressNumber() + " " + addressItems.getMainRoad() + addressItems.getSubRoad() + " " + addressItems.getAddressCity();
+        String addressNum =addressItems.getAddressNumber();
+        String addressFloor ="";
+        String mainRoad =addressItems.getMainRoad();
+        String subRoad ="";
+        String addressCity =addressItems.getAddressCity();
+        String addressApartmentName ="";
+        String addressCompanyName ="";
+
+
+
+        if(addressItems.getAddressFloor()!=null){
+            if(!addressItems.getAddressFloor().equals("null")){
+                addressFloor = addressItems.getAddressFloor();
+            }
+
+        }
+
+        if(addressItems.getSubRoad()!=null){
+            if(!addressItems.getSubRoad().equals("null")){
+                subRoad = addressItems.getSubRoad();
+            }
+
+        }
+
+
+        if(addressItems.getAddressApartmentName()!=null){
+            addressApartmentName = addressItems.getAddressApartmentName();
+        }
+
+
+        if(addressItems.getAddressCompanyName()!=null){
+            addressCompanyName = addressItems.getAddressCompanyName();
+        }
+
+
+
+
+        final String fullAddress =addressNum+" "+
+                addressFloor+ " " +
+                mainRoad+ " " +
+                subRoad+ " " +
+                addressCity+ " " +
+                addressApartmentName+ " " +
+                addressCompanyName;
+
 
         jsonObject.addProperty("userAddressID", "0");
         jsonObject.addProperty("AddressName", addressItems.getAddressName());
@@ -223,6 +267,9 @@ public class LandingInteractorImpil implements LandingInteractor {
         jsonObject.addProperty("DepartmentName", addressItems.getAddressCompanyDepartment());
         jsonObject.addProperty("LandMark", addressItems.getAddressLandmark());
         jsonObject.addProperty("DeliveryInstruction", addressItems.getAddressDeliveryInstructions());
+
+
+        System.out.println(" jsonObject :"+jsonObject);
 
 
         try {

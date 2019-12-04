@@ -102,7 +102,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
     // navigation menu
 
 
-   @BindView(R.id.swipeContainer)
+    @BindView(R.id.swipeContainer)
     SwipeRefreshLayout swipeRefreshLayout;
 
     HistoryCurrentAdapter historyCurrentAdapter;
@@ -114,16 +114,12 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
     HistoryMenuAdapter historyMenuAdapter;
 
 
-
-    double latitude = 0.0,longitude = 0.0;
-    GoogleMap mMap ;
+    double latitude = 0.0, longitude = 0.0;
+    GoogleMap mMap;
 
     MapView mapView;
     TextView textNoLocation;
     ImageView ImageView_googlemap;
-
-
-
 
 
     @Override
@@ -225,8 +221,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
     public void getOrderHistoryCurrent(ArrayList<OrderHistoryItems> orderHistoryItemsArrayList) {
 
 
-
-        historyCurrentAdapter = new HistoryCurrentAdapter(this, orderHistoryItemsArrayList,this);
+        historyCurrentAdapter = new HistoryCurrentAdapter(this, orderHistoryItemsArrayList, this);
         recyclerviewCurrent.setAdapter(historyCurrentAdapter);
 
     }
@@ -242,7 +237,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
         textviewMsg.setText("Your Past Orders");
 
 
-        historyPastAdapter = new HistoryPastAdapter(this, orderHistoryItemsArrayList,this);
+        historyPastAdapter = new HistoryPastAdapter(this, orderHistoryItemsArrayList, this);
         recyclerviewPast.setAdapter(historyPastAdapter);
 
 
@@ -286,7 +281,6 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
     }
 
 
-
     @Override
     public void getOrderHistoryDetailsStart() {
         proprogressview.setVisibility(View.VISIBLE);
@@ -295,47 +289,39 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
     }
 
     @Override
-    public void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> cartHeader,int level,OutletItems out) {
+    public void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> cartHeader, OutletItems out) {
 
         proprogressview.setVisibility(View.GONE);
         unBloackUserInteraction();
         swipeRefreshLayout.setRefreshing(false);
 
 
-        if(level==0){
-            Dialog dialogBox = new Dialog(this);
-            dialogBox.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            dialogBox.setContentView(R.layout.dialog_cart_subitems);
-            dialogBox.setCancelable(true);
+        Dialog dialogBox = new Dialog(this);
+        dialogBox.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogBox.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialogBox.setContentView(R.layout.dialog_cart_subitems);
+        dialogBox.setCancelable(true);
 
 
-            RecyclerView  recyclerViewOrderSubitems = (RecyclerView) dialogBox.findViewById(R.id.recyclerview_subcart_items);
+        RecyclerView recyclerViewOrderSubitems = (RecyclerView) dialogBox.findViewById(R.id.recyclerview_subcart_items);
 
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-            recyclerViewOrderSubitems.setLayoutManager(layoutManager);
-            recyclerViewOrderSubitems.setItemAnimator(new DefaultItemAnimator());
-            recyclerViewOrderSubitems.setNestedScrollingEnabled(true);
-
-
-            historyMenuAdapter = new HistoryMenuAdapter(this,cartHeader);
-            recyclerViewOrderSubitems.setAdapter(historyMenuAdapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerViewOrderSubitems.setLayoutManager(layoutManager);
+        recyclerViewOrderSubitems.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewOrderSubitems.setNestedScrollingEnabled(true);
 
 
-            dialogBox.show();
-        }else {
-            showOutletMoreDetails(out);
-        }
+        historyMenuAdapter = new HistoryMenuAdapter(this, cartHeader);
+        recyclerViewOrderSubitems.setAdapter(historyMenuAdapter);
 
 
+        dialogBox.show();
 
 
     }
 
 
-
-
-    private void showOutletMoreDetails(final OutletItems outlet){
+    private void showOutletMoreDetails(final OutletItems outlet) {
 
         final Dialog dialogOutletMoreDetails = new Dialog(this);
         dialogOutletMoreDetails.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -344,12 +330,11 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
         dialogOutletMoreDetails.setCancelable(true);
 
 
+        RecyclerView recyclerViewOutletImages = dialogOutletMoreDetails.findViewById(R.id.recyclerView_outletimages);
+        TextView text3 = dialogOutletMoreDetails.findViewById(R.id.text3);
+        ImageView_googlemap = dialogOutletMoreDetails.findViewById(R.id.ImageView_googlemap);
 
-        RecyclerView  recyclerViewOutletImages= dialogOutletMoreDetails.findViewById(R.id.recyclerView_outletimages);
-        TextView  text3= dialogOutletMoreDetails.findViewById(R.id.text3);
-        ImageView_googlemap= dialogOutletMoreDetails.findViewById(R.id.ImageView_googlemap);
-
-        textNoLocation =  dialogOutletMoreDetails.findViewById(R.id.textview_nolocations);
+        textNoLocation = dialogOutletMoreDetails.findViewById(R.id.textview_nolocations);
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -358,7 +343,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
         recyclerViewOutletImages.setNestedScrollingEnabled(true);
 
 
-        mapView= dialogOutletMoreDetails.findViewById(R.id.mapView_outlet);
+        mapView = dialogOutletMoreDetails.findViewById(R.id.mapView_outlet);
 
 
         latitude = outlet.getOutletLatitude();
@@ -371,46 +356,43 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
         }
 
 
-        if(outlet.getOutletImages().isEmpty()){
+        if (outlet.getOutletImages().isEmpty()) {
             text3.setVisibility(View.VISIBLE);
             recyclerViewOutletImages.setVisibility(View.INVISIBLE);
 
-        }else {
+        } else {
             text3.setVisibility(View.GONE);
             recyclerViewOutletImages.setVisibility(View.VISIBLE);
 
-            HomeOutletImagesAdaptor homeOutletImagesAdaptor = new HomeOutletImagesAdaptor(this,outlet.getOutletImages());
+            HomeOutletImagesAdaptor homeOutletImagesAdaptor = new HomeOutletImagesAdaptor(this, outlet.getOutletImages());
             recyclerViewOutletImages.setAdapter(homeOutletImagesAdaptor);
         }
 
 
-
-        TextView textView_outletdetails_name= dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_name);
+        TextView textView_outletdetails_name = dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_name);
         textView_outletdetails_name.setText(outlet.getOutletName());
 
-        TextView textView_outletdetails_city= dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_city);
+        TextView textView_outletdetails_city = dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_city);
         textView_outletdetails_city.setText(outlet.getOutletCity());
 
-        TextView textView_outletdetails_ownersname= dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_ownersname);
+        TextView textView_outletdetails_ownersname = dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_ownersname);
         textView_outletdetails_ownersname.setText(outlet.getOutletOwnersName());
 
-        TextView textView_outletdetails_contactnumber= dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_contactnumber);
+        TextView textView_outletdetails_contactnumber = dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_contactnumber);
         textView_outletdetails_contactnumber.setText(outlet.getPhoneNUmber());
 
 
-        TextView textView_outletdetails_email= dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_email);
+        TextView textView_outletdetails_email = dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_email);
         textView_outletdetails_email.setText(outlet.geteMail());
-
-
 
 
         ImageView_googlemap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(latitude==0.0){
+                if (latitude == 0.0) {
 
-                }else {
+                } else {
                     String latit = String.valueOf(latitude);
                     String longi = String.valueOf(longitude);
 
@@ -426,23 +408,19 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
                     Intent mapIntent = new Intent(Intent.ACTION_VIEW, uri);
                     mapIntent.setPackage("com.google.android.apps.maps");
 
-                    try{
+                    try {
                         if (mapIntent.resolveActivity(getPackageManager()) != null) {
                             startActivity(mapIntent);
                         }
-                    }catch (NullPointerException e){
+                    } catch (NullPointerException e) {
                     }
 
 
                 }
 
 
-
             }
         });
-
-
-
 
 
         dialogOutletMoreDetails.show();
@@ -467,7 +445,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
 
 
     @Override
-    public void getOrderHistoryDetailsFail(String msg, final String orderID, final int level) {
+    public void getOrderHistoryDetailsFail(String msg, final String orderID) {
 
 
         proprogressview.setVisibility(View.GONE);
@@ -484,7 +462,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
                             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
                                 proprogressview.setVisibility(View.VISIBLE);
                                 bloackUserInteraction();
-                                activtyHistoryPresenter.getOrderHistoryDetails(orderID,level);
+                                activtyHistoryPresenter.getOrderHistoryDetails(orderID);
                             } else {
                                 Toast.makeText(ActivityHistory.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
 
@@ -506,15 +484,10 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
         }
 
 
-
-
-
-
     }
 
 
     private void setRecycalCurrentView() {
-
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -555,9 +528,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
         MapsInitializer.initialize(this);
 
 
-
         mMap = googleMap;
-
 
 
         LatLng locationMap = new LatLng(latitude, longitude);
@@ -594,6 +565,52 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
         finish();
         startActivity(intent, bndlanimation);
 
+    }
+
+
+    @Override
+    public void getOutletDetails(OutletItems outletItems) {
+        proprogressview.setVisibility(View.GONE);
+        unBloackUserInteraction();
+        swipeRefreshLayout.setRefreshing(false);
+        showOutletMoreDetails(outletItems);
+    }
+
+    @Override
+    public void getOutletDetailsFail(String msg, final int outletID) {
+        proprogressview.setVisibility(View.GONE);
+        unBloackUserInteraction();
+        swipeRefreshLayout.setRefreshing(false);
+        try {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage(msg);
+            alertDialogBuilder.setPositiveButton("Re-Try",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+                                proprogressview.setVisibility(View.VISIBLE);
+                                bloackUserInteraction();
+                                activtyHistoryPresenter.getOutlet(outletID);
+                            } else {
+                                Toast.makeText(ActivityHistory.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+                    });
+            alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    return;
+                }
+            });
+            alertDialogBuilder.show();
+
+        } catch (WindowManager.BadTokenException e) {
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
 }
