@@ -229,8 +229,9 @@ public class ActivityLogin extends Activity implements LoginView {
     public void onClickFacebookSingUp(View view) {
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             bloackUserInteraction();
-            Toast.makeText(getApplicationContext(), "This feature will be available soon", Toast.LENGTH_SHORT).show();
-         //   FacebookSingUp();
+            FacebookSingUp();
+
+
         } else {
             Toast.makeText(getApplicationContext(), getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
@@ -300,7 +301,8 @@ public class ActivityLogin extends Activity implements LoginView {
     }
 
     private void facebookLoginButtonRegisterCallback() {
-        loginManager.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
+            loginManager.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 mAccessToken = loginResult.getAccessToken();
@@ -316,6 +318,7 @@ public class ActivityLogin extends Activity implements LoginView {
             @Override
             public void onError(FacebookException e) {
                 proprogressview.setVisibility(View.INVISIBLE);
+                unBloackUserInteraction();
                 Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
 
             }
@@ -544,6 +547,7 @@ public class ActivityLogin extends Activity implements LoginView {
 
     private void FacebookSingUp() {
         loginManager.logInWithReadPermissions(this, Arrays.asList("email", "public_profile"));
+
     }
 
     private void singOut() {

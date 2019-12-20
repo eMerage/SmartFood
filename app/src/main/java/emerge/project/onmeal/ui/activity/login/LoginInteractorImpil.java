@@ -122,7 +122,13 @@ public class LoginInteractorImpil implements LoginInteractor {
         encryptedPreferences = new EncryptedPreferences.Builder(context).withEncryptionPassword("122547895511").build();
         String userPushTokenId = encryptedPreferences.getString(PUSH_TOKEN, "");
 
+        System.out.println("xxxxxxxxxxxxxxxxxxxx checkFacebookSingInValidation: "+json);
+
         try {
+
+            System.out.println("xxxxxxxxxxxxxxxxxxxx : "+json.getString("email"));
+
+
             final String emailAddress = json.getString("email");
             final String userName = json.getString("name");
             final String userSocialMediaTokenId = json.getString("id");

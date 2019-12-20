@@ -54,19 +54,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
     }
 
     public void notification(String titel, String message){
+
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle(titel)
-                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setSound(defaultSoundUri)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText(message))
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message);
 
         Intent resultIntent = null;
 
-     resultIntent = new Intent(this, ActivitySplash.class);
+        resultIntent = new Intent(this, ActivitySplash.class);
 
         TaskStackBuilder stackBuilder = null;
         PendingIntent resultPendingIntent = null;

@@ -242,6 +242,7 @@ public class ActivitySetLocation extends FragmentActivity implements OnMapReadyC
         });
 
 
+
         mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
             @Override
             public void onCameraIdle() {
@@ -348,6 +349,12 @@ public class ActivitySetLocation extends FragmentActivity implements OnMapReadyC
                                         .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
                                         .draggable(true)
                                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+
+                                if (mLastKnownLocation == null) {
+
+                                } else {
+                                    getAddressFromLocation(mLastKnownLocation.getLatitude(),  mLastKnownLocation.getLongitude());
+                                }
                             }
 
                         } else {

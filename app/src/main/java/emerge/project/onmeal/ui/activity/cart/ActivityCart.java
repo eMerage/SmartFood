@@ -312,8 +312,6 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
     @OnClick(R.id.img_btn_confirm)
     public void onClickConfrim(View view) {
-
-
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             proprogressview.setVisibility(View.VISIBLE);
             bloackUserInteraction();
@@ -768,7 +766,6 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void orderProsessSuccess(OrderConfirmDetails orderConfirmDetails) {
-
         webOrderId = orderConfirmDetails.getOrderID();
         proprogressview.setVisibility(View.GONE);
         orderconfirmdetails = orderConfirmDetails;
@@ -781,14 +778,11 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
             cartPresenter.setDataToPaymentGateway(Double.parseDouble(totalAmount), webOrderId, orderCODE, edittextNote.getText().toString());
 
         } else {
-            Toast.makeText(this, "Thank you!,Your order has been successfully processed", Toast.LENGTH_SHORT).show();
-
-            Intent intentSingup = new Intent(ActivityCart.this, OrderDetails.class);
-            Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
-            intentSingup.putExtra("ORDERCONFIRMDETAILS", orderConfirmDetails);
-            finish();
-            startActivity(intentSingup, bndlanimation);
-
+            bloackUserInteraction();
+            proprogressview.setVisibility(View.VISIBLE);
+            //ref for cash
+            long cashRef=111111;
+            cartPresenter.orderPaymentUpdate(webOrderId, cashRef);
         }
 
 

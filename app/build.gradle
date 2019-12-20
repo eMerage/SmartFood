@@ -8,8 +8,8 @@ android {
         applicationId "emerge.project.onmeal"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 25
-        versionName "1.0.1.PR25"
+        versionCode 28
+        versionName "1.0.1.PR28"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -39,12 +39,13 @@ android {
             signingConfig signingConfigs.key
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_Production/api/\"'
+           // buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_DEV/api/\"'
         }
         debug {
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_Production/api/\"'
-          /// buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_DEV/api/\"'
+          //  buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_Production/api/\"'
+           buildConfigField "String", "API_BASE_URL", '\"http://mealtime.emerge.lk:7777/OnMeal_DEV/api/\"'
 
         }
     }
@@ -114,7 +115,7 @@ dependencies {
 
 
     //fcaebook sdk
-    implementation 'com.facebook.android:facebook-login:[4,5)'
+    implementation 'com.facebook.android:facebook-login:[5,6)'
 
     //Progress Indicators
     implementation 'com.tuyenmonkey:mkloader:1.4.0'

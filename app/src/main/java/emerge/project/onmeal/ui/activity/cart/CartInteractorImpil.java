@@ -174,6 +174,8 @@ public class CartInteractorImpil implements CartInteractor {
                                     try {
                                         userVerifiedResponse = new JSONObject(promoCodeValidationJsonObject.toString());
                                         Double deliveryCharges = userVerifiedResponse.getDouble("deliveryCost");
+
+
                                         double subAmount;
                                         double fullAmount;
                                         String serviceCharge;
@@ -186,6 +188,7 @@ public class CartInteractorImpil implements CartInteractor {
                                             fullAmount = userVerifiedResponse.getDouble("subTotal");
                                         }
 
+                                        
                                         if (userVerifiedResponse.getString("serviceChargePercentage").equals("0") || userVerifiedResponse.getString("serviceChargePercentage").equals("null")) {
                                             serviceCharge = "0.00";
                                         } else {
@@ -590,20 +593,21 @@ public class CartInteractorImpil implements CartInteractor {
                                 try {
                                     if (orderSaveFail.isEmpty()) {
                                         onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
-
                                     } else {
                                         for (int i = 0; i < orderSaveFail.size(); i++) {
                                             if (orderSaveFail.get(i).getErrorCode().equals("ERQNA")) {
                                                 menuItemsError.add(new MenuItemsError(orderSaveFail.get(i).getMenuItemsError().getMenuId(), orderSaveFail.get(i).getMenuItemsError().getOutletMenuTitleID(),
                                                         orderSaveFail.get(i).getMenuItemsError().getMenuTitle(), orderSaveFail.get(i).getMenuItemsError().getImageUrl()));
+                                                onOrderProsessFinishedListener.menuItemsErrorList(menuItemsError);
                                             } else if (orderSaveFail.get(i).getErrorCode().equals("ERDLT")) {
                                                 onOrderProsessFinishedListener.orderProsessFail("Delivery time slot error, Please try again");
+                                            }else if(orderSaveFail.get(i).getErrorCode().equals("ERCOLE")){
+                                                onOrderProsessFinishedListener.orderProsessFail("Your cash order limit exceeded");
                                             } else {
                                                 onOrderProsessFinishedListener.orderProsessFail("Communication error, Please try again");
                                             }
 
                                         }
-                                        onOrderProsessFinishedListener.menuItemsErrorList(menuItemsError);
 
                                     }
                                 } catch (NullPointerException exNull) {
@@ -693,12 +697,6 @@ public class CartInteractorImpil implements CartInteractor {
         User user = realm.where(User.class).findFirst();
         Address address = realm.where(Address.class).findFirst();
 
-        int totalQty = 0;
-
-        for (CartHeader ns : realm.where(CartHeader.class).equalTo("isActive", true).findAll()) {
-            totalQty = totalQty + ns.getQuantity();
-        }
-
 
 
         InitRequest req = new InitRequest();
@@ -723,8 +721,6 @@ public class CartInteractorImpil implements CartInteractor {
             req.getCustomer().getDeliveryAddress().setAddress("Pick Up");
             req.getCustomer().getDeliveryAddress().setCity("Pick Up");
             req.getCustomer().getDeliveryAddress().setCountry("Sri Lanka");
-
-
         } else {
             req.getCustomer().getAddress().setAddress(address.getAddress());
             req.getCustomer().getAddress().setCity(address.getAddress());
@@ -732,10 +728,10 @@ public class CartInteractorImpil implements CartInteractor {
             req.getCustomer().getDeliveryAddress().setAddress(address.getAddress());
             req.getCustomer().getDeliveryAddress().setCity(address.getAddress());
             req.getCustomer().getDeliveryAddress().setCountry("Sri Lanka");
-
-
         }
-        req.getItems().add(new Item(null, "Smart Food", totalQty,ammount));
+
+
+        req.getItems().add(new Item(null, "Smart Food", 1,ammount));
 
         onSetDataToPaymentGatewayFinishedListener.dataSetToPaymentGateway(req, orderID);
     }
