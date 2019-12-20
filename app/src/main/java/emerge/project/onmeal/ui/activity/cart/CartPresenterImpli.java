@@ -53,8 +53,8 @@ CartInteractor.OnRemoveFaildMenusFinishedListener,
 
 
     @Override
-    public void getPromoCodeValidation(Context context, String promoCode) {
-        cartInteractor.getPromoCodeValidation(context, promoCode, this);
+    public void getPromoCodeValidation(Context context, String promoCode,String orderCode) {
+        cartInteractor.getPromoCodeValidation(context, promoCode,orderCode ,this);
     }
 
 
@@ -64,8 +64,8 @@ CartInteractor.OnRemoveFaildMenusFinishedListener,
     }
 
     @Override
-    public void getPromoCodeValidationFail(String promoCode, String msg) {
-        cartView.getPromoCodeValidationFail(promoCode, msg);
+    public void getPromoCodeValidationFail(String promoCode,String orderCode ,String msg) {
+        cartView.getPromoCodeValidationFail(promoCode,orderCode ,msg);
     }
 
 

@@ -21,7 +21,7 @@ public interface CartView {
 
     void getPromoCodeValidationSuccessful(String code, Double discount, Double subtotal, String image, Double deliveryCharges,String service,String serviceValue,Double total);
 
-    void getPromoCodeValidationFail(String promoCode, String msg);
+    void getPromoCodeValidationFail(String promoCode, String orderCode,String msg);
 
 
     void getDeliveryTimeSlotSuccessful(ArrayList<TimeSlots> timeSlotsItems);

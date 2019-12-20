@@ -83,7 +83,7 @@ public class CartInteractorImpil implements CartInteractor {
     }
 
     @Override
-    public void getPromoCodeValidation(final Context context, final String promoCode, final OnPromoCodeValidationFinishedListener onPromoCodeValidationFinishedListener) {
+    public void getPromoCodeValidation(final Context context, final String promoCode, final String orderCode,final OnPromoCodeValidationFinishedListener onPromoCodeValidationFinishedListener) {
 
         appContext = context;
 
@@ -140,11 +140,14 @@ public class CartInteractorImpil implements CartInteractor {
         jsonObject.addProperty("PromoCode", promoCode);
         jsonObject.addProperty("SubTotal", totalPrice);
         jsonObject.addProperty("DispatchType", dispatchPatchType);
+        jsonObject.addProperty("OrderCode", orderCode);
+
+
 
         final Double finalTotalPrice = totalPrice;
 
         if(cartCount==0){
-            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "No Order in your cart");
+            onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode,orderCode,"No Order in your cart");
         }else {
 
             try {
@@ -164,7 +167,7 @@ public class CartInteractorImpil implements CartInteractor {
 
                             @Override
                             public void onError(Throwable e) {
-                                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode,"Communication error, Please try again");
+                                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, orderCode,"Communication error, Please try again");
                             }
 
                             @Override
@@ -216,19 +219,19 @@ public class CartInteractorImpil implements CartInteractor {
 
                                     } catch (JSONException e) {
                                         Logger.e(e.toString());
-                                        onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
+                                        onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, orderCode,"Communication error, Please try again");
                                     } catch (NullPointerException exNull) {
-                                        onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
+                                        onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode,orderCode, "Communication error, Please try again");
                                     }
 
                                 } else {
-                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
+                                    onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, orderCode,"Communication error, Please try again");
                                 }
                             }
                         });
 
             } catch (Exception ex) {
-                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode, "Communication error, Please try again");
+                onPromoCodeValidationFinishedListener.getPromoCodeValidationFail(promoCode,orderCode, "Communication error, Please try again");
             }
 
 

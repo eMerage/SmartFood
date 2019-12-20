@@ -229,13 +229,11 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             bloackUserInteraction();
             proprogressview.setVisibility(View.VISIBLE);
-
-            cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString());
-
-            cartPresenter.getDeliveryAddress(this);
             cartPresenter.genarateOrderCode();
+            cartPresenter.getDeliveryAddress(this);
 
         } else {
+            cartPresenter.genarateOrderCode();
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("Warning");
             alertDialogBuilder.setMessage("No Internet Access, Please try again ");
@@ -248,7 +246,6 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
             alertDialogBuilder.show();
 
         }
-
         calendar = Calendar.getInstance();
 
 
@@ -356,7 +353,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
                 bloackUserInteraction();
                 proprogressview.setVisibility(View.VISIBLE);
-                cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString());
+                cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString(),orderCODE);
             } else {
                 Toast.makeText(this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
 
@@ -408,7 +405,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         bloackUserInteraction();
         proprogressview.setVisibility(View.VISIBLE);
 
-        cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString());
+        cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString(),orderCODE);
         cartPresenter.getCartItems();
     }
 
@@ -485,7 +482,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void getPromoCodeValidationFail(String promoCode, String msg) {
+    public void getPromoCodeValidationFail(String promoCode, final String orderCode , String msg) {
         unBloackUserInteraction();
         proprogressview.setVisibility(View.GONE);
         try {
@@ -542,7 +539,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
                                 if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
                                     proprogressview.setVisibility(View.VISIBLE);
                                     bloackUserInteraction();
-                                    cartPresenter.getPromoCodeValidation(ActivityCart.this, editTextPromocode.getText().toString());
+                                    cartPresenter.getPromoCodeValidation(ActivityCart.this, editTextPromocode.getText().toString(),orderCode);
                                 } else {
                                     Toast.makeText(ActivityCart.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
 
@@ -916,8 +913,42 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void getOrderCode(String orderCode) {
         orderCODE = orderCode;
+        if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+            if((orderCODE.equals("")) || (orderCODE == null)){
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Warning");
+                alertDialogBuilder.setMessage("Order can not be process,please try again");
+                alertDialogBuilder.setPositiveButton("Try-again",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                cartPresenter.genarateOrderCode();
+                            }
+                        });
+                alertDialogBuilder.show();
+            }else {
+                cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString(),orderCODE);
+            }
+
+
+        }else {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage("No Internet Access, Please try again");
+            alertDialogBuilder.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+            alertDialogBuilder.show();
+
+        }
+
+
+
 
     }
+
 
     @Override
     public void removeFaildMenusSuccess() {
@@ -925,7 +956,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             bloackUserInteraction();
             proprogressview.setVisibility(View.VISIBLE);
-            cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString());
+            cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString(),orderCODE);
             cartPresenter.getCartItems();
         } else {
 

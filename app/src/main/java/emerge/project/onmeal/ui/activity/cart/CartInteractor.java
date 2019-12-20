@@ -28,9 +28,9 @@ public interface CartInteractor {
 
     interface OnPromoCodeValidationFinishedListener {
         void getPromoCodeValidationSuccessful(String code,Double discount,Double Subtotal,String image,Double deliveryCharges,String service,String serviceValue,Double total);
-        void getPromoCodeValidationFail(String promoCode,String msg);
+        void getPromoCodeValidationFail(String promoCode,String orderCode,String msg);
     }
-    void getPromoCodeValidation(Context context, String promoCode, OnPromoCodeValidationFinishedListener  onPromoCodeValidationFinishedListener);
+    void getPromoCodeValidation(Context context, String promoCode,String orderCode, OnPromoCodeValidationFinishedListener  onPromoCodeValidationFinishedListener);
 
 
     interface OngetDeliveryTimeSlotFinishedListener {

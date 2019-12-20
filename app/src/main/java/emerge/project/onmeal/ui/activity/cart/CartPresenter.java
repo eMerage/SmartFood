@@ -14,7 +14,7 @@ import emerge.project.onmeal.utils.entittes.MenuItemsError;
 public interface CartPresenter {
     void getCartItems();
 
-    void getPromoCodeValidation(Context context, String promoCode);
+    void getPromoCodeValidation(Context context, String promoCode,String orderCode);
 
     void getDeliveryTimeSlot();
 
