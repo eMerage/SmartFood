@@ -194,6 +194,8 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     String selectedPickupTime = "";
     String paymentType = "";
     String orderCODE;
+    String promoCode = "";
+
 
     String webOrderId;
 
@@ -309,10 +311,33 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
     @OnClick(R.id.img_btn_confirm)
     public void onClickConfrim(View view) {
+
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             proprogressview.setVisibility(View.VISIBLE);
             bloackUserInteraction();
-            callOrder();
+            if(!editTextPromocode.getText().toString().equals(promoCode)){
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Promo Code");
+                alertDialogBuilder.setMessage("Press Add button to claim your promotion");
+                alertDialogBuilder.setPositiveButton("Add",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                promoCode = editTextPromocode.getText().toString();
+                                return;
+                            }
+                        });
+                alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                alertDialogBuilder.show();
+
+            }else {
+                callOrder();
+            }
+
         } else {
             Toast.makeText(this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
 
@@ -351,9 +376,11 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
             Toast.makeText(this, "Please add the code", Toast.LENGTH_SHORT).show();
         } else {
             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+                promoCode = editTextPromocode.getText().toString();
                 bloackUserInteraction();
                 proprogressview.setVisibility(View.VISIBLE);
-                cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString(),orderCODE);
+                cartPresenter.getPromoCodeValidation(this, promoCode,orderCODE);
+                Toast.makeText(this, "Promo Code added", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
 
@@ -405,7 +432,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         bloackUserInteraction();
         proprogressview.setVisibility(View.VISIBLE);
 
-        cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString(),orderCODE);
+        cartPresenter.getPromoCodeValidation(this,promoCode ,orderCODE);
         cartPresenter.getCartItems();
     }
 
@@ -482,7 +509,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void getPromoCodeValidationFail(String promoCode, final String orderCode , String msg) {
+    public void getPromoCodeValidationFail(final String promoCode, final String orderCode , String msg) {
         unBloackUserInteraction();
         proprogressview.setVisibility(View.GONE);
         try {
@@ -539,7 +566,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
                                 if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
                                     proprogressview.setVisibility(View.VISIBLE);
                                     bloackUserInteraction();
-                                    cartPresenter.getPromoCodeValidation(ActivityCart.this, editTextPromocode.getText().toString(),orderCode);
+                                    cartPresenter.getPromoCodeValidation(ActivityCart.this,promoCode,orderCode);
                                 } else {
                                     Toast.makeText(ActivityCart.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
 
@@ -926,9 +953,8 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
                         });
                 alertDialogBuilder.show();
             }else {
-                cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString(),orderCODE);
+                cartPresenter.getPromoCodeValidation(this,promoCode,orderCODE);
             }
-
 
         }else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -956,7 +982,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             bloackUserInteraction();
             proprogressview.setVisibility(View.VISIBLE);
-            cartPresenter.getPromoCodeValidation(this, editTextPromocode.getText().toString(),orderCODE);
+            cartPresenter.getPromoCodeValidation(this, promoCode,orderCODE);
             cartPresenter.getCartItems();
         } else {
 
@@ -1105,10 +1131,12 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
     private void callOrder() {
 
 
+
+
         String deliver = textDeliverychaege.getText().toString() + textDeliverychaegeCents.getText().toString();
         String totalAmount = textSubtotal.getText().toString() + textSubtotalCents.getText().toString();
 
-        cartPresenter.orderProsess(edittextNote.getText().toString(), paymentType, orderCODE, Double.parseDouble(deliver), Double.parseDouble(totalAmount), editTextPromocode.getText().toString(), selectedPickupTime, selectedTimeSlots, this);
+        cartPresenter.orderProsess(edittextNote.getText().toString(), paymentType, orderCODE, Double.parseDouble(deliver), Double.parseDouble(totalAmount),    promoCode, selectedPickupTime, selectedTimeSlots, this);
 
 
     }

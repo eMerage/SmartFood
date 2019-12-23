@@ -31,5 +31,12 @@ public interface SetLocationInteractor {
 
 
 
+    interface OnAddNewAddressFinishedListener {
+        void addNewAddressSuccessful();
+        void addNewAddressFail(String msg);
+    }
+    void addNewAddress(AddressItems addressItems, OnAddNewAddressFinishedListener onAddNewAddressFinishedListener);
+
+
 
 }

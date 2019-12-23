@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ import emerge.project.onmeal.R;
 import emerge.project.onmeal.service.network.NetworkAvailability;
 import emerge.project.onmeal.ui.activity.favorites.ActivityFavourites;
 import emerge.project.onmeal.ui.activity.history.ActivityHistory;
+import emerge.project.onmeal.ui.activity.home.ActivityHome;
 import emerge.project.onmeal.ui.activity.landing.ActivityLanding;
 import emerge.project.onmeal.ui.activity.landingaddressmenual.ActivityMenualAddress;
 import emerge.project.onmeal.ui.activity.login.ActivityLogin;
@@ -192,17 +194,18 @@ public class ActivitySetLocation extends FragmentActivity implements OnMapReadyC
 
     @OnClick(R.id.imageView6)
     public void onClicNext(View view) {
-
         if (addressItem == null) {
             Toast.makeText(this, "Location is not set", Toast.LENGTH_LONG).show();
         } else {
 
-            Intent intentSingup = new Intent(this, ActivityLanding.class);
+         setLocationPresenter.addNewAddress(addressItem);
+
+         /*  Intent intentSingup = new Intent(this, ActivityLanding.class);
             Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
             intentSingup.putExtra("addressItem", addressItem);
             startActivity(intentSingup, bndlanimation);
             finish();
-
+*/
         }
 
 
@@ -391,7 +394,7 @@ public class ActivitySetLocation extends FragmentActivity implements OnMapReadyC
                         textViewSelectedAddress.setText(returnAddress.getAddressLine(0));
                     }
 
-                    // System.out.println("qqqqqqqqqqqqq :"+returnAddress.getAddressLine());
+
 
                     LatLng mDefaultLocation = new LatLng(returnAddress.getLatitude(), returnAddress.getLongitude());
                     setLocationPresenter.getSellectedAddressDetails("", returnAddress.getAddressLine(0), mDefaultLocation);
@@ -498,11 +501,62 @@ public class ActivitySetLocation extends FragmentActivity implements OnMapReadyC
 
     }
 
+    @Override
+    public void addNewAddressSuccessful() {
+        unBloackUserInteraction();
+        Intent intentSingup = new Intent(this, ActivityHome.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+        startActivity(intentSingup, bndlanimation);
+        finish();
+
+    }
+
+    @Override
+    public void addNewAddressFail(String msg) {
+
+        unBloackUserInteraction();
+
+        try {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage(msg);
+            alertDialogBuilder.setPositiveButton("YES",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            bloackUserInteraction();
+                            setLocationPresenter.addNewAddress(addressItem);
+
+                        }
+                    });
+            alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    return;
+                }
+            });
+            alertDialogBuilder.show();
+        } catch (WindowManager.BadTokenException e) {
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
 
     @OnClick(R.id.relativelayout_logout)
     public void onSingOut(View view) {
         setLocationPresenter.signOut(this);
 
+    }
+
+
+    private void bloackUserInteraction() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    private void unBloackUserInteraction() {
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
 }

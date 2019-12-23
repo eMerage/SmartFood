@@ -502,6 +502,10 @@ public class CartInteractorImpil implements CartInteractor {
 
             System.out.println("aaa :" + jsonObject);
             try {
+
+                Toast.makeText(context, "Order is processing please wait", Toast.LENGTH_SHORT).show();
+
+
                 final int finalOutletId = outletId;
                 apiService.orderProsess(jsonObject)
                         .subscribeOn(Schedulers.io())

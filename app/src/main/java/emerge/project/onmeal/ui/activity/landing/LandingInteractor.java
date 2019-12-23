@@ -39,6 +39,8 @@ public interface LandingInteractor {
     }
     void addNewAddress(AddressItems addressItems, OnAddNewAddressFinishedListener onAddNewAddressFinishedListener);
 
+
+
     interface OnsaveAddressFinishedListener {
         void saveAddressSuccessful(String add);
         void saveAddressFail(String msg);

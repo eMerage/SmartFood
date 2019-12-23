@@ -14,5 +14,14 @@ public interface SetLocationView {
     void selectedAddressDetailsFail();
 
     void signOutSuccess();
+
+
+
+
+        void addNewAddressSuccessful();
+        void addNewAddressFail(String msg);
+
+
+
 }
 

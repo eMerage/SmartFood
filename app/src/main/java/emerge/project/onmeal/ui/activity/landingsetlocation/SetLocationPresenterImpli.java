@@ -20,7 +20,7 @@ import emerge.project.onmeal.utils.entittes.AddressItems;
 public class SetLocationPresenterImpli implements
         SetLocationPresenter,
         SetLocationInteractor.OnGetSellectedAddressDetailsFinishedListener,
-        SetLocationInteractor.OnsignOutinishedListener{
+        SetLocationInteractor.OnsignOutinishedListener, SetLocationInteractor.OnAddNewAddressFinishedListener {
 
 
     private SetLocationView setLocationView;
@@ -36,8 +36,9 @@ public class SetLocationPresenterImpli implements
 
     @Override
     public void signOut(Context context) {
-        setLocationInteractor.signOut(context,this);
+        setLocationInteractor.signOut(context, this);
     }
+
 
 
     @Override
@@ -48,7 +49,7 @@ public class SetLocationPresenterImpli implements
 
     @Override
     public void getSellectedAddressDetails(String name, String address, LatLng latLng) {
-        setLocationInteractor.getSellectedAddressDetails(name,address,latLng,this);
+        setLocationInteractor.getSellectedAddressDetails(name, address, latLng, this);
     }
 
     @Override
@@ -60,4 +61,23 @@ public class SetLocationPresenterImpli implements
     public void selectedAddressDetailsFail() {
         setLocationView.selectedAddressDetailsFail();
     }
+
+    @Override
+    public void addNewAddress(AddressItems addressItems) {
+        setLocationInteractor.addNewAddress(addressItems,this);
+    }
+
+
+
+    @Override
+    public void addNewAddressSuccessful() {
+        setLocationView.addNewAddressSuccessful();
+    }
+
+    @Override
+    public void addNewAddressFail(String msg) {
+        setLocationView.addNewAddressFail(msg);
+    }
+
+
 }

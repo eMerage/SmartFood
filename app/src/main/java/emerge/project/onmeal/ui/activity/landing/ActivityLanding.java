@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -74,11 +75,13 @@ import com.pddstudio.preferences.encrypted.EncryptedPreferences;
 
 import com.tuyenmonkey.mkloader.MKLoader;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -245,8 +248,19 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         sdk = android.os.Build.VERSION.SDK_INT;
 
+
+        try {
+            mapMarker.remove();
+        }catch (Exception ex){
+
+        }
+
+
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+
 
 
         Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
@@ -256,8 +270,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         request = FetchPlaceRequest.builder(placeId, placeFields).build();
 
-        // mGeoDataClient = Places.getGeoDataClient(this, null);
-        //  mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
+
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         setNavigationMenuItems();
@@ -340,6 +353,12 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     @OnClick(R.id.robotoRegular4)
     public void onClicSetLocationOnMap(View view) {
 
+        try {
+            mapMarker.remove();
+        }catch (Exception ex){
+
+        }
+
         isSelectSaverdAddres = false;
         imageViewBtnAddaditional.setVisibility(View.VISIBLE);
 
@@ -368,7 +387,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
                 if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
                     if (addressItem == null) {
-                        Toast.makeText(this, "Please set the location", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Please set the location as per the availability", Toast.LENGTH_LONG).show();
                     } else {
                         proprogressview.setVisibility(View.VISIBLE);
                         bloackUserInteraction();
@@ -445,15 +464,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
 
 
-            if (mLastKnownLocation == null) {
-
-            } else {
-                mapMarker = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
-
-            }
-
+           getDeviceLocation();
 
             showCurrentPlace();
 
@@ -593,7 +604,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             if (addressItem == null) {
-                Toast.makeText(this, "Please set the location", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Please set the location as per the availability", Toast.LENGTH_LONG).show();
             } else {
                 Intent intentSingup = new Intent(this, ActivityAddressAdditianal.class);
                 Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
@@ -716,39 +727,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
             }
 
 
-           /* if (resultCode == RESULT_OK) {
-
-
-                Place place = Autocomplete.getPlaceFromIntent(data);
-
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude), 15));
-                mapMarker = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude))
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
-
-
-                try {
-                    if (place.getAddress().toString().length() > 30) {
-                        textViewSelectedAddress.setText(place.getAddress().toString().substring(0, 30));
-                    } else {
-                        textViewSelectedAddress.setText(place.getAddress().toString());
-                    }
-                } catch (ArrayIndexOutOfBoundsException aiobex) {
-                    textViewSelectedAddress.setText(place.getAddress().toString());
-                }
-
-
-                landingPresenter.getSellectedAddressDetails(place.getName().toString(), place.getAddress().toString(), place.getLatLng());
-
-                relativelayoutAddedlist.setVisibility(View.INVISIBLE);
-
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                Status status = Autocomplete.getStatusFromIntent(data);
-
-
-            } else if (resultCode == RESULT_CANCELED) {
-                // The user canceled the operation.
-            }*/
         } else if (requestCode == REQUEST_CHECK_SETTINGS) {
             mapFragment.getMapAsync(this);
         }
@@ -831,24 +809,35 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                         mLastKnownLocation = (Location) task.getResult();
 
                         if (mLastKnownLocation == null) {
-
-
                         } else {
-
+                            mapMarker = mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), 15));
                             mMap.setMyLocationEnabled(false);
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
+                            if( dispatchType == 1){
+                                getAddressFromLocation(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
+                            }else {
+
+                            }
                         }
 
                     } else {
+                        mapMarker = mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+
                         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, 15));
                         mMap.getUiSettings().setMyLocationButtonEnabled(false);
                         mMap.setMyLocationEnabled(false);
+                        if( dispatchType == 1){
+                            getAddressFromLocation(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
+                        }else {
 
+                        }
                     }
-
-
                 }
             });
 
@@ -857,6 +846,47 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
             Log.e("Exception: %s", e.getMessage());
         }
     }
+
+
+    public void getAddressFromLocation(double latitude, double longitude) {
+        Geocoder geocoder;
+        List<Address> address;
+        try {
+            geocoder = new Geocoder(this, Locale.ENGLISH);
+            address = geocoder.getFromLocation(latitude, longitude, 1);
+            StringBuilder str = new StringBuilder();
+            if (geocoder.isPresent()) {
+                Address returnAddress = address.get(0);
+
+                if (returnAddress.getAddressLine(0).isEmpty() || returnAddress.getAddressLine(0) == null) {
+
+                } else {
+                    if (returnAddress.getAddressLine(0).length() > 30) {
+                        textViewSelectedAddress.setText(returnAddress.getAddressLine(0).substring(0, 30));
+                    } else {
+                        textViewSelectedAddress.setText(returnAddress.getAddressLine(0));
+                    }
+
+
+
+                    LatLng mDefaultLocation = new LatLng(returnAddress.getLatitude(), returnAddress.getLongitude());
+
+                    landingPresenter.getSellectedAddressDetails("", returnAddress.getAddressLine(0), mDefaultLocation);
+
+                }
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+
+
+
+
 
     private void showCurrentPlace() {
         if (mMap == null) {
