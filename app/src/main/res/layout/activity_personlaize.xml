@@ -396,4 +396,13 @@
         app:mk_type="FishSpinner" />
 
 
+    <ImageView
+        android:id="@+id/button_cover_image_more"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="55dp"
+        android:layout_marginRight="5dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_info_round" />
+
 </RelativeLayout>

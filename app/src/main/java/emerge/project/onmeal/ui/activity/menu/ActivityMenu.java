@@ -505,6 +505,7 @@ public class ActivityMenu extends Activity implements MenuView, OnMapReadyCallba
         Intent intentSingup = new Intent(this, ActivityPersonlaize.class);
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
         intentSingup.putExtra("SELECTEDMENU", selectedMenuDetails);
+       // intentSingup.putExtra("SELECTEDMENU", selectedMenuDetails);
         startActivity(intentSingup, bndlanimation);
 
 

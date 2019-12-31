@@ -8,6 +8,7 @@ import emerge.project.onmeal.utils.entittes.FoodCategoryItems;
 import emerge.project.onmeal.utils.entittes.MenuCategoryItems;
 import emerge.project.onmeal.utils.entittes.MenuItems;
 import emerge.project.onmeal.utils.entittes.MenuSize;
+import emerge.project.onmeal.utils.entittes.OutletItems;
 import emerge.project.onmeal.utils.entittes.SelectedMenuDetails;
 
 /**
@@ -19,20 +20,20 @@ public interface PersonlaizeView {
 
     void foodCategory(ArrayList<FoodCategoryItems> foodCategoryItems);
 
-    void foodCategoryFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID);
+    void foodCategoryFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID, int menuCatID);
 
-    void selectedFoodCategor(int foodItemCategoryID,int position);
+    void selectedFoodCategor(int foodItemCategoryID, int position);
 
     void subFoodsEmpty();
 
     void subFoods(ArrayList<MenuSubItems> menuSubItemsArrayList);
 
-    void subFoodsFail(int menuId, int foodId, int outletId, int foodItemCategoryID, String msg,int menuCatID);
+    void subFoodsFail(int menuId, int foodId, int outletId, int foodItemCategoryID, String msg, int menuCatID);
 
 
     void menuSize(ArrayList<MenuSize> menuItemSizes);
 
-    void menuSizeFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID,int menuCatID);
+    void menuSizeFail(String msg, int outletID, int menuTitleID, int outletMenuTitleID, int menuCatID);
 
 
     void totalPrice(Double price);
@@ -42,28 +43,30 @@ public interface PersonlaizeView {
 
 
     void itemAddedToCart(int cartCount);
+
     void itemAddToCartFaild(String msg);
-    void itemAddToCartSocketFail(SelectedMenuDetails selectedMenuDetail,String msg);
+
+    void itemAddToCartSocketFail(SelectedMenuDetails selectedMenuDetail, String msg);
+
     void itemAddToCartOrderQtyExeed();
+
     void itemAddToCartNoItems();
 
 
-
     void cartAvailable();
+
     void cartNotAvailable();
 
 
     void cartCountNumber(int count);
 
 
+    void clareMenusFinsh(int cartcount);
 
 
+    void getOutletDetails(OutletItems outletItems);
 
-        void clareMenusFinsh(int cartcount);
-
-
-
-
+    void getOutletDetailsFail(String msg, int outletID);
 
 
 }

@@ -11,6 +11,7 @@ import emerge.project.onmeal.utils.entittes.FoodCategoryItems;
 import emerge.project.onmeal.utils.entittes.MenuCategoryItems;
 import emerge.project.onmeal.utils.entittes.MenuItems;
 import emerge.project.onmeal.utils.entittes.MenuSize;
+import emerge.project.onmeal.utils.entittes.OutletItems;
 import emerge.project.onmeal.utils.entittes.SelectedMenuDetails;
 
 
@@ -94,6 +95,12 @@ public interface PersonlaizeInteractor {
     }
     void clareMenus(OnClareMenusListener onClareMenusListener);
 
+
+    interface OnGetOutletFinishedListener {
+        void getOutletDetails(OutletItems outletItems);
+        void getOutletDetailsFail(String msg,int outletID);
+    }
+    void getOutlet(int outletID,OnGetOutletFinishedListener  onGetOutletFinishedListener);
 
 
 

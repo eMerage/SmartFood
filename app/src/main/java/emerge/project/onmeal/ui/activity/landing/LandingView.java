@@ -4,6 +4,7 @@ package emerge.project.onmeal.ui.activity.landing;
 import java.util.ArrayList;
 
 import emerge.project.onmeal.utils.entittes.AddressItems;
+import emerge.project.onmeal.utils.entittes.VersionUpdate;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -12,6 +13,7 @@ import emerge.project.onmeal.utils.entittes.AddressItems;
 public interface LandingView {
 
     void selectedAddressDetails(AddressItems addressItems);
+
     void selectedAddressDetailsFail();
 
     void getAddressEmpty();
@@ -29,6 +31,11 @@ public interface LandingView {
     void saveAddressSuccessful(String add);
 
     void saveAddressFail(String msg);
+
     void signOutSuccess();
+
+
+
+
 
 }

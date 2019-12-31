@@ -102,6 +102,7 @@ import emerge.project.onmeal.ui.adaptor.AddressListAdapter;
 import emerge.project.onmeal.ui.dialog.CustomDialogOne;
 import emerge.project.onmeal.ui.dialog.CustomDialogTwo;
 import emerge.project.onmeal.utils.entittes.AddressItems;
+import emerge.project.onmeal.utils.entittes.VersionUpdate;
 
 
 public class ActivityLanding extends FragmentActivity implements OnMapReadyCallback, LandingView {
@@ -233,6 +234,8 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     List<Place.Field> placeFields;
     FetchPlaceRequest request;
 
+    Boolean isInitial = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -245,22 +248,16 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         addressItem = (AddressItems) getIntent().getSerializableExtra("addressItem");
 
-
-        sdk = android.os.Build.VERSION.SDK_INT;
-
-
-        try {
-            mapMarker.remove();
-        }catch (Exception ex){
-
+        if (addressItem == null) {
+            isInitial = true;
+        } else {
+            isInitial = false;
         }
+        sdk = android.os.Build.VERSION.SDK_INT;
 
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-
-
 
 
         Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
@@ -277,6 +274,8 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+
+
 
 
             unBloackUserInteraction();
@@ -350,14 +349,18 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+
+
+    }
+
     @OnClick(R.id.robotoRegular4)
     public void onClicSetLocationOnMap(View view) {
 
-        try {
-            mapMarker.remove();
-        }catch (Exception ex){
-
-        }
 
         isSelectSaverdAddres = false;
         imageViewBtnAddaditional.setVisibility(View.VISIBLE);
@@ -462,9 +465,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         encryptedPreferences.edit().putString(DISPATCH_TYPE, "Delivery").apply();
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-
-
-           getDeviceLocation();
+            getDeviceLocation();
 
             showCurrentPlace();
 
@@ -526,11 +527,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
 
-            if (mapMarker != null) {
-                mapMarker.remove();
-            } else {
-
-            }
 
         } else {
             Toast.makeText(this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
@@ -586,11 +582,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
 
-            if (mapMarker != null) {
-                mapMarker.remove();
-            } else {
-
-            }
 
         } else {
             Toast.makeText(this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
@@ -645,22 +636,12 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
         boolean success = mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map));
         updateLocationUI();
 
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-
-            if (addressItem == null) {
-
-            } else {
-
-                mapMarker = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(addressItem.getAddressLatitude(), addressItem.getAddressLongitude()))
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
-            }
-
-
             if (mLocationRequest.getPriority() == 100) {
                 getDeviceLocation();
             } else {
@@ -695,12 +676,10 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                 Place place = Autocomplete.getPlaceFromIntent(data);
 
                 try {
-
-
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude), 15));
-                    mapMarker = mMap.addMarker(new MarkerOptions()
-                            .position(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude))
-                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+                        mapMarker = mMap.addMarker(new MarkerOptions()
+                                .position(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude))
+                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
 
                     try {
                         if (place.getAddress().toString().length() > 30) {
@@ -717,12 +696,12 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
                     relativelayoutAddedlist.setVisibility(View.INVISIBLE);
 
-                }catch (Exception ex){
+                } catch (Exception ex) {
 
                     Toast.makeText(this, "Place request fail,try again", Toast.LENGTH_SHORT).show();
                 }
 
-            }else {
+            } else {
                 Toast.makeText(this, "Place request fail,try again", Toast.LENGTH_SHORT).show();
             }
 
@@ -807,34 +786,54 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful() && task.isComplete()) {
                         mLastKnownLocation = (Location) task.getResult();
-
                         if (mLastKnownLocation == null) {
-                        } else {
-                            mapMarker = mMap.addMarker(new MarkerOptions()
-                                    .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
-                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), 15));
-                            mMap.setMyLocationEnabled(false);
-                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-                            if( dispatchType == 1){
-                                getAddressFromLocation(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
+                        } else {
+                            if (isInitial) {
+                                if(dispatchType != 0){
+                                    mMap.clear();
+                                    mapMarker = mMap.addMarker(new MarkerOptions()
+                                            .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), 15));
+                                    mMap.setMyLocationEnabled(false);
+                                    mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                                }
                             }else {
+                                mMap.clear();
+                                if(dispatchType != 0){
+                                    mMap.clear();
+                                    mapMarker = mMap.addMarker(new MarkerOptions()
+                                            .position(new LatLng(addressItem.getAddressLatitude(), addressItem.getAddressLongitude()))
+                                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(addressItem.getAddressLatitude(), addressItem.getAddressLongitude()), 15));
+                                    mMap.setMyLocationEnabled(false);
+                                    mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                                }
+
+                            }
+
+                            if (dispatchType == 1) {
+                                getAddressFromLocation(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+                            } else {
 
                             }
                         }
 
                     } else {
-                        mapMarker = mMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+                        if (isInitial) {
+                            mMap.clear();
+                            mapMarker = mMap.addMarker(new MarkerOptions()
+                                    .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
+                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
 
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, 15));
-                        mMap.getUiSettings().setMyLocationButtonEnabled(false);
-                        mMap.setMyLocationEnabled(false);
-                        if( dispatchType == 1){
-                            getAddressFromLocation(mLastKnownLocation.getLatitude(),mLastKnownLocation.getLongitude());
-                        }else {
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, 15));
+                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                            mMap.setMyLocationEnabled(false);
+                        }
+                        if (dispatchType == 1) {
+                           getAddressFromLocation(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+                        } else {
 
                         }
                     }
@@ -868,7 +867,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                     }
 
 
-
                     LatLng mDefaultLocation = new LatLng(returnAddress.getLatitude(), returnAddress.getLongitude());
 
                     landingPresenter.getSellectedAddressDetails("", returnAddress.getAddressLine(0), mDefaultLocation);
@@ -882,10 +880,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         }
     }
-
-
-
-
 
 
     private void showCurrentPlace() {
@@ -921,9 +915,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                 if (exception instanceof ApiException) {
                     ApiException apiException = (ApiException) exception;
                     int statusCode = apiException.getStatusCode();
-                    System.out.println("sssss  fail :" + exception);
-                    System.out.println("sssss  fail statusCode :" + statusCode);
-                    System.out.println("sssss  fail ApiException :" + apiException);
                     proprogressview.setVisibility(View.GONE);
                     unBloackUserInteraction();
                 }
@@ -1140,6 +1131,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         isSelectSaverdAddres = true;
         imageViewBtnAddaditional.setVisibility(View.INVISIBLE);
 
+
         try {
             if (add.length() > 30) {
                 textViewSelectedAddress.setText(add.substring(0, 30));
@@ -1151,8 +1143,12 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         }
 
 
+
+
         addressItem = new AddressItems();
         addressItem.setAddress(add);
+
+
 
         setmapLocationStatus = 0;
         relativelayoutAddedlist.setVisibility(View.GONE);

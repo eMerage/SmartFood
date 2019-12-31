@@ -14,6 +14,7 @@ import emerge.project.onmeal.utils.entittes.FoodCategoryItems;
 import emerge.project.onmeal.utils.entittes.MenuCategoryItems;
 import emerge.project.onmeal.utils.entittes.MenuItems;
 import emerge.project.onmeal.utils.entittes.MenuSize;
+import emerge.project.onmeal.utils.entittes.OutletItems;
 import emerge.project.onmeal.utils.entittes.SelectedMenuDetails;
 
 /**
@@ -29,7 +30,8 @@ public class PersonlaizePresenterImpli implements PersonlaizePresenter,
         PersonlaizeInteractor.OnSetMenuSizeListener,
         PersonlaizeInteractor.OnAddToCartListener,
 PersonlaizeInteractor.OnCheckCartAvailabilityListener,
-        PersonlaizeInteractor.OnCartCountListener,PersonlaizeInteractor.OnClareMenusListener{
+        PersonlaizeInteractor.OnCartCountListener,PersonlaizeInteractor.OnClareMenusListener,
+PersonlaizeInteractor.OnGetOutletFinishedListener{
 
 
     private PersonlaizeView personlaizeView;
@@ -205,6 +207,7 @@ PersonlaizeInteractor.OnCheckCartAvailabilityListener,
     }
 
 
+
     @Override
     public void cartCountNumber(int count) {
         personlaizeView.cartCountNumber(count);
@@ -224,4 +227,22 @@ PersonlaizeInteractor.OnCheckCartAvailabilityListener,
     public void clareMenusFinsh(int cartcount) {
         personlaizeView.clareMenusFinsh(cartcount);
     }
+
+
+    @Override
+    public void getOutlet(int outletID) {
+        personlaizeInteractor.getOutlet(outletID,this);
+    }
+
+    @Override
+    public void getOutletDetails(OutletItems outletItems) {
+        personlaizeView.getOutletDetails(outletItems);
+    }
+
+    @Override
+    public void getOutletDetailsFail(String msg, int outletID) {
+        personlaizeView.getOutletDetailsFail(msg,outletID);
+    }
+
+
 }

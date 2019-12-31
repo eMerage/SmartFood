@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import emerge.project.onmeal.utils.entittes.Foodtems;
 import emerge.project.onmeal.utils.entittes.HomeFavouriteItems;
 import emerge.project.onmeal.utils.entittes.OutletItems;
+import emerge.project.onmeal.utils.entittes.VersionUpdate;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -45,6 +46,14 @@ public interface HomeInteractor {
     }
     void signOut(Context context,OnsignOutinishedListener onsignOutinishedListener);
 
+
+
+
+    interface OnUpdateAppVersionAndPushFinishedListener {
+        void updateAppVersionAndPushSuccessful(VersionUpdate versionUpdate);
+        void updateAppVersionAndPushFail(String msg);
+    }
+    void updateAppVersionAndPush(Context con, OnUpdateAppVersionAndPushFinishedListener onUpdateAppVersionAndPushFinishedListener);
 
 
 

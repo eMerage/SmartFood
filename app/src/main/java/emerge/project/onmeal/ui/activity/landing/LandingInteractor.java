@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 import emerge.project.onmeal.utils.entittes.AddressItems;
+import emerge.project.onmeal.utils.entittes.VersionUpdate;
 
 
 /**
@@ -53,8 +54,11 @@ public interface LandingInteractor {
     void signOut(Context context, OnsignOutinishedListener onsignOutinishedListener);
 
 
-
-
     void deleteAddress();
+
+
+
+
+
 
 }

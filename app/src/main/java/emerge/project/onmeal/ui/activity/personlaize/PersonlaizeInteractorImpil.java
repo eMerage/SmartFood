@@ -29,6 +29,7 @@ import emerge.project.onmeal.utils.entittes.HomeFavouriteItems;
 import emerge.project.onmeal.utils.entittes.MenuCategoryItems;
 import emerge.project.onmeal.utils.entittes.MenuItems;
 import emerge.project.onmeal.utils.entittes.MenuSize;
+import emerge.project.onmeal.utils.entittes.OutletItems;
 import emerge.project.onmeal.utils.entittes.SelectedMenuDetails;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -57,6 +58,7 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
     List<MenuSubItems> subFoodsList;
 
     List<MenuSize> menuSize;
+    OutletItems outletItems;
 
     @Override
     public void getFoodCategory(Context mContext, final int outletID, final int menuTitleID, final int outletMenuTitleID, final int menuCatID , final OnGetFoodCategoryFinishedListener onGetFoodCategoryFinishedListener) {
@@ -1009,5 +1011,45 @@ public class PersonlaizeInteractorImpil implements PersonlaizeInteractor {
         }
         return sb.toString();
     }
+
+    @Override
+    public void getOutlet(final int outletID, final OnGetOutletFinishedListener onGetOutletFinishedListener) {
+
+
+
+        try {
+            apiService.getOutlet(outletID)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<OutletItems>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(OutletItems respond) {
+                            outletItems = respond;
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            onGetOutletFinishedListener.getOutletDetailsFail("Communication error, Please try again",outletID);
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+                            onGetOutletFinishedListener.getOutletDetails(outletItems);
+                        }
+                    });
+
+        } catch (Exception ex) {
+            onGetOutletFinishedListener.getOutletDetailsFail("Communication error, Please try again",outletID);
+        }
+
+
+    }
+
 
 }

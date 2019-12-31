@@ -3,9 +3,12 @@ package emerge.project.onmeal.ui.activity.personlaize;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -25,6 +29,12 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.tuyenmonkey.mkloader.MKLoader;
 
 import java.util.ArrayList;
@@ -39,6 +49,7 @@ import emerge.project.onmeal.data.table.MenuSubItems;
 import emerge.project.onmeal.service.network.NetworkAvailability;
 import emerge.project.onmeal.ui.activity.cart.ActivityCart;
 import emerge.project.onmeal.ui.adaptor.FoodCategoryAdapter;
+import emerge.project.onmeal.ui.adaptor.HomeOutletImagesAdaptor;
 import emerge.project.onmeal.ui.adaptor.MenuSizeAdapter;
 import emerge.project.onmeal.ui.adaptor.PersonlaizeAdapterType1;
 import emerge.project.onmeal.ui.adaptor.PersonlaizeAdapterType2;
@@ -48,9 +59,10 @@ import emerge.project.onmeal.ui.adaptor.PersonlaizeAdapterType5;
 import emerge.project.onmeal.ui.adaptor.PersonlaizeAdapterType6;
 import emerge.project.onmeal.utils.entittes.FoodCategoryItems;
 import emerge.project.onmeal.utils.entittes.MenuSize;
+import emerge.project.onmeal.utils.entittes.OutletItems;
 import emerge.project.onmeal.utils.entittes.SelectedMenuDetails;
 
-public class ActivityPersonlaize extends Activity implements PersonlaizeView {
+public class ActivityPersonlaize extends Activity implements PersonlaizeView , OnMapReadyCallback {
 
 
     @BindView(R.id.imageView_cover_image)
@@ -115,6 +127,17 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
 
     LinearLayoutManager layoutManagerFoodCat;
 
+    @BindView(R.id.button_cover_image_more)
+    ImageView btnCoverImageMore;
+
+    ImageView ImageView_googlemap;
+
+    double latitude = 0.0,longitude = 0.0;
+    GoogleMap mMap ;
+
+    MapView mapView;
+    TextView textNoLocation;
+
     Boolean isNavigationFromOutlet = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,6 +176,29 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
             alertDialogBuilder.show();
 
         }
+
+
+        btnCoverImageMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+                    bloackUserInteraction();
+                    proprogressview.setVisibility(View.VISIBLE);
+                    personlaizePresenter.getOutlet(selectedMenuDetails.getOutletId());
+                } else {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(ActivityPersonlaize.this);
+                    alertDialogBuilder.setTitle("Warning");
+                    alertDialogBuilder.setMessage("No Internet Access, Please try again ");
+                    alertDialogBuilder.setPositiveButton("OK",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    return;
+                                }
+                            });
+                    alertDialogBuilder.show();
+                }
+            }
+        });
 
 
         personlaizePresenter.cartCount();
@@ -611,8 +657,191 @@ public class ActivityPersonlaize extends Activity implements PersonlaizeView {
 
     }
 
+    @Override
+    public void getOutletDetails(OutletItems outletItems) {
+        unBloackUserInteraction();
+        proprogressview.setVisibility(View.GONE);
+        showOutletMoreDetails(outletItems);
+
+    }
+
+    @Override
+    public void getOutletDetailsFail(String msg, final int outletID) {
+        unBloackUserInteraction();
+        proprogressview.setVisibility(View.GONE);
+        try {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage(msg);
+            alertDialogBuilder.setPositiveButton("Re-Try",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+                                proprogressview.setVisibility(View.VISIBLE);
+                                bloackUserInteraction();
+                                personlaizePresenter.getOutlet(outletID);
+                            } else {
+                                Toast.makeText(ActivityPersonlaize.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+                    });
+            alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    return;
+                }
+            });
+            alertDialogBuilder.show();
+        } catch (WindowManager.BadTokenException e) {
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+
+    }
+
 
     public void priceUpdate() {
         personlaizePresenter.getTotalPrice(Integer.parseInt(textviewQty.getText().toString()), menuSizeCode);
+    }
+
+
+    private void showOutletMoreDetails(final OutletItems outlet){
+
+        final Dialog dialogOutletMoreDetails = new Dialog(this);
+        dialogOutletMoreDetails.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogOutletMoreDetails.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialogOutletMoreDetails.setContentView(R.layout.dialog_outlet_more_details);
+        dialogOutletMoreDetails.setCancelable(true);
+
+
+
+        RecyclerView  recyclerViewOutletImages= dialogOutletMoreDetails.findViewById(R.id.recyclerView_outletimages);
+        TextView  text3= dialogOutletMoreDetails.findViewById(R.id.text3);
+        ImageView_googlemap= dialogOutletMoreDetails.findViewById(R.id.ImageView_googlemap);
+
+        textNoLocation =  dialogOutletMoreDetails.findViewById(R.id.textview_nolocations);
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerViewOutletImages.setLayoutManager(layoutManager);
+        recyclerViewOutletImages.setItemAnimator(new DefaultItemAnimator());
+        recyclerViewOutletImages.setNestedScrollingEnabled(true);
+
+
+        mapView= dialogOutletMoreDetails.findViewById(R.id.mapView_outlet);
+
+
+        latitude = outlet.getOutletLatitude();
+        longitude = outlet.getOutletLongitude();
+
+        if (mapView != null) {
+            mapView.onCreate(null);
+            mapView.onResume();
+            mapView.getMapAsync(this);
+        }
+
+
+        if(outlet.getOutletImages().isEmpty()){
+            text3.setVisibility(View.VISIBLE);
+            recyclerViewOutletImages.setVisibility(View.INVISIBLE);
+
+        }else {
+            text3.setVisibility(View.GONE);
+            recyclerViewOutletImages.setVisibility(View.VISIBLE);
+
+            HomeOutletImagesAdaptor homeOutletImagesAdaptor = new HomeOutletImagesAdaptor(this,outlet.getOutletImages());
+            recyclerViewOutletImages.setAdapter(homeOutletImagesAdaptor);
+        }
+
+
+
+        TextView textView_outletdetails_name= dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_name);
+        textView_outletdetails_name.setText(outlet.getOutletName());
+
+        TextView textView_outletdetails_city= dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_city);
+        textView_outletdetails_city.setText(outlet.getOutletCity());
+
+        TextView textView_outletdetails_ownersname= dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_ownersname);
+        textView_outletdetails_ownersname.setText(outlet.getOutletOwnersName());
+
+        TextView textView_outletdetails_contactnumber= dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_contactnumber);
+        textView_outletdetails_contactnumber.setText(outlet.getPhoneNUmber());
+
+
+        TextView textView_outletdetails_email= dialogOutletMoreDetails.findViewById(R.id.textView_outletdetails_email);
+        textView_outletdetails_email.setText(outlet.geteMail());
+
+
+
+
+        ImageView_googlemap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(latitude==0.0){
+
+                }else {
+                    String latit = String.valueOf(latitude);
+                    String longi = String.valueOf(longitude);
+
+
+                    String label = outlet.getOutletName();
+                    String uriBegin = "geo:" + latit + "," + longi;
+                    String query = latit + "," + longi + "(" + label + ")";
+                    String encodedQuery = Uri.encode(query);
+                    String uriString = uriBegin + "?q=" + encodedQuery + "&z=16";
+
+                    Uri uri = Uri.parse(uriString);
+
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, uri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+
+                    try{
+                        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                            startActivity(mapIntent);
+                        }
+                    }catch (NullPointerException e){
+                    }
+
+
+                }
+
+
+
+            }
+        });
+
+
+
+
+
+        dialogOutletMoreDetails.show();
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        mMap = googleMap;
+
+        LatLng locationMap = new LatLng(latitude, longitude);
+        if (latitude == 0.0) {
+            textNoLocation.setVisibility(View.VISIBLE);
+            mapView.setVisibility(View.INVISIBLE);
+            ImageView_googlemap.setVisibility(View.GONE);
+
+
+        } else {
+            textNoLocation.setVisibility(View.GONE);
+            mapView.setVisibility(View.VISIBLE);
+            ImageView_googlemap.setVisibility(View.VISIBLE);
+
+            mMap.addMarker(new MarkerOptions().position(locationMap));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(locationMap, 17));
+
+        }
+
     }
 }

@@ -21,4 +21,9 @@ public interface LandingPresenter {
 
     void deleteAddress();
     void signOut(Context context);
+
+
+
+
+
 }

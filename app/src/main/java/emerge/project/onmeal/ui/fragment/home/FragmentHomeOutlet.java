@@ -34,6 +34,7 @@ import emerge.project.onmeal.ui.activity.home.HomePresenterImpli;
 import emerge.project.onmeal.ui.activity.home.HomeViewByOutlet;
 import emerge.project.onmeal.ui.adaptor.HomeOutletAdapter;
 import emerge.project.onmeal.utils.entittes.OutletItems;
+import emerge.project.onmeal.utils.entittes.VersionUpdate;
 
 
 public class FragmentHomeOutlet extends Fragment implements HomeViewByOutlet {
@@ -189,5 +190,15 @@ public class FragmentHomeOutlet extends Fragment implements HomeViewByOutlet {
         relativelayoutBtnRetry.setVisibility(View.VISIBLE);
         textViewRecyclerviewEmpty.setText(msg);
         textViewRecyclerviewEmpty.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void updateAppVersionAndPushSuccessful(VersionUpdate versionUpdate) {
+
+    }
+
+    @Override
+    public void updateAppVersionAndPushFail(String msg) {
+
     }
 }

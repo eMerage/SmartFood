@@ -2,7 +2,14 @@ package emerge.project.onmeal.ui.activity.home;
 
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.luseen.logger.Logger;
 import com.pddstudio.preferences.encrypted.EncryptedPreferences;
 
@@ -274,4 +281,50 @@ public class HomeInteractorImpil implements HomeInteractor {
         });
 
     }
+
+    @Override
+    public void updateAppVersionAndPush(Context con, OnUpdateAppVersionAndPushFinishedListener onUpdateAppVersionAndPushFinishedListener) {
+
+
+        realm = Realm.getDefaultInstance();
+        User user = realm.where(User.class).findFirst();
+
+        String versionName="";
+        int versionCode = 0;
+
+        try {
+            PackageInfo pInfo = con.getPackageManager().getPackageInfo(con.getPackageName(), 0);
+            versionName = pInfo.versionName;
+            versionCode = pInfo.versionCode;
+
+        } catch(PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+
+        }
+
+
+        final String finalVersionName = versionName;
+        final int finalVersionCode = versionCode;
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }
+
+
+                        String token = task.getResult().getToken();
+
+                        System.out.println("rrrrrrrrrrrrrrrr   versionName: "+ finalVersionName);
+                        System.out.println("rrrrrrrrrrrrrrrr   versionCode: "+ finalVersionCode);
+                        System.out.println("rrrrrrrrrrrrrrrr   token: "+ token);
+
+
+                    }
+                });
+
+    }
+
+
 }

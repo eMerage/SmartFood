@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import emerge.project.onmeal.utils.entittes.Foodtems;
 import emerge.project.onmeal.utils.entittes.HomeFavouriteItems;
 import emerge.project.onmeal.utils.entittes.OutletItems;
+import emerge.project.onmeal.utils.entittes.VersionUpdate;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -15,7 +16,7 @@ import emerge.project.onmeal.utils.entittes.OutletItems;
 
 public class HomePresenterImpli implements HomePresenter,HomeInteractor.OnFavouriteItemsLoadFinishedListener,
         HomeInteractor.OnMainFoodLoadFinishedListener,HomeInteractor.OnOutletLoadFinishedListener,
-        HomeInteractor.OnsignOutinishedListener{
+        HomeInteractor.OnsignOutinishedListener,  HomeInteractor.OnUpdateAppVersionAndPushFinishedListener{
 
 
     private HomeView homeView;
@@ -48,6 +49,7 @@ public class HomePresenterImpli implements HomePresenter,HomeInteractor.OnFavour
     public void signOut(Context context) {
         homeInteractor.signOut(context,this);
     }
+
 
 
     @Override
@@ -126,5 +128,27 @@ public class HomePresenterImpli implements HomePresenter,HomeInteractor.OnFavour
     @Override
     public void getOutletFail(String msg) {
         homeViewByOutlet.getOutletFail(msg);
+    }
+
+
+
+    @Override
+    public void updateAppVersionAndPush(Context con) {
+        homeInteractor.updateAppVersionAndPush(con,this);
+    }
+
+
+
+    @Override
+    public void updateAppVersionAndPushSuccessful(VersionUpdate versionUpdate) {
+        homeViewByOutlet.updateAppVersionAndPushSuccessful(versionUpdate);
+        homeViewByFood.updateAppVersionAndPushSuccessful(versionUpdate);
+
+    }
+
+    @Override
+    public void updateAppVersionAndPushFail(String msg) {
+        homeViewByOutlet.updateAppVersionAndPushFail(msg);
+        homeViewByFood.updateAppVersionAndPushFail(msg);
     }
 }

@@ -37,7 +37,7 @@ public interface PersonlaizePresenter {
 
     void cartCount();
 
-
+    void getOutlet(int outletID);
 
     void clareMenus();
 

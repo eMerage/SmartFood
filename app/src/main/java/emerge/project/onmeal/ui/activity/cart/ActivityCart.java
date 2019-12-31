@@ -322,13 +322,16 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
                 alertDialogBuilder.setPositiveButton("Add",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                unBloackUserInteraction();
                                 promoCode = editTextPromocode.getText().toString();
+
                                 return;
                             }
                         });
                 alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        callOrder();
                         return;
                     }
                 });
@@ -336,6 +339,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
             }else {
                 callOrder();
+
             }
 
         } else {
@@ -380,7 +384,6 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
                 bloackUserInteraction();
                 proprogressview.setVisibility(View.VISIBLE);
                 cartPresenter.getPromoCodeValidation(this, promoCode,orderCODE);
-                Toast.makeText(this, "Promo Code added", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
 
@@ -447,7 +450,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
 
     @Override
-    public void getPromoCodeValidationSuccessful(String code, Double discount, Double subtotal, String image, Double deliveryCharges, String service, String serviceChage, Double total) {
+    public void getPromoCodeValidationSuccessful(String promoTitle,String code, Double discount, Double subtotal, String image, Double deliveryCharges, String service, String serviceChage, Double total) {
 
         unBloackUserInteraction();
         proprogressview.setVisibility(View.GONE);
@@ -491,11 +494,15 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         textDiscountchaege.setText(priseArrayDiscount[0]);
         textDiscountchaegeCents.setText("." + priseArrayDiscount[1]);
 
+        if (code.equals("")) {
+            if(promoTitle.equals("")){
 
-        if (code.equals("No Promo")) {
+            }else {
+                Toast.makeText(this, "Promo code successfully redeemed", Toast.LENGTH_LONG).show();
+            }
 
         } else {
-            Toast.makeText(this, "Promo code successfully redeemed", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, code, Toast.LENGTH_LONG).show();
         }
 
 
@@ -790,8 +797,13 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void orderProsessSuccess(OrderConfirmDetails orderConfirmDetails) {
+
+
+
         webOrderId = orderConfirmDetails.getOrderID();
         proprogressview.setVisibility(View.GONE);
+
+        System.out.println("aaaaaaaaaaaa sss "+webOrderId);
         orderconfirmdetails = orderConfirmDetails;
 
         if (orderConfirmDetails.getPaymentTypeCode().equals("CC")) {

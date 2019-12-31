@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 import emerge.project.onmeal.utils.entittes.AddressItems;
+import emerge.project.onmeal.utils.entittes.VersionUpdate;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -18,7 +19,8 @@ public class LandingPresenterImpli implements LandingPresenter,
         LandingInteractor.OnAddressLoadFinishedListener,
         LandingInteractor.OnAddNewAddressFinishedListener,
         LandingInteractor.OnsaveAddressFinishedListener,
-        LandingInteractor.OnsignOutinishedListener{
+        LandingInteractor.OnsignOutinishedListener
+{
 
 
     private LandingView landingView;
@@ -42,7 +44,6 @@ public class LandingPresenterImpli implements LandingPresenter,
     public void signOut(Context context) {
         landingInteractor.signOut(context,this);
     }
-
 
     @Override
     public void signOutSuccess() {
@@ -129,4 +130,7 @@ public class LandingPresenterImpli implements LandingPresenter,
     public void saveAddressFail(String msg) {
         landingView.saveAddressFail(msg);
     }
+
+
+
 }

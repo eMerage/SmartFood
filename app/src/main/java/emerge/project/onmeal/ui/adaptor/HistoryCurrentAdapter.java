@@ -202,7 +202,7 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
             holder.textviewConfirm.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
             holder.textviewMake.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
             holder.textviewTransits.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
-            holder.textviewDeliverd.setTextColor(mContext.getResources().getColor(R.color.colorTextGreen));
+            holder.textviewDeliverd.setTextColor(mContext.getResources().getColor(R.color.historyTextColor));
             holder.imgConfrimd.setImageResource(R.drawable.ic_confirmed_green);
             holder.imgMake.setImageResource(R.drawable.ic_inmake_green);
             holder.imgDeliverd.setImageResource(R.drawable.ic_deliverd_green);

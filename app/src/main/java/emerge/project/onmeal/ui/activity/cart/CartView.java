@@ -19,7 +19,7 @@ public interface CartView {
     void cartItems(ArrayList<CartHeader> cartHeaderArrayList);
 
 
-    void getPromoCodeValidationSuccessful(String code, Double discount, Double subtotal, String image, Double deliveryCharges,String service,String serviceValue,Double total);
+    void getPromoCodeValidationSuccessful(String promoTitle,String code, Double discount, Double subtotal, String image, Double deliveryCharges,String service,String serviceValue,Double total);
 
     void getPromoCodeValidationFail(String promoCode, String orderCode,String msg);
 

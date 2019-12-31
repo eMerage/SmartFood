@@ -59,8 +59,8 @@ CartInteractor.OnRemoveFaildMenusFinishedListener,
 
 
     @Override
-    public void getPromoCodeValidationSuccessful(String code, Double discount, Double subtotal, String image, Double deliveryCharges,String service,String serviceValue,Double total) {
-        cartView.getPromoCodeValidationSuccessful(code, discount, subtotal, image, deliveryCharges,service, serviceValue,total);
+    public void getPromoCodeValidationSuccessful(String promoTitle,String code, Double discount, Double subtotal, String image, Double deliveryCharges,String service,String serviceValue,Double total) {
+        cartView.getPromoCodeValidationSuccessful( promoTitle,code, discount, subtotal, image, deliveryCharges,service, serviceValue,total);
     }
 
     @Override

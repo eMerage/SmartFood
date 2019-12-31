@@ -30,6 +30,7 @@ import emerge.project.onmeal.ui.activity.home.HomePresenterImpli;
 import emerge.project.onmeal.ui.activity.home.HomeViewByFood;
 import emerge.project.onmeal.ui.adaptor.HomeFoodAdapter;
 import emerge.project.onmeal.utils.entittes.Foodtems;
+import emerge.project.onmeal.utils.entittes.VersionUpdate;
 
 
 public class FragmentHomeFood extends Fragment implements HomeViewByFood {
@@ -183,6 +184,16 @@ public class FragmentHomeFood extends Fragment implements HomeViewByFood {
         relativelayoutBtnRetry.setVisibility(View.VISIBLE);
         textViewRecyclerviewEmpty.setText(msg);
         textViewRecyclerviewEmpty.setVisibility(View.VISIBLE);
+
+    }
+
+    @Override
+    public void updateAppVersionAndPushSuccessful(VersionUpdate versionUpdate) {
+
+    }
+
+    @Override
+    public void updateAppVersionAndPushFail(String msg) {
 
     }
 

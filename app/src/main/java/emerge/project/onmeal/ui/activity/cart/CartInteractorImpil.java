@@ -102,12 +102,6 @@ public class CartInteractorImpil implements CartInteractor {
         String dispatchPatchType="P";
 
 
-      /*  if (dispatch.equals("Delivery")) {
-            addressId = address.getAddressId();
-        } else {
-            addressId = "0";
-        }*/
-
         if (dispatch.equals("Delivery")) {
             dispatchPatchType = "D";
             addressId = address.getAddressId();
@@ -141,6 +135,8 @@ public class CartInteractorImpil implements CartInteractor {
         jsonObject.addProperty("SubTotal", totalPrice);
         jsonObject.addProperty("DispatchType", dispatchPatchType);
         jsonObject.addProperty("OrderCode", orderCode);
+
+
 
 
 
@@ -209,13 +205,18 @@ public class CartInteractorImpil implements CartInteractor {
 
                                         discount = userVerifiedResponse.getDouble("discountedAmount");
 
-                                        String promo;
+                                        String promo =userVerifiedResponse.getString("promoInvalidReason");
+
+                                        String promoTitle =userVerifiedResponse.getString("promoTitle");
+
+
+                                       /*
                                         if (userVerifiedResponse.getString("promoTitle").equals("") || userVerifiedResponse.getString("promoTitle") == null || userVerifiedResponse.getString("promoTitle").equals("null")) {
                                             promo = "No Promo";
                                         } else {
                                             promo = userVerifiedResponse.getString("promoTitle");
-                                        }
-                                        onPromoCodeValidationFinishedListener.getPromoCodeValidationSuccessful(promo, discount, subAmount, userVerifiedResponse.getString("imageUrl"), deliveryCharges, serviceCharge, String.valueOf(serviceChargeValue), fullAmount);
+                                        }*/
+                                        onPromoCodeValidationFinishedListener.getPromoCodeValidationSuccessful(promoTitle,promo, discount, subAmount, userVerifiedResponse.getString("imageUrl"), deliveryCharges, serviceCharge, String.valueOf(serviceChargeValue), fullAmount);
 
                                     } catch (JSONException e) {
                                         Logger.e(e.toString());
@@ -509,7 +510,6 @@ public class CartInteractorImpil implements CartInteractor {
                 final int finalOutletId = outletId;
                 apiService.orderProsess(jsonObject)
                         .subscribeOn(Schedulers.io())
-                        .retry(5)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Observer<JsonObject>() {
                             @Override
