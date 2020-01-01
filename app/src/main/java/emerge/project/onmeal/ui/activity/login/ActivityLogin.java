@@ -392,6 +392,8 @@ public class ActivityLogin extends Activity implements LoginView {
         } catch (ApiException e) {
             proprogressview.setVisibility(View.INVISIBLE);
             unBloackUserInteraction();
+
+
             Toast.makeText(getApplicationContext(), "Google Sing In fail,Please Try again !", Toast.LENGTH_LONG).show();
 
         }

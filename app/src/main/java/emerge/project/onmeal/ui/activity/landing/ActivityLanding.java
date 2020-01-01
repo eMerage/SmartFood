@@ -63,6 +63,7 @@ import com.google.android.gms.tasks.Task;
 
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.FetchPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
@@ -263,7 +264,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
         placesClient = Places.createClient(this);
 
-        placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
+        placeFields = Arrays.asList(Place.Field.LAT_LNG, Place.Field.NAME,Place.Field.ADDRESS,Place.Field.NAME,Place.Field.ID);
 
         request = FetchPlaceRequest.builder(placeId, placeFields).build();
 
@@ -481,7 +482,8 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     @OnClick(R.id.robotoLight2)
     public void textChangededitText(View view) {
 
-        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, placeFields).build(this);
+        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, placeFields)
+                .build(this);
         startActivityForResult(intent, PLACE_PICKER_REQUEST);
 
 
@@ -676,28 +678,28 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                 Place place = Autocomplete.getPlaceFromIntent(data);
 
                 try {
+
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude), 15));
                         mapMarker = mMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude))
                                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
 
                     try {
-                        if (place.getAddress().toString().length() > 30) {
-                            textViewSelectedAddress.setText(place.getAddress().toString().substring(0, 30));
+                        if (place.getAddress().length() > 30) {
+                            textViewSelectedAddress.setText(place.getAddress().substring(0, 30));
                         } else {
-                            textViewSelectedAddress.setText(place.getAddress().toString());
+                            textViewSelectedAddress.setText(place.getAddress());
                         }
                     } catch (ArrayIndexOutOfBoundsException aiobex) {
-                        textViewSelectedAddress.setText(place.getAddress().toString());
+                        textViewSelectedAddress.setText(place.getAddress());
                     }
 
 
-                    landingPresenter.getSellectedAddressDetails(place.getName().toString(), place.getAddress().toString(), place.getLatLng());
+                    landingPresenter.getSellectedAddressDetails(place.getName(), place.getAddress(), place.getLatLng());
 
                     relativelayoutAddedlist.setVisibility(View.INVISIBLE);
 
                 } catch (Exception ex) {
-
                     Toast.makeText(this, "Place request fail,try again", Toast.LENGTH_SHORT).show();
                 }
 
