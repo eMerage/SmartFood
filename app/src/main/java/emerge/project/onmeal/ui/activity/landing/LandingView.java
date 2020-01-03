@@ -28,7 +28,7 @@ public interface LandingView {
     void addNewAddressFail(String msg);
 
 
-    void saveAddressSuccessful(String add);
+    void saveAddressSuccessful(AddressItems add);
 
     void saveAddressFail(String msg);
 

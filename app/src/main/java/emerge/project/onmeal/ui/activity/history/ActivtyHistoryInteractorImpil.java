@@ -86,6 +86,8 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
                                         onOrderHistoryLoadFinishedListener.getOrderHistoryEmpty();
                                     } else {
                                         for (int i = 0; i < orderHistory.size(); i++) {
+
+
                                             if (orderHistory.get(i).getStatusCode().equals("ODCP")) {
                                                 orderHistoryItemsPast.add(new OrderHistoryItems(orderHistory.get(i).getOrderID(), orderHistory.get(i).getOrderDate(), orderHistory.get(i).getOrderTotal(),
                                                         orderHistory.get(i).getDispatchType(), orderHistory.get(i).getStatusCode(), "",orderHistory.get(i).getOutletName(),orderHistory.get(i).getOutletID()));

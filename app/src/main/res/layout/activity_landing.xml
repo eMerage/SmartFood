@@ -235,11 +235,10 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                  >
+                    android:orientation="horizontal">
                     <View
                         android:id="@+id/divider66"
-                        android:layout_width=".5dp"
+                        android:layout_width="0.5dp"
                         android:layout_height="match_parent"
                         android:background="@color/colorTextAsh"/>
 
@@ -250,7 +249,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_toEndOf="@+id/divider6"
                         android:layout_toRightOf="@+id/divider6"
-                        android:background="@drawable/bg_dispatchtype_right_red">
+                        android:background="@drawable/bg_dispatchtype_right_white">
 
                         <ImageView
                             android:id="@+id/imageView_ic_pickup"
@@ -259,7 +258,7 @@
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/divider8"
                             android:layout_toStartOf="@+id/divider8"
-                            android:src="@drawable/ic_pickup" />
+                            android:src="@drawable/ic_pick_up_dark" />
 
                         <View
                             android:id="@+id/divider8"
@@ -277,7 +276,7 @@
                             android:layout_toRightOf="@+id/divider8"
                             android:lineSpacingExtra="1sp"
                             android:text="Pick Up"
-                            android:textColor="@color/colorTextWhite"
+                            android:textColor="#b5b5b5"
                             android:textSize="13sp" />
                     </RelativeLayout>
 
@@ -404,6 +403,7 @@
                     android:paddingTop="10dp"
                     android:paddingRight="50dp"
                     android:paddingBottom="10dp"
+                    android:visibility="gone"
                     android:text="Set Location on Map"
                     android:textColor="#dd432b"
                     android:textSize="15sp" />

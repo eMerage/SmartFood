@@ -519,7 +519,7 @@ public class ActivityMenu extends Activity implements MenuView, OnMapReadyCallba
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Warning");
-        alertDialogBuilder.setMessage("Your Cart will be clear");
+        alertDialogBuilder.setMessage("Your Cart will be cleared");
         alertDialogBuilder.setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {

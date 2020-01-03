@@ -42,11 +42,20 @@ public interface LandingInteractor {
 
 
 
-    interface OnsaveAddressFinishedListener {
+  /*  interface OnsaveAddressFinishedListener {
         void saveAddressSuccessful(String add);
         void saveAddressFail(String msg);
     }
     void saveAddress(String addresID,String address, OnsaveAddressFinishedListener onsaveAddressFinishedListener);
+*/
+
+
+
+    interface OnsaveAddressFinishedListener {
+        void saveAddressSuccessful(AddressItems address);
+        void saveAddressFail(String msg);
+    }
+    void saveAddress(AddressItems address, OnsaveAddressFinishedListener onsaveAddressFinishedListener);
 
     interface OnsignOutinishedListener {
         void signOutSuccess();

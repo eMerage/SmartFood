@@ -56,7 +56,7 @@ public interface ApiInterface {
     Observable<String> addNewAddress(@Body JsonObject address);
 
     @GET("MealTimeUser/GetAddresses")
-    Observable<List<AddressItems>> getAddress(@Query("userId") int userId);
+    Observable<ArrayList<AddressItems>> getAddress(@Query("userId") int userId);
 
 
     @GET("MealTimeUser/GetUserFavourites")

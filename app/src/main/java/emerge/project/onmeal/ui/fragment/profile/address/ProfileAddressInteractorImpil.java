@@ -71,7 +71,13 @@ public class ProfileAddressInteractorImpil implements ProfileAddressInteractor {
                                                 //didn't show the address which doesn't have address name
                                             } else {
                                                 addressItemsArrayList.add(new AddressItems(addressList.get(i).getAddressId(),
-                                                        addressList.get(i).getAddressName(), addressList.get(i).getAddressCity(), addressList.get(i).getAddressNumber(), addressList.get(i).getAddressRoad(), false));
+                                                        addressList.get(i).getAddressName(),
+                                                        addressList.get(i).getAddressCity(),
+                                                        addressList.get(i).getAddressNumber(),
+                                                        addressList.get(i).getAddressRoad(),
+                                                        false,
+                                                        addressList.get(i).getAddressLatitude(),
+                                                        addressList.get(i).getAddressLongitude()));
                                             }
                                         }
                                         onAddressLoadFinishedListener.getAddressSuccessful(addressItemsArrayList);

@@ -123,6 +123,9 @@ public class SingUpInteractorImpil implements SingUpInteractor {
         jsonObject.addProperty("SocialMediaTokenId", user.getUserSocialMediaTokenId());
         jsonObject.addProperty("PushTokenId", user.getUserPushTokenId());
 
+
+        System.out.println("qqqqqqqqqqqqqq  vvvv: "+jsonObject);
+
         try {
             apiService.userRegistration(jsonObject)
                     .subscribeOn(Schedulers.io())

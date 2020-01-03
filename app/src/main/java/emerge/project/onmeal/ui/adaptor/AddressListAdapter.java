@@ -54,29 +54,36 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final AddressItems addressItems = addressItemsArrayList.get(position);
 
-        final String address=addressItems.getAddressNumber()+" "+addressItems.getAddressRoad()+" "+addressItems.getAddressCity();
+        if (addressItems.getAddressName().equals("") ||addressItems.getAddressName().isEmpty()) {
+            //didn't show the address which doesn't have address name
+        } else {
+
+            final String address=addressItems.getAddressNumber()+" "+addressItems.getAddressRoad()+" "+addressItems.getAddressCity();
 
 
-        if(addressItems.getAddressName().isEmpty() || addressItems.getAddressName().equals("")){
-            holder.textViewAddressName.setText(addressItems.getAddressCity());
-        }else {
-            holder.textViewAddressName.setText(addressItems.getAddressName());
+            if(addressItems.getAddressName().isEmpty() || addressItems.getAddressName().equals("")){
+                holder.textViewAddressName.setText(addressItems.getAddressCity());
+            }else {
+                holder.textViewAddressName.setText(addressItems.getAddressName());
+            }
+
+
+
+
+            holder.textViewAddress.setText(address);
+
+            holder.relativelayoutMain.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    landingPresenter.saveAddress(addressItems);
+                }
+            });
+
         }
 
 
 
 
-        holder.textViewAddress.setText(address);
-
-
-
-
-        holder.relativelayoutMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                landingPresenter.saveAddress(addressItems.getAddressId(),address);
-            }
-        });
 
     }
 

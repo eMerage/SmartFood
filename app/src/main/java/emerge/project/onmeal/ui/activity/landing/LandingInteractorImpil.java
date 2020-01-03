@@ -48,7 +48,7 @@ public class LandingInteractorImpil implements LandingInteractor {
     ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
     String newAddressRespons;
-    List<AddressItems> addressList;
+    ArrayList<AddressItems> addressList;
 
     @Override
     public void getSellectedAddressDetails(String planeName, String address, LatLng latLng, OnGetSellectedAddressDetailsFinishedListener onGetSellectedAddressDetailsFinishedListener) {
@@ -148,21 +148,18 @@ public class LandingInteractorImpil implements LandingInteractor {
     public void getAddress(final OnAddressLoadFinishedListener onAddressLoadFinishedListener) {
         final ArrayList<AddressItems> addressItemsArrayList = new ArrayList<AddressItems>();
 
-
         User user = realm.where(User.class).findFirst();
-
         try {
             apiService.getAddress(Integer.parseInt(user.getUserId()))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<List<AddressItems>>() {
+                    .subscribe(new Observer<ArrayList<AddressItems>>() {
                         @Override
                         public void onSubscribe(Disposable d) {
 
                         }
-
                         @Override
-                        public void onNext(List<AddressItems> respond) {
+                        public void onNext(ArrayList<AddressItems> respond) {
                             addressList = respond;
                         }
 
@@ -179,24 +176,26 @@ public class LandingInteractorImpil implements LandingInteractor {
                                     } else {
                                         for (int i = 0; i < addressList.size(); i++) {
                                             if (addressList.get(i).getAddressName().equals("") || addressList.get(i).getAddressName().isEmpty()) {
-                                                                //didn't show the address which doesn't have address name
+                                                //didn't show the address which doesn't have address name
                                             } else {
                                                 addressItemsArrayList.add(new AddressItems(addressList.get(i).getAddressId(),
-                                                        addressList.get(i).getAddressName(), addressList.get(i).getAddressCity(), addressList.get(i).getAddressNumber(), addressList.get(i).getAddressRoad(), false));
+                                                        addressList.get(i).getAddressName(),
+                                                        addressList.get(i).getAddressCity(),
+                                                        addressList.get(i).getAddressNumber(),
+                                                        addressList.get(i).getAddressRoad(),
+                                                        false,
+                                                        addressList.get(i).getAddressLatitude(),
+                                                        addressList.get(i).getAddressLongitude()));
                                             }
                                         }
                                         onAddressLoadFinishedListener.getAddressSuccessful(addressItemsArrayList);
                                     }
-
                                 } catch (NullPointerException exNull) {
                                     onAddressLoadFinishedListener.getAddressFail("Communication error, Please try again");
                                 }
-
-
                             } else {
                                 onAddressLoadFinishedListener.getAddressFail("Communication error, Please try again");
                             }
-
                         }
                     });
 
@@ -323,7 +322,9 @@ public class LandingInteractorImpil implements LandingInteractor {
         }
     }
 
-    @Override
+
+
+   /* @Override
     public void saveAddress(final String addresID, final String selectedAddress, OnsaveAddressFinishedListener onsaveAddressFinishedListener) {
 
         realm = Realm.getDefaultInstance();
@@ -345,6 +346,35 @@ public class LandingInteractorImpil implements LandingInteractor {
         });
 
         onsaveAddressFinishedListener.saveAddressSuccessful(selectedAddress);
+
+
+    }*/
+
+
+    @Override
+    public void saveAddress(final AddressItems addressItems,OnsaveAddressFinishedListener onsaveAddressFinishedListener) {
+
+        final String selectedAddress=addressItems.getAddressNumber()+" "+addressItems.getAddressRoad()+" "+addressItems.getAddressCity();
+
+        realm = Realm.getDefaultInstance();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm bgRealm) {
+                final Long addressList = bgRealm.where(Address.class).count();
+                if (addressList.intValue() == 0) {
+                    Address address = bgRealm.createObject(Address.class, 1);
+                    address.setAddressId(addressItems.getAddressId());
+                    address.setAddress(selectedAddress);
+                } else {
+                    Address address = bgRealm.where(Address.class).equalTo("rowId", 1).findFirst();
+                    address.setAddressId(addressItems.getAddressId());
+                    address.setAddress(selectedAddress);
+                }
+
+            }
+        });
+
+        onsaveAddressFinishedListener.saveAddressSuccessful(addressItems);
 
 
     }

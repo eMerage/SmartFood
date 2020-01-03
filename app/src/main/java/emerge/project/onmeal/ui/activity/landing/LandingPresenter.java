@@ -17,7 +17,7 @@ public interface LandingPresenter {
 
     void addNewAddress(AddressItems addressItems);
 
-    void saveAddress(String addresID,String address);
+    void saveAddress(AddressItems address);
 
     void deleteAddress();
     void signOut(Context context);
