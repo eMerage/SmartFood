@@ -1,5 +1,6 @@
 package emerge.project.onmeal.ui.activity.cart;
 
+import android.app.Activity;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -324,6 +325,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
                             public void onClick(DialogInterface dialog, int which) {
                                 unBloackUserInteraction();
                                 promoCode = editTextPromocode.getText().toString();
+                                cartPresenter.getPromoCodeValidation(ActivityCart.this, promoCode,orderCODE);
 
                                 return;
                             }
@@ -331,6 +333,8 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
                 alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+
+                        editTextPromocode.setText("");
                         callOrder();
                         return;
                     }
@@ -499,9 +503,11 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
 
             }else {
                 Toast.makeText(this, "Promo code successfully redeemed", Toast.LENGTH_LONG).show();
+                editTextPromocode.setEnabled(false);
             }
 
         } else {
+            promoCode = "";
             Toast.makeText(this, code, Toast.LENGTH_LONG).show();
         }
 
@@ -994,8 +1000,12 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
             bloackUserInteraction();
             proprogressview.setVisibility(View.VISIBLE);
+            cartPresenter.genarateOrderCode();
             cartPresenter.getPromoCodeValidation(this, promoCode,orderCODE);
             cartPresenter.getCartItems();
+
+
+            Toast.makeText(this, "Please confirm the Order", Toast.LENGTH_SHORT).show();
         } else {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -1148,7 +1158,7 @@ public class ActivityCart extends FragmentActivity implements OnMapReadyCallback
         String deliver = textDeliverychaege.getText().toString() + textDeliverychaegeCents.getText().toString();
         String totalAmount = textSubtotal.getText().toString() + textSubtotalCents.getText().toString();
 
-        cartPresenter.orderProsess(edittextNote.getText().toString(), paymentType, orderCODE, Double.parseDouble(deliver), Double.parseDouble(totalAmount),    promoCode, selectedPickupTime, selectedTimeSlots, this);
+        cartPresenter.orderProsess(edittextNote.getText().toString(), paymentType, orderCODE, Double.parseDouble(deliver), Double.parseDouble(totalAmount),promoCode, selectedPickupTime, selectedTimeSlots, this);
 
 
     }

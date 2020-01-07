@@ -74,7 +74,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         holder.relativelayoutMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                landingPresenter.saveAddress(addressItems.getAddressId(),address);
+                landingPresenter.saveAddress(addressItems);
             }
         });
 

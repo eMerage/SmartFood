@@ -2,14 +2,18 @@ package emerge.project.onmeal.ui.activity.splash;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -21,6 +25,7 @@ import emerge.project.onmeal.ui.activity.intro.FragmentActivityIntro;
 import emerge.project.onmeal.ui.activity.landing.ActivityLanding;
 import emerge.project.onmeal.ui.activity.login.ActivityLogin;
 import emerge.project.onmeal.ui.activity.login.LoginInteractor;
+import emerge.project.onmeal.utils.entittes.UpdateToken;
 import io.realm.Realm;
 import io.sentry.Sentry;
 import io.sentry.SentryClient;
@@ -31,105 +36,117 @@ import io.sentry.event.UserBuilder;
 public class ActivitySplash extends Activity implements SplashView {
 
     SplashPresenter splashPresenter;
-    public Handler mHandler;
-    private Runnable myRunnableActivityIntro;
-    private Runnable myRunnableActivityLanding;
-    private Runnable myRunnableActivityLogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         splashPresenter = new SplashPresenterImpli(this);
-        mHandler = new Handler();
-        runnable();
+
+
+
+
         splashPresenter.deleteLocalOrderData();
 
     }
 
     @Override
     protected void onDestroy() {
-        mHandler.removeCallbacks(myRunnableActivityIntro);
-        mHandler.removeCallbacks(myRunnableActivityLanding);
-        mHandler.removeCallbacks(myRunnableActivityLogin);
+
         super.onDestroy();
     }
     @Override
     protected void onPause() {
-        mHandler.removeCallbacks(myRunnableActivityIntro);
-        mHandler.removeCallbacks(myRunnableActivityLanding);
-        mHandler.removeCallbacks(myRunnableActivityLogin);
+
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-        mHandler.removeCallbacks(myRunnableActivityIntro);
-        mHandler.removeCallbacks(myRunnableActivityLanding);
-        mHandler.removeCallbacks(myRunnableActivityLogin);
+
         super.onStop();
     }
 
     @Override
     public void userAvailable() {
-        try {
-            mHandler.postDelayed(myRunnableActivityLanding,2000);
-        } catch (Exception ex) { }
-
-
+        Intent intent = new Intent(ActivitySplash.this, ActivityLanding.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
+        startActivity(intent, bndlanimation);
+        finish();
     }
 
     @Override
     public void userNotAvailable() {
-        try {
-            mHandler.postDelayed(myRunnableActivityIntro,2000);
-        } catch (Exception ex) { }
-
+        Intent intent = new Intent(ActivitySplash.this, FragmentActivityIntro.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
+        startActivity(intent, bndlanimation);
+        finish();
     }
 
     @Override
     public void userSingOut() {
-        try {
-            mHandler.postDelayed(myRunnableActivityLogin,2000);
-        } catch (Exception ex) { }
+        Intent intent = new Intent(ActivitySplash.this, ActivityLogin.class);
+        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
+        startActivity(intent, bndlanimation);
+        finish();
     }
 
     @Override
     public void deletetedData() {
-        splashPresenter.checkUser();
-    }
-
-    private void runnable(){
-        myRunnableActivityIntro = new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(ActivitySplash.this, FragmentActivityIntro.class);
-                Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
-                startActivity(intent, bndlanimation);
-                finish();
-            }
-        };
-
-        myRunnableActivityLanding = new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(ActivitySplash.this, ActivityLanding.class);
-                Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
-                startActivity(intent, bndlanimation);
-                finish();
-            }
-        };
-        myRunnableActivityLogin = new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(ActivitySplash.this, ActivityLogin.class);
-                Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
-                startActivity(intent, bndlanimation);
-                finish();
-            }
-        };
-
+        splashPresenter.updatePushTokenAndAppVersion(this);
 
     }
+
+    @Override
+    public void updateStatus(Boolean status, final UpdateToken updateToken) {
+
+        if(status){
+            splashPresenter.checkUser();
+        }else {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("App Update");
+            alertDialogBuilder.setMessage(updateToken.getError().getErrorMessage());
+            if(updateToken.getError().getErrorCode().equals("CE")){
+                alertDialogBuilder.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(ActivitySplash.this, "You can not processed", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        });
+
+
+            }else {
+                alertDialogBuilder.setPositiveButton("Update",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateToken.getAppUrl()));
+                                startActivity(browserIntent);
+
+                                return;
+                            }
+                        });
+                alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(ActivitySplash.this, "You can not processed", Toast.LENGTH_SHORT).show();
+
+                        return;
+                    }
+                });
+
+            }
+
+            alertDialogBuilder.show();
+
+
+        }
+
+    }
+
+
+
 
 }

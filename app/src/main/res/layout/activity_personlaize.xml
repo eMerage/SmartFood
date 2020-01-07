@@ -174,11 +174,12 @@
 
                         android:id="@+id/recyclerView_menu"
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:background="#ffffff"
                         android:layoutAnimation="@anim/layout_animation_fall_down"
                         android:minHeight="250dp" />
+
 
 
                     <RelativeLayout
@@ -378,9 +379,12 @@
                     </RelativeLayout>
 
 
+
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>
+
+
     </RelativeLayout>
 
 

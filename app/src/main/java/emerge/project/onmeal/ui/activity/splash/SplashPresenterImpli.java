@@ -1,12 +1,16 @@
 package emerge.project.onmeal.ui.activity.splash;
 
 
+import android.content.Context;
+
+import emerge.project.onmeal.utils.entittes.UpdateToken;
+
 /**
  * Created by Himanshu on 4/4/2017.
  */
 
 public class SplashPresenterImpli implements SplashPresenter, SplashInteractor.OnCheckUserFinishedListener,
-        SplashInteractor.OnDeleteLocalOrderDataFinishedListener {
+        SplashInteractor.OnDeleteLocalOrderDataFinishedListener,SplashInteractor.OnUpdatePushTokenAndAppVersionFinishedListener {
 
 
     private SplashView splashView;
@@ -49,8 +53,27 @@ public class SplashPresenterImpli implements SplashPresenter, SplashInteractor.O
     public void deleteLocalOrderData() {
         landingInteractor.deleteLocalOrderData(this);
     }
+
+
+
     @Override
     public void deletetedData() {
         splashView.deletetedData();
     }
+
+
+
+    @Override
+    public void updatePushTokenAndAppVersion(Context con) {
+        landingInteractor.updatePushTokenAndAppVersion( con,this);
+    }
+
+
+
+    @Override
+    public void updateStatus(Boolean status, UpdateToken updateToken) {
+        splashView.updateStatus(status,updateToken);
+    }
+
+
 }

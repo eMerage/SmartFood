@@ -656,31 +656,36 @@
                         android:background="#e1e1e1" />
 
 
-                    <ImageView
-                        android:id="@+id/img_btn_confirm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/divider22"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/btn_confirm_order" />
+
+
+
 
                     <ImageView
-                        android:id="@+id/img_btn_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/img_btn_confirm"
-                        android:layout_alignParentEnd="true"
+                         android:id="@+id/img_btn_confirm"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_below="@+id/divider22"
+                         android:layout_marginLeft="20dp"
+                         android:layout_marginTop="10dp"
+                         android:layout_marginBottom="10dp"
+                         android:src="@drawable/btn_confirm_order" />
 
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="20dp"
-                        android:src="@drawable/ic_time" />
+                     <ImageView
+                         android:id="@+id/img_btn_time"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignTop="@+id/img_btn_confirm"
+                         android:layout_alignParentEnd="true"
+
+                         android:layout_alignParentRight="true"
+                         android:layout_marginRight="20dp"
+                         android:src="@drawable/ic_time" />
 
 
                 </RelativeLayout>
             </LinearLayout>
         </ScrollView>
+
 
     </RelativeLayout>
 

@@ -111,8 +111,8 @@ public class LandingPresenterImpli implements LandingPresenter,
 
 
     @Override
-    public void saveAddress(String addresID, String address) {
-        landingInteractor.saveAddress(addresID,address,this);
+    public void saveAddress(AddressItems addressItems) {
+        landingInteractor.saveAddress(addressItems,this);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class LandingPresenterImpli implements LandingPresenter,
 
 
     @Override
-    public void saveAddressSuccessful(String add) {
+    public void saveAddressSuccessful(AddressItems add) {
         landingView.saveAddressSuccessful( add);
     }
 

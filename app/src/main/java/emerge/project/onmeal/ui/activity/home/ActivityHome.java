@@ -118,6 +118,7 @@ public class ActivityHome extends FragmentActivity implements HomeView{
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,6 +149,9 @@ public class ActivityHome extends FragmentActivity implements HomeView{
                     });
             alertDialogBuilder.show();
         }
+
+
+
 
         assert viewPager != null;
         viewPager.setAdapter(new HomeViewPagerAdapter(getSupportFragmentManager()));

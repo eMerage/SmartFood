@@ -324,7 +324,9 @@ public class LandingInteractorImpil implements LandingInteractor {
     }
 
     @Override
-    public void saveAddress(final String addresID, final String selectedAddress, OnsaveAddressFinishedListener onsaveAddressFinishedListener) {
+    public void saveAddress(final AddressItems addressItems,OnsaveAddressFinishedListener onsaveAddressFinishedListener) {
+
+        final String selectedAddress=addressItems.getAddressNumber()+" "+addressItems.getAddressRoad()+" "+addressItems.getAddressCity();
 
         realm = Realm.getDefaultInstance();
         realm.executeTransaction(new Realm.Transaction() {
@@ -333,22 +335,21 @@ public class LandingInteractorImpil implements LandingInteractor {
                 final Long addressList = bgRealm.where(Address.class).count();
                 if (addressList.intValue() == 0) {
                     Address address = bgRealm.createObject(Address.class, 1);
-                    address.setAddressId(addresID);
+                    address.setAddressId(addressItems.getAddressId());
                     address.setAddress(selectedAddress);
                 } else {
                     Address address = bgRealm.where(Address.class).equalTo("rowId", 1).findFirst();
-                    address.setAddressId(addresID);
+                    address.setAddressId(addressItems.getAddressId());
                     address.setAddress(selectedAddress);
                 }
 
             }
         });
 
-        onsaveAddressFinishedListener.saveAddressSuccessful(selectedAddress);
+        onsaveAddressFinishedListener.saveAddressSuccessful(addressItems);
 
 
     }
-
     @Override
     public void deleteAddress() {
         realm = Realm.getDefaultInstance();

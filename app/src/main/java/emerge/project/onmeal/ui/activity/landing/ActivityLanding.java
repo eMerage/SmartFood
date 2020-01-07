@@ -214,14 +214,14 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
     boolean isSelectSaverdAddres = false;
 
-
+    private LatLng center;
     int sdk;
 
     Marker mapMarker;
 
     EncryptedPreferences encryptedPreferences;
     private static final String DISPATCH_TYPE = "dispatch_type";
-    int dispatchType = 0;
+    int dispatchType = -1;
 
     AddressItems addressItem;
     LandingPresenter landingPresenter;
@@ -257,6 +257,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         sdk = android.os.Build.VERSION.SDK_INT;
 
 
+
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -269,63 +270,20 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         request = FetchPlaceRequest.builder(placeId, placeFields).build();
 
 
+
+
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         setNavigationMenuItems();
 
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-
-
-
-
             unBloackUserInteraction();
             getLocationPermission();
 
             createLocationRequest();
             checkLocationSettings();
 
-
-            if (addressItem == null) {
-                encryptedPreferences.edit().putString(DISPATCH_TYPE, "Pickup").apply();
-                dispatchType = 0;
-            } else {
-                if (sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                    relativelayoutDelivery.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dispatchtype_left_red));
-                    relativelayoutPickup.setBackgroundDrawable(getResources().getDrawable(R.drawable.bg_dispatchtype_right_white));
-
-                } else {
-                    relativelayoutDelivery.setBackground(getResources().getDrawable(R.drawable.bg_dispatchtype_left_red));
-                    relativelayoutPickup.setBackground(getResources().getDrawable(R.drawable.bg_dispatchtype_right_white));
-                }
-                imageViewIcDelivery.setImageResource(R.drawable.ic_delivery_bick);
-                textViewIcDelivery.setTextColor(getResources().getColor(R.color.colorTextWhite));
-
-
-                imageViewIcPickup.setImageResource(R.drawable.ic_pick_up_dark);
-                textViewIcPickup.setTextColor(getResources().getColor(R.color.colorTextIcon));
-
-                imageViewBtn.setImageResource(R.drawable.btn_continuewithdilivery);
-                imageViewBtnAddaditional.setVisibility(View.VISIBLE);
-
-
-                textViewTitle.setText("Delivery Location");
-                dispatchType = 1;
-                encryptedPreferences.edit().putString(DISPATCH_TYPE, "Delivery").apply();
-
-
-                try {
-                    if (addressItem.getAddress().length() > 30) {
-                        textViewSelectedAddress.setText(addressItem.getAddress().substring(0, 30));
-                    } else {
-                        textViewSelectedAddress.setText(addressItem.getAddress());
-                    }
-                } catch (ArrayIndexOutOfBoundsException aiobex) {
-                    textViewSelectedAddress.setText(addressItem.getAddress());
-                }
-
-
-            }
 
 
         } else {
@@ -344,6 +302,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         }
 
 
+
         setAddressListRecycalView();
 
 
@@ -355,31 +314,34 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         super.onStart();
 
 
-
-
     }
 
-    @OnClick(R.id.robotoRegular4)
-    public void onClicSetLocationOnMap(View view) {
-
-
-        isSelectSaverdAddres = false;
-        imageViewBtnAddaditional.setVisibility(View.VISIBLE);
-
-        Intent intentSingup = new Intent(this, ActivitySetLocation.class);
-        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
-        startActivity(intentSingup, bndlanimation);
-        finish();
-
-
-    }
 
 
     @OnClick(R.id.imageView_btn)
     public void onClickNextBtn(View view) {
-
-        if (dispatchType == 1) {
-
+        if(dispatchType == -1){
+            try {
+                new AlertDialog.Builder(this)
+                        .setMessage("To continue, select Delivery or Dine-In or Pick Up !")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;
+                            }
+                        })
+                        .create()
+                        .show();
+            } catch (WindowManager.BadTokenException e) {
+                Toast.makeText(this, "To continue, select Delivery or Dine-In or Pick Up !", Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+        }else if((dispatchType == 0) || (dispatchType == 2)){
+            Intent intentSingup = new Intent(this, ActivityHome.class);
+            Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+            startActivity(intentSingup, bndlanimation);
+            finish();
+        }else if(dispatchType == 1) {
             if (isSelectSaverdAddres) {
 
                 Intent intentSingup = new Intent(this, ActivityHome.class);
@@ -388,7 +350,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                 finish();
 
             } else {
-
                 if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
                     if (addressItem == null) {
                         Toast.makeText(this, "Please set the location as per the availability", Toast.LENGTH_LONG).show();
@@ -405,16 +366,8 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
             }
 
-
-        } else {
-
-            Intent intentSingup = new Intent(this, ActivityHome.class);
-            Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
-            startActivity(intentSingup, bndlanimation);
-            finish();
-
-
         }
+
 
 
     }
@@ -463,6 +416,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         textViewTitle.setText("Delivery Location");
         dispatchType = 1;
+
         encryptedPreferences.edit().putString(DISPATCH_TYPE, "Delivery").apply();
 
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
@@ -535,6 +489,17 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         }
 
 
+        mMap.clear();
+
+
+
+        if(mDefaultLocation == null){
+
+        }else {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mDefaultLocation.latitude, mDefaultLocation.longitude), 1));
+        }
+
+
     }
 
 
@@ -589,6 +554,14 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
             Toast.makeText(this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
         }
 
+        mMap.clear();
+        if(mDefaultLocation == null){
+
+        }else {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mDefaultLocation.latitude, mDefaultLocation.longitude), 1));
+        }
+
+
     }
 
 
@@ -615,9 +588,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     @OnClick(R.id.relativelayout_address)
     public void onClickLocation(View view) {
         if (dispatchType == 1) {
-
             if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-                imageViewBtnAddaditional.setVisibility(View.INVISIBLE);
                 setmapLocationStatus = 1;
                 proprogressview.setVisibility(View.VISIBLE);
                 bloackUserInteraction();
@@ -638,36 +609,91 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-
         boolean success = mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map));
-        updateLocationUI();
 
-        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        if(dispatchType == 1){
+            updateLocationUI();
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        }else {
+
+        }
+
         if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-            if (mLocationRequest.getPriority() == 100) {
-                getDeviceLocation();
-            } else {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("Location");
-                alertDialogBuilder.setCancelable(false);
-                alertDialogBuilder.setMessage("We're having trouble locating you.To find your location faster and more accurately,turn on your device's high-accuracy mode");
-                alertDialogBuilder.setPositiveButton("Turn On",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
 
-                                checkLocationSettings();
+            try {
+                if (mLocationRequest.getPriority() == 100) {
+                } else {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                    alertDialogBuilder.setTitle("Location");
+                    alertDialogBuilder.setCancelable(false);
+                    alertDialogBuilder.setMessage("We're having trouble locating you.To find your location faster and more accurately,turn on your device's high-accuracy mode");
+                    alertDialogBuilder.setPositiveButton("Turn On",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
 
-                            }
-                        });
-                alertDialogBuilder.show();
+                                    checkLocationSettings();
+
+                                }
+                            });
+                    alertDialogBuilder.show();
+                }
+
+            }catch (Exception ex){
+
+
             }
 
         } else {
             Toast.makeText(this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
         }
+        mapMarkerMove();
+
 
 
     }
+
+    private void mapMarkerMove(){
+
+        try {
+
+            mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+                @Override
+                public void onCameraMove() {
+                    mMap.clear();
+
+                    center = mMap.getCameraPosition().target;
+
+                    mapMarker = mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(center.latitude, center.longitude))
+                            .draggable(true)
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+
+                }
+            });
+
+
+            mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+                @Override
+                public void onCameraIdle() {
+
+                    if (center == null) {
+
+                    } else {
+                        getAddressFromLocation(center.latitude, center.longitude);
+                    }
+
+                }
+            });
+        }catch (Exception ex){
+
+
+        }
+
+
+
+    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -678,11 +704,14 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                 Place place = Autocomplete.getPlaceFromIntent(data);
 
                 try {
+                    imageViewBtnAddaditional.setVisibility(View.VISIBLE);
+
+                    mMap.clear();
 
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude), 15));
-                        mapMarker = mMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude))
-                                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+                    mapMarker = mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude))
+                            .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
 
                     try {
                         if (place.getAddress().length() > 30) {
@@ -792,7 +821,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
                         } else {
                             if (isInitial) {
-                                if(dispatchType != 0){
+                                if(dispatchType == 1){
                                     mMap.clear();
                                     mapMarker = mMap.addMarker(new MarkerOptions()
                                             .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
@@ -800,10 +829,11 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()), 15));
                                     mMap.setMyLocationEnabled(false);
                                     mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
                                 }
                             }else {
                                 mMap.clear();
-                                if(dispatchType != 0){
+                                if(dispatchType  == 1){
                                     mMap.clear();
                                     mapMarker = mMap.addMarker(new MarkerOptions()
                                             .position(new LatLng(addressItem.getAddressLatitude(), addressItem.getAddressLongitude()))
@@ -811,6 +841,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(addressItem.getAddressLatitude(), addressItem.getAddressLongitude()), 15));
                                     mMap.setMyLocationEnabled(false);
                                     mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
                                 }
 
                             }
@@ -823,7 +854,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                         }
 
                     } else {
-                        if (isInitial) {
+                      /*  if (isInitial) {
                             mMap.clear();
                             mapMarker = mMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))
@@ -832,12 +863,14 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, 15));
                             mMap.getUiSettings().setMyLocationButtonEnabled(false);
                             mMap.setMyLocationEnabled(false);
+
+
                         }
                         if (dispatchType == 1) {
                            getAddressFromLocation(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
                         } else {
 
-                        }
+                        }*/
                     }
                 }
             });
@@ -877,7 +910,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
             }
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
 
         }
@@ -889,27 +922,19 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
             return;
         }
 
-        // Add a listener to handle the response.
         placesClient.fetchPlace(request).addOnSuccessListener(new OnSuccessListener<FetchPlaceResponse>() {
             @Override
             public void onSuccess(FetchPlaceResponse response) {
                 Place place = response.getPlace();
 
                 textViewSelectedAddress.setText(place.getAddress());
-
-               /* if (mLikelyPlaceAddresses[4].length() > 30) {
-                    textViewSelectedAddress.setText(place.getAddress());
-                } else {
-                    textViewSelectedAddress.setText(place.getAddress());
-                }*/
-
                 landingPresenter.getSellectedAddressDetails(place.getName(), place.getAddress(), place.getLatLng());
 
                 proprogressview.setVisibility(View.GONE);
                 unBloackUserInteraction();
 
                 System.out.println("sssss  suc");
-                //Log.i(TAG, "Place found: " + place.getName());
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -922,71 +947,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
                 }
             }
         });
-/*
-        if (mLocationPermissionGranted) {
-            try {
-                @SuppressWarnings("MissingPermission") final Task<PlaceLikelihoodBufferResponse> placeResult = mPlaceDetectionClient.getCurrentPlace(null);
-                placeResult.addOnCompleteListener
-                        (new OnCompleteListener<PlaceLikelihoodBufferResponse>() {
-                            @Override
-                            public void onComplete(@NonNull Task<PlaceLikelihoodBufferResponse> task) {
-                                if (task.isSuccessful() && task.getResult() != null) {
-                                    PlaceLikelihoodBufferResponse likelyPlaces = task.getResult();
 
-                                    // Set the count, handling cases where less than 5 entries are returned.
-                                    int count;
-                                    if (likelyPlaces.getCount() < 5) {
-                                        count = likelyPlaces.getCount();
-                                    } else {
-                                        count = 5;
-                                    }
-
-                                    int i = 0;
-                                    mLikelyPlaceNames = new String[count];
-                                    mLikelyPlaceAddresses = new String[count];
-                                    mLikelyPlaceAttributions = new String[count];
-                                    mLikelyPlaceLatLngs = new LatLng[count];
-                                    for (PlaceLikelihood placeLikelihood : likelyPlaces) {
-                                        // Build a list of likely places to show the user.
-                                        mLikelyPlaceNames[i] = (String) placeLikelihood.getPlace().getName();
-                                        mLikelyPlaceAddresses[i] = (String) placeLikelihood.getPlace().getAddress();
-                                        mLikelyPlaceAttributions[i] = (String) placeLikelihood.getPlace().getAttributions();
-                                        mLikelyPlaceLatLngs[i] = placeLikelihood.getPlace().getLatLng();
-                                        i++;
-                                        if (i > (count - 1)) {
-                                            break;
-                                        }
-
-
-                                    }
-                                    likelyPlaces.release();
-
-
-                                    if (mLikelyPlaceAddresses[4].length() > 30) {
-                                        textViewSelectedAddress.setText(mLikelyPlaceAddresses[4].substring(0, 30));
-                                    } else {
-                                        textViewSelectedAddress.setText(mLikelyPlaceAddresses[4]);
-                                    }
-
-                                    landingPresenter.getSellectedAddressDetails(mLikelyPlaceNames[4], mLikelyPlaceAddresses[4], mLikelyPlaceLatLngs[4]);
-
-                                    proprogressview.setVisibility(View.GONE);
-                                    unBloackUserInteraction();
-
-                                } else {
-                                    proprogressview.setVisibility(View.GONE);
-                                    unBloackUserInteraction();
-
-                                }
-                            }
-                        });
-            } catch (ArrayIndexOutOfBoundsException e) {
-                Toast.makeText(this, "we are having a issue with getting your current location", Toast.LENGTH_SHORT).show();
-            }
-
-        } else {
-            getLocationPermission();
-        }*/
     }
 
 
@@ -1127,7 +1088,50 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
     }
 
+
     @Override
+    public void saveAddressSuccessful(AddressItems add) {
+
+        isSelectSaverdAddres = true;
+        imageViewBtnAddaditional.setVisibility(View.INVISIBLE);
+
+        final String selectedAddress=add.getAddressNumber()+" "+add.getAddressRoad()+" "+add.getAddressCity();
+
+        try {
+            if (selectedAddress.length() > 30) {
+                textViewSelectedAddress.setText(selectedAddress.substring(0, 30));
+            } else {
+                textViewSelectedAddress.setText(selectedAddress);
+            }
+        } catch (ArrayIndexOutOfBoundsException aiobex) {
+            textViewSelectedAddress.setText(selectedAddress);
+        }
+
+
+        addressItem = add;
+        try {
+            mMap.clear();
+            mapMarker = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(add.getAddressLatitude(), add.getAddressLongitude()))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(add.getAddressLatitude(), add.getAddressLongitude()), 15));
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            mMap.setMyLocationEnabled(false);
+
+
+        }catch (Exception ex){
+
+
+        }
+
+
+        setmapLocationStatus = 0;
+        relativelayoutAddedlist.setVisibility(View.GONE);
+    }
+
+
+    /* @Override
     public void saveAddressSuccessful(String add) {
 
         isSelectSaverdAddres = true;
@@ -1152,10 +1156,20 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
 
 
+
+      *//*  mMap.clear();
+        mapMarker = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(add, add.getLongitude()))
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, 15));
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+        mMap.setMyLocationEnabled(false);*//*
+
         setmapLocationStatus = 0;
         relativelayoutAddedlist.setVisibility(View.GONE);
     }
-
+*/
     @Override
     public void saveAddressFail(String msg) {
 

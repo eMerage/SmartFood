@@ -43,10 +43,10 @@ public interface LandingInteractor {
 
 
     interface OnsaveAddressFinishedListener {
-        void saveAddressSuccessful(String add);
+        void saveAddressSuccessful(AddressItems address);
         void saveAddressFail(String msg);
     }
-    void saveAddress(String addresID,String address, OnsaveAddressFinishedListener onsaveAddressFinishedListener);
+    void saveAddress(AddressItems address, OnsaveAddressFinishedListener onsaveAddressFinishedListener);
 
     interface OnsignOutinishedListener {
         void signOutSuccess();

@@ -18,6 +18,7 @@ import emerge.project.onmeal.utils.entittes.OrderErrorReturn;
 import emerge.project.onmeal.utils.entittes.OrderHistoryItems;
 import emerge.project.onmeal.utils.entittes.OutletItems;
 import emerge.project.onmeal.utils.entittes.TimeSlots;
+import emerge.project.onmeal.utils.entittes.UpdateToken;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -153,6 +154,9 @@ public interface ApiInterface {
     @GET("Outlet/GetOutlet")
     Observable<OutletItems> getOutlet(@Query("outletID") int outletID);
 
+
+    @POST("MealTime/SaveMealTimeUserPushToken")
+    Observable<UpdateToken> saveMealTimeUserPushToken(@Body JsonObject tokenInfo);
 
 
 
