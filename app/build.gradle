@@ -10,8 +10,8 @@ android {
         targetSdkVersion 28
         versionCode 29
         //  versionName "1.0.1.PR29"
-        //  versionName "1.0.1.DEV24"
-        versionName "1.0.1.QA24"
+          versionName "1.0.1.DEV25"
+        //versionName "1.0.1.QA24"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -41,15 +41,15 @@ android {
             signingConfig signingConfigs.key
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
            // buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_Production/api/\"'
-              buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_QA/api/\"'
-          //  buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_DEV/api/\"'
+             // buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_QA/api/\"'
+            buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_DEV/api/\"'
         }
         debug {
 
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
           //  buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_Production/api/\"'
-           buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_QA/api/\"'
-           // buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_DEV/api/\"'
+          // buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_QA/api/\"'
+            buildConfigField "String", "API_BASE_URL", '\"https://app.smartfood.lk:8081/OnMeal_DEV/api/\"'
 
         }
     }

@@ -2,16 +2,22 @@ package emerge.project.onmeal.utils.entittes;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UpdateToken {
+import java.io.Serializable;
 
+public class UpdateToken implements Serializable {
+
+    @SerializedName("status")
     boolean status;
+
+    @SerializedName("currentVersion")
+    String currentVersion;
+
+    @SerializedName("appUrl")
+    String appUrl;
+
 
     @SerializedName("error")
     ErrorObject error = new ErrorObject();
-
-    String currentVersion;
-
-    String appUrl;
 
 
     public boolean isStatus() {

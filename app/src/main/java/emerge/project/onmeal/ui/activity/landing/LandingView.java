@@ -4,6 +4,7 @@ package emerge.project.onmeal.ui.activity.landing;
 import java.util.ArrayList;
 
 import emerge.project.onmeal.utils.entittes.AddressItems;
+import emerge.project.onmeal.utils.entittes.UpdateToken;
 import emerge.project.onmeal.utils.entittes.VersionUpdate;
 
 /**
@@ -33,6 +34,7 @@ public interface LandingView {
     void saveAddressFail(String msg);
 
     void signOutSuccess();
+
 
 
 

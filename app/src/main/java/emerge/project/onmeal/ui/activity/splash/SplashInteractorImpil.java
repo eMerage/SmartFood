@@ -36,6 +36,8 @@ public class SplashInteractorImpil implements SplashInteractor {
 
     Realm realm;
 
+    String pushToken ;
+
     ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
     UpdateToken updateToken =  new UpdateToken();
@@ -79,9 +81,9 @@ public class SplashInteractorImpil implements SplashInteractor {
     @Override
     public void updatePushTokenAndAppVersion(Context con, final OnUpdatePushTokenAndAppVersionFinishedListener onUpdatePushTokenAndAppVersionFinishedListener) {
         realm = Realm.getDefaultInstance();
-        User user = realm.where(User.class).findFirst();
 
-        int versionCode = 0;
+
+        int versionCode = 1;
 
         try {
             PackageInfo pInfo = con.getPackageManager().getPackageInfo(con.getPackageName(), 0);
@@ -92,40 +94,30 @@ public class SplashInteractorImpil implements SplashInteractor {
 
         }
 
-
-
         int userID = 0;
         try {
+            User user = realm.where(User.class).findFirst();
             userID = Integer.parseInt(user.getUserId());
         }catch (NumberFormatException num){
+
+        }catch (Exception ex){
 
         }
 
 
-        final JsonObject jsonObject = new JsonObject();
 
-        jsonObject.addProperty("UserID", userID);
-        jsonObject.addProperty("appVersion", versionCode);
-        jsonObject.addProperty("AppType", "M");
-        jsonObject.addProperty("AppOs", "A");
-
-
+        final int finalVersionCode = versionCode;
+        final int finalUserID = userID;
         FirebaseInstanceId.getInstance().getInstanceId()
                 .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
                     @Override
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (!task.isSuccessful()) {
-                            jsonObject.addProperty("pushToken", "");
-
                             return;
                         }else {
-                            String token = task.getResult().getToken();
-
-                            jsonObject.addProperty("pushToken", token);
-
+                            pushToken= task.getResult().getToken();
                         }
-
-                        updateTokenToServer(jsonObject,onUpdatePushTokenAndAppVersionFinishedListener);
+                        updateTokenToServer(finalUserID, finalVersionCode,pushToken,onUpdatePushTokenAndAppVersionFinishedListener);
 
                     }
                 });
@@ -133,16 +125,17 @@ public class SplashInteractorImpil implements SplashInteractor {
     }
 
 
-    private void updateTokenToServer(JsonObject jsonObject, final OnUpdatePushTokenAndAppVersionFinishedListener onUpdatePushTokenAndAppVersionFinishedListener){
+    private void updateTokenToServer(int userID,int versionCode,String token, final OnUpdatePushTokenAndAppVersionFinishedListener onUpdatePushTokenAndAppVersionFinishedListener){
 
 
         final ErrorObject errorObject =  new ErrorObject();
-        errorObject.setErrorCode("CE");
-        errorObject.setErrorMessage("Communication error, Please try again");
+        errorObject.setErrCode("CE");
+        errorObject.setErrDescription("Communication error, Please try again");
 
+        System.out.println("xxxxxxxxxxxxxxxxxx : "+token);
 
         try {
-            apiService.saveMealTimeUserPushToken(jsonObject)
+            apiService.saveMealTimeUserPushToken(userID,token,versionCode,"M","A")
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<UpdateToken>() {

@@ -37,6 +37,8 @@ public class ActivitySplash extends Activity implements SplashView {
 
     SplashPresenter splashPresenter;
 
+    Handler m_handler;
+    private Runnable m_runnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,43 +55,80 @@ public class ActivitySplash extends Activity implements SplashView {
 
     @Override
     protected void onDestroy() {
-
+        m_handler.removeCallbacks(m_runnable);
         super.onDestroy();
     }
     @Override
     protected void onPause() {
-
+        m_handler.removeCallbacks(m_runnable);
         super.onPause();
     }
 
     @Override
     protected void onStop() {
-
+        m_handler.removeCallbacks(m_runnable);
         super.onStop();
     }
 
     @Override
     public void userAvailable() {
-        Intent intent = new Intent(ActivitySplash.this, ActivityLanding.class);
-        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
-        startActivity(intent, bndlanimation);
-        finish();
+        final Intent intent = new Intent(ActivitySplash.this, ActivityLanding.class);
+        final Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
+        m_handler =  new Handler();
+        m_runnable = new  Runnable() {
+            public void run()  {
+                startActivity(intent, bndlanimation);
+                finish();
+            }
+        };
+
+        try {
+            m_handler.postDelayed(m_runnable,2000);
+        } catch (Exception ex) { }
+
+
     }
 
     @Override
     public void userNotAvailable() {
-        Intent intent = new Intent(ActivitySplash.this, FragmentActivityIntro.class);
-        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
-        startActivity(intent, bndlanimation);
-        finish();
+
+
+        final Intent intent = new Intent(ActivitySplash.this, FragmentActivityIntro.class);
+        final Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
+        m_handler =  new Handler();
+        m_runnable = new  Runnable() {
+            public void run()  {
+                startActivity(intent, bndlanimation);
+                finish();
+            }
+        };
+
+        try {
+            m_handler.postDelayed(m_runnable,2000);
+        } catch (Exception ex) { }
+
+
+
     }
 
     @Override
     public void userSingOut() {
-        Intent intent = new Intent(ActivitySplash.this, ActivityLogin.class);
-        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
-        startActivity(intent, bndlanimation);
-        finish();
+
+        final Intent intent = new Intent(ActivitySplash.this, ActivityLogin.class);
+        final Bundle bndlanimation = ActivityOptions.makeCustomAnimation(ActivitySplash.this, R.anim.fade_in, R.anim.fade_out).toBundle();
+        m_handler =  new Handler();
+        m_runnable = new  Runnable() {
+            public void run()  {
+                startActivity(intent, bndlanimation);
+                finish();
+            }
+        };
+
+        try {
+            m_handler.postDelayed(m_runnable,2000);
+        } catch (Exception ex) { }
+
+
     }
 
     @Override
@@ -107,8 +146,11 @@ public class ActivitySplash extends Activity implements SplashView {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setTitle("App Update");
-            alertDialogBuilder.setMessage(updateToken.getError().getErrorMessage());
-            if(updateToken.getError().getErrorCode().equals("CE")){
+            alertDialogBuilder.setMessage(updateToken.getError().getErrDescription());
+
+
+
+            if((updateToken.getError().getErrCode().equals("CE")) || (updateToken.getError().getErrCode().equals("SYSE")) ){
                 alertDialogBuilder.setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {

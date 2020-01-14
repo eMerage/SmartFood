@@ -50,6 +50,9 @@ public interface ApiInterface {
     @GET("MealTimeUser/ValidateUser")
     Observable<User> userLoginValidation(@Query("eMail") String email, @Query("Password") String password);
 
+
+
+
     @GET("MealTimeUser/GetNewVerificationCode")
     Observable<JsonObject> getNewValidationCode(@Query("userID") int userId);
 
@@ -156,7 +159,8 @@ public interface ApiInterface {
 
 
     @POST("MealTime/SaveMealTimeUserPushToken")
-    Observable<UpdateToken> saveMealTimeUserPushToken(@Body JsonObject tokenInfo);
+    Observable<UpdateToken> saveMealTimeUserPushToken(@Query("UserID") int userID, @Query("pushToken") String pushToken, @Query("appVersion") int appVersion,
+                                                      @Query("AppType") String AppType, @Query("AppOs") String AppOs);
 
 
 

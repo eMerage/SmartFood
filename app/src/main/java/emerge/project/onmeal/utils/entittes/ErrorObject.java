@@ -1,23 +1,33 @@
 package emerge.project.onmeal.utils.entittes;
 
-public class ErrorObject {
+import com.google.gson.annotations.SerializedName;
 
-    String errorCode;
-    String errorMessage;
+import java.io.Serializable;
 
-    public String getErrorCode() {
-        return errorCode;
+public class ErrorObject implements Serializable {
+
+
+
+    @SerializedName("errCode")
+    String errCode;
+
+
+    @SerializedName("errDescription")
+    String errDescription;
+
+    public String getErrCode() {
+        return errCode;
     }
 
-    public void setErrorCode(String errorCode) {
-        this.errorCode = errorCode;
+    public void setErrCode(String errCode) {
+        this.errCode = errCode;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getErrDescription() {
+        return errDescription;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setErrDescription(String errDescription) {
+        this.errDescription = errDescription;
     }
 }

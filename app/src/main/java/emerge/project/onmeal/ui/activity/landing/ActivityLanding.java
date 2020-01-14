@@ -103,6 +103,7 @@ import emerge.project.onmeal.ui.adaptor.AddressListAdapter;
 import emerge.project.onmeal.ui.dialog.CustomDialogOne;
 import emerge.project.onmeal.ui.dialog.CustomDialogTwo;
 import emerge.project.onmeal.utils.entittes.AddressItems;
+import emerge.project.onmeal.utils.entittes.UpdateToken;
 import emerge.project.onmeal.utils.entittes.VersionUpdate;
 
 
@@ -237,6 +238,11 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
     Boolean isInitial = true;
 
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -260,6 +266,8 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
 
 
         Places.initialize(getApplicationContext(), getResources().getString(R.string.google_maps_key));
@@ -312,6 +320,9 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     @Override
     protected void onStart() {
         super.onStart();
+
+
+
 
 
     }
@@ -1277,6 +1288,7 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         startActivity(intent, bndlanimation);
 
     }
+
 
 
     @OnClick(R.id.relativelayout_logout)

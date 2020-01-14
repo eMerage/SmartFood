@@ -27,6 +27,8 @@ import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.api.ApiClient;
 import emerge.project.onmeal.service.api.ApiInterface;
 import emerge.project.onmeal.utils.entittes.AddressItems;
+import emerge.project.onmeal.utils.entittes.ErrorObject;
+import emerge.project.onmeal.utils.entittes.UpdateToken;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -49,6 +51,8 @@ public class LandingInteractorImpil implements LandingInteractor {
 
     String newAddressRespons;
     List<AddressItems> addressList;
+
+    UpdateToken updateToken =  new UpdateToken();
 
     @Override
     public void getSellectedAddressDetails(String planeName, String address, LatLng latLng, OnGetSellectedAddressDetailsFinishedListener onGetSellectedAddressDetailsFinishedListener) {
@@ -413,7 +417,6 @@ public class LandingInteractorImpil implements LandingInteractor {
         });
 
     }
-
 
 
 
