@@ -28,6 +28,8 @@ public class TimeSlots implements Serializable {
 
     boolean isSelected;
 
+    public TimeSlots() { }
+
 
     public TimeSlots(int timeslotId, String deliveryTimeSlot, String deliveryTimeFrom, String deliveryTimeTo, boolean isselected) {
         this.timeSlotId = timeslotId;

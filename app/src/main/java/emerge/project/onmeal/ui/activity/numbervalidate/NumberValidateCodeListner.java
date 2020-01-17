@@ -8,4 +8,7 @@ package emerge.project.onmeal.ui.activity.numbervalidate;
 public interface NumberValidateCodeListner {
     void messageReceived(String message);
 
+
+
+
 }

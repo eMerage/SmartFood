@@ -36,6 +36,7 @@ import emerge.project.onmeal.ui.activity.history.ActivtyHistoryPresenter;
 import emerge.project.onmeal.ui.activity.history.ActivtyHistoryPresenterImpli;
 import emerge.project.onmeal.ui.activity.history.ActivtyHistorytView;
 import emerge.project.onmeal.utils.entittes.OrderHistoryItems;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrdersList;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import retrofit2.Call;
@@ -49,13 +50,13 @@ import retrofit2.Response;
 public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<OrderHistoryItems> orderHistoryItems;
+    ArrayList<OrdersList> orderHistoryItems;
 
     ActivtyHistoryPresenter activtyHistoryPresenter;
 
     int sdk;
 
-    public HistoryCurrentAdapter(Context mContext, ArrayList<OrderHistoryItems> item, ActivtyHistorytView activtyHistorytView) {
+    public HistoryCurrentAdapter(Context mContext, ArrayList<OrdersList> item, ActivtyHistorytView activtyHistorytView) {
         this.mContext = mContext;
         this.orderHistoryItems = item;
         sdk = android.os.Build.VERSION.SDK_INT;
@@ -77,7 +78,7 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        final OrderHistoryItems historyItems = orderHistoryItems.get(position);
+        final OrdersList historyItems = orderHistoryItems.get(position);
 
         holder.textviewOrdernumber.setText(String.valueOf(historyItems.getOrderID()));
 
@@ -85,7 +86,7 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
         //  getMenue(historyItems.getOrderID(),holder);
 
 
-        holder.textviewOutlet.setText(historyItems.getOutletName());
+        holder.textviewOutlet.setText(historyItems.getOutlet());
 
 
         String dispatchType = "";
@@ -113,10 +114,9 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
         holder.textviewTotal.setText(priseArray[0]);
         holder.textviewTotalCents.setText("." + priseArray[1]);
 
-        String statusCode = historyItems.getStatusCode();
+        String statusCode = historyItems.getLastStatus();
 
 
-        System.out.println("cccccccccccccccccccccccccc : "+statusCode);
 
         if (statusCode.equals("ODPN")) {
 
@@ -241,7 +241,7 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
 
 
                 if (NetworkAvailability.isNetworkAvailable(mContext)) {
-                    activtyHistoryPresenter.getOrderHistoryDetails(String.valueOf(historyItems.getOrderID()));
+                    activtyHistoryPresenter.getOrderHistoryDetails(historyItems.getMenuItems());
                 } else {
                     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(mContext);
                     alertDialogBuilder.setTitle("Warning");
@@ -363,44 +363,6 @@ public class HistoryCurrentAdapter extends RecyclerView.Adapter<HistoryCurrentAd
     }
 
 
-/*
-    private void getMenue(int orderId, final MyViewHolder holder){
-
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<JsonObject> call = apiService.orderHistorDetails(orderId);
-        call.enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if(response.isSuccessful()){
-                    try {
-                        JSONObject historyListist = null;
-                        String names = "";
-                        historyListist = new JSONObject(response.body().toString());
-                        JSONArray orderMenusList;
-                        orderMenusList = historyListist.getJSONArray("orderMenus");
-                        for (int i = 0; i < orderMenusList.length(); i++) {
-                            JSONObject jsonData = orderMenusList.getJSONObject(i);
-                            names = names + jsonData.getString("name") + ",";
-                        }
-                        holder.textviewMenus.setText(names);
-
-                    }catch (NullPointerException exNull){
-
-                    }catch (JSONException e) {
-
-                    }
-                }else {
-                }
-
-            }
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-
-            }
-        });
-
-    }
-*/
 
 
 }

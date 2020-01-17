@@ -14,6 +14,8 @@ import emerge.project.onmeal.ui.activity.profile.ProfilePresenter;
 import emerge.project.onmeal.utils.entittes.OrderHistoryItems;
 import emerge.project.onmeal.utils.entittes.OrderHistoryMenu;
 import emerge.project.onmeal.utils.entittes.OutletItems;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrderMenus;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrdersList;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -64,12 +66,12 @@ public class ActivtyHistoryPresenterImpli implements ActivtyHistoryPresenter,
     }
 
     @Override
-    public void getOrderHistoryCurrent(ArrayList<OrderHistoryItems> orderHistoryItemsArrayList) {
+    public void getOrderHistoryCurrent(ArrayList<OrdersList> orderHistoryItemsArrayList) {
         activtyHistorytView.getOrderHistoryCurrent(orderHistoryItemsArrayList);
     }
 
     @Override
-    public void getOrderHistoryPAst(ArrayList<OrderHistoryItems> orderHistoryItemsArrayList) {
+    public void getOrderHistoryPAst(ArrayList<OrdersList> orderHistoryItemsArrayList) {
         activtyHistorytView.getOrderHistoryPAst(orderHistoryItemsArrayList);
     }
 
@@ -79,27 +81,6 @@ public class ActivtyHistoryPresenterImpli implements ActivtyHistoryPresenter,
     }
 
 
-
-
-    @Override
-    public void getOrderHistoryDetails(String orderID) {
-        activtyHistoryInteractor.getOrderHistoryDetails(orderID,this);
-    }
-
-    @Override
-    public void getOrderHistoryDetailsStart() {
-        activtyHistorytView.getOrderHistoryDetailsStart();
-    }
-
-    @Override
-    public void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> cartHeader, OutletItems outlet) {
-        activtyHistorytView.getOrderHistoryDetails(cartHeader,outlet);
-    }
-
-    @Override
-    public void getOrderHistoryDetailsFail(String msg,String orderID) {
-        activtyHistorytView.getOrderHistoryDetailsFail(msg,orderID);
-    }
 
 
     @Override
@@ -115,5 +96,18 @@ public class ActivtyHistoryPresenterImpli implements ActivtyHistoryPresenter,
     @Override
     public void getOutletDetailsFail(String msg, int outletID) {
         activtyHistorytView.getOutletDetailsFail(msg,outletID);
+    }
+
+
+
+    @Override
+    public void getOrderHistoryDetails( ArrayList<OrderMenus> orderMenus) {
+        activtyHistoryInteractor.getOrderHistoryDetails(orderMenus,this);
+    }
+
+
+    @Override
+    public void orderHistoryDetails( ArrayList<OrderMenus> orderMenus) {
+        activtyHistorytView.orderHistoryDetails(orderMenus);
     }
 }

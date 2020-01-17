@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -59,6 +60,7 @@ import emerge.project.onmeal.ui.activity.singin.ActivitySingIn;
 import emerge.project.onmeal.ui.activity.singup.ActivitySingup;
 import emerge.project.onmeal.ui.dialog.CustomDialogOne;
 import emerge.project.onmeal.ui.dialog.CustomDialogTwo;
+import emerge.project.onmeal.utils.entittes.UpdateToken;
 
 public class ActivityLogin extends Activity implements LoginView {
 
@@ -162,11 +164,15 @@ public class ActivityLogin extends Activity implements LoginView {
 
     @Override
     public void showEmailExistSocial() {
+        //add update push
         proprogressview.setVisibility(View.INVISIBLE);
-        Intent intentLanding = new Intent(ActivityLogin.this, ActivityLanding.class);
+        loginPresenter.updatePushTokenAndAppVersion(this);
+
+
+      /*  Intent intentLanding = new Intent(ActivityLogin.this, ActivityLanding.class);
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
         finish();
-        startActivity(intentLanding, bndlanimation);
+        startActivity(intentLanding, bndlanimation);*/
 
     }
 
@@ -239,11 +245,16 @@ public class ActivityLogin extends Activity implements LoginView {
 
     @Override
     public void showAlreadySingUpWithFacebook() {
+
+        //add update push
+        loginPresenter.updatePushTokenAndAppVersion(this);
         proprogressview.setVisibility(View.INVISIBLE);
-        Intent intentLanding = new Intent(this, ActivityLanding.class);
+
+
+       /* Intent intentLanding = new Intent(this, ActivityLanding.class);
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
         finish();
-        startActivity(intentLanding, bndlanimation);
+        startActivity(intentLanding, bndlanimation);*/
 
     }
 
@@ -401,11 +412,19 @@ public class ActivityLogin extends Activity implements LoginView {
 
     @Override
     public void showAlreadySingUpWithGoogle() {
+
+
+        loginPresenter.updatePushTokenAndAppVersion(this);
         proprogressview.setVisibility(View.INVISIBLE);
+
+     //add update push
+
+
+        /*proprogressview.setVisibility(View.INVISIBLE);
         Intent intentLanding = new Intent(this, ActivityLanding.class);
         Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
         finish();
-        startActivity(intentLanding, bndlanimation);
+        startActivity(intentLanding, bndlanimation);*/
     }
 
     @Override
@@ -465,7 +484,61 @@ public class ActivityLogin extends Activity implements LoginView {
         startActivity(intent, bndlanimation);
     }
 
+    @Override
+    public void updateStatus(Boolean status, final UpdateToken updateToken) {
+        if(status){
+            proprogressview.setVisibility(View.INVISIBLE);
+            Intent intentLanding = new Intent(this, ActivityLanding.class);
+            Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+            finish();
+            startActivity(intentLanding, bndlanimation);
 
+        }else {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("App Update");
+            alertDialogBuilder.setMessage(updateToken.getError().getErrDescription());
+
+
+
+            if((updateToken.getError().getErrCode().equals("CE")) || (updateToken.getError().getErrCode().equals("SYSE")) ){
+                alertDialogBuilder.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(ActivityLogin.this, "You can not processed", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        });
+
+
+            }else {
+                alertDialogBuilder.setPositiveButton("Update",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateToken.getAppUrl()));
+                                startActivity(browserIntent);
+
+                                return;
+                            }
+                        });
+                alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(ActivityLogin.this, "You can not processed", Toast.LENGTH_SHORT).show();
+
+                        return;
+                    }
+                });
+
+            }
+
+            alertDialogBuilder.show();
+
+
+        }
+
+
+    }
 
 
     @Override

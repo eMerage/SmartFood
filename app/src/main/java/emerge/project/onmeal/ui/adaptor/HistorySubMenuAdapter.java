@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 
 import emerge.project.onmeal.R;
 import emerge.project.onmeal.utils.entittes.OrderHistorySubMenu;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrderMenuDetails;
 
 
 /**
@@ -23,11 +24,11 @@ import emerge.project.onmeal.utils.entittes.OrderHistorySubMenu;
 public class HistorySubMenuAdapter extends RecyclerView.Adapter<HistorySubMenuAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<OrderHistorySubMenu> foodsItems;
+    ArrayList<OrderMenuDetails> foodsItems;
 
 
 
-    public HistorySubMenuAdapter(Context mContext, ArrayList<OrderHistorySubMenu> item) {
+    public HistorySubMenuAdapter(Context mContext, ArrayList<OrderMenuDetails> item) {
         this.mContext = mContext;
         this.foodsItems = item;
 
@@ -49,25 +50,12 @@ public class HistorySubMenuAdapter extends RecyclerView.Adapter<HistorySubMenuAd
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        OrderHistorySubMenu foods =foodsItems.get(position);
+        OrderMenuDetails foods =foodsItems.get(position);
 
-        holder.textViewFoodname.setText(foods.getOutletMenuName());
+        holder.textViewFoodname.setText(foods.getName());
 
-        holder.textViewFoodqty.setText(String.valueOf(foods.getQty()));
+        holder.textViewFoodqty.setText(String.valueOf(foods.getFoodQty()));
 
-       /* String catagory;
-
-        if (foods.isBaseFood()) {
-            catagory = "BASE";
-        } else if (foods.getFoodItemTypeCode().equals("EX")) {
-            catagory = "EXTRA";
-        } else {
-            catagory = foods.getFoodItemCategory();
-
-        }
-
-
-        holder.textViewFoodType.setText(catagory);*/
 
 
     }

@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import org.json.JSONObject;
 
 import emerge.project.onmeal.data.table.User;
+import emerge.project.onmeal.utils.entittes.UpdateToken;
 
 
 /**
@@ -17,7 +18,7 @@ import emerge.project.onmeal.data.table.User;
 public class LoginPresenterImpli implements LoginPresenter,
         LoginInteractor.OnLocalSingInValidationFinishedListener,
         LoginInteractor.OnFacebookSingInValidationFinishedListener,
-        LoginInteractor.OnGoogleSingInValidationFinishedListener{
+        LoginInteractor.OnGoogleSingInValidationFinishedListener,  LoginInteractor.OnUpdatePushTokenAndAppVersionFinishedListener{
 
 
     private LoginView loginView;
@@ -130,7 +131,17 @@ public class LoginPresenterImpli implements LoginPresenter,
         loginView.userNotValidateGoogle(user);
     }
 
+    @Override
+    public void updatePushTokenAndAppVersion(Context con) {
+        loginInteractor.updatePushTokenAndAppVersion( con,this);
+    }
 
+
+
+    @Override
+    public void updateStatus(Boolean status, UpdateToken updateToken) {
+        loginView.updateStatus(status,updateToken);
+    }
 
 
 }

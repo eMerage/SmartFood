@@ -20,6 +20,8 @@ import butterknife.ButterKnife;
 import emerge.project.onmeal.R;
 import emerge.project.onmeal.utils.entittes.OrderHistoryMenu;
 import emerge.project.onmeal.utils.entittes.OrderHistorySubMenu;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrderMenuDetails;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrderMenus;
 
 
 /**
@@ -28,10 +30,10 @@ import emerge.project.onmeal.utils.entittes.OrderHistorySubMenu;
 public class HistoryMenuAdapter extends RecyclerView.Adapter<HistoryMenuAdapter.MyViewHolder> {
 
     Context mContext;
-    ArrayList<OrderHistoryMenu> menusItems;
+    ArrayList<OrderMenus> menusItems;
 
 
-    public HistoryMenuAdapter(Context mContext, ArrayList<OrderHistoryMenu> item) {
+    public HistoryMenuAdapter(Context mContext, ArrayList<OrderMenus> item) {
         this.mContext = mContext;
         this.menusItems = item;
 
@@ -53,15 +55,17 @@ public class HistoryMenuAdapter extends RecyclerView.Adapter<HistoryMenuAdapter.
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
 
-        final OrderHistoryMenu menusList =menusItems.get(position);
+     //   final OrderHistoryMenu menusList =menusItems.get(position);
+        final OrderMenus menusList =menusItems.get(position);
 
 
 
-        holder.textViewMenuNumber.setText(menusList.getCartID());
-        holder.textViewMenuName.setText(menusList.getOutletMenuName());
-        holder.textViewMenuSize.setText(String.valueOf(menusList.getSize()));
-        holder.textViewAmount.setText(String.valueOf(menusList.getPrice()));
-        holder.textViewQuantity.setText(String.valueOf(menusList.getQty()));
+
+        holder.textViewMenuNumber.setText(String.valueOf(menusList.getMenuID()));
+        holder.textViewMenuName.setText(menusList.getName());
+        holder.textViewMenuSize.setText(String.valueOf(menusList.getMenuSizeCode()));
+        holder.textViewAmount.setText(String.valueOf(menusList.getMenuPrice()));
+        holder.textViewQuantity.setText(String.valueOf(menusList.getMenuQty()));
 
 
 
@@ -77,7 +81,7 @@ public class HistoryMenuAdapter extends RecyclerView.Adapter<HistoryMenuAdapter.
                 } else {
                     holder.linearLayoutChild.setVisibility(View.VISIBLE);
 
-                    setSubItems(mContext,holder,menusList.getFoods());
+                    setSubItems(mContext,holder,menusList.getOrderMenuDetails());
 
                 }
             }
@@ -136,7 +140,7 @@ public class HistoryMenuAdapter extends RecyclerView.Adapter<HistoryMenuAdapter.
     }
 
 
-    public void setSubItems(Context context, MyViewHolder holder, ArrayList<OrderHistorySubMenu> foodsArrayList){
+    public void setSubItems(Context context, MyViewHolder holder, ArrayList<OrderMenuDetails> foodsArrayList){
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);

@@ -5,6 +5,7 @@ import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,6 +28,7 @@ import emerge.project.onmeal.service.network.NetworkAvailability;
 import emerge.project.onmeal.ui.activity.welcome.ActivityWelcome;
 import emerge.project.onmeal.ui.dialog.CustomDialogOne;
 import emerge.project.onmeal.ui.dialog.CustomDialogTwo;
+import emerge.project.onmeal.utils.entittes.UpdateToken;
 
 public class ActivityNumberValidation extends Activity implements NumberValidateView, NumberValidateCodeListner {
 
@@ -241,11 +243,9 @@ public class ActivityNumberValidation extends Activity implements NumberValidate
 
     @Override
     public void showOTPCodeValid() {
-        proprogressview.setVisibility(View.INVISIBLE);
-        Intent intentSingup = new Intent(this, ActivityWelcome.class);
-        Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
-        finish();
-        startActivity(intentSingup, bndlanimation);
+
+        numberValidatePresenter.updatePushTokenAndAppVersion(this);
+
 
     }
 
@@ -335,6 +335,64 @@ public class ActivityNumberValidation extends Activity implements NumberValidate
                 .setNegativeButton("No", null)
                 .create()
                 .show();
+
+
+    }
+
+    @Override
+    public void updateStatus(Boolean status, final UpdateToken updateToken) {
+        if(status){
+            proprogressview.setVisibility(View.INVISIBLE);
+            Intent intentSingup = new Intent(this, ActivityWelcome.class);
+            Bundle bndlanimation = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fade_in, R.anim.fade_out).toBundle();
+            finish();
+            startActivity(intentSingup, bndlanimation);
+        }else {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("App Update");
+            alertDialogBuilder.setMessage(updateToken.getError().getErrDescription());
+
+
+
+            if((updateToken.getError().getErrCode().equals("CE")) || (updateToken.getError().getErrCode().equals("SYSE")) ){
+                alertDialogBuilder.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(ActivityNumberValidation.this, "You can not processed", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        });
+
+
+            }else {
+                alertDialogBuilder.setPositiveButton("Update",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(updateToken.getAppUrl()));
+                                startActivity(browserIntent);
+
+                                return;
+                            }
+                        });
+                alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(ActivityNumberValidation.this, "You can not processed", Toast.LENGTH_SHORT).show();
+
+                        return;
+                    }
+                });
+
+            }
+
+            alertDialogBuilder.show();
+
+
+        }
+
+
+
 
 
     }

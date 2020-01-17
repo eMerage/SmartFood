@@ -2,8 +2,15 @@ package emerge.project.onmeal.ui.activity.login;
 
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.JsonObject;
 import com.luseen.logger.Logger;
 import com.pddstudio.preferences.encrypted.EncryptedPreferences;
@@ -19,6 +26,8 @@ import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.User;
 import emerge.project.onmeal.service.api.ApiClient;
 import emerge.project.onmeal.service.api.ApiInterface;
+import emerge.project.onmeal.utils.entittes.ErrorObject;
+import emerge.project.onmeal.utils.entittes.UpdateToken;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -44,6 +53,9 @@ public class LoginInteractorImpil implements LoginInteractor {
     User localSingInValidation;
     User facebookSingInValidation;
     User googleSingInValidation;
+
+    UpdateToken updateToken =  new UpdateToken();
+    String pushToken ;
 
     @Override
     public void checkLocalSingInValidation(Context context, String email, final OnLocalSingInValidationFinishedListener onLocalSingInValidationFinishedListener) {
@@ -122,12 +134,8 @@ public class LoginInteractorImpil implements LoginInteractor {
         encryptedPreferences = new EncryptedPreferences.Builder(context).withEncryptionPassword("122547895511").build();
         String userPushTokenId = encryptedPreferences.getString(PUSH_TOKEN, "");
 
-        System.out.println("xxxxxxxxxxxxxxxxxxxx checkFacebookSingInValidation: "+json);
 
         try {
-
-            System.out.println("xxxxxxxxxxxxxxxxxxxx : "+json.getString("email"));
-
 
             final String emailAddress = json.getString("email");
             final String userName = json.getString("name");
@@ -251,6 +259,100 @@ public class LoginInteractorImpil implements LoginInteractor {
 
     }
 
+    @Override
+    public void updatePushTokenAndAppVersion(Context con, final OnUpdatePushTokenAndAppVersionFinishedListener onUpdatePushTokenAndAppVersionFinishedListener) {
+        realm = Realm.getDefaultInstance();
+
+
+        int versionCode = 1;
+
+        try {
+            PackageInfo pInfo = con.getPackageManager().getPackageInfo(con.getPackageName(), 0);
+            versionCode = pInfo.versionCode;
+
+        } catch(PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+
+        }
+
+        int userID = 0;
+        try {
+            User user = realm.where(User.class).findFirst();
+            userID = Integer.parseInt(user.getUserId());
+        }catch (NumberFormatException num){
+
+        }catch (Exception ex){
+
+        }
+
+
+
+        final int finalVersionCode = versionCode;
+        final int finalUserID = userID;
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            return;
+                        }else {
+                            pushToken= task.getResult().getToken();
+                        }
+                        updateTokenToServer(finalUserID, finalVersionCode,pushToken,onUpdatePushTokenAndAppVersionFinishedListener);
+
+                    }
+                });
+
+    }
+
+
+    private void updateTokenToServer(int userID,int versionCode,String token, final OnUpdatePushTokenAndAppVersionFinishedListener onUpdatePushTokenAndAppVersionFinishedListener){
+
+
+        final ErrorObject errorObject =  new ErrorObject();
+        errorObject.setErrCode("CE");
+        errorObject.setErrDescription("Communication error, Please try again");
+
+
+        try {
+            apiService.saveMealTimeUserPushToken(userID,token,versionCode,"M","A")
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<UpdateToken>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(UpdateToken respond) {
+                            updateToken = respond;
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            updateToken.setError(errorObject);
+                            onUpdatePushTokenAndAppVersionFinishedListener.updateStatus(false,updateToken);
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                            System.out.println("yyyyyyyyyyyyyy saveMealTimeUserPushToken");
+
+                            onUpdatePushTokenAndAppVersionFinishedListener.updateStatus(updateToken.isStatus(),updateToken);
+
+                        }
+                    });
+
+        } catch (Exception ex) {
+            updateToken.setError(errorObject);
+            onUpdatePushTokenAndAppVersionFinishedListener.updateStatus(false,updateToken);
+        }
+
+
+    }
 
     private void saveUser(final User userArrayList, final OnLocalSingInValidationFinishedListener onLocalSingInValidationFinishedListener) {
 
@@ -314,5 +416,7 @@ public class LoginInteractorImpil implements LoginInteractor {
         });
 
     }
+
+
 
 }

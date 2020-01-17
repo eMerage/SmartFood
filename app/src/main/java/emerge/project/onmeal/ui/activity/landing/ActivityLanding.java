@@ -321,10 +321,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
     protected void onStart() {
         super.onStart();
 
-
-
-
-
     }
 
 
@@ -1106,6 +1102,8 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         isSelectSaverdAddres = true;
         imageViewBtnAddaditional.setVisibility(View.INVISIBLE);
 
+
+
         final String selectedAddress=add.getAddressNumber()+" "+add.getAddressRoad()+" "+add.getAddressCity();
 
         try {
@@ -1141,46 +1139,6 @@ public class ActivityLanding extends FragmentActivity implements OnMapReadyCallb
         relativelayoutAddedlist.setVisibility(View.GONE);
     }
 
-
-    /* @Override
-    public void saveAddressSuccessful(String add) {
-
-        isSelectSaverdAddres = true;
-        imageViewBtnAddaditional.setVisibility(View.INVISIBLE);
-
-
-        try {
-            if (add.length() > 30) {
-                textViewSelectedAddress.setText(add.substring(0, 30));
-            } else {
-                textViewSelectedAddress.setText(add);
-            }
-        } catch (ArrayIndexOutOfBoundsException aiobex) {
-            textViewSelectedAddress.setText(add);
-        }
-
-
-
-
-        addressItem = new AddressItems();
-        addressItem.setAddress(add);
-
-
-
-
-      *//*  mMap.clear();
-        mapMarker = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(add, add.getLongitude()))
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_place)));
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, 15));
-        mMap.getUiSettings().setMyLocationButtonEnabled(false);
-        mMap.setMyLocationEnabled(false);*//*
-
-        setmapLocationStatus = 0;
-        relativelayoutAddedlist.setVisibility(View.GONE);
-    }
-*/
     @Override
     public void saveAddressFail(String msg) {
 

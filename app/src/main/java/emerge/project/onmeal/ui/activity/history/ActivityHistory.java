@@ -55,6 +55,8 @@ import emerge.project.onmeal.ui.adaptor.HomeOutletImagesAdaptor;
 import emerge.project.onmeal.utils.entittes.OrderHistoryItems;
 import emerge.project.onmeal.utils.entittes.OrderHistoryMenu;
 import emerge.project.onmeal.utils.entittes.OutletItems;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrderMenus;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrdersList;
 
 public class ActivityHistory extends Activity implements ActivtyHistorytView, OnMapReadyCallback {
 
@@ -218,7 +220,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
     }
 
     @Override
-    public void getOrderHistoryCurrent(ArrayList<OrderHistoryItems> orderHistoryItemsArrayList) {
+    public void getOrderHistoryCurrent(ArrayList<OrdersList> orderHistoryItemsArrayList) {
 
 
         historyCurrentAdapter = new HistoryCurrentAdapter(this, orderHistoryItemsArrayList, this);
@@ -227,7 +229,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
     }
 
     @Override
-    public void getOrderHistoryPAst(ArrayList<OrderHistoryItems> orderHistoryItemsArrayList) {
+    public void getOrderHistoryPAst(ArrayList<OrdersList> orderHistoryItemsArrayList) {
 
         proprogressview.setVisibility(View.GONE);
         unBloackUserInteraction();
@@ -281,15 +283,10 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
     }
 
 
-    @Override
-    public void getOrderHistoryDetailsStart() {
-        proprogressview.setVisibility(View.VISIBLE);
-        bloackUserInteraction();
 
-    }
 
     @Override
-    public void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> cartHeader, OutletItems out) {
+    public void orderHistoryDetails( ArrayList<OrderMenus> orderMenus) {
 
         proprogressview.setVisibility(View.GONE);
         unBloackUserInteraction();
@@ -311,7 +308,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
         recyclerViewOrderSubitems.setNestedScrollingEnabled(true);
 
 
-        historyMenuAdapter = new HistoryMenuAdapter(this, cartHeader);
+        historyMenuAdapter = new HistoryMenuAdapter(this, orderMenus);
         recyclerViewOrderSubitems.setAdapter(historyMenuAdapter);
 
 
@@ -435,7 +432,7 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
                     bloackUserInteraction();
                     activtyHistoryPresenter.getOrderHistory();
                 } else {
-                    Toast.makeText(ActivityHistory.this, "yNo Internet Access, Please try again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ActivityHistory.this, "No Internet Access, Please try again", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -444,47 +441,6 @@ public class ActivityHistory extends Activity implements ActivtyHistorytView, On
     }
 
 
-    @Override
-    public void getOrderHistoryDetailsFail(String msg, final String orderID) {
-
-
-        proprogressview.setVisibility(View.GONE);
-        unBloackUserInteraction();
-        swipeRefreshLayout.setRefreshing(false);
-
-        try {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Warning");
-            alertDialogBuilder.setMessage(msg);
-            alertDialogBuilder.setPositiveButton("Re-Try",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-                                proprogressview.setVisibility(View.VISIBLE);
-                                bloackUserInteraction();
-                                activtyHistoryPresenter.getOrderHistoryDetails(orderID);
-                            } else {
-                                Toast.makeText(ActivityHistory.this, "No Internet Access, Please try again", Toast.LENGTH_SHORT).show();
-
-                            }
-
-                        }
-                    });
-            alertDialogBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    return;
-                }
-            });
-            alertDialogBuilder.show();
-
-        } catch (WindowManager.BadTokenException e) {
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-
-
-    }
 
 
     private void setRecycalCurrentView() {

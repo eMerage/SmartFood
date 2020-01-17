@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import org.json.JSONObject;
 
 import emerge.project.onmeal.data.table.User;
+import emerge.project.onmeal.utils.entittes.UpdateToken;
 
 
 /**
@@ -50,6 +51,12 @@ public interface LoginInteractor {
     }
     void checkGoogleSingInValidation(Context context,GoogleSignInAccount account, OnGoogleSingInValidationFinishedListener onGoogleSingInValidationFinishedListener);
 
+
+
+    interface OnUpdatePushTokenAndAppVersionFinishedListener {
+        void updateStatus(Boolean status, UpdateToken updateToken);
+    }
+    void updatePushTokenAndAppVersion(Context con, OnUpdatePushTokenAndAppVersionFinishedListener onUpdatePushTokenAndAppVersionFinishedListener);
 
 
 

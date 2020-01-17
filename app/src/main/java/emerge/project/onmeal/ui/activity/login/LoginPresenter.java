@@ -21,7 +21,7 @@ public interface LoginPresenter {
 
 
 
-
+    void updatePushTokenAndAppVersion(Context con);
 
 
 }

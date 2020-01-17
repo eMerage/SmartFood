@@ -25,6 +25,9 @@ import emerge.project.onmeal.utils.entittes.OrderHistoryMenu;
 import emerge.project.onmeal.utils.entittes.OrderHistorySubMenu;
 import emerge.project.onmeal.utils.entittes.OutletImages;
 import emerge.project.onmeal.utils.entittes.OutletItems;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrderMenus;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrdersData;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrdersList;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -43,10 +46,13 @@ import retrofit2.Response;
 public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
 
-    Realm  realm = Realm.getDefaultInstance();
+    Realm realm = Realm.getDefaultInstance();
     ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
 
-    List<OrderHistoryItems> orderHistory;
+    //  List<OrderHistoryItems> orderHistory;
+
+
+    OrdersData orderHistory;
 
     JsonObject orderHistoryDetails;
 
@@ -56,20 +62,25 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
     public void getOrderHistory(final OnOrderHistoryLoadFinishedListener onOrderHistoryLoadFinishedListener) {
 
         User user = realm.where(User.class).findFirst();
-        final ArrayList<OrderHistoryItems> orderHistoryItemsCurrent = new ArrayList<OrderHistoryItems>();
-        final ArrayList<OrderHistoryItems> orderHistoryItemsPast = new ArrayList<OrderHistoryItems>();
+        final ArrayList<OrdersList> orderHistoryItemsCurrent = new ArrayList<OrdersList>();
+        final ArrayList<OrdersList> orderHistoryItemsPast = new ArrayList<OrdersList>();
+
+
+        System.out.println("dfdffdfdfdfdfdff "+user.getUserId());
+
+
         try {
-            apiService.orderHistor(user.getUserId())
+            apiService.orderHistory(user.getUserId())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<List<OrderHistoryItems>>() {
+                    .subscribe(new Observer<OrdersData>() {
                         @Override
                         public void onSubscribe(Disposable d) {
 
                         }
 
                         @Override
-                        public void onNext(List<OrderHistoryItems> respond) {
+                        public void onNext(OrdersData respond) {
                             orderHistory = respond;
                         }
 
@@ -80,135 +91,85 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
                         @Override
                         public void onComplete() {
-                            if (orderHistory != null) {
-                                try {
-                                    if (orderHistory.isEmpty()) {
-                                        onOrderHistoryLoadFinishedListener.getOrderHistoryEmpty();
-                                    } else {
-                                        for (int i = 0; i < orderHistory.size(); i++) {
-                                            if (orderHistory.get(i).getStatusCode().equals("ODCP")) {
-                                                orderHistoryItemsPast.add(new OrderHistoryItems(orderHistory.get(i).getOrderID(), orderHistory.get(i).getOrderDate(), orderHistory.get(i).getOrderTotal(),
-                                                        orderHistory.get(i).getDispatchType(), orderHistory.get(i).getStatusCode(), "",orderHistory.get(i).getOutletName(),orderHistory.get(i).getOutletID()));
-                                            } else {
-                                                orderHistoryItemsCurrent.add(new OrderHistoryItems(orderHistory.get(i).getOrderID(), orderHistory.get(i).getOrderDate(), orderHistory.get(i).getOrderTotal(),
-                                                        orderHistory.get(i).getDispatchType(), orderHistory.get(i).getStatusCode(), "",orderHistory.get(i).getOutletName(),orderHistory.get(i).getOutletID()));
-                                            }
-                                        }
-                                        onOrderHistoryLoadFinishedListener.getOrderHistoryCurrent(orderHistoryItemsCurrent);
-                                        onOrderHistoryLoadFinishedListener.getOrderHistoryPAst(orderHistoryItemsPast);
-                                    }
+                            if (orderHistory.getStatus()) {
+                                for (OrdersList oh : orderHistory.getOrdersList()) {
+                                    if (oh.getLastStatus().equals("ODCP")) {
+                                        orderHistoryItemsPast.add(new OrdersList(
+                                                oh.getOrderID(),
+                                                oh.getOutlet(),
+                                                oh.getOutletID(),
+                                                oh.getOrderDate(),
+                                                oh.getPickUpTime(),
+                                                oh.getDeliveryTime(),
+                                                oh.getPaymentType(),
+                                                oh.getRideName(),
+                                                oh.getOrderTotal(),
+                                                oh.getOrderTotalWithoutDeliveryCost(),
+                                                oh.getSubTotal(),
+                                                oh.getDeliveryCost(),
+                                                oh.getOrderQty(),
+                                                oh.getDispatchType(),
+                                                oh.getPromoCode(),
+                                                oh.getPromoTitle(),
+                                                oh.getOrderNote(),
+                                                oh.getLastStatus(),
+                                                oh.getPromoDiscountValue(),
+                                                oh.getMenuItems()
+                                        ));
 
-                                } catch (NullPointerException exNull) {
-                                    onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Communication error, Please try again");
+
+                                    } else {
+
+                                        orderHistoryItemsCurrent.add(new OrdersList(
+                                                oh.getOrderID(),
+                                                oh.getOutlet(),
+                                                oh.getOutletID(),
+                                                oh.getOrderDate(),
+                                                oh.getPickUpTime(),
+                                                oh.getDeliveryTime(),
+                                                oh.getPaymentType(),
+                                                oh.getRideName(),
+                                                oh.getOrderTotal(),
+                                                oh.getOrderTotalWithoutDeliveryCost(),
+                                                oh.getSubTotal(),
+                                                oh.getDeliveryCost(),
+                                                oh.getOrderQty(),
+                                                oh.getDispatchType(),
+                                                oh.getPromoCode(),
+                                                oh.getPromoTitle(),
+                                                oh.getOrderNote(),
+                                                oh.getLastStatus(),
+                                                oh.getPromoDiscountValue(),
+                                                oh.getMenuItems()
+                                        ));
+
+                                    }
                                 }
+                                onOrderHistoryLoadFinishedListener.getOrderHistoryCurrent(orderHistoryItemsCurrent);
+                                onOrderHistoryLoadFinishedListener.getOrderHistoryPAst(orderHistoryItemsPast);
+
                             } else {
-                                onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Communication error, Please try again");
+                                if (orderHistory.getError().getErrCode().equals("RNF")) {
+                                    onOrderHistoryLoadFinishedListener.getOrderHistoryEmpty();
+                                } else {
+                                    onOrderHistoryLoadFinishedListener.getOrderHistoryFail(orderHistory.getError().getErrDescription());
+                                }
+
                             }
+
+
                         }
                     });
         } catch (Exception ex) {
             onOrderHistoryLoadFinishedListener.getOrderHistoryFail("Communication error, Please try again");
         }
+
+
     }
 
     @Override
-    public void getOrderHistoryDetails(final String orderID, final OnOrderHistoryDetailsFinishedListener onOrderHistoryDetailsFinishedListener) {
-
-
-        onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsStart();
-        final ArrayList<OrderHistoryMenu> menusArrayList = new ArrayList<OrderHistoryMenu>();//main
-
-        try {
-            apiService.orderHistorDetails(Integer.parseInt(orderID))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<JsonObject>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onNext(JsonObject respond) {
-                            orderHistoryDetails = respond;
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID);
-                        }
-
-                        @Override
-                        public void onComplete() {
-                            if (orderHistoryDetails != null) {
-                                JSONObject historyListist = null;
-                                try {
-                                    historyListist = new JSONObject(orderHistoryDetails.toString());
-                                    JSONArray orderMenusList;
-                                    JSONArray orderMenusDetailsList;
-
-                                    JSONObject outletJson;
-
-                                    orderMenusList = historyListist.getJSONArray("orderMenus");
-                                    orderMenusDetailsList = historyListist.getJSONArray("orderMenuDetails");
-
-                                    outletJson = historyListist.getJSONObject("orderOutlet");
-
-                                    JSONArray outletImages=outletJson.getJSONArray("images");
-                                    ArrayList<OutletImages> images =  new ArrayList<>();
-
-                                    for (int i = 0; i < outletImages.length(); i++) {
-                                        JSONObject jsonData = outletImages.getJSONObject(i);
-                                        images.add(new OutletImages(jsonData.getString("id"),jsonData.getString("name"),jsonData.getString("imageUrl")));
-                                    }
-
-                                        OutletItems outlet = new OutletItems(outletJson.getString("id"),
-                                                outletJson.getString("name"), outletJson.getString("imageUrl"), outletJson.getInt("outletTypeID"),
-                                                outletJson.getString("city"), outletJson.getString("ownerName"), outletJson.getDouble("latitude"),
-                                                outletJson.getDouble("longitude"),images, outletJson.getString("phone01"), outletJson.getString("eMail"));
-
-
-
-                                    for (int i = 0; i < orderMenusList.length(); i++) {
-                                        JSONObject jsonData = orderMenusList.getJSONObject(i);
-
-                                        final ArrayList<OrderHistorySubMenu> foodsArrayList = new ArrayList<OrderHistorySubMenu>();//sub
-
-                                        for (int k = 0; k < orderMenusDetailsList.length(); k++) {
-                                            JSONObject jsonDatafoodsyList = orderMenusDetailsList.getJSONObject(k);
-
-
-                                            if (jsonDatafoodsyList.getString("cartID").equals(jsonData.getString("cartID"))) {
-                                                foodsArrayList.add(new OrderHistorySubMenu(jsonDatafoodsyList.getString("id"), jsonDatafoodsyList.getString("name"), jsonDatafoodsyList.getInt("foodQty"),
-                                                        jsonDatafoodsyList.getBoolean("isBase"), jsonDatafoodsyList.getString("foodItemCategory"), jsonDatafoodsyList.getString("foodItemTypeCode")));
-                                            } else {
-
-                                            }
-
-                                        }
-                                        menusArrayList.add(new OrderHistoryMenu(jsonData.getInt("orderID"), jsonData.getString("id"), jsonData.getString("name"),
-                                                jsonData.getString("menuSizeCode"),jsonData.getDouble("menuPrice"), jsonData.getInt("menuQty"), foodsArrayList));
-
-                                    }
-                                    onOrderHistoryDetailsFinishedListener.getOrderHistoryDetails(menusArrayList,outlet);
-
-
-                                } catch (JSONException e) {
-                                    onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID);
-                                }
-
-
-
-                            } else {
-                                onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID);
-                            }
-                        }
-                    });
-
-        } catch (Exception ex) {
-            onOrderHistoryDetailsFinishedListener.getOrderHistoryDetailsFail("Communication error, Please try again", orderID);
-        }
-
+    public void getOrderHistoryDetails( ArrayList<OrderMenus> orderMenus, final OnOrderHistoryDetailsFinishedListener onOrderHistoryDetailsFinishedListener) {
+        onOrderHistoryDetailsFinishedListener.orderHistoryDetails(orderMenus);
     }
 
     @Override
@@ -231,7 +192,6 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
     public void getOutlet(final int outletID, final OnGetOutletFinishedListener onGetOutletFinishedListener) {
 
 
-
         try {
             apiService.getOutlet(outletID)
                     .subscribeOn(Schedulers.io())
@@ -249,7 +209,7 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
 
                         @Override
                         public void onError(Throwable e) {
-                            onGetOutletFinishedListener.getOutletDetailsFail("Communication error, Please try again",outletID);
+                            onGetOutletFinishedListener.getOutletDetailsFail("Communication error, Please try again", outletID);
 
                         }
 
@@ -260,7 +220,7 @@ public class ActivtyHistoryInteractorImpil implements ActivtyHistoryInteractor {
                     });
 
         } catch (Exception ex) {
-            onGetOutletFinishedListener.getOutletDetailsFail("Communication error, Please try again",outletID);
+            onGetOutletFinishedListener.getOutletDetailsFail("Communication error, Please try again", outletID);
         }
 
 

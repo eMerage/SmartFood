@@ -10,6 +10,8 @@ import emerge.project.onmeal.data.table.CartHeader;
 import emerge.project.onmeal.utils.entittes.OrderHistoryItems;
 import emerge.project.onmeal.utils.entittes.OrderHistoryMenu;
 import emerge.project.onmeal.utils.entittes.OutletItems;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrderMenus;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrdersList;
 
 /**
  * Created by Himanshu on 4/4/2017.
@@ -19,8 +21,8 @@ public interface ActivtyHistoryInteractor {
 
     interface OnOrderHistoryLoadFinishedListener {
         void getOrderHistoryEmpty();
-        void getOrderHistoryCurrent( ArrayList<OrderHistoryItems> orderHistoryItemsArrayList);
-        void getOrderHistoryPAst( ArrayList<OrderHistoryItems> orderHistoryItemsArrayList);
+        void getOrderHistoryCurrent( ArrayList<OrdersList> orderHistoryItemsArrayList);
+        void getOrderHistoryPAst( ArrayList<OrdersList> orderHistoryItemsArrayList);
         void getOrderHistoryFail(String msg);
     }
     void getOrderHistory(OnOrderHistoryLoadFinishedListener  onOrderHistoryLoadFinishedListener);
@@ -28,12 +30,9 @@ public interface ActivtyHistoryInteractor {
 
 
     interface OnOrderHistoryDetailsFinishedListener {
-
-        void getOrderHistoryDetailsStart();
-        void getOrderHistoryDetails(ArrayList<OrderHistoryMenu> OrderHistoryMenu, OutletItems outlet);
-        void getOrderHistoryDetailsFail(String msg,String orderID);
+        void orderHistoryDetails( ArrayList<OrderMenus> orderMenus);
     }
-    void getOrderHistoryDetails(String orderID,OnOrderHistoryDetailsFinishedListener  onOrderHistoryDetailsFinishedListener);
+    void getOrderHistoryDetails( ArrayList<OrderMenus> orderMenus, OnOrderHistoryDetailsFinishedListener  onOrderHistoryDetailsFinishedListener);
 
 
     interface OnsignOutinishedListener {

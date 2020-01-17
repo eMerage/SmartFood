@@ -1,13 +1,18 @@
 package emerge.project.onmeal.ui.activity.numbervalidate;
 
 
+import android.content.Context;
+
+import emerge.project.onmeal.utils.entittes.UpdateToken;
+
 /**
  * Created by Himanshu on 4/4/2017.
  */
 
 public class NumberValidatePresenterImpli implements NumberValidatePresenter,
         NumberValidateInteractor.OnOTPCodeValidationFinishedListener,
-        NumberValidateInteractor.OnNewOTPCodeFinishedListener{
+        NumberValidateInteractor.OnNewOTPCodeFinishedListener,  NumberValidateInteractor.OnUpdatePushTokenAndAppVersionFinishedListener
+        {
 
 
     private NumberValidateView numberValidateView;
@@ -72,4 +77,19 @@ public class NumberValidatePresenterImpli implements NumberValidatePresenter,
     public void newOTPCodeServerError(String error) {
         numberValidateView.showNewOTPCodeServerError(error);
     }
+
+
+
+    @Override
+    public void updatePushTokenAndAppVersion(Context con) {
+        numberValidateInteractor.updatePushTokenAndAppVersion( con,this);
+    }
+
+
+
+    @Override
+    public void updateStatus(Boolean status, UpdateToken updateToken) {
+        numberValidateView.updateStatus(status,updateToken);
+    }
 }
+

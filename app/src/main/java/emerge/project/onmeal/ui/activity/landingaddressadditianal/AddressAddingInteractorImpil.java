@@ -43,49 +43,46 @@ public class AddressAddingInteractorImpil implements AddressAddingInteractor {
         JsonObject jsonObject = new JsonObject();
 
 
-        String addressNum =addressItems.getAddressNumber();
-        String addressFloor ="";
-        String mainRoad =addressItems.getMainRoad();
-        String subRoad ="";
-        String addressCity =addressItems.getAddressCity();
-        String addressApartmentName ="";
-        String addressCompanyName ="";
+        String addressNum = addressItems.getAddressNumber();
+        String addressFloor = "";
+        String mainRoad = addressItems.getMainRoad();
+        String subRoad = "";
+        String addressCity = addressItems.getAddressCity();
+        String addressApartmentName = "";
+        String addressCompanyName = "";
 
 
-
-        if(addressItems.getAddressFloor()!=null){
-            if(!addressItems.getAddressFloor().equals("null")){
+        if (addressItems.getAddressFloor() != null) {
+            if (!addressItems.getAddressFloor().equals("null")) {
                 addressFloor = addressItems.getAddressFloor();
             }
 
         }
 
-        if(addressItems.getSubRoad()!=null){
-            if(!addressItems.getSubRoad().equals("null")){
+        if (addressItems.getSubRoad() != null) {
+            if (!addressItems.getSubRoad().equals("null")) {
                 subRoad = addressItems.getSubRoad();
             }
 
         }
 
 
-        if(addressItems.getAddressApartmentName()!=null){
+        if (addressItems.getAddressApartmentName() != null) {
             addressApartmentName = addressItems.getAddressApartmentName();
         }
 
 
-        if(addressItems.getAddressCompanyName()!=null){
+        if (addressItems.getAddressCompanyName() != null) {
             addressCompanyName = addressItems.getAddressCompanyName();
         }
 
 
-
-
-        final String fullAddress =addressNum+" "+
-                addressFloor+ " " +
-                mainRoad+ " " +
-                subRoad+ " " +
-                addressCity+ " " +
-                addressApartmentName+ " " +
+        final String fullAddress = addressNum + " " +
+                addressFloor + " " +
+                mainRoad + " " +
+                subRoad + " " +
+                addressCity + " " +
+                addressApartmentName + " " +
                 addressCompanyName;
 
 
@@ -106,47 +103,59 @@ public class AddressAddingInteractorImpil implements AddressAddingInteractor {
         jsonObject.addProperty("DepartmentName", addressItems.getAddressCompanyDepartment());
         jsonObject.addProperty("LandMark", addressItems.getAddressLandmark());
         jsonObject.addProperty("DeliveryInstruction", addressItems.getAddressDeliveryInstructions());
-        try {
-            apiService.addNewAddress(jsonObject)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<String>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
 
-                        }
 
-                        @Override
-                        public void onNext(String response) {
-                            newAddressRespons = response;
-                        }
+        if ((addressItems.getAddressName().equals("")) || (addressItems.getAddressName() == null)) {
 
-                        @Override
-                        public void onError(Throwable e) {
-                            onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
-                        }
+            onAddNewAddressFinishedListener.addNewAddressFail("Address name can not be empty, Please try again");
 
-                        @Override
-                        public void onComplete() {
-                            if (newAddressRespons != null) {
-                                try {
-                                    if (newAddressRespons.equals("0")) {
-                                        onAddNewAddressFinishedListener.addNewAddressFail("Address adding fail,please try again");
-                                    } else {
-                                        addAddress(newAddressRespons, fullAddress, onAddNewAddressFinishedListener);
-                                    }
-                                } catch (NullPointerException exNull) {
-                                    onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
-                                }
-                            } else {
+        } else {
+
+            try {
+                apiService.addNewAddress(jsonObject)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<String>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(String response) {
+                                newAddressRespons = response;
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
                                 onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
                             }
 
-                        }
-                    });
-        } catch (Exception ex) {
-            onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
+                            @Override
+                            public void onComplete() {
+                                if (newAddressRespons != null) {
+                                    try {
+                                        if (newAddressRespons.equals("0")) {
+                                            onAddNewAddressFinishedListener.addNewAddressFail("Address adding fail,please try again");
+                                        } else {
+                                            addAddress(newAddressRespons, fullAddress, onAddNewAddressFinishedListener);
+                                        }
+                                    } catch (NullPointerException exNull) {
+                                        onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
+                                    }
+                                } else {
+                                    onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
+                                }
+
+                            }
+                        });
+            } catch (Exception ex) {
+                onAddNewAddressFinishedListener.addNewAddressFail("Communication error, Please try again");
+            }
+
+
         }
+
 
     }
 

@@ -62,13 +62,15 @@ public class AddressItems implements Serializable {
 
     }
 
-    public AddressItems(String addressId, String addressName, String addressCity, String addressNumber, String addressRoad, boolean isCheck) {
+    public AddressItems(String addressId, String addressName, String addressCity, String addressNumber, String addressRoad, boolean isCheck, double lat,double lon) {
         this.addressId = addressId;
         this.addressName = addressName;
         this.addressCity = addressCity;
         this.addressNumber = addressNumber;
         this.addressRoad = addressRoad;
         this.isCheck = isCheck;
+        this.addressLatitude = lat;
+        this.addressLongitude = lon;
     }
 
 

@@ -19,6 +19,7 @@ import emerge.project.onmeal.utils.entittes.OrderHistoryItems;
 import emerge.project.onmeal.utils.entittes.OutletItems;
 import emerge.project.onmeal.utils.entittes.TimeSlots;
 import emerge.project.onmeal.utils.entittes.UpdateToken;
+import emerge.project.onmeal.utils.entittes.v2.Orders.OrdersData;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -131,8 +132,7 @@ public interface ApiInterface {
     Observable<List<OrderErrorReturn>> getBusinessRuleViolations(@Query("orderCode") String orderCode);
 
 
-    @GET("Order/GetOrderHistoryForUser")
-    Observable<List<OrderHistoryItems>> orderHistor(@Query("UserID") String UserID);
+
 
 
     @POST("Outlet/SaveOutletSuggestion")
@@ -151,8 +151,8 @@ public interface ApiInterface {
     Observable<Integer> updateMealTimeUser(@Query("userID") int userID, @Query("gender") String gender, @Query("dateOfBirth") String dateOfBirth);
 
 
-    @GET("Order/GetOrderHistoryByOrder")
-    Observable<JsonObject> orderHistorDetails(@Query("OrderID") int orderID);
+/*    @GET("Order/GetOrderHistoryByOrder")
+    Observable<JsonObject> orderHistorDetails(@Query("OrderID") int orderID);*/
 
     @GET("Outlet/GetOutlet")
     Observable<OutletItems> getOutlet(@Query("outletID") int outletID);
@@ -161,6 +161,12 @@ public interface ApiInterface {
     @POST("MealTime/SaveMealTimeUserPushToken")
     Observable<UpdateToken> saveMealTimeUserPushToken(@Query("UserID") int userID, @Query("pushToken") String pushToken, @Query("appVersion") int appVersion,
                                                       @Query("AppType") String AppType, @Query("AppOs") String AppOs);
+
+
+
+    //v2
+    @GET("Order/GetOrderHistoryForUser")
+    Observable<OrdersData> orderHistory(@Query("UserID") String UserID);
 
 
 
