@@ -20,6 +20,7 @@ import java.security.NoSuchAlgorithmException;
 
 import emerge.project.onmeal.R;
 import emerge.project.onmeal.data.table.User;
+import emerge.project.onmeal.service.network.NetworkAvailability;
 import emerge.project.onmeal.ui.activity.home.ActivityHome;
 import emerge.project.onmeal.ui.activity.intro.FragmentActivityIntro;
 import emerge.project.onmeal.ui.activity.landing.ActivityLanding;
@@ -133,7 +134,21 @@ public class ActivitySplash extends Activity implements SplashView {
 
     @Override
     public void deletetedData() {
-        splashPresenter.updatePushTokenAndAppVersion(this);
+        if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+            splashPresenter.updatePushTokenAndAppVersion(this);
+        }else {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage("No Internet Access, Please try again ");
+            alertDialogBuilder.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+            alertDialogBuilder.show();
+        }
+
 
     }
 
