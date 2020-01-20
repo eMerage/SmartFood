@@ -271,7 +271,7 @@
                                         android:layout_centerVertical="true"
                                         android:layout_marginLeft="20dp"
                                         android:lineSpacingExtra="3sp"
-                                        android:text="Quantity"
+                                        android:text="Number of Packs"
                                         android:textColor="#767676"
                                         android:textSize="13sp" />
 

@@ -132,7 +132,7 @@ public class SplashInteractorImpil implements SplashInteractor {
         errorObject.setErrCode("CE");
         errorObject.setErrDescription("Communication error, Please try again");
 
-        System.out.println("xxxxxxxxxxxxxxxxxx : "+token);
+        System.out.println("xxxxxxxxxxxxxxxxxx userID: "+userID);
 
         try {
             apiService.saveMealTimeUserPushToken(userID,token,versionCode,"M","A")

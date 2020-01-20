@@ -82,6 +82,9 @@ public class HomeInteractorImpil implements HomeInteractor {
                 }
             });
 
+
+
+
             apiService.getFavouriteItems(Integer.parseInt(user.getUserId()))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

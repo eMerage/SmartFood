@@ -47,11 +47,59 @@ public class ActivitySplash extends Activity implements SplashView {
         setContentView(R.layout.activity_splash);
         splashPresenter = new SplashPresenterImpli(this);
 
+    }
 
+    @Override
+    protected void onRestart() {
+        if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+            splashPresenter.updatePushTokenAndAppVersion(this);
+        }else {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage("No Internet Access, Please try again ");
+            alertDialogBuilder.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+            alertDialogBuilder.show();
+        }
+        super.onRestart();
+    }
 
+    @Override
+    protected void onResume() {
 
-        splashPresenter.deleteLocalOrderData();
+        try{
+            if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
+                splashPresenter.updatePushTokenAndAppVersion(this);
+            }else {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+                alertDialogBuilder.setTitle("Warning");
+                alertDialogBuilder.setMessage("No Internet Access, Please try again ");
+                alertDialogBuilder.setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                return;
+                            }
+                        });
+                alertDialogBuilder.show();
+            }
+        }catch (Exception ex){
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setTitle("Warning");
+            alertDialogBuilder.setMessage("we have problem to get your connection,Please try again");
+            alertDialogBuilder.setPositiveButton("OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+            alertDialogBuilder.show();
+        }
 
+        super.onResume();
     }
 
     @Override
@@ -85,7 +133,9 @@ public class ActivitySplash extends Activity implements SplashView {
 
         try {
             m_handler.postDelayed(m_runnable,2000);
-        } catch (Exception ex) { }
+        } catch (Exception ex) {
+
+        }
 
 
     }
@@ -134,29 +184,14 @@ public class ActivitySplash extends Activity implements SplashView {
 
     @Override
     public void deletetedData() {
-        if (NetworkAvailability.isNetworkAvailable(getApplicationContext())) {
-            splashPresenter.updatePushTokenAndAppVersion(this);
-        }else {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Warning");
-            alertDialogBuilder.setMessage("No Internet Access, Please try again ");
-            alertDialogBuilder.setPositiveButton("OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            return;
-                        }
-                    });
-            alertDialogBuilder.show();
-        }
-
-
+        splashPresenter.checkUser();
     }
 
     @Override
     public void updateStatus(Boolean status, final UpdateToken updateToken) {
 
         if(status){
-            splashPresenter.checkUser();
+            splashPresenter.deleteLocalOrderData();
         }else {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
